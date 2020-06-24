@@ -1,0 +1,5 @@
+Warsaw Chopin Airport;Warsaw;Poland;52.1656990051;20.967100143399996;2;AAA
+Katowice International Airport;Katowice;Poland;50.4743;19.08;2;AAB
+Łódź Władysław Reymont Airport;Lodz;Poland;51.721900939899996;19.3980998993;2;AAC
+Kraków John Paul II International Airport;Krakow;Poland;50.077702;19.7848;2;AAD
+Rzeszów-Jasionka Airport;Rzeszow;Poland;50.1100006104;22.0189990997;2;AAE

@@ -1,0 +1,60 @@
+@startuml dtos
+class TripDto {
+  + tickets: Array<TicketDto>
+  + departureDate: Date
+  + arrivalDate: Date
+  + totalPrice: Price
+}
+
+class TicketDto {
+  + flight: FlightDto
+  + departureDate: Date
+  + arrivalDate: Date
+  + totalPrice: number
+}
+
+class FlightDto {
+  + flightId: int
+  + airline: AirlineDto
+  + srcAirport: AirportDto
+  + dstAirport: AirportDto
+}
+
+class AirlineDto {
+  + code: String
+  + name: String
+}
+
+class AirportDto {
+  __ attributes __
+  + id: int
+  + iata: String
+  + icao: String
+  + airportName: String
+  + city: String
+  + country: String
+  + timezone: int
+}
+
+class BookingRequestDto {
+  + chosenTrip: TripDto
+  + passengers: Array<PassengerDto>
+}
+
+class PassengerDto {
+  + firstname: String
+  + surname: String
+  + dateOfBirth: Date
+  + phoneNumber: String
+  + email: String
+  + idOrPesel: String
+}
+
+TripDto *-- TicketDto
+TicketDto *-- FlightDto
+FlightDto *-- AirportDto
+FlightDto *-- AirlineDto
+
+BookingRequestDto *-- TripDto
+BookingRequestDto *-- PassengerDto
+@enduml

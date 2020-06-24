@@ -1,0 +1,20 @@
+drop table if exists airlines cascade;
+drop table if exists airports cascade;
+
+create table airlines(
+    airline_id bigint primary key auto_increment,
+    name varchar(100) not null,
+    country varchar(100) not null,
+    code varchar(50)
+);
+
+create table airports(
+    airport_id bigint primary key auto_increment,
+    name varchar(100) not null,
+    city varchar(100) not null,
+    country varchar(100) not null,
+    longitude float not null,
+    latitude float not null,
+    timezone int,
+    code varchar(50)
+)
