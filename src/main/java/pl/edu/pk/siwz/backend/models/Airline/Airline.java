@@ -1,6 +1,7 @@
 package pl.edu.pk.siwz.backend.models.Airline;
 
 import lombok.*;
+import pl.edu.pk.siwz.backend.controllers.AirlineController.AirlineDto;
 
 import javax.persistence.*;
 
@@ -20,4 +21,10 @@ public class Airline {
     private String name;
     private String country;
     private String code;
+
+    public void updateForm(AirlineDto airlineDto, String country){
+        this.name = airlineDto.getName();
+        this.country = country;
+        this.code = airlineDto.getCode();
+    }
 }

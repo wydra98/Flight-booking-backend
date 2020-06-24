@@ -36,4 +36,17 @@ public class AirportService {
         repository.save(airport);
         return airport;
     }
+
+    public boolean existsByCode(String code) {
+        return repository.existsByCode(code);
+    }
+
+    public Airport findAirportByCode(String code){
+        return repository.findAirportByCode(code);
+    }
+
+    public void deleteAirport(String code){
+        repository.deleteByCode(code);
+    }
+
 }

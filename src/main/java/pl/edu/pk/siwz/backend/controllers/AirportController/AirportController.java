@@ -45,7 +45,26 @@ public class AirportController {
         return ResponseEntity.created(URI.create("/" + airport.getId())).body(airport);
     }
 
+    @ApiOperation(value = "Delete airport")
+    @DeleteMapping("/delete/{code}")
+    ResponseEntity<String> deleteAirport(@PathVariable String code) {
+        airportService.deleteAirport(code);
+        return ResponseEntity.ok(code);
+    }
 
+    @ApiOperation(value = "Update airport")
+    @PutMapping
+    ResponseEntity<Void> updateAirport(@RequestBody AirportDto airportDto,
+                                       @RequestParam double longitude,
+                                       @RequestParam double latitude) {
 
+        if (!airportService.existsByCode(airportDto.getCode())) {
+            return ResponseEntity.notFound().build();
+        }
 
+        Airport airport = airportService.findAirportByCode(airportDto.getCode());
+        airport.updateForm(airportDto, longitude, latitude);
+
+        return ResponseEntity.noContent().build();
+    }
 }

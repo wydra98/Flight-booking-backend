@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import pl.edu.pk.siwz.backend.models.Airport.Airport;
 import pl.edu.pk.siwz.backend.models.Airport.AirportRepository;
 
+import java.util.Optional;
+
 @Repository
 public interface SqlAirportRepository extends AirportRepository, JpaRepository<Airport, Long> {
 
@@ -13,4 +15,8 @@ public interface SqlAirportRepository extends AirportRepository, JpaRepository<A
     int amountOfRows();
 
     Airport findAirportByCode(String code);
+
+    boolean existsByCode(String code);
+
+    void deleteByCode(String code);
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.pk.siwz.backend.controllers.AirlineController.AirlineDto;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
 import pl.edu.pk.siwz.backend.models.Airline.AirlineRepository;
+import pl.edu.pk.siwz.backend.models.Airport.Airport;
 
 import java.util.List;
 import java.util.Locale;
@@ -33,5 +34,18 @@ public class AirlineService {
         repository.save(airline);
         return airline;
     }
+
+    public boolean existsByCode(String code) {
+        return repository.existsByCode(code);
+    }
+
+    public Airline findAirlineByCode(String code) {
+        return repository.findAirlineByCode(code);
+    }
+
+    public void deleteAirline(String code) {
+        repository.deleteByCode(code);
+    }
+
 
 }

@@ -16,4 +16,8 @@ public interface AirlineRepository {
 
     Airline findAirlineByCode(String code);
 
+    boolean existsByCode(String code);
+
+    void deleteByCode(String code);
+
 }

@@ -8,11 +8,13 @@ import java.util.Optional;
 public interface AirportRepository {
     List<Airport> findAll();
 
-    Optional<Airport> findById(Long id);
-
     Airport save(Airport entity);
 
     int amountOfRows();
 
     Airport findAirportByCode(String code);
+
+    boolean existsByCode(String code);
+
+    void deleteByCode(String code);
 }

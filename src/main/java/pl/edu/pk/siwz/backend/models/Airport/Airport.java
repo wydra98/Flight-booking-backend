@@ -3,6 +3,7 @@ package pl.edu.pk.siwz.backend.models.Airport;
 import javax.persistence.*;
 
 import lombok.*;
+import pl.edu.pk.siwz.backend.controllers.AirportController.AirportDto;
 
 @Entity
 @Builder
@@ -15,7 +16,7 @@ public class Airport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "airport_id",updatable = false, nullable = false)
+    @Column(name = "airport_id", updatable = false, nullable = false)
     private long id;
     private String name;
     private String city;
@@ -24,4 +25,14 @@ public class Airport {
     private double latitude;
     private int timezone;
     private String code;
+
+    public void updateForm(AirportDto airportDto, double longitude, double latitude) {
+        this.name = airportDto.getName();
+        this.city = airportDto.getCity();
+        this.country = airportDto.getCountry();
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.timezone = airportDto.getTimezone();
+        this.code = airportDto.getCode();
+    }
 }
