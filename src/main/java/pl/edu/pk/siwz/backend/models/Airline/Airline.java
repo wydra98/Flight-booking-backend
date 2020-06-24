@@ -13,9 +13,9 @@ import javax.persistence.*;
 @Table(name = "airlines")
 public class Airline {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "airline_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "airline_id",updatable = false, nullable = false)
     private Long id;
     private String name;
     private String country;

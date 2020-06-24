@@ -20,8 +20,9 @@ public class AirlineController {
 
     @Autowired
     private AirlineService airlineService;
- // response entity ma status header body
-    @ApiOperation(value="Get all airlines",notes = "provide information about all airlines")
+
+    // response entity ma status header body
+    @ApiOperation(value = "Get all airlines", notes = "provide information about all airlines")
     @GetMapping
     ResponseEntity<List<AirlineDto>> getAllAirlines() {
         List<Airline> airlines = airlineService.findAll();
@@ -34,19 +35,11 @@ public class AirlineController {
         return ResponseEntity.ok(airlineDtos);
     }
 
-      @ApiOperation(value="Add new airline",notes = "provide information about all airlines")
-      @PostMapping
-      ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto) {
-          Airline airline = airlineService.addNewAirline(airlineDto);
-          return ResponseEntity.created(URI.create("/"+airline.getId())).body(airline);
-      }
-//        List<Airline> airlines = airlineService.findAll();
-//
-//        ArrayList<AirlineDto> airlineDtos = new ArrayList<>();
-//        for (Airline airline : airlines) {
-//            airlineDtos.add(mapper.map(airline));
-//        }
-//
-//        return ResponseEntity.ok(airlineDtos);
-//    }
+    @ApiOperation(value = "Add new airline", notes = "provide information about all airlines")
+    @PostMapping
+    ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto,
+                                          @RequestParam String country) {
+        Airline airline = airlineService.addNewAirline(airlineDto, country);
+        return ResponseEntity.created(URI.create("/" + airline.getId())).body(airline);
+    }
 }

@@ -3,7 +3,7 @@ drop table if exists connections cascade;
 drop table if exists routeconnections cascade;*/
 
 create table connections(
-    connection_id bigint primary key auto_increment,
+    connection_id bigint auto_increment ,
     airport_src_id bigint not null,
     airport_dst_id  bigint not null,
     airline_id bigint not null,

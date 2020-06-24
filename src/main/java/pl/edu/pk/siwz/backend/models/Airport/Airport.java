@@ -12,9 +12,10 @@ import lombok.*;
 @Getter
 @Table(name = "airports")
 public class Airport {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    @Column(name = "airport_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "airport_id",updatable = false, nullable = false)
     private long id;
     private String name;
     private String city;

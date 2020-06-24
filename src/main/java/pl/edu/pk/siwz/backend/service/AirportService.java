@@ -2,6 +2,7 @@ package pl.edu.pk.siwz.backend.service;
 
 import org.springframework.stereotype.Service;
 import pl.edu.pk.siwz.backend.controllers.AirlineController.AirlineDto;
+import pl.edu.pk.siwz.backend.controllers.AirportController.AirportDto;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
 import pl.edu.pk.siwz.backend.models.Airport.Airport;
 import pl.edu.pk.siwz.backend.models.Airport.AirportRepository;
@@ -20,16 +21,19 @@ public class AirportService {
 
     public List<Airport> findAll() { return repository.findAll(); }
 
-    public Airline addNewAirline(AirlineDto airlineDto) {
-        String country = repository.findCountryByCode(airlineDto.getCode());
+    public Airport addNewAirport(AirportDto airportDto, double longitude, double latitude) {
 
-        Airline airline = Airline.builder()
-                .name(airlineDto.getName())
-                .code(airlineDto.getCode())
-                .country(country)
+        Airport airport = Airport.builder()
+                .name(airportDto.getName())
+                .city(airportDto.getCity())
+                .country(airportDto.getCountry())
+                .longitude(longitude)
+                .latitude(latitude)
+                .timezone(airportDto.getTimezone())
+                .code(airportDto.getCode())
                 .build();
 
-        repository.save(airline);
-        return airline;
+        repository.save(airport);
+        return airport;
     }
 }

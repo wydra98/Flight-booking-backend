@@ -13,6 +13,4 @@ interface SqlAirlinerepository extends AirlineRepository, JpaRepository<Airline,
     int amountOfRows();
 
     Airline findAirlineByCode(String code);
-
-    String findCountryByCode(String code);
 }

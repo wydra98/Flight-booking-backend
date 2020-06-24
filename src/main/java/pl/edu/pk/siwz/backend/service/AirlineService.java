@@ -22,8 +22,7 @@ public class AirlineService {
         return repository.findAll();
     }
 
-    public Airline addNewAirline(AirlineDto airlineDto) {
-        String country = repository.findCountryByCode(airlineDto.getCode());
+    public Airline addNewAirline(AirlineDto airlineDto, String country) {
 
         Airline airline = Airline.builder()
                 .name(airlineDto.getName())

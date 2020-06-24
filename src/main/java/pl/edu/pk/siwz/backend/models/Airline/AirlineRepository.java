@@ -16,5 +16,4 @@ public interface AirlineRepository {
 
     Airline findAirlineByCode(String code);
 
-    String findCountryByCode(String code);
 }

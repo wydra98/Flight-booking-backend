@@ -7,7 +7,7 @@ public class AirportMapper {
     public AirportDto map(Airport airport) {
         return AirportDto.builder()
                 .code(airport.getCode())
-                .airportName(airport.getName())
+                .name(airport.getName())
                 .city(airport.getCity())
                 .country(airport.getCountry())
                 .timezone(airport.getTimezone())

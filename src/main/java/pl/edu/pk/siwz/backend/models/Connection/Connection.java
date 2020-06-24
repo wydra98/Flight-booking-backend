@@ -1,6 +1,7 @@
 package pl.edu.pk.siwz.backend.models.Connection;
 
 import javax.persistence.*;
+
 import lombok.*;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
 import pl.edu.pk.siwz.backend.models.Airport.Airport;
@@ -14,8 +15,9 @@ import pl.edu.pk.siwz.backend.models.Times;
 @Getter
 @Table(name = "connections")
 public class Connection {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "connection_id")
     private Long id;
     @OneToOne

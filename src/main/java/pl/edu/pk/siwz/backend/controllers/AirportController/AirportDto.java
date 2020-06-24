@@ -7,9 +7,9 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 public class AirportDto {
-    private String code;
-    private String airportName;
+    private String name;
     private String city;
     private String country;
     private int timezone;
+    private String code;
 }
