@@ -49,7 +49,6 @@ public class AirportLoader implements CommandLineRunner {
                 .longitude(Double.parseDouble(arr[3]))
                 .latitude(Double.parseDouble(arr[4]))
                 .timezone(Integer.parseInt(arr[5]))
-                .code(arr[6])
                 .build();
 
         return airport;

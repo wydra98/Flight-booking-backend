@@ -3,6 +3,8 @@ package pl.edu.pk.siwz.backend.service;
 import org.springframework.stereotype.Service;
 import pl.edu.pk.siwz.backend.controllers.AirlineController.AirlineDto;
 import pl.edu.pk.siwz.backend.controllers.AirportController.AirportDto;
+import pl.edu.pk.siwz.backend.exception.AirlineAlreadyExistsException;
+import pl.edu.pk.siwz.backend.exception.AirportAlreadyExistsException;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
 import pl.edu.pk.siwz.backend.models.Airport.Airport;
 import pl.edu.pk.siwz.backend.models.Airport.AirportRepository;
@@ -19,7 +21,13 @@ public class AirportService {
         this.repository = repository;
     }
 
-    public List<Airport> findAll() { return repository.findAll(); }
+    public List<Airport> findAll() {
+        return repository.findAll();
+    }
+
+    public void save(Airport airport){
+        repository.save(airport);
+    }
 
     public Airport addNewAirport(AirportDto airportDto, double longitude, double latitude) {
 
@@ -30,23 +38,28 @@ public class AirportService {
                 .longitude(longitude)
                 .latitude(latitude)
                 .timezone(airportDto.getTimezone())
-                .code(airportDto.getCode())
                 .build();
 
         repository.save(airport);
         return airport;
     }
 
-    public boolean existsByCode(String code) {
-        return repository.existsByCode(code);
+    public boolean existsById(Long id) {
+        return repository.existsById(id);
     }
 
-    public Airport findAirportByCode(String code){
-        return repository.findAirportByCode(code);
+    public Optional<Airport> findById(Long id) {
+        return repository.findById(id);
     }
 
-    public void deleteAirport(String code){
-        repository.deleteByCode(code);
+    public void deleteAirport(Long id) {
+        repository.deleteById(id);
+    }
+
+    public void checkIfCodeExists(Long id) {
+        if (repository.findById(id).isPresent()) {
+            throw new AirportAlreadyExistsException("Airport already exists, can't create airport with the same code.");
+        }
     }
 
 }

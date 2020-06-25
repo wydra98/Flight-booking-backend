@@ -13,9 +13,9 @@ import java.time.LocalTime;
 @Builder
 @AllArgsConstructor
 public class ConnectionDto {
-    private String srcAirportCode;
-    private String dstAirportCode;
-    private String airlineCode;
+    private Long srcAirportId;
+    private Long dstAirportId;
+    private Long airlineId;
     private int numberSeats;
     private String departureDate;
     private String arrivalDate;

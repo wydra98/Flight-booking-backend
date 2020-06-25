@@ -2,6 +2,8 @@ package pl.edu.pk.siwz.backend.service;
 
 import org.springframework.stereotype.Service;
 import pl.edu.pk.siwz.backend.controllers.AirlineController.AirlineDto;
+import pl.edu.pk.siwz.backend.exception.AirlineAlreadyExistsException;
+import pl.edu.pk.siwz.backend.exception.AirportAlreadyExistsException;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
 import pl.edu.pk.siwz.backend.models.Airline.AirlineRepository;
 import pl.edu.pk.siwz.backend.models.Airport.Airport;
@@ -27,7 +29,6 @@ public class AirlineService {
 
         Airline airline = Airline.builder()
                 .name(airlineDto.getName())
-                .code(airlineDto.getCode())
                 .country(country)
                 .build();
 
@@ -35,17 +36,21 @@ public class AirlineService {
         return airline;
     }
 
-    public boolean existsByCode(String code) {
-        return repository.existsByCode(code);
+    public boolean existsById(Long id) {
+        return repository.existsById(id);
     }
 
-    public Airline findAirlineByCode(String code) {
-        return repository.findAirlineByCode(code);
+    public Optional<Airline> findById(Long id) {
+        return repository.findById(id);
     }
 
-    public void deleteAirline(String code) {
-        repository.deleteByCode(code);
+    public void deleteAirline(Long id) {
+        repository.deleteById(id);
     }
 
-
+    public void checkIfIdExists(Long id) {
+        if (repository.findById(id).isPresent()) {
+            throw new AirlineAlreadyExistsException("Airline already exists, can't create airline with the same code.");
+        }
+    }
 }

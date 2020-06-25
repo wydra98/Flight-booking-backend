@@ -12,6 +12,7 @@ import pl.edu.pk.siwz.backend.models.Times;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 
 @Service
@@ -32,14 +33,14 @@ public class ConnectionService {
 
     public Connection addNewConnection(ConnectionDto connectionDto) {
 
-        Airline airline1 = airlineRepository.findAirlineByCode(connectionDto.getAirlineCode());
-        Airport srcAirport1 = airportRepository.findAirportByCode(connectionDto.getSrcAirportCode());
-        Airport dstAirport1 = airportRepository.findAirportByCode(connectionDto.getDstAirportCode());
+        Optional<Airline> airline1 = airlineRepository.findById(connectionDto.getAirlineId());
+        Optional<Airport> srcAirport1 = airportRepository.findById(connectionDto.getSrcAirportId());
+        Optional<Airport> dstAirport1 = airportRepository.findById(connectionDto.getDstAirportId());
 
         Connection connection = Connection.builder()
-                .srcAirport(srcAirport1)
-                .dstAirport(dstAirport1)
-                .airline(airline1)
+                .srcAirport(srcAirport1.get())
+                .dstAirport(dstAirport1.get())
+                .airline(airline1.get())
                 .times(Times.builder()
                         .departureDate(LocalDate.parse(connectionDto.getDepartureDate()))
                         .arrivalDate(LocalDate.parse(connectionDto.getArrivalDate()))
@@ -51,6 +52,10 @@ public class ConnectionService {
                 .build();
         connectionRepository.save(connection);
         return connection;
+    }
+
+    public void deleteConnection(Long id) {
+        connectionRepository.deleteAllConnectionWithAirlineId(id);
     }
 
 }

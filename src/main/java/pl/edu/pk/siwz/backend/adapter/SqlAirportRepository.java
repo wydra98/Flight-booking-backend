@@ -13,10 +13,4 @@ public interface SqlAirportRepository extends AirportRepository, JpaRepository<A
 
     @Query(value = "SELECT COUNT (a.airport_id) FROM airports a", nativeQuery = true)
     int amountOfRows();
-
-    Airport findAirportByCode(String code);
-
-    boolean existsByCode(String code);
-
-    void deleteByCode(String code);
 }

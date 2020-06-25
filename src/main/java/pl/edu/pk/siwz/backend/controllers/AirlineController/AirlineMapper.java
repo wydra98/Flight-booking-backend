@@ -6,7 +6,7 @@ public class AirlineMapper {
 
     public AirlineDto map(Airline airline) {
         return AirlineDto.builder()
-                .code(airline.getCode())
+                .id(airline.getId())
                 .name(airline.getName())
                 .build();
     }

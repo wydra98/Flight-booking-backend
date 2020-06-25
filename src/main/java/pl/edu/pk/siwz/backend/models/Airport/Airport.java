@@ -17,14 +17,13 @@ public class Airport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "airport_id", updatable = false, nullable = false)
-    private long id;
+    private Long id;
     private String name;
     private String city;
     private String country;
     private double longitude;
     private double latitude;
     private int timezone;
-    private String code;
 
     public void updateForm(AirportDto airportDto, double longitude, double latitude) {
         this.name = airportDto.getName();
@@ -33,6 +32,5 @@ public class Airport {
         this.longitude = longitude;
         this.latitude = latitude;
         this.timezone = airportDto.getTimezone();
-        this.code = airportDto.getCode();
     }
 }

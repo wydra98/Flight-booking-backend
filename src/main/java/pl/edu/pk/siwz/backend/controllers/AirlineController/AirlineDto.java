@@ -7,6 +7,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 public class AirlineDto {
+    private Long id;
     private String name;
-    private String code;
 }

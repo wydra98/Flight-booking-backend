@@ -12,9 +12,4 @@ interface SqlAirlinerepository extends AirlineRepository, JpaRepository<Airline,
     @Query(value = "SELECT COUNT (a.airline_id) FROM airlines a", nativeQuery = true)
     int amountOfRows();
 
-    Airline findAirlineByCode(String code);
-
-    boolean existsByCode(String code);
-
-    void deleteByCode(String code);
 }

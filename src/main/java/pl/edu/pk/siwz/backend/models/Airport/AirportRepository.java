@@ -12,9 +12,9 @@ public interface AirportRepository {
 
     int amountOfRows();
 
-    Airport findAirportByCode(String code);
+    Optional<Airport> findById(Long id);
 
-    boolean existsByCode(String code);
+    boolean existsById(Long id);
 
-    void deleteByCode(String code);
+    void deleteById(Long id);
 }

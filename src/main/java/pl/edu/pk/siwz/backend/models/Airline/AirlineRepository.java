@@ -8,16 +8,14 @@ import java.util.Optional;
 public interface AirlineRepository {
     List<Airline> findAll();
 
-    Optional<Airline> findById(Long id);
-
     Airline save(Airline entity);
 
     int amountOfRows();
 
-    Airline findAirlineByCode(String code);
+    Optional<Airline> findById(Long id);
 
-    boolean existsByCode(String code);
+    boolean existsById(Long id);
 
-    void deleteByCode(String code);
-
+    void deleteById(Long id);
 }
+

@@ -16,15 +16,13 @@ public class Airline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "airline_id",updatable = false, nullable = false)
+    @Column(name = "airline_id", updatable = false, nullable = false)
     private Long id;
     private String name;
     private String country;
-    private String code;
 
-    public void updateForm(AirlineDto airlineDto, String country){
+    public void updateForm(AirlineDto airlineDto, String country) {
         this.name = airlineDto.getName();
         this.country = country;
-        this.code = airlineDto.getCode();
     }
 }

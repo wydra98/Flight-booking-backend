@@ -44,7 +44,6 @@ public class AirlineLoader implements CommandLineRunner {
         Airline airline = Airline.builder()
                 .name(arr[0])
                 .country(arr[1])
-                .code(arr[2])
                 .build();
 
         return airline;
