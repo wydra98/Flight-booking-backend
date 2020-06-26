@@ -1,5 +1,7 @@
 package pl.edu.pk.siwz.backend.models.Airport;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import pl.edu.pk.siwz.backend.models.Airport.Airport;
 
 import java.util.List;
@@ -17,4 +19,8 @@ public interface AirportRepository {
     boolean existsById(Long id);
 
     void deleteById(Long id);
+
+    int checkIfAirportExistsThroughName(@Param("name") String name, @Param("city") String city);
+
+    int checkIfAirportExistsThroughCoordinates(@Param("longitude") double longitude, @Param("latitude") double latitude);
 }

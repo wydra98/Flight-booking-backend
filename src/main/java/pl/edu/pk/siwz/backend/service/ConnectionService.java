@@ -54,8 +54,13 @@ public class ConnectionService {
         return connection;
     }
 
-    public void deleteConnection(Long id) {
+    public void deleteConnectionWithAirlineId(Long id) {
         connectionRepository.deleteAllConnectionWithAirlineId(id);
     }
+
+    public void deleteConnectionWithAirportId(Long id) {
+        connectionRepository.deleteAllConnectionWithAirportId(id);
+    }
+
 
 }

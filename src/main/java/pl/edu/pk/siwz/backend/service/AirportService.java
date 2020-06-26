@@ -25,7 +25,7 @@ public class AirportService {
         return repository.findAll();
     }
 
-    public void save(Airport airport){
+    public void save(Airport airport) {
         repository.save(airport);
     }
 
@@ -56,10 +56,12 @@ public class AirportService {
         repository.deleteById(id);
     }
 
-    public void checkIfCodeExists(Long id) {
-        if (repository.findById(id).isPresent()) {
-            throw new AirportAlreadyExistsException("Airport already exists, can't create airport with the same code.");
-        }
+    public boolean checkIfAirportExists(AirportDto airportDto, double longitude, double latitude) {
+        if (repository.checkIfAirportExistsThroughName(airportDto.getName().toUpperCase(), airportDto.getCity().toUpperCase()) > 0 ||
+                repository.checkIfAirportExistsThroughCoordinates(longitude, latitude) > 0) {
+            return true;
+        } else
+            return false;
     }
 
 }

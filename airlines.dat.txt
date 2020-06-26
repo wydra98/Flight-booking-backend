@@ -1,1 +1,2 @@
 LOT Polish Airlines;Poland
+Lufthansa;Germany

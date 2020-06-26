@@ -95,7 +95,7 @@ public class ConnectionLoader implements CommandLineRunner {
                     .build();
             connectionRepository.save(connection3);
 
-            Optional<Airline> airline4 = airlineRepository.findById(1L);
+            Optional<Airline> airline4 = airlineRepository.findById(2L);
             Optional<Airport> srcAirport4 = airportRepository.findById(1L);
             Optional<Airport> dstAirport4 = airportRepository.findById(3L);
             Connection connection4 = Connection.builder()
@@ -114,7 +114,7 @@ public class ConnectionLoader implements CommandLineRunner {
                     .build();
             connectionRepository.save(connection4);
 
-            Optional<Airline> airline5 = airlineRepository.findById(1L);
+            Optional<Airline> airline5 = airlineRepository.findById(2L);
             Optional<Airport> srcAirport5 = airportRepository.findById(2L);
             Optional<Airport> dstAirport5 = airportRepository.findById(3L);
             Connection connection5 = Connection.builder()

@@ -9,4 +9,6 @@ public interface ConnectionRepository {
     int amountOfRows();
 
     void deleteAllConnectionWithAirlineId(@Param("id") Long id);
+
+    void deleteAllConnectionWithAirportId(@Param("id") Long id);
 }

@@ -2,6 +2,7 @@ package pl.edu.pk.siwz.backend.service;
 
 import org.springframework.stereotype.Service;
 import pl.edu.pk.siwz.backend.controllers.AirlineController.AirlineDto;
+import pl.edu.pk.siwz.backend.controllers.AirportController.AirportDto;
 import pl.edu.pk.siwz.backend.exception.AirlineAlreadyExistsException;
 import pl.edu.pk.siwz.backend.exception.AirportAlreadyExistsException;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
@@ -48,9 +49,14 @@ public class AirlineService {
         repository.deleteById(id);
     }
 
-    public void checkIfIdExists(Long id) {
-        if (repository.findById(id).isPresent()) {
-            throw new AirlineAlreadyExistsException("Airline already exists, can't create airline with the same code.");
-        }
+    public boolean checkIfAirlineExists(AirlineDto airlineDto,String country) {
+        if (repository.checkIfAirlineExists(airlineDto.getName(),country)>0) {
+            return true;
+        } else
+            return false;
+    }
+
+    public void save(Airline airline) {
+        repository.save(airline);
     }
 }

@@ -1,15 +1,14 @@
 package pl.edu.pk.siwz.backend.controllers.AirlineController;
 
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.pk.siwz.backend.controllers.AirportController.AirportDto;
+import pl.edu.pk.siwz.backend.exception.AirlineAlreadyExistsException;
+import pl.edu.pk.siwz.backend.exception.AirlineNotExistsException;
 import pl.edu.pk.siwz.backend.exception.AirportAlreadyExistsException;
+import pl.edu.pk.siwz.backend.exception.AirportNotExistsException;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
-import pl.edu.pk.siwz.backend.models.Airport.Airport;
 import pl.edu.pk.siwz.backend.service.AirlineService;
 import pl.edu.pk.siwz.backend.service.ConnectionService;
 
@@ -21,7 +20,6 @@ import java.util.Optional;
 
 
 @RestController
-@Slf4j
 @RequestMapping("/airlines")
 public class AirlineController {
 
@@ -52,22 +50,25 @@ public class AirlineController {
     @PostMapping
     ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto,
                                           @RequestParam String country) {
-        try {
-            airlineService.checkIfIdExists(airlineDto.getId());
-            Airline airline = airlineService.addNewAirline(airlineDto, country);
-            return ResponseEntity.created(URI.create("/" + airline.getId())).body(airline);
-        } catch (AirportAlreadyExistsException e) {
-            log.error("Airport already exist", e);
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+
+        if (airlineService.checkIfAirlineExists(airlineDto, country)) {
+            throw new AirportAlreadyExistsException("Airline with these data already exist ins datebase!");
         }
 
+        Airline airline = airlineService.addNewAirline(airlineDto, country);
+        return ResponseEntity.created(URI.create("/" + airline.getId())).body(airline);
     }
 
     @ApiOperation(value = "Delete airline")
     @Transactional
     @DeleteMapping("/delete/{id}")
     ResponseEntity<Long> deleteAirline(@PathVariable Long id) {
-        connectionService.deleteConnection(id);
+
+        if (!airlineService.existsById(id)) {
+            throw new AirlineNotExistsException("Airline with that id not exist!");
+        }
+
+        connectionService.deleteConnectionWithAirlineId(id);
         airlineService.deleteAirline(id);
         return ResponseEntity.ok(id);
     }
@@ -78,13 +79,24 @@ public class AirlineController {
                                        @RequestParam String country) {
 
         if (!airlineService.existsById(airlineDto.getId())) {
-            return ResponseEntity.notFound().build();
+            throw new AirlineNotExistsException("Airline with that ID not exist!");
         }
 
-        Optional<Airline> airline = airlineService.findById(airlineDto.getId());
-        airline.get().updateForm(airlineDto, country);
+        Optional<Airline> airlineOptional = airlineService.findById(airlineDto.getId());
+        airlineOptional.get().updateForm(airlineDto, country);
+        airlineService.save(airlineOptional.get());
 
         return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(AirlineAlreadyExistsException.class)
+    ResponseEntity<String> handleAirlineAlreadyExistsException(AirlineAlreadyExistsException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(AirlineNotExistsException.class)
+    ResponseEntity<?> handleAirlineNotExistsException(AirlineNotExistsException e) {
+        return ResponseEntity.notFound().build();
     }
 }
 
