@@ -3,9 +3,18 @@ package pl.edu.pk.siwz.backend.models.Connection;
 import javax.persistence.*;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.edu.pk.siwz.backend.controllers.AirlineController.AirlineMapper;
+import pl.edu.pk.siwz.backend.controllers.AirportController.AirportMapper;
+import pl.edu.pk.siwz.backend.controllers.ConnectionController.ConnectionDto;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
 import pl.edu.pk.siwz.backend.models.Airport.Airport;
 import pl.edu.pk.siwz.backend.models.Times;
+import pl.edu.pk.siwz.backend.service.ConnectionService;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Builder
@@ -17,7 +26,8 @@ import pl.edu.pk.siwz.backend.models.Times;
 public class Connection {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "inc")
+    @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "connection_id")
     private Long id;
     @OneToOne
@@ -33,4 +43,29 @@ public class Connection {
     @Embedded
     private Times times;
     private double price;
+
+    public void updateForm(Long id,
+                           Airport srcAirport,
+                           Airport dstAirport,
+                           Airline airline,
+                           int numberSeats,
+                           String arrivalDate,
+                           String  arrivalTime,
+                           String departureDate,
+                           String departureTime,
+                           double price
+    ) {
+
+        this.id = id;
+        this.srcAirport = srcAirport;
+        this.dstAirport = dstAirport;
+        this.airline = airline;
+        this.numberSeats = numberSeats;
+        this.getTimes().setDepartureDate(LocalDate.parse(departureDate));
+        this.getTimes().setArrivalDate(LocalDate.parse(arrivalDate));
+        this.getTimes().setDepartureTime(LocalTime.parse(departureTime));
+        this.getTimes().setArrivalTime(LocalTime.parse(arrivalTime));
+        this.price = price;
+
+    }
 }

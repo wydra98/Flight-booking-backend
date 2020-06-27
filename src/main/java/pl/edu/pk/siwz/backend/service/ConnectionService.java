@@ -12,6 +12,7 @@ import pl.edu.pk.siwz.backend.models.Times;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -33,9 +34,9 @@ public class ConnectionService {
 
     public Connection addNewConnection(ConnectionDto connectionDto) {
 
-        Optional<Airline> airline1 = airlineRepository.findById(connectionDto.getAirlineId());
-        Optional<Airport> srcAirport1 = airportRepository.findById(connectionDto.getSrcAirportId());
-        Optional<Airport> dstAirport1 = airportRepository.findById(connectionDto.getDstAirportId());
+        Optional<Airline> airline1 = airlineRepository.findById(connectionDto.getAirlineDto().getId());
+        Optional<Airport> srcAirport1 = airportRepository.findById(connectionDto.getSrcAirportDto().getId());
+        Optional<Airport> dstAirport1 = airportRepository.findById(connectionDto.getDstAirportDto().getId());
 
         Connection connection = Connection.builder()
                 .srcAirport(srcAirport1.get())
@@ -60,6 +61,26 @@ public class ConnectionService {
 
     public void deleteConnectionWithAirportId(Long id) {
         connectionRepository.deleteAllConnectionWithAirportId(id);
+    }
+
+    public List<Connection> findAll() {
+        return connectionRepository.findAll();
+    }
+
+    public boolean existsById(Long id) {
+        return connectionRepository.existsById(id);
+    }
+
+    public void deleteConnection(Long id) {
+        connectionRepository.deleteById(id);
+    }
+
+    public Optional<Connection> findById(Long id){
+       return connectionRepository.findById(id);
+    }
+
+    public void save(Connection connection){
+        connectionRepository.save(connection);
     }
 
 
