@@ -1,0 +1,83 @@
+@startuml
+class Airport {
+  __ attributes __
+  - id: Long
+  - name: String
+  - city: String
+  - country: String
+  - longitude: double
+  - latitude: double
+  - timezone: int
+}
+
+class Airline {
+  __ attributes __
+  - id: Long
+  - name: String
+  - country: String
+}
+
+class Connection {
+  __ attributes __
+  - id: Long
+  - srcAirport: Airport
+  - dstAirport: Airport
+  - departureDate: LocalDateTime
+  - arrivalDate: LocalDateTime
+}
+
+class Flight {
+  __ attributes __
+  - id: Long
+  - connection: Connection
+  - airline: Airline
+  - numberSeats: int
+  - price: double
+}
+
+class Ticket {
+  __ attributes __
+  - id: Long
+  - passenger: Passenger
+  - purchaseDate: LocalDateTime
+  - seatNumber: int
+  - price: double
+  - connections: Array<Flight>
+  //luggage weight, flightClass
+}
+
+class Passenger {
+  __ attributes __
+  -firstname: String
+  -surname: String
+  -dateOfBirth: LocalDate
+  -phoneNumber: String
+  -email: String
+  -pesel: String
+}
+
+class Trip {
+  __ attributes __
+  - id: Long
+  - oneWayTrip: boolean
+  - tickets: Array<Ticket>
+  - departureDate: LocalDateTime
+  - arrivalDate: LocalDateTime
+  - totalPrice: Price
+  //one way trip
+}
+
+class AvaiableTrips {
+  __ attributes __
+  - id: Long
+  - avaiableTrips: Array<Trip>
+}
+
+Connection --.> Airline
+Connection --.> Airport
+Flight *-- Connection
+Ticket o-- Passenger
+Ticket o-- Flight
+Trip *-- Ticket
+AvaiableTrips o-- Trip
+@enduml

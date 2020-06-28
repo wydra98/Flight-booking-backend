@@ -6,7 +6,6 @@ create table connections(
     connection_id bigint auto_increment ,
     airport_src_id bigint not null,
     airport_dst_id  bigint not null,
-    airline_id bigint not null,
     number_seats int not null,
     departure_date date  not null,
     arrival_date date not null,
