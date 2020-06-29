@@ -1,0 +1,38 @@
+package flight_booking.backend.models.Airport;
+
+import javax.persistence.*;
+
+import flight_booking.backend.controllers.AirportController.AirportDto;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
+@Table(name = "airports")
+public class Airport {
+
+    @Id
+    @GeneratedValue(generator = "inc")
+    @GenericGenerator(name = "inc", strategy = "increment")
+    @Column(name = "airport_id")
+    private Long id;
+    private String name;
+    private String city;
+    private String country;
+    private double longitude;
+    private double latitude;
+    private int timezone;
+
+    public void updateForm(AirportDto airportDto, double longitude, double latitude) {
+        this.name = airportDto.getName();
+        this.city = airportDto.getCity();
+        this.country = airportDto.getCountry();
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.timezone = airportDto.getTimezone();
+    }
+}
