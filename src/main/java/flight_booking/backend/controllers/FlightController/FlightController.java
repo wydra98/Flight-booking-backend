@@ -49,6 +49,8 @@ package flight_booking.backend.controllers.FlightController;
 //    }
 //}
 
+import flight_booking.backend.controllers.AirlineController.AirlineDto;
+import flight_booking.backend.controllers.AirportController.AirportDto;
 import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Flight.FlightRepository;
@@ -59,10 +61,9 @@ import flight_booking.backend.service.FlightService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,17 +71,12 @@ import java.util.List;
 @RequestMapping("/connections")
 public class FlightController {
 
-    private ConnectionService connectionService;
-    private AirportService airportService;
-    private AirlineService airlineService;
-    private FlightService flightService;
-    private FlightMapper flightMapper;
+    private final ConnectionService connectionService;
+    private final FlightService flightService;
+    private final FlightMapper flightMapper;
 
-    FlightController(ConnectionService connectionService, AirportService airportService,
-                     AirlineService airlineService, FlightService flightService) {
+    FlightController(ConnectionService connectionService, FlightService flightService) {
         this.connectionService = connectionService;
-        this.airportService = airportService;
-        this.airlineService = airlineService;
         this.flightService = flightService;
         this.flightMapper = new FlightMapper();
     }
@@ -98,21 +94,27 @@ public class FlightController {
         }
         return ResponseEntity.ok(flightDtos);
     }
-}
 
-//    @ApiOperation(value = "Add new connection")
-//    @PostMapping
-//    ResponseEntity<Connection> addNewConnection(@RequestBody ConnectionDto connectionDto) {
-//
-//        /*
-//         * linia lotnicza moze miec kilka samolotow i je wkorszystywac bez problemu, wiec moze byc
-//         * teoretycznie kilka takich samych polaczen z tego samego lotniska zrodlowego do tego samego lotniska
-//         * docelowe w tym samym czasie
-//         */
-//
-//        Connection connection = connectionService.addNewConnection(connectionDto);
-//        return ResponseEntity.created(URI.create("/" + connection.getId())).body(connection);
-//    }
+    //TODO read about twice @Requestbody in arguments of one function
+    @ApiOperation(value = "Add new flight")
+    @PostMapping
+    ResponseEntity<Flight> addNewConnection(@RequestParam Long airlineDtoId,
+                                            @RequestParam int numberSeats,
+                                            @RequestParam double price,
+                                            @RequestParam Long srcAirportId,
+                                            @RequestParam Long dstAirportId,
+                                            @RequestParam String departureDate,
+                                            @RequestParam String departureTime,
+                                            @RequestParam String arrivalDate,
+                                            @RequestParam String arrivalTime) {
+
+        Connection connection = connectionService.addNewConnection(srcAirportId, dstAirportId, departureDate,
+                departureTime, arrivalDate, arrivalTime);
+        Flight flight = flightService.addNewFlight(airlineDtoId, numberSeats, price, connection);
+        return ResponseEntity.created(URI.create("/" + flight.getId())).body(flight);
+
+    }
+}
 
 //    @ApiOperation(value = "Update connection")
 //    @Transactional

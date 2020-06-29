@@ -1,22 +1,29 @@
 package flight_booking.backend.service;
 
+import flight_booking.backend.controllers.AirlineController.AirlineDto;
+import flight_booking.backend.models.Airline.Airline;
 import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Flight.FlightRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightService {
 
     FlightRepository flightRepository;
     ConnectionService connectionService;
+    AirlineService airlineService;
 
-    FlightService(FlightRepository flightRepository, ConnectionService connectionService) {
+    FlightService(FlightRepository flightRepository,
+                  ConnectionService connectionService,
+                  AirlineService airlineService) {
         this.flightRepository = flightRepository;
         this.connectionService = connectionService;
+        this.airlineService = airlineService;
     }
 
     public Connection findConnection(Long flightId) {
@@ -35,6 +42,23 @@ public class FlightService {
 
     public int amount() {
         return flightRepository.amountOfRows();
+    }
+
+    public Flight addNewFlight(Long airlineDtoId,
+                               int numberSeats,
+                               double price,
+                               Connection connection) {
+
+        Optional<Airline> airline = airlineService.findById(airlineDtoId);
+        Flight flight = Flight.builder()
+                .connection(connection)
+                .airline(airline.get())
+                .numberSeats(numberSeats)
+                .price(price)
+                .build();
+        flightRepository.save(flight);
+
+        return flight;
     }
 
 }

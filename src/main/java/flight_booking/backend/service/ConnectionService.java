@@ -1,10 +1,15 @@
 package flight_booking.backend.service;
 
+import flight_booking.backend.controllers.AirportController.AirportDto;
+import flight_booking.backend.models.Airport.Airport;
 import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Connection.ConnectionRepository;
+import flight_booking.backend.models.Times;
 import org.springframework.stereotype.Service;
 import flight_booking.backend.models.Airport.AirportRepository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,24 +28,29 @@ public class ConnectionService {
     }
 
 
-//    public Connection addNewConnection(ConnectionDto connectionDto) {
-//
-//        Optional<Airport> srcAirport1 = airportRepository.findById(connectionDto.getSrcAirportDto().getId());
-//        Optional<Airport> dstAirport1 = airportRepository.findById(connectionDto.getDstAirportDto().getId());
-//
-//        Connection connection = Connection.builder()
-//                .srcAirport(srcAirport1.get())
-//                .dstAirport(dstAirport1.get())
-//                .times(Times.builder()
-//                        .departureDate(LocalDate.parse(connectionDto.getDepartureDate()))
-//                        .arrivalDate(LocalDate.parse(connectionDto.getArrivalDate()))
-//                        .arrivalTime(LocalTime.parse(connectionDto.getArrivalTime()))
-//                        .departureTime(LocalTime.parse(connectionDto.getDepartureTime()))
-//                        .build())
-//                .build();
-//        connectionRepository.save(connection);
-//        return connection;
-//    }
+    public Connection addNewConnection(Long srcAirportId,
+                                       Long dstAirportId,
+                                       String departureDate,
+                                       String departureTime,
+                                       String arrivalDate,
+                                       String arrivalTime) {
+
+        Optional<Airport> srcAirport1 = airportRepository.findById(srcAirportId);
+        Optional<Airport> dstAirport1 = airportRepository.findById(dstAirportId);
+
+        Connection connection = Connection.builder()
+                .srcAirport(srcAirport1.get())
+                .dstAirport(dstAirport1.get())
+                .times(Times.builder()
+                        .departureDate(LocalDate.parse(departureDate))
+                        .arrivalDate(LocalDate.parse(arrivalDate))
+                        .arrivalTime(LocalTime.parse(arrivalTime))
+                        .departureTime(LocalTime.parse(departureTime))
+                        .build())
+                .build();
+        connectionRepository.save(connection);
+        return connection;
+    }
 
     public void deleteConnectionWithAirlineId(Long id) {
         connectionRepository.deleteAllConnectionWithAirlineId(id);
@@ -62,11 +72,11 @@ public class ConnectionService {
         connectionRepository.deleteById(id);
     }
 
-    public Optional<Connection> findById(Long id){
-       return connectionRepository.findById(id);
+    public Optional<Connection> findById(Long id) {
+        return connectionRepository.findById(id);
     }
 
-    public void save(Connection connection){
+    public void save(Connection connection) {
         connectionRepository.save(connection);
     }
 
