@@ -1,7 +1,6 @@
 package pl.edu.pk.siwz.backend.service;
 
 import org.springframework.stereotype.Service;
-import pl.edu.pk.siwz.backend.controllers.ConnectionController.ConnectionDto;
 import pl.edu.pk.siwz.backend.models.Airline.Airline;
 import pl.edu.pk.siwz.backend.models.Airline.AirlineRepository;
 import pl.edu.pk.siwz.backend.models.Airport.Airport;

@@ -1,9 +1,9 @@
-@startuml dtos
+@startuml
 class TripDto {
   + tickets: Array<TicketDto>
   + departureDate: Date
   + arrivalDate: Date
-  + totalPrice: Price
+  + totalPrice: number
 }
 
 class TicketDto {
@@ -28,9 +28,7 @@ class AirlineDto {
 class AirportDto {
   __ attributes __
   + id: int
-  + iata: String
-  + icao: String
-  + airportName: String
+  + name: String
   + city: String
   + country: String
   + timezone: int
@@ -47,7 +45,7 @@ class PassengerDto {
   + dateOfBirth: Date
   + phoneNumber: String
   + email: String
-  + idOrPesel: String
+  + pesel: String
 }
 
 TripDto *-- TicketDto

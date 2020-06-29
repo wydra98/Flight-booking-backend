@@ -13,6 +13,7 @@ import pl.edu.pk.siwz.backend.models.Times;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 
@@ -95,17 +96,16 @@ public class ConnectionLoader implements CommandLineRunner {
                     .build();
             connectionRepository.save(connection3);
 
-            Optional<Airline> airline4 = airlineRepository.findById(2L);
+            //Optional<Airline> airline4 = airlineRepository.findById(2L);
             Optional<Airport> srcAirport4 = airportRepository.findById(1L);
             Optional<Airport> dstAirport4 = airportRepository.findById(3L);
             Connection connection4 = Connection.builder()
                     .srcAirport(srcAirport4.get())
                     .dstAirport(dstAirport4.get())
-                    .airline(airline4.get())
                     .times(Times.
                             builder()
-                            .departureDate(LocalDate.parse("2020-03-25"))
-                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .departureDate(LocalDateTime.parse("2020-03-25"))
+                            .arrivalDate(LocalDateTime.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
                             .departureTime(LocalTime.parse("10:40:00"))
                             .build())
