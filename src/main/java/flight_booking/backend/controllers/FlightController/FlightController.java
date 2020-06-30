@@ -1,71 +1,24 @@
 package flight_booking.backend.controllers.FlightController;
-//
-//import io.swagger.annotations.ApiOperation;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//@RequestMapping("/flights")
-//public class FlightController {
-//
-//    @ApiOperation(value = "Return list of trips that match given params")
-//    @GetMapping
-//    List<TripDto> getTrips(
-//            @RequestParam boolean oneWay,
-//            @RequestParam String from,
-//            @RequestParam String to,
-//            @RequestParam String departureDate,
-//            @RequestParam String arrivalDate,
-//            @RequestParam int passengerNumber,
-//            @RequestParam String tripClass
-//    ) {
-//
-//        // @TODO: implement searching trips based on query params
-//        List<TripDto> offers = new ArrayList<TripDto>();
-//        offers.add(new TripDto());
-//
-//        return offers;
-//    }
-//
-//    @ApiOperation(value = "Takes chosen trip and book")
-//    @PostMapping
-//    TripDto requestBooking(
-//            @RequestParam int tripId,
-//            @RequestBody TripDto tripDto) {
-//        // @TODO: implement booking mechanism
-//
-//        return tripDto;
-//    }
-//
-//    @PatchMapping("/{id}")
-//    TripDto editBooking(@PathVariable int tripId, @RequestBody TripDto changedTrip) {
-//        // @TODO: implement editing existing trip
-//
-//        return changedTrip;
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    void editBooking(@PathVariable int tripId) {
-//        // @TODO: implement deleting existing trip
-//    }
-//}
 
-import flight_booking.backend.controllers.AirlineController.AirlineDto;
-import flight_booking.backend.controllers.AirportController.AirportDto;
+import flight_booking.backend.exception.ConnectionNotExistsException;
+import flight_booking.backend.exception.FlightNotExistsException;
+import flight_booking.backend.models.Airline.Airline;
+import flight_booking.backend.models.Airport.Airport;
 import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Flight.Flight;
-import flight_booking.backend.models.Flight.FlightRepository;
 import flight_booking.backend.service.AirlineService;
 import flight_booking.backend.service.AirportService;
 import flight_booking.backend.service.ConnectionService;
 import flight_booking.backend.service.FlightService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/connections")
@@ -73,11 +26,18 @@ public class FlightController {
 
     private final ConnectionService connectionService;
     private final FlightService flightService;
+    private final AirlineService airlineService;
+    private final AirportService airportService;
     private final FlightMapper flightMapper;
 
-    FlightController(ConnectionService connectionService, FlightService flightService) {
+    FlightController(ConnectionService connectionService,
+                     FlightService flightService,
+                     AirlineService airlineService,
+                     AirportService airportService) {
         this.connectionService = connectionService;
         this.flightService = flightService;
+        this.airlineService = airlineService;
+        this.airportService = airportService;
         this.flightMapper = new FlightMapper();
     }
 
@@ -89,24 +49,24 @@ public class FlightController {
         ArrayList<FlightDto> flightDtos = new ArrayList<>();
         for (Flight flight : flights) {
             Connection connection = flightService.findConnection(flight.getId());
-            System.out.println(connection);
             flightDtos.add(flightMapper.map(flight, connection));
         }
         return ResponseEntity.ok(flightDtos);
     }
 
     //TODO read about twice @Requestbody in arguments of one function
+    //TODO add validators for examples like "if airlineId exists"
     @ApiOperation(value = "Add new flight")
     @PostMapping
-    ResponseEntity<Flight> addNewConnection(@RequestParam Long airlineDtoId,
-                                            @RequestParam int numberSeats,
-                                            @RequestParam double price,
-                                            @RequestParam Long srcAirportId,
-                                            @RequestParam Long dstAirportId,
-                                            @RequestParam String departureDate,
-                                            @RequestParam String departureTime,
-                                            @RequestParam String arrivalDate,
-                                            @RequestParam String arrivalTime) {
+    ResponseEntity<Flight> addNewFlight(@RequestParam Long airlineDtoId,
+                                        @RequestParam int numberSeats,
+                                        @RequestParam double price,
+                                        @RequestParam Long srcAirportId,
+                                        @RequestParam Long dstAirportId,
+                                        @RequestParam String departureDate,
+                                        @RequestParam String departureTime,
+                                        @RequestParam String arrivalDate,
+                                        @RequestParam String arrivalTime) {
 
         Connection connection = connectionService.addNewConnection(srcAirportId, dstAirportId, departureDate,
                 departureTime, arrivalDate, arrivalTime);
@@ -114,53 +74,79 @@ public class FlightController {
         return ResponseEntity.created(URI.create("/" + flight.getId())).body(flight);
 
     }
-}
 
-//    @ApiOperation(value = "Update connection")
-//    @Transactional
-//    @PutMapping
-//    ResponseEntity<Void> updateConnection(@RequestBody ConnectionDto connectionDto) {
-//
-//        if (!connectionService.existsById(connectionDto.getId())) {
-//            throw new ConnectionNotExistsException("Connection with that id not exist!");
-//        }
-//
-//        Optional<Connection> connectionOptional = connectionService.findById(connectionDto.getId());
-//        Optional<Airline> airline = airlineService.findById(connectionDto.getAirlineDto().getId());
-//        Optional<Airport> srcAirport = airportService.findById(connectionDto.getSrcAirportDto().getId());
-//        Optional<Airport> dstAirport  = airportService.findById(connectionDto.getDstAirportDto().getId());
-//
-//        connectionOptional.get().updateForm(connectionDto.getId(),
-//                srcAirport.get(),
-//                dstAirport.get(),
-//                airline.get(),
-//                connectionDto.getNumberSeats(),
-//                connectionDto.getArrivalDate(),
-//                connectionDto.getArrivalTime(),
-//                connectionDto.getDepartureDate(),
-//                connectionDto.getDepartureTime(),
-//                connectionDto.getPrice());
-//        connectionService.save(connectionOptional.get());
-//
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    @ApiOperation(value = "Delete connection")
-//    @Transactional
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<Long> deleteConnection(@PathVariable Long id) {
-//
-//        if (!connectionService.existsById(id)) {
-//            throw new ConnectionNotExistsException("Connection with that id not exist!");
-//        }
-//
-//        connectionService.deleteConnection(id);
-//        return ResponseEntity.ok(id);
-//    }
-//
-//
-//    @ExceptionHandler(ConnectionNotExistsException.class)
-//    ResponseEntity<?> handleConnectionNotExistsException(ConnectionNotExistsException e) {
-//        return ResponseEntity.notFound().build();
-//    }
-//}
+    //TODO add validators for examples like "if airlineId exists"
+    @ApiOperation(value = "Update flight")
+    @Transactional
+    @PutMapping
+    ResponseEntity<Void> updateFlight(@RequestParam Long flightId,
+                                      @RequestParam Long airlineId,
+                                      @RequestParam int numberSeats,
+                                      @RequestParam double price,
+                                      @RequestParam Long srcAirportId,
+                                      @RequestParam Long dstAirportId,
+                                      @RequestParam String departureDate,
+                                      @RequestParam String departureTime,
+                                      @RequestParam String arrivalDate,
+                                      @RequestParam String arrivalTime) {
+
+        if (!flightService.existsById(flightId)) {
+            throw new FlightNotExistsException("Flight with that id not exist!");
+        }
+
+        if (!connectionService.existsById(flightId)) {
+            throw new ConnectionNotExistsException("Connection with that id not exist!");
+        }
+
+        Optional<Flight> flightOptional = flightService.findById(flightId);
+        Optional<Connection> connectionOptional = connectionService.findById(flightId);
+        Optional<Airline> airline = airlineService.findById(airlineId);
+        Optional<Airport> srcAirport = airportService.findById(srcAirportId);
+        Optional<Airport> dstAirport = airportService.findById(dstAirportId);
+
+        connectionOptional.get().updateForm(
+                srcAirport.get(),
+                dstAirport.get(),
+                arrivalDate,
+                departureDate,
+                arrivalTime,
+                departureTime
+        );
+
+        System.out.println(connectionOptional.get());
+
+        flightOptional.get().updateForm(
+                airline.get(),
+                numberSeats,
+                price
+        );
+
+        System.out.println(connectionOptional.get());
+
+        if (connectionOptional.isPresent() && flightOptional.isPresent()) {
+            flightService.save(flightOptional.get());
+            connectionService.save(connectionOptional.get());
+        }
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @ApiOperation(value = "Delete flight")
+    @Transactional
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {
+
+        if (!flightService.existsById(id)) {
+            throw new FlightNotExistsException("Flight with that id not exist!");
+        }
+
+        flightService.deleteConnection(id);
+        return ResponseEntity.ok(id);
+    }
+
+
+    @ExceptionHandler(FlightNotExistsException.class)
+    ResponseEntity<?> handleConnectionNotExistsException(FlightNotExistsException e) {
+        return ResponseEntity.notFound().build();
+    }
+}

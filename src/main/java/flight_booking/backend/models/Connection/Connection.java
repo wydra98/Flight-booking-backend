@@ -34,15 +34,14 @@ public class Connection {
     @Embedded
     private Times times;
 
-    public void updateForm(Long id,
-                           Airport srcAirport,
-                           Airport dstAirport,
-                           String arrivalDate,
-                           String departureDate,
-                           String arrivalTime,
-                           String departureTime
+    public void updateForm(
+            Airport srcAirport,
+            Airport dstAirport,
+            String arrivalDate,
+            String departureDate,
+            String arrivalTime,
+            String departureTime
     ) {
-        this.id = id;
         this.srcAirport = srcAirport;
         this.dstAirport = dstAirport;
         this.getTimes().setDepartureDate(LocalDate.parse(departureDate));

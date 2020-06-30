@@ -29,4 +29,10 @@ public class Flight {
     private Airline airline;
     int numberSeats;
     double price;
+
+    public void updateForm(Airline airline, int numberSeats, double price) {
+        this.airline = airline;
+        this.numberSeats = numberSeats;
+        this.price = price;
+    }
 }

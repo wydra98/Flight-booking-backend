@@ -61,4 +61,16 @@ public class FlightService {
         return flight;
     }
 
+    public boolean existsById(Long id) {
+        return flightRepository.existsById(id);
+    }
+
+    public void deleteConnection(Long id) {
+        flightRepository.deleteById(id);
+    }
+
+    public Optional<Flight> findById(Long id) {
+        return flightRepository.findById(id);
+    }
+
 }
