@@ -99,12 +99,12 @@ public class FlightController {
         }
 
         Optional<Flight> flightOptional = flightService.findById(flightId);
-        Optional<Connection> connectionOptional = connectionService.findById(flightId);
+        Connection connection = flightService.findConnection(flightId);
         Optional<Airline> airline = airlineService.findById(airlineId);
         Optional<Airport> srcAirport = airportService.findById(srcAirportId);
         Optional<Airport> dstAirport = airportService.findById(dstAirportId);
 
-        connectionOptional.get().updateForm(
+        connection.updateForm(
                 srcAirport.get(),
                 dstAirport.get(),
                 arrivalDate,
@@ -113,19 +113,15 @@ public class FlightController {
                 departureTime
         );
 
-        System.out.println(connectionOptional.get());
-
         flightOptional.get().updateForm(
                 airline.get(),
                 numberSeats,
                 price
         );
 
-        System.out.println(connectionOptional.get());
-
-        if (connectionOptional.isPresent() && flightOptional.isPresent()) {
+        if (flightOptional.isPresent()) {
             flightService.save(flightOptional.get());
-            connectionService.save(connectionOptional.get());
+            connectionService.save(connection);
         }
 
         return ResponseEntity.noContent().build();

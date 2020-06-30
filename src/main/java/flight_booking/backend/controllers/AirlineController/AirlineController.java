@@ -44,6 +44,7 @@ public class AirlineController {
         return ResponseEntity.ok(airlineDtos);
     }
 
+    //@TODO what is better request bddy or parametr?
     @ApiOperation(value = "Add new airline")
     @PostMapping
     ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto,
@@ -71,6 +72,7 @@ public class AirlineController {
         return ResponseEntity.ok(id);
     }
 
+    //@TODO what is better request bddy or parametr?
     @ApiOperation(value = "Update airline")
     @PutMapping
     ResponseEntity<Void> updateAirline(@RequestBody AirlineDto airlineDto,
