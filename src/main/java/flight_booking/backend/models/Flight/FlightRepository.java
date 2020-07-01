@@ -1,6 +1,5 @@
 package flight_booking.backend.models.Flight;
 
-import flight_booking.backend.models.Connection.Connection;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;

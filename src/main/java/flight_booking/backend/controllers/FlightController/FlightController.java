@@ -1,7 +1,6 @@
 package flight_booking.backend.controllers.FlightController;
 
-import flight_booking.backend.exception.ConnectionNotExistsException;
-import flight_booking.backend.exception.FlightNotExistsException;
+import flight_booking.backend.exception.EntityNotExistsException;
 import flight_booking.backend.models.Airline.Airline;
 import flight_booking.backend.models.Airport.Airport;
 import flight_booking.backend.models.Connection.Connection;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/connections")
+@RequestMapping("/flights")
 public class FlightController {
 
     private final ConnectionService connectionService;
@@ -91,11 +90,11 @@ public class FlightController {
                                       @RequestParam String arrivalTime) {
 
         if (!flightService.existsById(flightId)) {
-            throw new FlightNotExistsException("Flight with that id not exist!");
+            throw new EntityNotExistsException("Flight with that id not exist!");
         }
 
         if (!connectionService.existsById(flightId)) {
-            throw new ConnectionNotExistsException("Connection with that id not exist!");
+            throw new EntityNotExistsException("Connection with that id not exist!");
         }
 
         Optional<Flight> flightOptional = flightService.findById(flightId);
@@ -133,7 +132,7 @@ public class FlightController {
     public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {
 
         if (!flightService.existsById(id)) {
-            throw new FlightNotExistsException("Flight with that id not exist!");
+            throw new EntityNotExistsException("Flight with that id not exist!");
         }
 
         flightService.deleteConnection(id);
@@ -141,8 +140,8 @@ public class FlightController {
     }
 
 
-    @ExceptionHandler(FlightNotExistsException.class)
-    ResponseEntity<?> handleConnectionNotExistsException(FlightNotExistsException e) {
+    @ExceptionHandler(EntityNotExistsException.class)
+    ResponseEntity<?> handleConnectionNotExistsException(EntityNotExistsException e) {
         return ResponseEntity.notFound().build();
     }
 }

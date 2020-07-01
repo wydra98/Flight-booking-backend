@@ -1,14 +1,13 @@
 package flight_booking.backend.controllers.AirlineController;
 
-import flight_booking.backend.exception.AirlineAlreadyExistsException;
-import flight_booking.backend.exception.AirportAlreadyExistsException;
+import flight_booking.backend.exception.EntityAlreadyExistsException;
+import flight_booking.backend.exception.EntityNotExistsException;
 import flight_booking.backend.models.Airline.Airline;
 import flight_booking.backend.service.AirlineService;
 import flight_booking.backend.service.ConnectionService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import flight_booking.backend.exception.AirlineNotExistsException;
 
 import javax.transaction.Transactional;
 import java.net.URI;
@@ -51,7 +50,7 @@ public class AirlineController {
                                           @RequestParam String country) {
 
         if (airlineService.checkIfAirlineExists(airlineDto, country)) {
-            throw new AirportAlreadyExistsException("Airline with these data already exist ins datebase!");
+            throw new EntityAlreadyExistsException("Airline with these data already exist ins datebase!");
         }
 
         Airline airline = airlineService.addNewAirline(airlineDto, country);
@@ -64,7 +63,7 @@ public class AirlineController {
     ResponseEntity<Long> deleteAirline(@PathVariable Long id) {
 
         if (!airlineService.existsById(id)) {
-            throw new AirlineNotExistsException("Airline with that id not exist!");
+            throw new EntityNotExistsException("Airline with that id not exist!");
         }
 
         connectionService.deleteConnectionWithAirlineId(id);
@@ -79,7 +78,7 @@ public class AirlineController {
                                        @RequestParam String country) {
 
         if (!airlineService.existsById(airlineDto.getId())) {
-            throw new AirlineNotExistsException("Airline with that ID not exist!");
+            throw new EntityNotExistsException("Airline with that ID not exist!");
         }
 
         Optional<Airline> airlineOptional = airlineService.findById(airlineDto.getId());
@@ -89,13 +88,13 @@ public class AirlineController {
         return ResponseEntity.noContent().build();
     }
 
-    @ExceptionHandler(AirlineAlreadyExistsException.class)
-    ResponseEntity<String> handleAirlineAlreadyExistsException(AirlineAlreadyExistsException e) {
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    ResponseEntity<String> handleAirlineAlreadyExistsException(EntityAlreadyExistsException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
-    @ExceptionHandler(AirlineNotExistsException.class)
-    ResponseEntity<?> handleAirlineNotExistsException(AirlineNotExistsException e) {
+    @ExceptionHandler(EntityNotExistsException.class)
+    ResponseEntity<?> handleAirlineNotExistsException(EntityNotExistsException e) {
         return ResponseEntity.notFound().build();
     }
 }

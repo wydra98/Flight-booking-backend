@@ -1,8 +1,8 @@
 package flight_booking.backend.controllers.AirportController;
 
 
-import flight_booking.backend.exception.AirportAlreadyExistsException;
-import flight_booking.backend.exception.AirportNotExistsException;
+import flight_booking.backend.exception.EntityAlreadyExistsException;
+import flight_booking.backend.exception.EntityNotExistsException;
 import flight_booking.backend.service.AirportService;
 import flight_booking.backend.service.ConnectionService;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +49,7 @@ public class AirportController {
                                           @RequestParam double latitude) {
 
         if (airportService.checkIfAirportExists(airportDto, longitude, latitude)) {
-            throw new AirportAlreadyExistsException("Airport with these data already exist in datebase!");
+            throw new EntityAlreadyExistsException("Airport with these data already exist in datebase!");
         }
 
         Airport airport = airportService.addNewAirport(airportDto, longitude, latitude);
@@ -62,7 +62,7 @@ public class AirportController {
     public ResponseEntity<Long> deleteAirport(@PathVariable Long id) {
 
         if (!airportService.existsById(id)) {
-            throw new AirportNotExistsException("Airport with that id not exist!");
+            throw new EntityNotExistsException("Airport with that id not exist!");
         }
 
         connectionService.deleteConnectionWithAirportId(id);
@@ -79,7 +79,7 @@ public class AirportController {
                                        @RequestParam double latitude) {
 
         if (!airportService.existsById(airportDto.getId())) {
-            throw new AirportNotExistsException("Airport with that id not exist!");
+            throw new EntityNotExistsException("Airport with that id not exist!");
         }
 
         Optional<Airport> airportOptional = airportService.findById(airportDto.getId());
@@ -89,13 +89,13 @@ public class AirportController {
         return ResponseEntity.noContent().build();
     }
 
-    @ExceptionHandler(AirportAlreadyExistsException.class)
-    ResponseEntity<String> handleAirportAlreadyExistsException(AirportAlreadyExistsException e) {
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    ResponseEntity<String> handleAirportAlreadyExistsException(EntityAlreadyExistsException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
-    @ExceptionHandler(AirportNotExistsException.class)
-    ResponseEntity<?> handleAirportNotExistsException(AirportNotExistsException e) {
+    @ExceptionHandler(EntityNotExistsException.class)
+    ResponseEntity<?> handleAirportNotExistsException(EntityNotExistsException e) {
         return ResponseEntity.notFound().build();
     }
 
