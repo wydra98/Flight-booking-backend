@@ -6,4 +6,8 @@ import java.util.List;
 public interface PassengerRepository {
 
     List<Passenger> findAll();
+
+    Passenger save(Passenger entity);
+
+    int amountOfRows();
 }

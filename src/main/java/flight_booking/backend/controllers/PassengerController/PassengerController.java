@@ -1,5 +1,7 @@
 package flight_booking.backend.controllers.PassengerController;
 
+import flight_booking.backend.controllers.AirlineController.AirlineDto;
+import flight_booking.backend.exception.EntityAlreadyExistsException;
 import flight_booking.backend.exception.EntityNotExistsException;
 import flight_booking.backend.models.Passenger.Passenger;
 import flight_booking.backend.service.*;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,26 +39,19 @@ public class PassengerController {
         return ResponseEntity.ok(passengerDtos);
     }
 
-//    //TODO read about twice @Requestbody in arguments of one function
-//    //TODO add validators for examples like "if airlineId exists"
-//    @ApiOperation(value = "Add new flight")
-//    @PostMapping
-//    ResponseEntity<Flight> addNewFlight(@RequestParam Long airlineDtoId,
-//                                        @RequestParam int numberSeats,
-//                                        @RequestParam double price,
-//                                        @RequestParam Long srcAirportId,
-//                                        @RequestParam Long dstAirportId,
-//                                        @RequestParam String departureDate,
-//                                        @RequestParam String departureTime,
-//                                        @RequestParam String arrivalDate,
-//                                        @RequestParam String arrivalTime) {
-//
-//        Connection connection = connectionService.addNewConnection(srcAirportId, dstAirportId, departureDate,
-//                departureTime, arrivalDate, arrivalTime);
-//        Flight flight = flightService.addNewFlight(airlineDtoId, numberSeats, price, connection);
-//        return ResponseEntity.created(URI.create("/" + flight.getId())).body(flight);
-//
-//    }
+
+    @ApiOperation(value = "Add new passenger")
+    @PostMapping
+    ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
+
+//        if (passengerService.checkIfPassengerExists(passengerDto)) {
+//            throw new EntityAlreadyExistsException("Passenger with these data already exist in datebase!");
+//        }
+
+        Passenger passenger = passengerService.addNewPassenger(passengerDto);
+        return ResponseEntity.created(URI.create("/" + passenger.getId())).body(passenger);
+
+    }
 //
 //    //TODO add validators for examples like "if airlineId exists"
 //    @ApiOperation(value = "Update flight")

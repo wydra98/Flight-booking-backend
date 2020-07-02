@@ -40,10 +40,6 @@ public class FlightService {
         flightRepository.save(flight);
     }
 
-    public int amount() {
-        return flightRepository.amountOfRows();
-    }
-
     public Flight addNewFlight(Long airlineDtoId,
                                int numberSeats,
                                double price,
