@@ -1,6 +1,7 @@
 package flight_booking.backend.models.Ticket;
 
 
+import flight_booking.backend.controllers.FlightController.FlightDto;
 import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Passenger.Passenger;
 import lombok.*;
@@ -36,4 +37,9 @@ public class Ticket {
     private int seatNumber;
     private double price;
 
+    //@TODO function that convert List of Flight into one FlightDto
+    public FlightDto convertListOfFlightsToDto(){
+        FlightDto flightDto = null;
+        return flightDto;
+    }
 }
