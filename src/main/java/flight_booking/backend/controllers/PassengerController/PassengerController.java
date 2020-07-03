@@ -44,17 +44,18 @@ public class PassengerController {
     @PostMapping
     ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
 
-//        if (passengerService.checkIfPassengerExists(passengerDto)) {
-//            throw new EntityAlreadyExistsException("Passenger with these data already exist in datebase!");
-//        }
+        if (passengerService.checkIfPassengerExists(passengerDto.getEmail(), passengerDto.getPhoneNumber())) {
+            throw new EntityAlreadyExistsException("Passenger with these data already exist in datebase!");
+        }
 
         Passenger passenger = passengerService.addNewPassenger(passengerDto);
         return ResponseEntity.created(URI.create("/" + passenger.getId())).body(passenger);
 
     }
-//
+
+
 //    //TODO add validators for examples like "if airlineId exists"
-//    @ApiOperation(value = "Update flight")
+//    @ApiOperation(value = "Update passenger")
 //    @Transactional
 //    @PutMapping
 //    ResponseEntity<Void> updateFlight(@RequestParam Long flightId,
@@ -104,23 +105,23 @@ public class PassengerController {
 //
 //        return ResponseEntity.noContent().build();
 //    }
-//
-//    @ApiOperation(value = "Delete flight")
-//    @Transactional
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {
-//
-//        if (!flightService.existsById(id)) {
-//            throw new EntityNotExistsException("Flight with that id not exist!");
-//        }
-//
-//        flightService.deleteConnection(id);
-//        return ResponseEntity.ok(id);
-//    }
-//
-//
-//    @ExceptionHandler(EntityNotExistsException.class)
-//    ResponseEntity<?> handleConnectionNotExistsException(EntityNotExistsException e) {
-//        return ResponseEntity.notFound().build();
-//    }
+
+    @ApiOperation(value = "Delete passenger")
+    @Transactional
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Long> deletePassenger(@PathVariable Long id) {
+
+        if (!passengerService.existsById(id)) {
+            throw new EntityNotExistsException("Passenger with that id not exist!");
+        }
+
+        passengerService.deleteConnection(id);
+        return ResponseEntity.ok(id);
+    }
+
+
+    @ExceptionHandler(EntityNotExistsException.class)
+    ResponseEntity<?> handleConnectionNotExistsException(EntityNotExistsException e) {
+        return ResponseEntity.notFound().build();
+    }
 }

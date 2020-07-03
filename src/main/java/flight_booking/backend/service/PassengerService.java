@@ -35,4 +35,24 @@ public class PassengerService {
         return passenger;
     }
 
+    public boolean checkIfPassengerExists(String email, String phoneNumber) {
+        if (passengerRepository.checkIfPassengerExistsThroughEmail(email) > 0
+                || passengerRepository.checkIfPassengerExistsThroughPhoneNumber(phoneNumber) > 0)
+            return true;
+        else
+            return false;
+
+    }
+
+    public boolean existsById(Long id) {
+        if (passengerRepository.existsById(id))
+            return true;
+        else
+            return false;
+    }
+
+    public void deleteConnection(Long id) {
+        passengerRepository.deleteById(id);
+    }
+
 }
