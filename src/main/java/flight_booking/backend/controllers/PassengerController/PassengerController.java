@@ -1,6 +1,5 @@
 package flight_booking.backend.controllers.PassengerController;
 
-import flight_booking.backend.controllers.AirlineController.AirlineDto;
 import flight_booking.backend.exception.EntityAlreadyExistsException;
 import flight_booking.backend.exception.EntityNotExistsException;
 import flight_booking.backend.models.Passenger.Passenger;
@@ -54,57 +53,8 @@ public class PassengerController {
     }
 
 
-//    //TODO add validators for examples like "if airlineId exists"
-//    @ApiOperation(value = "Update passenger")
-//    @Transactional
-//    @PutMapping
-//    ResponseEntity<Void> updateFlight(@RequestParam Long flightId,
-//                                      @RequestParam Long airlineId,
-//                                      @RequestParam int numberSeats,
-//                                      @RequestParam double price,
-//                                      @RequestParam Long srcAirportId,
-//                                      @RequestParam Long dstAirportId,
-//                                      @RequestParam String departureDate,
-//                                      @RequestParam String departureTime,
-//                                      @RequestParam String arrivalDate,
-//                                      @RequestParam String arrivalTime) {
+//    //TODO Should i do do make update passenger??
 //
-//        if (!flightService.existsById(flightId)) {
-//            throw new FlightNotExistsException("Flight with that id not exist!");
-//        }
-//
-//        if (!connectionService.existsById(flightId)) {
-//            throw new ConnectionNotExistsException("Connection with that id not exist!");
-//        }
-//
-//        Optional<Flight> flightOptional = flightService.findById(flightId);
-//        Connection connection = flightService.findConnection(flightId);
-//        Optional<Airline> airline = airlineService.findById(airlineId);
-//        Optional<Airport> srcAirport = airportService.findById(srcAirportId);
-//        Optional<Airport> dstAirport = airportService.findById(dstAirportId);
-//
-//        connection.updateForm(
-//                srcAirport.get(),
-//                dstAirport.get(),
-//                arrivalDate,
-//                departureDate,
-//                arrivalTime,
-//                departureTime
-//        );
-//
-//        flightOptional.get().updateForm(
-//                airline.get(),
-//                numberSeats,
-//                price
-//        );
-//
-//        if (flightOptional.isPresent()) {
-//            flightService.save(flightOptional.get());
-//            connectionService.save(connection);
-//        }
-//
-//        return ResponseEntity.noContent().build();
-//    }
 
     @ApiOperation(value = "Delete passenger")
     @Transactional

@@ -1,7 +1,10 @@
 package flight_booking.backend.models.Passenger;
 
 
+import org.springframework.data.jpa.repository.Query;
+
 import java.util.List;
+import java.util.Optional;
 
 public interface PassengerRepository {
 
@@ -18,5 +21,7 @@ public interface PassengerRepository {
     boolean existsById(Long Id);
 
     void deleteById(Long Id);
+
+    Optional<Passenger> findById(Long id);
 
 }
