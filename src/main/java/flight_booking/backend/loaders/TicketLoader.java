@@ -37,11 +37,9 @@ public class TicketLoader implements CommandLineRunner {
 
             Optional<Passenger> passenger1 = passengerRepository.findById(1L);
             Optional<Flight> flights1 = flightRepository.findById(1L);
-            Optional<Flight> flights2 = flightRepository.findById(1L);
-            List<Flight> flights = List.of(flights1.get(), flights2.get());
             Ticket ticket1 = Ticket.builder()
                     .passenger(passenger1.get())
-                    .flights(flights)
+                    .flight(flights1.get())
                     .purchaseDate(LocalDate.parse("2020-07-29"))
                     .purchaseTime(LocalTime.parse("10:40:00"))
                     .seatNumber(23)

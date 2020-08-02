@@ -1,5 +1,5 @@
 drop table if exists tickets cascade;
-drop table if exists tickets_flights cascade;
+//drop table if exists tickets_flights cascade;
 
 
 create table tickets(
@@ -16,13 +16,13 @@ create table tickets(
     foreign key(id_flight) references flights(flight_id)
 );
 
-create table tickets_flights(
-    ticket_flight_id bigint auto_increment primary key,
-    ticket_ticket_id bigint not null,
-    flights_flight_id bigint not null,
-
-    foreign key(ticket_ticket_id) references tickets(ticket_id),
-    foreign key(flights_flight_id) references flights(flight_id)
-)
+-- create table tickets_flights(
+--     ticket_flight_id bigint auto_increment primary key,
+--     ticket_ticket_id bigint not null,
+--     flights_flight_id bigint not null,
+--
+--     foreign key(ticket_ticket_id) references tickets(ticket_id),
+--     foreign key(flights_flight_id) references flights(flight_id)
+-- )
 
 

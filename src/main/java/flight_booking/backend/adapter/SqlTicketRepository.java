@@ -1,5 +1,6 @@
 package flight_booking.backend.adapter;
 
+import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Ticket.Ticket;
 import flight_booking.backend.models.Ticket.TicketRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,8 @@ public interface SqlTicketRepository extends TicketRepository, JpaRepository<Tic
     @Override
     @Query(value = "SELECT COUNT (a.ticket_id) FROM tickets a", nativeQuery = true)
     int amountOfRows();
+
+    @Override
+    @Query("SELECT DISTINCT f FROM Flight f JOIN Ticket t on f = t.flight WHERE t.id = :id")
+    Flight findFlightByTicketId(@Param("id") Long id);
 }

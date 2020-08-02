@@ -29,17 +29,13 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
-    @ManyToMany
+    @OneToOne
     @JoinColumn(name = "id_flight")
-    private List<Flight> flights;
+    private Flight flight;
     private LocalDate purchaseDate;
     private LocalTime purchaseTime;
     private int seatNumber;
     private double price;
 
-    //@TODO function that convert List of Flight into one FlightDto
-    public FlightDto convertListOfFlightsToDto(){
-        FlightDto flightDto = null;
-        return flightDto;
-    }
+
 }

@@ -1,5 +1,6 @@
 package flight_booking.backend.service;
 
+import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Ticket.Ticket;
 import flight_booking.backend.models.Ticket.TicketRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,12 @@ public class TicketService {
         List<Ticket> tickets = ticketRepository.findAllTicketFromUserId(id);
 
         return tickets;
+    }
+
+    public Flight findFlightByTicketId(Long id){
+        Flight flight = ticketRepository.findFlightByTicketId(id);
+
+        return flight;
     }
 
 }

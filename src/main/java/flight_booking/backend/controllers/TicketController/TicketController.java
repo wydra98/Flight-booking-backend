@@ -1,6 +1,8 @@
 package flight_booking.backend.controllers.TicketController;
 
+import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Ticket.Ticket;
+import flight_booking.backend.service.FlightService;
 import flight_booking.backend.service.TicketService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +21,7 @@ public class TicketController {
     private final TicketService ticketService;
     private final TicketMapper ticketMapper;
 
-    TicketController(TicketService ticketService
-    ) {
+    TicketController(TicketService ticketService) {
         this.ticketService = ticketService;
         this.ticketMapper = new TicketMapper();
     }
@@ -33,6 +34,8 @@ public class TicketController {
 
         ArrayList<TicketDto> ticketDtos = new ArrayList<>();
         for (Ticket ticket : tickets) {
+
+            //@TODO za pomocą flighta znajdź connection
             ticketDtos.add(ticketMapper.map(ticket));
         }
         System.out.println(ticketDtos);
