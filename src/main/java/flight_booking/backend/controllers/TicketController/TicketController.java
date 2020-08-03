@@ -34,8 +34,6 @@ public class TicketController {
 
         ArrayList<TicketDto> ticketDtos = new ArrayList<>();
         for (Ticket ticket : tickets) {
-
-            //@TODO za pomocą flighta znajdź connection
             ticketDtos.add(ticketMapper.map(ticket));
         }
         System.out.println(ticketDtos);

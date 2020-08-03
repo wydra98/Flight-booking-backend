@@ -12,11 +12,10 @@ public class TicketMapper {
     public TicketDto map(Ticket ticket) {
         return TicketDto.builder()
                 .id(ticket.getId())
-                //@TODO check if work correct
-                .flightDto(flightMapper.map(ticket.getFlight())
+                .flightDto(flightMapper.map(ticket.getFlight(), ticket.getFlight().getConnection()))
                 .purchaseDate(ticket.getPurchaseDate().toString())
                 .purchaseTime(ticket.getPurchaseTime().toString())
                 .totalPrice(ticket.getPrice())
-                .build());
+                .build();
     }
 }

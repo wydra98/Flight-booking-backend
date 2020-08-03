@@ -21,7 +21,4 @@ public interface SqlTicketRepository extends TicketRepository, JpaRepository<Tic
     @Query(value = "SELECT COUNT (a.ticket_id) FROM tickets a", nativeQuery = true)
     int amountOfRows();
 
-    @Override
-    @Query("SELECT DISTINCT f FROM Flight f JOIN Ticket t on f = t.flight WHERE t.id = :id")
-    Flight findFlightByTicketId(@Param("id") Long id);
 }

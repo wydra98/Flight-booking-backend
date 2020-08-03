@@ -24,10 +24,5 @@ public class TicketService {
         return tickets;
     }
 
-    public Flight findFlightByTicketId(Long id){
-        Flight flight = ticketRepository.findFlightByTicketId(id);
-
-        return flight;
-    }
 
 }
