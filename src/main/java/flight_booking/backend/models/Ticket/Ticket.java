@@ -4,6 +4,7 @@ package flight_booking.backend.models.Ticket;
 import flight_booking.backend.controllers.FlightController.FlightDto;
 import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Passenger.Passenger;
+import flight_booking.backend.models.Trips.Trip;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,12 +27,19 @@ public class Ticket {
     @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "ticket_id")
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
+
     @OneToOne
     @JoinColumn(name = "id_flight")
     private Flight flight;
+
+    @ManyToOne
+    @JoinColumn(name = "id_trip")
+    private Trip trip;
+
     private LocalDate purchaseDate;
     private LocalTime purchaseTime;
     private int seatNumber;

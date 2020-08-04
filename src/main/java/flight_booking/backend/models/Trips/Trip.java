@@ -25,12 +25,18 @@ public class Trip {
     @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "trip_id")
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "id_ticket")
-    private Ticket tickets;
+
+    @OneToMany(mappedBy = "trip")
+    private List<Ticket> tickets;
+
+    @ManyToOne
+    @JoinColumn(name = "id_passenger")
+    private Passenger passenger;
+
     private LocalDate departureDate;
     private LocalTime departureTime;
     private LocalDate purchaseDate;
     private LocalTime purchaseTime;
     private double price;
+
 }
