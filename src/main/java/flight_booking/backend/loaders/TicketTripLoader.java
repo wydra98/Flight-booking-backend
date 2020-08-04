@@ -1,5 +1,6 @@
 package flight_booking.backend.loaders;
 
+import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Flight.FlightRepository;
 import flight_booking.backend.models.Passenger.Passenger;
@@ -25,9 +26,9 @@ public class TicketTripLoader implements CommandLineRunner {
     TripRepository tripRepository;
 
     TicketTripLoader(TicketRepository ticketRepository,
-                 PassengerRepository passengerRepository,
-                 FlightRepository flightRepository,
-                 TripRepository tripRepository) {
+                     PassengerRepository passengerRepository,
+                     FlightRepository flightRepository,
+                     TripRepository tripRepository) {
         this.ticketRepository = ticketRepository;
         this.passengerRepository = passengerRepository;
         this.flightRepository = flightRepository;
@@ -39,64 +40,66 @@ public class TicketTripLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (ticketRepository.amountOfRows() == 0 && tripRepository.amountOfRows() == 0) {
 
-//
-//            Trip trip1 = Trip.builder()
-//
-//                    .purchaseDate(LocalDate.parse("2020-06-26"))
-//                    .purchaseTime(LocalTime.parse("10:43:22"))
-//                    .departureDate(LocalDate.parse("2020-08-26"))
-//                    .departureTime(LocalTime.parse("14:43:11"))
-//                    .price(34)
-//                    .build();
-//            tripRepository.save(trip1);
-//
-//
-//            Trip trip2 = Trip.builder()
-//                    .purchaseDate(LocalDate.parse("2011-06-26"))
-//                    .purchaseTime(LocalTime.parse("11:43:22"))
-//                    .departureDate(LocalDate.parse("1111-08-26"))
-//                    .departureTime(LocalTime.parse("14:42:11"))
-//                    .price(45)
-//                    .build();
-//            tripRepository.save(trip2);
-//
-//
-//            Trip trip3 = Trip.builder()
-//                    .purchaseDate(LocalDate.parse("2022-06-26"))
-//                    .purchaseTime(LocalTime.parse("11:40:20"))
-//                    .departureDate(LocalDate.parse("2212-03-25"))
-//                    .departureTime(LocalTime.parse("12:23:22"))
-//                    .price(78)
-//                    .build();
-//            tripRepository.save(trip3);
-//
-//            Optional<Passenger> passenger1 = passengerRepository.findById(1L);
-//            Optional<Flight> flights1 = flightRepository.findById(1L);
-//            Optional<Trip> tripFind1 = tripRepository.findById(1L);
-//            Ticket ticket1 = Ticket.builder()
-//                    .passenger(passenger1.get())
-//                    .flight(flights1.get())
-//                    .trip(tripFind1.get())
-//                    .purchaseDate(LocalDate.parse("2020-07-29"))
-//                    .purchaseTime(LocalTime.parse("10:40:00"))
-//                    .seatNumber(23)
-//                    .price(34)
-//                    .build();
-//            ticketRepository.save(ticket1);
-//
-//            Optional<Passenger> passenger2 = passengerRepository.findById(2L);
-//            Optional<Flight> flights2 = flightRepository.findById(2L);
-//            Optional<Trip> tripFind2 = tripRepository.findById(2L);
-//            Ticket ticket2 = Ticket.builder()
-//                    .passenger(passenger2.get())
-//                    .flight(flights2.get())
-//                    .trip(tripFind2.get())
-//                    .purchaseDate(LocalDate.parse("2020-07-29"))
-//                    .purchaseTime(LocalTime.parse("10:40:00"))
-//                    .seatNumber(111)
-//                    .price(666)
-//                    .build();
-//            ticketRepository.save(ticket2);
+            Optional<Passenger> passenger1 = passengerRepository.findById(1L);
+            Optional<Passenger> passenger2 = passengerRepository.findById(2L);
+
+            Trip trip1 = Trip.builder()
+                    .passenger(passenger1.get())
+                    .purchaseDate(LocalDate.parse("2020-06-26"))
+                    .purchaseTime(LocalTime.parse("10:43:22"))
+                    .departureDate(LocalDate.parse("2020-08-26"))
+                    .departureTime(LocalTime.parse("14:43:11"))
+                    .price(34)
+                    .build();
+            tripRepository.save(trip1);
+
+
+            Trip trip2 = Trip.builder()
+                    .passenger(passenger1.get())
+                    .purchaseDate(LocalDate.parse("2011-06-26"))
+                    .purchaseTime(LocalTime.parse("11:43:22"))
+                    .departureDate(LocalDate.parse("1111-08-26"))
+                    .departureTime(LocalTime.parse("14:42:11"))
+                    .price(45)
+                    .build();
+            tripRepository.save(trip2);
+
+
+            Trip trip3 = Trip.builder()
+                    .passenger(passenger2.get())
+                    .purchaseDate(LocalDate.parse("2022-06-26"))
+                    .purchaseTime(LocalTime.parse("11:40:20"))
+                    .departureDate(LocalDate.parse("2212-03-25"))
+                    .departureTime(LocalTime.parse("12:23:22"))
+                    .price(78)
+                    .build();
+            tripRepository.save(trip3);
+
+            Optional<Flight> flights1 = flightRepository.findById(1L);
+            Optional<Trip> tripFind1 = tripRepository.findById(1L);
+            Ticket ticket1 = Ticket.builder()
+                    .passenger(passenger1.get())
+                    .flight(flights1.get())
+                    .trip(tripFind1.get())
+                    .purchaseDate(LocalDate.parse("2020-07-29"))
+                    .purchaseTime(LocalTime.parse("10:40:00"))
+                    .seatNumber(23)
+                    .price(34)
+                    .build();
+            ticketRepository.save(ticket1);
+
+            Optional<Flight> flights2 = flightRepository.findById(2L);
+            Optional<Trip> tripFind2 = tripRepository.findById(2L);
+            Ticket ticket2 = Ticket.builder()
+                    .passenger(passenger2.get())
+                    .flight(flights2.get())
+                    .trip(tripFind2.get())
+                    .purchaseDate(LocalDate.parse("2020-07-29"))
+                    .purchaseTime(LocalTime.parse("10:40:00"))
+                    .seatNumber(111)
+                    .price(666)
+                    .build();
+            ticketRepository.save(ticket2);
         }
     }
 }

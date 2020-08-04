@@ -1,13 +1,21 @@
 package flight_booking.backend.adapter;
 
+import flight_booking.backend.models.Ticket.Ticket;
 import flight_booking.backend.models.Trips.Trip;
 import flight_booking.backend.models.Trips.TripRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface SqlTripRepository extends TripRepository, JpaRepository<Trip, Long> {
+
+    @Override
+    @Query("SELECT DISTINCT t FROM Trip t WHERE t.id = :id")
+    List<Trip> findAllTripFromUserId(@Param("id") Long id);
 
     @Override
     @Query(value = "SELECT COUNT (t.trip_id) FROM trips t", nativeQuery = true)
