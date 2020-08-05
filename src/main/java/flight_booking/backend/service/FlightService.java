@@ -72,9 +72,9 @@ public class FlightService {
         return flightRepository.findById(id);
     }
 
-    public List<List<Flight>> findFlights(Airport srcAirport, Airport dstAirport, LocalDate departureDate, LocalTime departureTime) {
+    public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate, LocalTime departureTime) {
 
-        List<List<Connection>> connections = connectionService.findConnections();
+        List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport, departureDate, departureTime);
         List<List<Flight>> flights = mapToFlight(connections);
         return flights;
     }

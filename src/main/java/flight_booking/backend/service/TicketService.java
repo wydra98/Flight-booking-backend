@@ -31,7 +31,7 @@ public class TicketService {
         return tickets;
     }
 
-    public List<List<Ticket>> findAllListOfTicket(Airport srcAirport, Airport dstAirport, LocalDate departureDate, LocalTime departureTime) {
+    public List<List<Ticket>> findAllListOfTicket(Long srcAirport, Long dstAirport, LocalDate departureDate, LocalTime departureTime) {
 
         List<List<Flight>> flights = flightService.findFlights(srcAirport, dstAirport, departureDate, departureTime);
         List<List<Ticket>> tickets = mapToTicket(flights);

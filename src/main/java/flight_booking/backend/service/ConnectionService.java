@@ -80,8 +80,9 @@ public class ConnectionService {
         connectionRepository.save(connection);
     }
 
-    public List<List<Connection>> findConnections() {
+    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId, LocalDate departureDate, LocalTime departureTime) {
 
+        List<Connection> connectionsWithTheSameSrcAirport = connectionRepository.findAllConnectionWithTheSameSrcAirport(srcAirportId);
         List<List<Connection>> connections = null;
         return connections;
     }

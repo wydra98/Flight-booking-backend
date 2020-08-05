@@ -21,4 +21,6 @@ public interface ConnectionRepository {
     void deleteById(Long id);
 
     Optional<Connection> findById(Long id);
+
+    List<Connection> findAllConnectionWithTheSameSrcAirport(@Param("srcAirportId") Long srcAirport);
 }
