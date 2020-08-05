@@ -14,8 +14,6 @@ public class TripMapper {
 
     public TripDto map(Trip trip) {
 
-
-
         TicketMapper ticketMapper = new TicketMapper();
         PassengerMapper passengerMapper = new PassengerMapper();
 

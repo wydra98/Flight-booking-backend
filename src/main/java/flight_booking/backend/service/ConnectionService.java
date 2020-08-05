@@ -80,5 +80,11 @@ public class ConnectionService {
         connectionRepository.save(connection);
     }
 
+    public List<List<Connection>> findConnections() {
+
+        List<List<Connection>> connections = null;
+        return connections;
+    }
+
 
 }

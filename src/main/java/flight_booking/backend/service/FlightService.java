@@ -2,12 +2,15 @@ package flight_booking.backend.service;
 
 import flight_booking.backend.controllers.AirlineController.AirlineDto;
 import flight_booking.backend.models.Airline.Airline;
+import flight_booking.backend.models.Airport.Airport;
 import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Flight.FlightRepository;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +70,19 @@ public class FlightService {
 
     public Optional<Flight> findById(Long id) {
         return flightRepository.findById(id);
+    }
+
+    public List<List<Flight>> findFlights(Airport srcAirport, Airport dstAirport, LocalDate departureDate, LocalTime departureTime) {
+
+        List<List<Connection>> connections = connectionService.findConnections();
+        List<List<Flight>> flights = mapToFlight(connections);
+        return flights;
+    }
+
+    public List<List<Flight>> mapToFlight(List<List<Connection>> connections) {
+
+        List<List<Flight>> flights = null;
+        return flights;
     }
 
 
