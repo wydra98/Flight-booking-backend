@@ -14,7 +14,7 @@ import java.util.List;
 public interface SqlTripRepository extends TripRepository, JpaRepository<Trip, Long> {
 
     @Override
-    @Query("SELECT DISTINCT t FROM Trip t WHERE t.id = :id")
+    @Query("SELECT t FROM Trip t WHERE t.passenger.id = :id")
     List<Trip> findAllTripFromUserId(@Param("id") Long id);
 
     @Override

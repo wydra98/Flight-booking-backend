@@ -1,14 +1,14 @@
 package flight_booking.backend.controllers.TripController;
 
-import flight_booking.backend.controllers.FlightController.FlightDto;
+import flight_booking.backend.controllers.PassengerController.PassengerDto;
 import flight_booking.backend.controllers.TicketController.TicketDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,7 +16,8 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class TripDto {
     private Long id;
-    private Array<TicketDto> arraysTicket;
+    private ArrayList<TicketDto> arraysTicket;
+    private PassengerDto passengerDto;
     private String departureDate;
     private String departureTime;
     private String purchaseDate;

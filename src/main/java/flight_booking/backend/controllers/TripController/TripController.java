@@ -33,6 +33,7 @@ public class TripController {
     ResponseEntity<List<TripDto>> getAllUsersTrips(@PathVariable Long id) {
 
         List<Trip> trips = tripService.findAllTripsFromUserId(id);
+        System.out.println(trips.size());
 
         ArrayList<TripDto> tripsDtos = new ArrayList<>();
         for (Trip trip : trips) {

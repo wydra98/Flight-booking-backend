@@ -88,18 +88,58 @@ public class TicketTripLoader implements CommandLineRunner {
                     .build();
             ticketRepository.save(ticket1);
 
-            Optional<Flight> flights2 = flightRepository.findById(2L);
-            Optional<Trip> tripFind2 = tripRepository.findById(2L);
+            Optional<Flight> flights2 = flightRepository.findById(1L);
+            Optional<Trip> tripFind2 = tripRepository.findById(1L);
             Ticket ticket2 = Ticket.builder()
-                    .passenger(passenger2.get())
+                    .passenger(passenger1.get())
                     .flight(flights2.get())
                     .trip(tripFind2.get())
+                    .purchaseDate(LocalDate.parse("2020-07-29"))
+                    .purchaseTime(LocalTime.parse("10:40:00"))
+                    .seatNumber(23)
+                    .price(34)
+                    .build();
+            ticketRepository.save(ticket2);
+
+            Optional<Flight> flights3 = flightRepository.findById(1L);
+            Optional<Trip> tripFind3 = tripRepository.findById(1L);
+            Ticket ticket3 = Ticket.builder()
+                    .passenger(passenger1.get())
+                    .flight(flights3.get())
+                    .trip(tripFind3.get())
+                    .purchaseDate(LocalDate.parse("2020-07-29"))
+                    .purchaseTime(LocalTime.parse("10:40:00"))
+                    .seatNumber(23)
+                    .price(34)
+                    .build();
+            ticketRepository.save(ticket3);
+
+
+            Optional<Flight> flights4 = flightRepository.findById(1L);
+            Optional<Trip> tripFind4 = tripRepository.findById(1L);
+            Ticket ticket4 = Ticket.builder()
+                    .passenger(passenger1.get())
+                    .flight(flights4.get())
+                    .trip(tripFind4.get())
+                    .purchaseDate(LocalDate.parse("2020-07-29"))
+                    .purchaseTime(LocalTime.parse("10:40:00"))
+                    .seatNumber(23)
+                    .price(34)
+                    .build();
+            ticketRepository.save(ticket4);
+
+            Optional<Flight> flights5 = flightRepository.findById(2L);
+            Optional<Trip> tripFind5 = tripRepository.findById(2L);
+            Ticket ticket5 = Ticket.builder()
+                    .passenger(passenger1.get())
+                    .flight(flights5.get())
+                    .trip(tripFind5.get())
                     .purchaseDate(LocalDate.parse("2020-07-29"))
                     .purchaseTime(LocalTime.parse("10:40:00"))
                     .seatNumber(111)
                     .price(666)
                     .build();
-            ticketRepository.save(ticket2);
+            ticketRepository.save(ticket5);
         }
     }
 }
