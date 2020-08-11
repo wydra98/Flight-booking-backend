@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface TripRepository {
 
-    List<Trip> findAllTripFromUserId(Long id);
+ //   List<Trip> findAllTripFromUserId(Long id);
 
     int amountOfRows();
 

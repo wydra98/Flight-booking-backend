@@ -13,9 +13,9 @@ import java.util.List;
 @Repository
 public interface SqlTripRepository extends TripRepository, JpaRepository<Trip, Long> {
 
-    @Override
-    @Query("SELECT t FROM Trip t WHERE t.passenger.id = :id")
-    List<Trip> findAllTripFromUserId(@Param("id") Long id);
+//    @Override
+//    @Query("SELECT t FROM Trip t WHERE t.passenger.id = :id")
+//    List<Trip> findAllTripFromUserId(@Param("id") Long id);
 
     @Override
     @Query(value = "SELECT COUNT (t.trip_id) FROM trips t", nativeQuery = true)

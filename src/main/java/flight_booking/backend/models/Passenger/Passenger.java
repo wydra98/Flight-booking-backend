@@ -31,11 +31,11 @@ public class Passenger {
     private String phoneNumber;
     private String email;
 
-    @OneToMany(mappedBy = "passenger")
-    private List<Trip> trips;
+//    @OneToMany(mappedBy = "passenger")
+//    private List<Trip> trips;
 
     @OneToMany(mappedBy = "passenger")
-    private List<Trip> tickets;
+    private List<Ticket> tickets;
 
 
     public void updateForm(String firstName, String surname, String phoneNumber, String email) {

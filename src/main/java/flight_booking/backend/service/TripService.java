@@ -26,11 +26,11 @@ public class TripService {
         this.airportRepository = airportRepository;
     }
 
-    public List<Trip> findAllTripsFromUserId(Long id) {
-        List<Trip> trips = tripRepository.findAllTripFromUserId(id);
-
-        return trips;
-    }
+//    public List<Trip> findAllTripsFromUserId(Long id) {
+//        List<Trip> trips = tripRepository.findAllTripFromUserId(id);
+//
+//        return trips;
+//    }
 
     public List<Trip> findAllAvailableTrips(Long srcAirportId, Long dstAirportId, String departureDateString, String departureTimeString) {
 

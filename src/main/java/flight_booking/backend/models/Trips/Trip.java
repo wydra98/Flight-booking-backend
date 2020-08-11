@@ -29,14 +29,14 @@ public class Trip {
     @OneToMany(mappedBy = "trip")
     private List<Ticket> tickets;
 
-    @ManyToOne
-    @JoinColumn(name = "id_passenger")
-    private Passenger passenger;
+//    @ManyToOne
+//    @JoinColumn(name = "id_passenger")
+//    private Passenger passenger;
 
     private LocalDate departureDate;
     private LocalTime departureTime;
-    private LocalDate purchaseDate;
-    private LocalTime purchaseTime;
+    private LocalDate arrivalDate;
+    private LocalTime arrivalTime;
     private double price;
 
 }

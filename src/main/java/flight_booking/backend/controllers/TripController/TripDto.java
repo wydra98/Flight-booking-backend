@@ -17,7 +17,7 @@ import java.util.List;
 public class TripDto {
     private Long id;
     private ArrayList<TicketDto> arraysTicket;
-    private PassengerDto passengerDto;
+    //private PassengerDto passengerDto;
     private String departureDate;
     private String departureTime;
     private String purchaseDate;

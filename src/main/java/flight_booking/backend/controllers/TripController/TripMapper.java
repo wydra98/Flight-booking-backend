@@ -25,11 +25,11 @@ public class TripMapper {
         return TripDto.builder()
                 .id(trip.getId())
                 .arraysTicket(ticketDtos)
-                .passengerDto(passengerMapper.map(trip.getPassenger()))
+               // .passengerDto(passengerMapper.map(trip.getPassenger()))
                 .departureDate(trip.getDepartureDate().toString())
                 .departureTime(trip.getDepartureTime().toString())
-                .purchaseDate(trip.getPurchaseDate().toString())
-                .purchaseTime(trip.getPurchaseTime().toString())
+                .purchaseDate(trip.getArrivalDate().toString())
+                .purchaseTime(trip.getArrivalTime().toString())
                 .totalPrice(trip.getPrice())
                 .build();
     }
