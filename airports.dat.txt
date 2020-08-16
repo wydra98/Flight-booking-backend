@@ -1,4 +1,4 @@
-Los Angeles International Airport;-118.410042;33.942791;New York;USA;-4
+John F. Kennedy International Airport;-118.410042;33.942791;New York;USA;-4
 Chicago O'Hare International Airport;-87.904724;41.978611;Chicago;USA;-5
 Toronto Pearson Airport;-79.62481969999999;43.67771760000001;Toronto;USA;-4
 Calgary International Airport;-114.010559;51.131470;Calgary;USA;-6

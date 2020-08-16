@@ -72,11 +72,16 @@ public class ConnectionService {
 
     public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId, LocalDate departureDate, LocalTime departureTime) {
 
-        List<Connection> connectionsWithTheSameSrcAirport = connectionRepository.findAllConnectionWithTheSameSrcAirport(srcAirportId);
+       // List<Connection> allConnection = connectionRepository.findAllConnection();
 
         List<List<Connection>> connections = null;
         return connections;
     }
+
+
+
+
+
 
 //    public class Algorytm {
 //
