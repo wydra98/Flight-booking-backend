@@ -37,13 +37,6 @@ public class ConnectionLoader implements CommandLineRunner {
             Connection connection1 = Connection.builder()
                     .srcAirport(srcAirport1.get())
                     .dstAirport(dstAirport1.get())
-                    .times(Times.
-                            builder()
-                            .departureDate(LocalDate.parse("2020-04-25"))
-                            .arrivalDate(LocalDate.parse("2020-07-29"))
-                            .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:40:00"))
-                            .build())
                     .build();
             connectionRepository.save(connection1);
 
@@ -52,13 +45,6 @@ public class ConnectionLoader implements CommandLineRunner {
             Connection connection2 = Connection.builder()
                     .srcAirport(srcAirport2.get())
                     .dstAirport(dstAirport2.get())
-                    .times(Times.
-                            builder()
-                            .departureDate(LocalDate.parse("2020-07-25"))
-                            .arrivalDate(LocalDate.parse("2020-03-29"))
-                            .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:40:00"))
-                            .build())
                     .build();
             connectionRepository.save(connection2);
 
@@ -67,13 +53,6 @@ public class ConnectionLoader implements CommandLineRunner {
             Connection connection3 = Connection.builder()
                     .srcAirport(srcAirport3.get())
                     .dstAirport(dstAirport3.get())
-                    .times(Times.
-                            builder()
-                            .departureDate(LocalDate.parse("2020-07-25"))
-                            .arrivalDate(LocalDate.parse("2020-02-29"))
-                            .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:40:00"))
-                            .build())
                     .build();
             connectionRepository.save(connection3);
 
@@ -82,13 +61,6 @@ public class ConnectionLoader implements CommandLineRunner {
             Connection connection4 = Connection.builder()
                     .srcAirport(srcAirport4.get())
                     .dstAirport(dstAirport4.get())
-                    .times(Times.
-                            builder()
-                            .departureDate(LocalDate.parse("2020-03-25"))
-                            .arrivalDate(LocalDate.parse("2020-07-29"))
-                            .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:40:00"))
-                            .build())
                     .build();
             connectionRepository.save(connection4);
 
@@ -97,13 +69,6 @@ public class ConnectionLoader implements CommandLineRunner {
             Connection connection5 = Connection.builder()
                     .srcAirport(srcAirport5.get())
                     .dstAirport(dstAirport5.get())
-                    .times(Times.
-                            builder()
-                            .departureDate(LocalDate.parse("2020-07-25"))
-                            .arrivalDate(LocalDate.parse("2020-07-29"))
-                            .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
-                            .build())
                     .build();
             connectionRepository.save(connection5);
         }

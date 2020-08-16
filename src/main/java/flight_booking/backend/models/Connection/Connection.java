@@ -31,22 +31,12 @@ public class Connection {
     @ManyToOne
     @JoinColumn(name = "id_dst_airport")
     private Airport dstAirport;
-    @Embedded
-    private Times times;
 
     public void updateForm(
             Airport srcAirport,
-            Airport dstAirport,
-            String arrivalDate,
-            String departureDate,
-            String arrivalTime,
-            String departureTime
+            Airport dstAirport
     ) {
         this.srcAirport = srcAirport;
         this.dstAirport = dstAirport;
-        this.getTimes().setDepartureDate(LocalDate.parse(departureDate));
-        this.getTimes().setArrivalDate(LocalDate.parse(arrivalDate));
-        this.getTimes().setArrivalTime(LocalTime.parse(arrivalTime));
-        this.getTimes().setDepartureTime(LocalTime.parse(departureTime));
     }
 }

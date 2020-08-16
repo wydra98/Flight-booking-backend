@@ -7,10 +7,13 @@ import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Connection.ConnectionRepository;
 import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Flight.FlightRepository;
+import flight_booking.backend.models.Times;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
 @Component
@@ -40,6 +43,13 @@ public class FlightLoader implements CommandLineRunner {
                     .airline(srcAirline1.get())
                     .numberSeats(128)
                     .price(56)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
                     .build();
             flightRepository.save(flight1);
 
@@ -50,6 +60,13 @@ public class FlightLoader implements CommandLineRunner {
                     .airline(srcAirline2.get())
                     .numberSeats(12)
                     .price(5)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
                     .build();
             flightRepository.save(flight2);
 
@@ -60,6 +77,13 @@ public class FlightLoader implements CommandLineRunner {
                     .airline(srcAirline3.get())
                     .numberSeats(55)
                     .price(51)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
                     .build();
             flightRepository.save(flight3);
 
@@ -70,6 +94,13 @@ public class FlightLoader implements CommandLineRunner {
                     .airline(srcAirline4.get())
                     .numberSeats(118)
                     .price(67)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
                     .build();
             flightRepository.save(flight4);
 
@@ -80,6 +111,13 @@ public class FlightLoader implements CommandLineRunner {
                     .airline(srcAirline5.get())
                     .numberSeats(156)
                     .price(23)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
                     .build();
             flightRepository.save(flight5);
         }

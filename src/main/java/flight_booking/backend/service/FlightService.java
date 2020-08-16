@@ -6,6 +6,7 @@ import flight_booking.backend.models.Airport.Airport;
 import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Flight.Flight;
 import flight_booking.backend.models.Flight.FlightRepository;
+import flight_booking.backend.models.Times;
 import org.springframework.stereotype.Service;
 
 
@@ -46,6 +47,10 @@ public class FlightService {
     public Flight addNewFlight(Long airlineDtoId,
                                int numberSeats,
                                double price,
+                               String departureDate,
+                               String arrivalDate,
+                               String arrivalTime,
+                               String departureTime,
                                Connection connection) {
 
         Optional<Airline> airline = airlineService.findById(airlineDtoId);
@@ -54,6 +59,12 @@ public class FlightService {
                 .airline(airline.get())
                 .numberSeats(numberSeats)
                 .price(price)
+                .times(Times.builder()
+                        .departureDate(LocalDate.parse(departureDate))
+                        .arrivalDate(LocalDate.parse(arrivalDate))
+                        .arrivalTime(LocalTime.parse(arrivalTime))
+                        .departureTime(LocalTime.parse(departureTime))
+                        .build())
                 .build();
         flightRepository.save(flight);
 

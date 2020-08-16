@@ -29,11 +29,7 @@ public class ConnectionService {
 
 
     public Connection addNewConnection(Long srcAirportId,
-                                       Long dstAirportId,
-                                       String departureDate,
-                                       String departureTime,
-                                       String arrivalDate,
-                                       String arrivalTime) {
+                                       Long dstAirportId) {
 
         Optional<Airport> srcAirport1 = airportRepository.findById(srcAirportId);
         Optional<Airport> dstAirport1 = airportRepository.findById(dstAirportId);
@@ -41,12 +37,6 @@ public class ConnectionService {
         Connection connection = Connection.builder()
                 .srcAirport(srcAirport1.get())
                 .dstAirport(dstAirport1.get())
-                .times(Times.builder()
-                        .departureDate(LocalDate.parse(departureDate))
-                        .arrivalDate(LocalDate.parse(arrivalDate))
-                        .arrivalTime(LocalTime.parse(arrivalTime))
-                        .departureTime(LocalTime.parse(departureTime))
-                        .build())
                 .build();
         connectionRepository.save(connection);
         return connection;

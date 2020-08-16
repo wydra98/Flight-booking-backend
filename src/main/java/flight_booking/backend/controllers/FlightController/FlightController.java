@@ -67,9 +67,9 @@ public class FlightController {
                                         @RequestParam String arrivalDate,
                                         @RequestParam String arrivalTime) {
 
-        Connection connection = connectionService.addNewConnection(srcAirportId, dstAirportId, departureDate,
-                departureTime, arrivalDate, arrivalTime);
-        Flight flight = flightService.addNewFlight(airlineDtoId, numberSeats, price, connection);
+        Connection connection = connectionService.addNewConnection(srcAirportId, dstAirportId);
+        Flight flight = flightService.addNewFlight(airlineDtoId, numberSeats, price, departureDate,
+                departureTime, arrivalDate, arrivalTime, connection);
         return ResponseEntity.created(URI.create("/" + flight.getId())).body(flight);
 
     }
@@ -105,17 +105,17 @@ public class FlightController {
 
         connection.updateForm(
                 srcAirport.get(),
-                dstAirport.get(),
-                arrivalDate,
-                departureDate,
-                arrivalTime,
-                departureTime
+                dstAirport.get()
         );
 
         flightOptional.get().updateForm(
                 airline.get(),
                 numberSeats,
-                price
+                price,
+                arrivalDate,
+                departureDate,
+                arrivalTime,
+                departureTime
         );
 
         if (flightOptional.isPresent()) {
