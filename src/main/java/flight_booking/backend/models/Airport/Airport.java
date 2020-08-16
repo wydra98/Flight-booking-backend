@@ -31,8 +31,6 @@ public class Airport {
         this.name = airportDto.getName();
         this.city = airportDto.getCity();
         this.country = airportDto.getCountry();
-        this.longitude = longitude;
-        this.latitude = latitude;
         this.timezone = airportDto.getTimezone();
     }
 }

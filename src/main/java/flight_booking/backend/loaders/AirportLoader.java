@@ -44,10 +44,10 @@ public class AirportLoader implements CommandLineRunner {
 
         Airport airport = Airport.builder()
                 .name(arr[0])
-                .city(arr[1])
-                .country(arr[2])
-                .longitude(Double.parseDouble(arr[3]))
-                .latitude(Double.parseDouble(arr[4]))
+                .longitude(Double.parseDouble(arr[1]))
+                .latitude(Double.parseDouble(arr[2]))
+                .city(arr[3])
+                .country(arr[4])
                 .timezone(Integer.parseInt(arr[5]))
                 .build();
 
