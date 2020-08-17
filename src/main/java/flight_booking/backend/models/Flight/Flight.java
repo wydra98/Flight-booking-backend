@@ -25,7 +25,7 @@ public class Flight {
     @Column(name = "flight_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_connection")
     private Connection connection;
 

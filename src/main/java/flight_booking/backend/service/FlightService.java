@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,15 +86,26 @@ public class FlightService {
 
     public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate, LocalTime departureTime) {
 
-        List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport, departureDate, departureTime);
+        List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport);
         List<List<Flight>> flights = mapToFlight(connections);
         return flights;
     }
 
-    public List<List<Flight>> mapToFlight(List<List<Connection>> connections) {
+    public List<List<Flight>> mapToFlight(List<List<Connection>> listConnections) {
 
-        List<List<Flight>> flights = null;
-        return flights;
+        List<List<Flight>> allflights = new ArrayList<>();
+        List<Flight> oneflight = new ArrayList<>();
+        for (List<Connection> connections : listConnections) {
+            for (Connection connection : connections){
+                List<Flight> flights = flightRepository.findFlightsByConnection(connection);
+                Flight flight = flights.get(0);
+                oneflight.add(flight);
+            }
+            allflights.add(oneflight);
+            oneflight.clear();
+        }
+
+        return allflights;
     }
 
 

@@ -1,5 +1,6 @@
 package flight_booking.backend.models.Flight;
 
+import flight_booking.backend.models.Connection.Connection;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface FlightRepository {
     void deleteById(Long id);
 
     Optional<Flight> findById(Long id);
+
+    List<Flight> findFlightsByConnection(Connection connection);
 }

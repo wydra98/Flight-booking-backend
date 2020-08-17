@@ -71,7 +71,7 @@ public class ConnectionService {
         connectionRepository.save(connection);
     }
 
-    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId, LocalDate departureDate, LocalTime departureTime) {
+    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId) {
 
        List<Connection> allConnection = connectionRepository.findAll();
 
@@ -80,7 +80,7 @@ public class ConnectionService {
 
        Search search = new Search(srcAirport.get(),dstAirport.get());
        List<List<Connection>> connections = search.findConnections(allConnection);
-       
+
        return connections;
     }
 
