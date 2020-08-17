@@ -75,10 +75,10 @@ public class ConnectionService {
 
        List<Connection> allConnection = connectionRepository.findAll();
 
-       Optional<Airport> srcAirport = airportRepository.findById(srcAirportId);
-       Optional<Airport> dstAirport = airportRepository.findById(dstAirportId);
+//       Optional<Airport> srcAirport = airportRepository.findById(srcAirportId);
+//       Optional<Airport> dstAirport = airportRepository.findById(dstAirportId);
 
-       Search search = new Search(srcAirport.get(),dstAirport.get());
+       Search search = new Search(srcAirportId,dstAirportId);
        List<List<Connection>> connections = search.findConnections(allConnection);
 
        return connections;

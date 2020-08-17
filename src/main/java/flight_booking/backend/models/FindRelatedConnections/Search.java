@@ -9,13 +9,13 @@ import java.util.List;
 public class Search {
 
     public static final int MAX_CONNECTION = 2;
-    private Airport START;
-    private Airport END;
+    private Long START;
+    private Long END;
     private List<List<Connection>> allConnection = new ArrayList();
     List<Connection> baseConnection;
     private int depth = 1;
 
-    public Search(Airport START, Airport END) {
+    public Search(Long START, Long END) {
         this.START = START;
         this.END = END;
     }
@@ -27,33 +27,39 @@ public class Search {
             graph.addEdge(connection);
         }
 
-        ArrayList<Airport> visited = new ArrayList();
+        ArrayList<Long> visited = new ArrayList();
         visited.add(START);
         depthFirst(graph, visited);
+        System.out.println(allConnection.size());
+        for (List<Connection> connections : allConnection) {
+            for (Connection connection : connections) {
+                System.out.println("from: " + connection.getId() + " to: " + connection.getId());
+            }
+            System.out.println();
+        }
         return allConnection;
-//        System.out.println(allConnection.size());
-//        for (List<Connection> connections : allConnection) {
-//            for (Connection connection : connections) {
-//                System.out.println("from: " + connection.getFrom() + " to: " + connection.getTo());
-//            }
-//            System.out.println();
-//        }
     }
 
-    private void depthFirst(Graph graph, ArrayList<Airport> visited) {
-        List<Airport> nodes = graph.adjacentNodes(visited.get(visited.size() - 1));
-        for (Airport node : nodes) {
+    private void depthFirst(Graph graph, ArrayList<Long> visited) {
+        List<Long> nodes = graph.adjacentNodes(visited.get(visited.size() - 1));
+        for (Long visit: visited
+        ) {
+            System.out.println(visit + " ");
+
+        }
+        for (Long node : nodes) {
             if (visited.contains(node)) {
                 continue;
             }
             if (node.equals(END)) {
                 visited.add(node);
+
                 allConnection.add(buildFlight(visited));
                 visited.remove(visited.size() - 1);
                 break;
             }
         }
-        for (Airport node : nodes) {
+        for (Long node : nodes) {
             if (visited.contains(node) || node.equals(END)) {
                 continue;
             }
@@ -67,9 +73,9 @@ public class Search {
         }
     }
 
-    private List<Connection> buildFlight(ArrayList<Airport> visited) {
+    private List<Connection> buildFlight(ArrayList<Long> visited) {
         List<Connection> arraysOfConnections = new ArrayList();
-        List<Airport> pairOfAirports = new ArrayList<>();
+        List<Long> pairOfAirports = new ArrayList<>();
         for (int i = 0; i < visited.size(); i++) {
             if (i == 0) {
                 pairOfAirports.add(visited.get(i));
@@ -90,9 +96,9 @@ public class Search {
         return arraysOfConnections;
     }
 
-    private Connection findConnection(Airport srcAirport, Airport dstAirport){
+    private Connection findConnection(Long srcAirportId, Long dstAirportId){
         for(Connection connection: baseConnection){
-            if(connection.equals(srcAirport) && connection.equals(dstAirport)){
+            if(connection.equals(srcAirportId) && connection.equals(dstAirportId)){
                 return connection;
             }
         }

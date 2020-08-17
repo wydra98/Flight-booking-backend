@@ -39,14 +39,14 @@ public class TripService {
         LocalDate departureDate = LocalDate.parse(departureDateString);
         LocalTime departureTime = LocalTime.parse(departureTimeString);
 
-        List<List<Ticket>> listOfTicket = ticketService.findAllListOfTicket(srcAirportId, dstAirportId, departureDate, departureTime);
-        List<Trip> trips = mapTicketToFlight(listOfTicket);
+        List<Trip> listOfTrip = ticketService.findAllTrips(srcAirportId, dstAirportId, departureDate, departureTime);
+        List<Trip> trips = mapTicketToFlight(listOfTrip);
         return trips;
     }
 
-    public List<Trip> mapTicketToFlight(List<List<Ticket>> listOfTicket) {
+    public List<Trip> mapTicketToFlight(List<Trip> listOfTrips) {
 
-        List<Trip> trips = null;
-        return trips;
+
+        return listOfTrips;
     }
 }

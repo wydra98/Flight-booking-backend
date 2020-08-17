@@ -7,19 +7,19 @@ import flight_booking.backend.models.Connection.Connection;
 import java.util.*;
 
 public class Graph {
-    private Map<Airport, TreeSet<Airport>> map = new HashMap();
+    private Map<Long, TreeSet<Long>> map = new HashMap();
 
     public void addEdge(Connection connection){
-        TreeSet<Airport> adjacent = map.get(connection.getSrcAirport());
+        TreeSet<Long> adjacent = map.get(connection.getSrcAirport().getId());
         if(adjacent==null) {
             adjacent = new TreeSet();
-            map.put(connection.getSrcAirport(), adjacent);
+            map.put(connection.getSrcAirport().getId(), adjacent);
         }
-        adjacent.add(connection.getDstAirport());
+        adjacent.add(connection.getDstAirport().getId());
     }
 
-    public ArrayList<Airport> adjacentNodes(Airport airport) {
-        TreeSet<Airport> adjacent = map.get(airport);
+    public ArrayList<Long> adjacentNodes(Long id) {
+        TreeSet<Long> adjacent = map.get(id);
         if(adjacent==null) {
             return new ArrayList<>();
         }
