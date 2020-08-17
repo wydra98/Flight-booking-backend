@@ -22,5 +22,5 @@ public interface ConnectionRepository {
 
     Optional<Connection> findById(Long id);
 
-    List<Connection> findAllConnectionWithTheSameSrcAirport(@Param("srcAirportId") Long srcAirport);
+    //List<Connection> findAllConnectionWithTheSameSrcAirport(@Param("srcAirportId") Long srcAirport);
 }

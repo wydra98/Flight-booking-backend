@@ -4,6 +4,7 @@ import flight_booking.backend.controllers.AirportController.AirportDto;
 import flight_booking.backend.models.Airport.Airport;
 import flight_booking.backend.models.Connection.Connection;
 import flight_booking.backend.models.Connection.ConnectionRepository;
+import flight_booking.backend.models.FindRelatedConnections.Search;
 import flight_booking.backend.models.Times;
 import org.springframework.stereotype.Service;
 import flight_booking.backend.models.Airport.AirportRepository;
@@ -72,10 +73,15 @@ public class ConnectionService {
 
     public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId, LocalDate departureDate, LocalTime departureTime) {
 
-       // List<Connection> allConnection = connectionRepository.findAllConnection();
+       List<Connection> allConnection = connectionRepository.findAll();
 
-        List<List<Connection>> connections = null;
-        return connections;
+       Optional<Airport> srcAirport = airportRepository.findById(srcAirportId);
+       Optional<Airport> dstAirport = airportRepository.findById(dstAirportId);
+
+       Search search = new Search(srcAirport.get(),dstAirport.get());
+       List<List<Connection>> connections = search.findConnections(allConnection);
+       
+       return connections;
     }
 
 

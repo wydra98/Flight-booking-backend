@@ -35,10 +35,10 @@ interface SqlConnectionRepository extends ConnectionRepository, JpaRepository<Co
 //    @Query("SELECT t FROM Trip t WHERE t.passenger.id = :id")
 //    List<Trip> findAllTripFromUserId(@Param("id") Long id);
 
-    @Override
-    @Modifying
-    @Transactional
-    @Query(value = "SELECT c FROM Connection c WHERE c.srcAirport =:srcAirport", nativeQuery = true)
-    List<Connection> findAllConnectionWithTheSameSrcAirport(@Param("srcAirport") Long srcAirport);
+//    @Override
+//    @Modifying
+//    @Transactional
+//    @Query(value = "SELECT c FROM Connection c WHERE c.srcAirport =:srcAirport", nativeQuery = true)
+//    List<Connection> findAllConnectionWithTheSameSrcAirport(@Param("srcAirport") Long srcAirport);
 
 }
