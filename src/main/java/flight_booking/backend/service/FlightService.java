@@ -85,31 +85,60 @@ public class FlightService {
     public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate, LocalTime departureTime) {
 
         List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport);
-//        for (List<Connection> connection: connections) {
-//            System.out.println("Czo tam " + connection);
-//        }
-        List<List<Flight>> flights = mapToFlight(connections);
-//        for (List<Flight> flight: flights) {
-//            System.out.println("Czo tam "+flight);
-//        }
-        return flights;
+        List<List<Flight>> connections2 = null;
+        List<List<List<Flight>>> flights = findAllFlights(connections);
+        //List<List<Flight>> properFlights = chooseFlightsWithProperDate(flights, departureDate);
+
+        return connections2;
+        //return properFlights;
     }
 
-    public List<List<Flight>> mapToFlight(List<List<Connection>> listConnections) {
+    public List<List<List<Flight>>> findAllFlights(List<List<Connection>> listConnections) {
 
-        List<List<Flight>> allflights = new ArrayList<>();
+        List<List<List<Flight>>> allFlights = new ArrayList<>();
         for (List<Connection> connections : listConnections) {
-            List<Flight> oneflight = new ArrayList<>();
-            for (Connection connection : connections){
+            List<List<Flight>> allFlightsInOneTrip = new ArrayList<>();
+            for (Connection connection : connections) {
                 List<Flight> flights = flightRepository.findFlightsByConnection(connection);
-                Flight flight = flights.get(0);
-                oneflight.add(flight);
+                allFlightsInOneTrip.add(flights);
             }
-            allflights.add(oneflight);
+            allFlights.add(allFlightsInOneTrip);
         }
-
-        return allflights;
+        return allFlights;
     }
 
-
+//    public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate) {
+//
+//        List<List<Flight>> properDateFlight = new ArrayList<>();
+//        for (int i = 0; i < allFlights.size(); i++) {
+//            List<List<Flight>> oneTrip = allFlights.get(i);
+//
+//
+//            for (int j = 0; j < oneTrip.size(); j++) {
+//                List<Flight> listFlightsFromOneConnection = oneTrip.get(j);
+//                List<Flight> findProperWay = new ArrayList<>();
+//                if (j == 0) {
+//                    for (int k = 0; k < listFlightsFromOneConnection.size(); k++) {
+//                        if ((listFlightsFromOneConnection.get(k).getTimes().getDepartureDate().isEqual(userDate) &&
+//                                listFlightsFromOneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
+//                                (listFlightsFromOneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
+//                                        listFlightsFromOneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
+//                            findProperWay.add(listFlightsFromOneConnection.get(k));
+//                        }
+//                    }
+//                } else {
+//
+//
+//                }
+//                properDateFlight.add(findProperWay);
+//            }
+//
+////                for (int k = 0; k < listFlightsFromOneConnection.size(); k++) {
+////                    if ()
+////                }
+//        }
+//    }
+//
+//        //return properDateFlight;
+//}
 }

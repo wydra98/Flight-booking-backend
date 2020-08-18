@@ -10,9 +10,9 @@ import java.util.TreeSet;
 public class Search {
 
     public static final int MAX_CONNECTION = 5;
-    private Long START;
-    private Long END;
-    private List<List<Connection>> allConnection = new ArrayList();
+    private final Long START;
+    private final Long END;
+    private final List<List<Connection>> allConnection = new ArrayList();
     List<Connection> baseConnection;
     private int depth = 1;
 
@@ -32,13 +32,6 @@ public class Search {
         ArrayList<Long> visited = new ArrayList();
         visited.add(START);
         depthFirst(graph, visited);
-       // System.out.println(allConnection.size());
-//        for (List<Connection> connections : allConnection) {
-//            for (Connection connection : connections) {
-//                System.out.println("from: " + connection.getSrcAirport().getId() + " to: " + connection.getDstAirport().getId());
-//            }
-//            System.out.println();
-//        }
         return allConnection;
     }
 
@@ -89,7 +82,6 @@ public class Search {
                 pairOfAirports.clear();
             }
         }
-
         return arraysOfConnections;
     }
 
