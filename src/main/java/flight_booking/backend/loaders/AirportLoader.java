@@ -3,8 +3,8 @@ package flight_booking.backend.loaders;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import flight_booking.backend.models.Airport.Airport;
-import flight_booking.backend.models.Airport.AirportRepository;
+import flight_booking.backend.models.Airports.Airport;
+import flight_booking.backend.models.Airports.AirportRepository;
 
 import javax.transaction.Transactional;
 import java.io.BufferedReader;

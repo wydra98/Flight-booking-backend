@@ -1,11 +1,11 @@
 package flight_booking.backend.adapter;
 
-import flight_booking.backend.models.Airline.Airline;
+import flight_booking.backend.models.Airlines.Airline;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import flight_booking.backend.models.Airline.AirlineRepository;
+import flight_booking.backend.models.Airlines.AirlineRepository;
 
 @Repository
 interface SqlAirlinerepository extends AirlineRepository, JpaRepository<Airline, Long> {

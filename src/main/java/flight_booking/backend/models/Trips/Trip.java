@@ -1,14 +1,13 @@
 package flight_booking.backend.models.Trips;
 
-import flight_booking.backend.models.Flight.Flight;
-import flight_booking.backend.models.Passenger.Passenger;
-import flight_booking.backend.models.Ticket.Ticket;
+import flight_booking.backend.models.Tickets.Ticket;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Setter
 @Getter
 @Table(name = "trips")
 public class Trip {
@@ -33,6 +33,9 @@ public class Trip {
 //    @JoinColumn(name = "id_passenger")
 //    private Passenger passenger;
 
+    public void addTicket(Ticket ticket){
+        tickets.add(ticket);
+    }
     private LocalDate departureDate;
     private LocalTime departureTime;
     private LocalDate arrivalDate;

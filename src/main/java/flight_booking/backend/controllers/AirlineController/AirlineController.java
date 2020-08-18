@@ -2,7 +2,7 @@ package flight_booking.backend.controllers.AirlineController;
 
 import flight_booking.backend.exception.EntityAlreadyExistsException;
 import flight_booking.backend.exception.EntityNotExistsException;
-import flight_booking.backend.models.Airline.Airline;
+import flight_booking.backend.models.Airlines.Airline;
 import flight_booking.backend.service.AirlineService;
 import flight_booking.backend.service.ConnectionService;
 import io.swagger.annotations.ApiOperation;

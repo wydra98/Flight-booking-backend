@@ -3,8 +3,8 @@ package flight_booking.backend.controllers.FlightController;
 
 import flight_booking.backend.controllers.AirlineController.AirlineMapper;
 import flight_booking.backend.controllers.AirportController.AirportMapper;
-import flight_booking.backend.models.Connection.Connection;
-import flight_booking.backend.models.Flight.Flight;
+import flight_booking.backend.models.Connections.Connection;
+import flight_booking.backend.models.Flights.Flight;
 
 public class FlightMapper {
     AirlineMapper airlineMapper = new AirlineMapper();

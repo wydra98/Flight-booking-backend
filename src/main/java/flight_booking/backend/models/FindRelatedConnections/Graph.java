@@ -1,13 +1,12 @@
 package flight_booking.backend.models.FindRelatedConnections;
 
 
-import flight_booking.backend.models.Airport.Airport;
-import flight_booking.backend.models.Connection.Connection;
+import flight_booking.backend.models.Connections.Connection;
 
 import java.util.*;
 
 public class Graph {
-    private Map<Long, TreeSet<Long>> map = new HashMap();
+    public Map<Long, TreeSet<Long>> map = new HashMap();
 
     public void addEdge(Connection connection){
         TreeSet<Long> adjacent = map.get(connection.getSrcAirport().getId());

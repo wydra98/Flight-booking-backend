@@ -1,10 +1,8 @@
 package flight_booking.backend.service;
 
-import flight_booking.backend.models.Airport.Airport;
-import flight_booking.backend.models.Connection.Connection;
-import flight_booking.backend.models.Flight.Flight;
-import flight_booking.backend.models.Ticket.Ticket;
-import flight_booking.backend.models.Ticket.TicketRepository;
+import flight_booking.backend.models.Flights.Flight;
+import flight_booking.backend.models.Tickets.Ticket;
+import flight_booking.backend.models.Tickets.TicketRepository;
 import flight_booking.backend.models.Trips.Trip;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +34,17 @@ public class TicketService {
     public List<Trip> findAllTrips(Long srcAirport, Long dstAirport, LocalDate departureDate, LocalTime departureTime) {
 
         List<List<Flight>> flights = flightService.findFlights(srcAirport, dstAirport, departureDate, departureTime);
+
+//        for (List<Flight> oneFlight: flights) {
+//            System.out.println(oneFlight);
+//        }
+
+        //System.out.println("Dupa"+flights.size());
         List<Trip> trips = mapToTicket(flights);
 
+//        for (Trip trip : trips) {
+//            System.out.println(trip);
+//        }
         return trips;
     }
 
@@ -46,8 +53,20 @@ public class TicketService {
         List<Trip> allTrips = new ArrayList<>();
 
         for (List<Flight> flights : allFlights) {
-            Trip trip = new Trip();
+            List<Ticket> allTickets = new ArrayList<>();
+            //System.out.println(flights.size());
+            Trip trip = Trip.builder()
+                    .id(1L)
+                    .tickets(null)
+                    .departureDate(LocalDate.parse("2020-07-29"))
+                    .departureTime(LocalTime.parse("10:40:00"))
+                    .arrivalDate(LocalDate.parse("2020-07-29"))
+                    .arrivalTime(LocalTime.parse("10:40:00"))
+                    .price(5.6)
+                    .build();
+
             for (Flight flight : flights) {
+                //System.out.println("dupa");
                 Ticket ticket = Ticket.builder()
                         .passenger(null)
                         .flight(flight)
@@ -57,8 +76,13 @@ public class TicketService {
                         .seatNumber(23)
                         .price(34)
                         .build();
-                trip.getTickets().add(ticket);
+                //trip.addTicket(ticket);
+                allTickets.add(ticket);
+                //System.out.println(allTickets);
+
             }
+            //System.out.println(allTickets);
+            trip.setTickets(allTickets);
             allTrips.add(trip);
         }
         return allTrips;

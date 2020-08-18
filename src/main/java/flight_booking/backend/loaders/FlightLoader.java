@@ -1,12 +1,11 @@
 package flight_booking.backend.loaders;
 
-import flight_booking.backend.models.Airline.Airline;
-import flight_booking.backend.models.Airline.AirlineRepository;
-import flight_booking.backend.models.Airport.AirportRepository;
-import flight_booking.backend.models.Connection.Connection;
-import flight_booking.backend.models.Connection.ConnectionRepository;
-import flight_booking.backend.models.Flight.Flight;
-import flight_booking.backend.models.Flight.FlightRepository;
+import flight_booking.backend.models.Airlines.Airline;
+import flight_booking.backend.models.Airlines.AirlineRepository;
+import flight_booking.backend.models.Connections.Connection;
+import flight_booking.backend.models.Connections.ConnectionRepository;
+import flight_booking.backend.models.Flights.Flight;
+import flight_booking.backend.models.Flights.FlightRepository;
 import flight_booking.backend.models.Times;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -141,8 +140,8 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Airline> srcAirline7 = airlineRepository.findById(1L);
             Optional<Connection> connection7 = connectionRepository.findById(7L);
             Flight flight7 = Flight.builder()
-                    .connection(connection5.get())
-                    .airline(srcAirline5.get())
+                    .connection(connection7.get())
+                    .airline(srcAirline7.get())
                     .numberSeats(156)
                     .price(23)
                     .times(Times.
@@ -209,8 +208,8 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Airline> srcAirline11 = airlineRepository.findById(1L);
             Optional<Connection> connection11 = connectionRepository.findById(11L);
             Flight flight11 = Flight.builder()
-                    .connection(connection5.get())
-                    .airline(srcAirline5.get())
+                    .connection(connection11.get())
+                    .airline(srcAirline11.get())
                     .numberSeats(156)
                     .price(23)
                     .times(Times.

@@ -1,4 +1,4 @@
-package flight_booking.backend.models.Connection;
+package flight_booking.backend.models.Connections;
 
 import org.springframework.data.repository.query.Param;
 

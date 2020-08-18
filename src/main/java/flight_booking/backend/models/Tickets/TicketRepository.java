@@ -1,7 +1,4 @@
-package flight_booking.backend.models.Ticket;
-
-import flight_booking.backend.models.Flight.Flight;
-import org.springframework.data.repository.query.Param;
+package flight_booking.backend.models.Tickets;
 
 import java.util.List;
 import java.util.Optional;

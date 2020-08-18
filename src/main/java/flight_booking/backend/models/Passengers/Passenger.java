@@ -1,9 +1,7 @@
-package flight_booking.backend.models.Passenger;
+package flight_booking.backend.models.Passengers;
 
 
-import flight_booking.backend.controllers.AirportController.AirportDto;
-import flight_booking.backend.models.Ticket.Ticket;
-import flight_booking.backend.models.Trips.Trip;
+import flight_booking.backend.models.Tickets.Ticket;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 

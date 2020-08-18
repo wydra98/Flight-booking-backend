@@ -1,15 +1,10 @@
-package flight_booking.backend.models.Connection;
+package flight_booking.backend.models.Connections;
 
 import javax.persistence.*;
 
-import flight_booking.backend.models.Airline.Airline;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import flight_booking.backend.models.Airport.Airport;
-import flight_booking.backend.models.Times;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
+import flight_booking.backend.models.Airports.Airport;
 
 @Entity
 @Builder

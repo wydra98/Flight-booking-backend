@@ -1,7 +1,5 @@
-package flight_booking.backend.models.Passenger;
+package flight_booking.backend.models.Passengers;
 
-
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package flight_booking.backend.controllers.AirlineController;
 
-import flight_booking.backend.models.Airline.Airline;
+import flight_booking.backend.models.Airlines.Airline;
 
 public class AirlineMapper {
 

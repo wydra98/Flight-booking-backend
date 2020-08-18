@@ -1,8 +1,7 @@
 package flight_booking.backend.adapter;
 
-import flight_booking.backend.models.Flight.Flight;
-import flight_booking.backend.models.Ticket.Ticket;
-import flight_booking.backend.models.Ticket.TicketRepository;
+import flight_booking.backend.models.Tickets.Ticket;
+import flight_booking.backend.models.Tickets.TicketRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

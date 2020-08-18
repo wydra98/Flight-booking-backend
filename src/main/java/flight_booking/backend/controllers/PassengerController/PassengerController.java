@@ -2,7 +2,7 @@ package flight_booking.backend.controllers.PassengerController;
 
 import flight_booking.backend.exception.EntityAlreadyExistsException;
 import flight_booking.backend.exception.EntityNotExistsException;
-import flight_booking.backend.models.Passenger.Passenger;
+import flight_booking.backend.models.Passengers.Passenger;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;

@@ -1,14 +1,12 @@
 package flight_booking.backend.controllers.TripController;
 
-import flight_booking.backend.controllers.FlightController.FlightMapper;
 import flight_booking.backend.controllers.PassengerController.PassengerMapper;
 import flight_booking.backend.controllers.TicketController.TicketDto;
 import flight_booking.backend.controllers.TicketController.TicketMapper;
-import flight_booking.backend.models.Ticket.Ticket;
+import flight_booking.backend.models.Tickets.Ticket;
 import flight_booking.backend.models.Trips.Trip;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TripMapper {
 

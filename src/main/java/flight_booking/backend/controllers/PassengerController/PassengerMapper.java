@@ -1,8 +1,6 @@
 package flight_booking.backend.controllers.PassengerController;
 
-import flight_booking.backend.models.Passenger.Passenger;
-
-import java.time.LocalDate;
+import flight_booking.backend.models.Passengers.Passenger;
 
 public class PassengerMapper {
 

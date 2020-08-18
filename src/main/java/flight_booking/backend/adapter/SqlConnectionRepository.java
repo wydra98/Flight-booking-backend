@@ -1,8 +1,7 @@
 package flight_booking.backend.adapter;
 
-import flight_booking.backend.models.Connection.Connection;
-import flight_booking.backend.models.Connection.ConnectionRepository;
-import flight_booking.backend.models.Trips.Trip;
+import flight_booking.backend.models.Connections.Connection;
+import flight_booking.backend.models.Connections.ConnectionRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Repository
 interface SqlConnectionRepository extends ConnectionRepository, JpaRepository<Connection, Long> {

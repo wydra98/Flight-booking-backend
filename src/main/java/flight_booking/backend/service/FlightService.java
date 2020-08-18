@@ -1,11 +1,9 @@
 package flight_booking.backend.service;
 
-import flight_booking.backend.controllers.AirlineController.AirlineDto;
-import flight_booking.backend.models.Airline.Airline;
-import flight_booking.backend.models.Airport.Airport;
-import flight_booking.backend.models.Connection.Connection;
-import flight_booking.backend.models.Flight.Flight;
-import flight_booking.backend.models.Flight.FlightRepository;
+import flight_booking.backend.models.Airlines.Airline;
+import flight_booking.backend.models.Connections.Connection;
+import flight_booking.backend.models.Flights.Flight;
+import flight_booking.backend.models.Flights.FlightRepository;
 import flight_booking.backend.models.Times;
 import org.springframework.stereotype.Service;
 
@@ -87,22 +85,27 @@ public class FlightService {
     public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate, LocalTime departureTime) {
 
         List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport);
+//        for (List<Connection> connection: connections) {
+//            System.out.println("Czo tam " + connection);
+//        }
         List<List<Flight>> flights = mapToFlight(connections);
+//        for (List<Flight> flight: flights) {
+//            System.out.println("Czo tam "+flight);
+//        }
         return flights;
     }
 
     public List<List<Flight>> mapToFlight(List<List<Connection>> listConnections) {
 
         List<List<Flight>> allflights = new ArrayList<>();
-        List<Flight> oneflight = new ArrayList<>();
         for (List<Connection> connections : listConnections) {
+            List<Flight> oneflight = new ArrayList<>();
             for (Connection connection : connections){
                 List<Flight> flights = flightRepository.findFlightsByConnection(connection);
                 Flight flight = flights.get(0);
                 oneflight.add(flight);
             }
             allflights.add(oneflight);
-            oneflight.clear();
         }
 
         return allflights;

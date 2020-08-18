@@ -1,9 +1,7 @@
 package flight_booking.backend.controllers.TicketController;
 
-import flight_booking.backend.controllers.AirportController.AirportMapper;
 import flight_booking.backend.controllers.FlightController.FlightMapper;
-import flight_booking.backend.models.Flight.Flight;
-import flight_booking.backend.models.Ticket.Ticket;
+import flight_booking.backend.models.Tickets.Ticket;
 
 public class TicketMapper {
 
