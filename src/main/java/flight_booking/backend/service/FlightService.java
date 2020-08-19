@@ -107,38 +107,59 @@ public class FlightService {
         return allFlights;
     }
 
-//    public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate) {
-//
-//        List<List<Flight>> properDateFlight = new ArrayList<>();
-//        for (int i = 0; i < allFlights.size(); i++) {
-//            List<List<Flight>> oneTrip = allFlights.get(i);
-//
-//
-//            for (int j = 0; j < oneTrip.size(); j++) {
-//                List<Flight> listFlightsFromOneConnection = oneTrip.get(j);
-//                List<Flight> findProperWay = new ArrayList<>();
-//                if (j == 0) {
-//                    for (int k = 0; k < listFlightsFromOneConnection.size(); k++) {
-//                        if ((listFlightsFromOneConnection.get(k).getTimes().getDepartureDate().isEqual(userDate) &&
-//                                listFlightsFromOneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
-//                                (listFlightsFromOneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
-//                                        listFlightsFromOneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
-//                            findProperWay.add(listFlightsFromOneConnection.get(k));
-//                        }
-//                    }
-//                } else {
-//
-//
+    public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate) {
+
+
+        //lista wyszukanych fligtow dla jednego tripa
+        List<List<Flight>> properDateFlight = new ArrayList<>();
+        // ta lista w kazdej iteracji rzuca nam jednym trpem (lista connectionow)
+        for (int i = 0; i < allFlights.size(); i++) {
+            //dostep do jednego tripa
+            List<List<Flight>> oneTrip = allFlights.get(i);
+            //ta petla w kazdej iteracji bedzie nam rzucac jednym connectionem
+            for (int j = 0; j < oneTrip.size(); j++) {
+                List<Flight> oneConnection = oneTrip.get(j);
+                if (j == 0) {
+                    //petla cheba pobiera nam wszystkie zagniezdzone flight z connection jednego typu (w tym przypadku )
+                    for (int k = 0; k < oneConnection.size(); k++) {
+                        if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(userDate) &&
+                                oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
+                                (oneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
+                                        oneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
+                            List<Flight> listForNewConnection = new ArrayList<>();
+                            listForNewConnection.add(oneConnection.get(k));
+                            //dla kazdego znalezionego flighta tworzysz dla niego nowa tablice, czekajaca na wypelnienie
+                            properDateFlight.add(listForNewConnection);
+                        }
+                    }
+                } else {
+
+                    // pierwsza petla odpowiada za wyciagniecie listy na ktorej maja znalezc sie wszystkie polaczenia dajace Tripa
+                    for (List<Flight> oneTripFlight : properDateFlight) {
+                        Flight latestFlight = oneTripFlight.get(oneTripFlight.size() - 1);
+                        for (int k = 0; k < oneConnection.size(); k++) {
+                            if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(userDate) &&
+                                    oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
+                                    (oneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
+                                            oneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
+                                List<Flight> listForNewConnection = new ArrayList<>();
+                                listForNewConnection.add(oneConnection.get(k));
+                                //dla kazdego znalezionego flighta tworzysz dla niego nowa tablice, czekajaca na wypelnienie
+                                properDateFlight.add(listForNewConnection);
+                            }
+                        }
+                    }
+
+                }
+                //properDateFlight.add(findProperWay);
+            }
+
+//                for (int k = 0; k < listFlightsFromOneConnection.size(); k++) {
+//                    if ()
 //                }
-//                properDateFlight.add(findProperWay);
-//            }
-//
-////                for (int k = 0; k < listFlightsFromOneConnection.size(); k++) {
-////                    if ()
-////                }
-//        }
-//    }
-//
-//        //return properDateFlight;
-//}
+        }
+    }
+
+    //return properDateFlight;
+}
 }
