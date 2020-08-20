@@ -135,31 +135,30 @@ public class FlightService {
                 } else {
 
                     // pierwsza petla odpowiada za wyciagniecie listy na ktorej maja znalezc sie wszystkie polaczenia dajace Tripa
+                    List<List<Flight>> newListProperDateFlight = new ArrayList<>();
                     for (List<Flight> oneTripFlight : properDateFlight) {
                         Flight latestFlight = oneTripFlight.get(oneTripFlight.size() - 1);
+
                         for (int k = 0; k < oneConnection.size(); k++) {
-                            if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(userDate) &&
-                                    oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
-                                    (oneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
-                                            oneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
-                                List<Flight> listForNewConnection = new ArrayList<>();
-                                listForNewConnection.add(oneConnection.get(k));
-                                //dla kazdego znalezionego flighta tworzysz dla niego nowa tablice, czekajaca na wypelnienie
-                                properDateFlight.add(listForNewConnection);
+                            if ((oneConnection.get(k).getTimes().getArrivalDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
+                                    oneConnection.get(k).getTimes().getArrivalTime().isAfter(LocalTime.now()) &&
+                                    oneConnection.get(k).getTimes().getArrivalTime().isAfter(latestFlight.getTimes().getArrivalTime().plusHours(59)))) {
+
+                                List<Flight> oneTripFlightCopy = new ArrayList<>(oneTripFlight);
+                                oneTripFlightCopy.add(oneConnection.get(k));
+                                newListProperDateFlight.add(oneTripFlightCopy);
+
                             }
                         }
                     }
 
+                    properDateFlight.clear();
+                    properDateFlight = newListProperDateFlight;
+
                 }
-                //properDateFlight.add(findProperWay);
             }
-
-//                for (int k = 0; k < listFlightsFromOneConnection.size(); k++) {
-//                    if ()
-//                }
         }
-    }
 
-    //return properDateFlight;
-}
+        return properDateFlight;
+    }
 }
