@@ -30,14 +30,13 @@ public class TripService {
 //        return trips;
 //    }
 
-    public List<Trip> findAllAvailableTrips(Long srcAirportId, Long dstAirportId, String departureDateString, String departureTimeString) {
+    public List<Trip> findAllAvailableTrips(Long srcAirportId, Long dstAirportId, String departureDateString) {
 
         //Airport srcAirport = airportRepository.findById(srcAirportId).get();
         //Airport dstAirport = airportRepository.findById(dstAirportId).get();
         LocalDate departureDate = LocalDate.parse(departureDateString);
-        LocalTime departureTime = LocalTime.parse(departureTimeString);
 
-        List<Trip> listOfTrip = ticketService.findAllTrips(srcAirportId, dstAirportId, departureDate, departureTime);
+        List<Trip> listOfTrip = ticketService.findAllTrips(srcAirportId, dstAirportId, departureDate);
         List<Trip> trips = mapTicketToFlight(listOfTrip);
         return trips;
     }

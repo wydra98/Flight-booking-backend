@@ -31,20 +31,11 @@ public class TicketService {
         return tickets;
     }
 
-    public List<Trip> findAllTrips(Long srcAirport, Long dstAirport, LocalDate departureDate, LocalTime departureTime) {
+    public List<Trip> findAllTrips(Long srcAirport, Long dstAirport, LocalDate departureDate) {
 
-        List<List<Flight>> flights = flightService.findFlights(srcAirport, dstAirport, departureDate, departureTime);
+        List<List<Flight>> flights = flightService.findFlights(srcAirport, dstAirport, departureDate);
 
-//        for (List<Flight> oneFlight: flights) {
-//            System.out.println(oneFlight);
-//        }
-
-        //System.out.println("Dupa"+flights.size());
         List<Trip> trips = mapToTicket(flights);
-
-//        for (Trip trip : trips) {
-//            System.out.println(trip);
-//        }
         return trips;
     }
 
@@ -54,7 +45,6 @@ public class TicketService {
 
         for (List<Flight> flights : allFlights) {
             List<Ticket> allTickets = new ArrayList<>();
-            //System.out.println(flights.size());
             Trip trip = Trip.builder()
                     .id(1L)
                     .tickets(null)

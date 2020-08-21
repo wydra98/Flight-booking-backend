@@ -39,14 +39,13 @@ public class TripController {
     @GetMapping("/findTrips/{id}")
     ResponseEntity<List<TripDto>> findTrips(@RequestParam Long srcAirportId,
                                             @RequestParam Long dstAirportId,
-                                            @RequestParam String departureDate,
-                                            @RequestParam String departureTime) {
+                                            @RequestParam String departureDate) {
 
         //@TODO check if srcAirportId is correct
         //@TODO check if dstAirportId is correct
         //@TODO how to check if arrivalDate is correct?? :O:O:O:O:O:O:O:O:O
 
-        List<Trip> trips = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, departureDate, departureTime);
+        List<Trip> trips = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, departureDate);
         System.out.println(trips.size());
 
         ArrayList<TripDto> tripsDtos = new ArrayList<>();

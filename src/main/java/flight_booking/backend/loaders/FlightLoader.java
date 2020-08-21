@@ -52,6 +52,7 @@ public class FlightLoader implements CommandLineRunner {
                     .build();
             flightRepository.save(flight1);
 
+            /*** Z TEGO SAMEGO DO TEGO SAMEGO ***/
             Optional<Airline> srcAirline2 = airlineRepository.findById(1L);
             Optional<Connection> connection2 = connectionRepository.findById(2L);
             Flight flight2 = Flight.builder()
@@ -68,6 +69,114 @@ public class FlightLoader implements CommandLineRunner {
                             .build())
                     .build();
             flightRepository.save(flight2);
+
+            Flight flight16 = Flight.builder()
+                    .connection(connection2.get())
+                    .airline(srcAirline2.get())
+                    .numberSeats(13)
+                    .price(5)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
+                    .build();
+            flightRepository.save(flight16);
+
+            Flight flight17 = Flight.builder()
+                    .connection(connection2.get())
+                    .airline(srcAirline2.get())
+                    .numberSeats(14)
+                    .price(5)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-08-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
+                    .build();
+            flightRepository.save(flight17);
+
+            Flight flight18 = Flight.builder()
+                    .connection(connection2.get())
+                    .airline(srcAirline2.get())
+                    .numberSeats(15)
+                    .price(5)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2021-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
+                    .build();
+            flightRepository.save(flight18);
+
+
+            Flight flight19 = Flight.builder()
+                    .connection(connection2.get())
+                    .airline(srcAirline2.get())
+                    .numberSeats(16)
+                    .price(5)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("08:45:00"))
+                            .build())
+                    .build();
+            flightRepository.save(flight19);
+
+            Flight flight20 = Flight.builder()
+                    .connection(connection2.get())
+                    .airline(srcAirline2.get())
+                    .numberSeats(17)
+                    .price(5)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-24"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
+                    .build();
+            flightRepository.save(flight20);
+
+            Flight flight21 = Flight.builder()
+                    .connection(connection2.get())
+                    .airline(srcAirline2.get())
+                    .numberSeats(18)
+                    .price(5)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-26"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
+                    .build();
+            flightRepository.save(flight21);
+
+            Flight flight22 = Flight.builder()
+                    .connection(connection2.get())
+                    .airline(srcAirline2.get())
+                    .numberSeats(19)
+                    .price(5)
+                    .times(Times.
+                            builder()
+                            .departureDate(LocalDate.parse("2020-07-25"))
+                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalTime(LocalTime.parse("10:40:00"))
+                            .departureTime(LocalTime.parse("10:45:00"))
+                            .build())
+                    .build();
+            flightRepository.save(flight22);
+
+            /**KONIEC*/
 
             Optional<Airline> srcAirline3 = airlineRepository.findById(2L);
             Optional<Connection> connection3 = connectionRepository.findById(3L);

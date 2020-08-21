@@ -82,15 +82,13 @@ public class FlightService {
         return flightRepository.findById(id);
     }
 
-    public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate, LocalTime departureTime) {
+    public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate) {
 
         List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport);
-        List<List<Flight>> connections2 = null;
         List<List<List<Flight>>> flights = findAllFlights(connections);
-        //List<List<Flight>> properFlights = chooseFlightsWithProperDate(flights, departureDate);
+        List<List<Flight>> properFlights = chooseFlightsWithProperDate(flights, departureDate);
 
-        return connections2;
-        //return properFlights;
+        return properFlights;
     }
 
     public List<List<List<Flight>>> findAllFlights(List<List<Connection>> listConnections) {
@@ -109,6 +107,16 @@ public class FlightService {
 
     public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate) {
 
+        for (List<List<Flight>> flyList: allFlights) {
+            System.out.println("\nNOWY TRIP:");
+            for (List<Flight> flyList2: flyList) {
+                for (Flight flight3: flyList2) {
+                    System.out.println(flight3);
+                }
+            }
+
+        }
+        System.out.println("\n\n");
 
         //lista wyszukanych fligtow dla jednego tripa
         List<List<Flight>> properDateFlight = new ArrayList<>();
@@ -126,6 +134,7 @@ public class FlightService {
                                 oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
                                 (oneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
                                         oneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
+                            System.out.println(oneConnection.get(k));
                             List<Flight> listForNewConnection = new ArrayList<>();
                             listForNewConnection.add(oneConnection.get(k));
                             //dla kazdego znalezionego flighta tworzysz dla niego nowa tablice, czekajaca na wypelnienie
@@ -142,7 +151,7 @@ public class FlightService {
                         for (int k = 0; k < oneConnection.size(); k++) {
                             if ((oneConnection.get(k).getTimes().getArrivalDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
                                     oneConnection.get(k).getTimes().getArrivalTime().isAfter(LocalTime.now()) &&
-                                    oneConnection.get(k).getTimes().getArrivalTime().isAfter(latestFlight.getTimes().getArrivalTime().plusHours(59)))) {
+                                    oneConnection.get(k).getTimes().getArrivalTime().isAfter(latestFlight.getTimes().getArrivalTime().plusMinutes(59)))) {
 
                                 List<Flight> oneTripFlightCopy = new ArrayList<>(oneTripFlight);
                                 oneTripFlightCopy.add(oneConnection.get(k));
