@@ -130,16 +130,11 @@ public class FlightService {
                                 (oneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
                                         oneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
 
-
                             //System.out.println(oneConnection.get(k));
                             List<Flight> oneTripFlightCopy = new ArrayList<>();
                             oneTripFlightCopy.add(oneConnection.get(k));
                             //dla kazdego znalezionego flighta tworzysz dla niego nowa tablice, czekajaca na wypelnienie
                             // jesli zawiera miasto docelowe dodajemy go na ostateczna liste
-//                            System.out.println("********************************");
-//                            System.out.println("oneConnectionId: " + oneConnection.get(k).getAirline().getId());
-//                            System.out.println("dstAirportId: " + dstAirport);
-//                            System.out.println("*******************************");
                             if (oneConnection.get(k).getConnection().getDstAirport().getId().equals(dstAirport)) {
                                 finishListFlights.add(oneTripFlightCopy);
                             } else {
@@ -151,23 +146,24 @@ public class FlightService {
                     properDateFlight = newListProperDateFlight;
 
                 } else {
-
-
                     List<List<Flight>> newListProperDateFlight = new ArrayList<>();
                     // pierwsza petla odpowiada za wyciagniecie listy na ktorej maja znalezc sie wszystkie polaczenia dajace Tripa
                     for (List<Flight> oneTripFlight : properDateFlight) {
 
                         Flight latestFlight = oneTripFlight.get(oneTripFlight.size() - 1);
                         for (int k = 0; k < oneConnection.size(); k++) {
-//                            if (oneConnection.get(k).getTimes().getDepartureDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
-//                                    ((oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
-//                                            (oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now()))) &&
-//                                    (oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime()) ||
-//                                            oneConnection.get(k).getTimes().getDepartureTime().isAfter(latestFlight.getTimes().getArrivalTime())) &&
-//                                    (oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime().plusHours(3)) ||
-//                                            oneConnection.get(k).getTimes().getDepartureTime().isBefore(latestFlight.getTimes().getArrivalTime().plusHours(3)))) {
-//
-                            if (true) {
+                            System.out.println("***********************************************************");
+                            System.out.println("Latest flight: " + latestFlight.getTimes().getArrivalDate());
+                            System.out.println("Actual time:" + oneConnection.get(k).getTimes().getDepartureDate());
+                            System.out.println("***********************************************************");
+                            if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
+                                    ((oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now()))) &&
+                                    
+                                    (oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime()) ||
+                                            oneConnection.get(k).getTimes().getDepartureTime().isAfter(latestFlight.getTimes().getArrivalTime())) &&
+                                    (oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime().plusHours(3)) ||
+                                            oneConnection.get(k).getTimes().getDepartureTime().isBefore(latestFlight.getTimes().getArrivalTime().plusHours(3))))
+                            {
 
                                 //System.out.println(oneConnection.get(k));
                                 List<Flight> oneTripFlightCopy = new ArrayList<>(oneTripFlight);
@@ -182,7 +178,6 @@ public class FlightService {
                             }
                         }
                     }
-
                     properDateFlight.clear();
                     properDateFlight = newListProperDateFlight;
                 }

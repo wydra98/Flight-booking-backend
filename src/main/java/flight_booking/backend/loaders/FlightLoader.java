@@ -45,7 +45,7 @@ public class FlightLoader implements CommandLineRunner {
                     .times(Times.
                             builder()
                             .departureDate(LocalDate.parse("2020-07-25"))
-                            .arrivalDate(LocalDate.parse("2020-07-29"))
+                            .arrivalDate(LocalDate.parse("2020-07-25"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
                             .departureTime(LocalTime.parse("17:45:00"))
                             .build())
