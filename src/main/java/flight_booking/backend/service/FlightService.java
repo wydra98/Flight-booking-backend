@@ -8,6 +8,7 @@ import flight_booking.backend.models.Times;
 import org.springframework.stereotype.Service;
 
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class FlightService {
 
         List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport);
         List<List<List<Flight>>> flights = findAllFlights(connections);
-        List<List<Flight>> properFlights = chooseFlightsWithProperDate(flights, departureDate);
+        List<List<Flight>> properFlights = chooseFlightsWithProperDate(flights, departureDate, dstAirport);
 
         return properFlights;
     }
@@ -105,69 +106,93 @@ public class FlightService {
         return allFlights;
     }
 
-    public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate) {
+    public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate, Long dstAirport) {
 
-        for (List<List<Flight>> flyList: allFlights) {
-            System.out.println("\nNOWY TRIP:");
-            for (List<Flight> flyList2: flyList) {
-                for (Flight flight3: flyList2) {
-                    System.out.println(flight3);
-                }
-            }
-
-        }
-        System.out.println("\n\n");
 
         //lista wyszukanych fligtow dla jednego tripa
         List<List<Flight>> properDateFlight = new ArrayList<>();
+        List<List<Flight>> finishListFlights = new ArrayList<>();
+
         // ta lista w kazdej iteracji rzuca nam jednym trpem (lista connectionow)
         for (int i = 0; i < allFlights.size(); i++) {
             //dostep do jednego tripa
             List<List<Flight>> oneTrip = allFlights.get(i);
             //ta petla w kazdej iteracji bedzie nam rzucac jednym connectionem
+            //za pierwszym razem ma jeden ,potem skoczy na 2
             for (int j = 0; j < oneTrip.size(); j++) {
                 List<Flight> oneConnection = oneTrip.get(j);
                 if (j == 0) {
                     //petla cheba pobiera nam wszystkie zagniezdzone flight z connection jednego typu (w tym przypadku )
+                    List<List<Flight>> newListProperDateFlight = new ArrayList<>();
                     for (int k = 0; k < oneConnection.size(); k++) {
                         if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(userDate) &&
                                 oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
                                 (oneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
                                         oneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
-                            System.out.println(oneConnection.get(k));
-                            List<Flight> listForNewConnection = new ArrayList<>();
-                            listForNewConnection.add(oneConnection.get(k));
+
+
+                            //System.out.println(oneConnection.get(k));
+                            List<Flight> oneTripFlightCopy = new ArrayList<>();
+                            oneTripFlightCopy.add(oneConnection.get(k));
                             //dla kazdego znalezionego flighta tworzysz dla niego nowa tablice, czekajaca na wypelnienie
-                            properDateFlight.add(listForNewConnection);
+                            // jesli zawiera miasto docelowe dodajemy go na ostateczna liste
+//                            System.out.println("********************************");
+//                            System.out.println("oneConnectionId: " + oneConnection.get(k).getAirline().getId());
+//                            System.out.println("dstAirportId: " + dstAirport);
+//                            System.out.println("*******************************");
+                            if (oneConnection.get(k).getConnection().getDstAirport().getId().equals(dstAirport)) {
+                                finishListFlights.add(oneTripFlightCopy);
+                            } else {
+                                newListProperDateFlight.add(oneTripFlightCopy);
+                            }
                         }
                     }
+                    properDateFlight.clear();
+                    properDateFlight = newListProperDateFlight;
+
                 } else {
 
-                    // pierwsza petla odpowiada za wyciagniecie listy na ktorej maja znalezc sie wszystkie polaczenia dajace Tripa
+
                     List<List<Flight>> newListProperDateFlight = new ArrayList<>();
+                    // pierwsza petla odpowiada za wyciagniecie listy na ktorej maja znalezc sie wszystkie polaczenia dajace Tripa
                     for (List<Flight> oneTripFlight : properDateFlight) {
+
                         Flight latestFlight = oneTripFlight.get(oneTripFlight.size() - 1);
-
                         for (int k = 0; k < oneConnection.size(); k++) {
-                            if ((oneConnection.get(k).getTimes().getArrivalDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
-                                    oneConnection.get(k).getTimes().getArrivalTime().isAfter(LocalTime.now()) &&
-                                    oneConnection.get(k).getTimes().getArrivalTime().isAfter(latestFlight.getTimes().getArrivalTime().plusMinutes(59)))) {
+//                            if (oneConnection.get(k).getTimes().getDepartureDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
+//                                    ((oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
+//                                            (oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now()))) &&
+//                                    (oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime()) ||
+//                                            oneConnection.get(k).getTimes().getDepartureTime().isAfter(latestFlight.getTimes().getArrivalTime())) &&
+//                                    (oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime().plusHours(3)) ||
+//                                            oneConnection.get(k).getTimes().getDepartureTime().isBefore(latestFlight.getTimes().getArrivalTime().plusHours(3)))) {
+//
+                            if (true) {
 
+                                //System.out.println(oneConnection.get(k));
                                 List<Flight> oneTripFlightCopy = new ArrayList<>(oneTripFlight);
                                 oneTripFlightCopy.add(oneConnection.get(k));
-                                newListProperDateFlight.add(oneTripFlightCopy);
-
+                                //dla kazdego znalezionego flighta tworzysz dla niego nowa tablice, czekajaca na wypelnienie
+                                // jesli zawiera miasto docelowe dodajemy go na ostateczna liste
+                                if (oneConnection.get(k).getConnection().getDstAirport().getId().equals(dstAirport)) {
+                                    finishListFlights.add(oneTripFlightCopy);
+                                } else {
+                                    newListProperDateFlight.add(oneTripFlightCopy);
+                                }
                             }
                         }
                     }
 
                     properDateFlight.clear();
                     properDateFlight = newListProperDateFlight;
-
                 }
+
             }
         }
+        for (List<Flight> flights: finishListFlights) {
+            System.out.println(flights);
+        }
 
-        return properDateFlight;
+        return finishListFlights;
     }
 }

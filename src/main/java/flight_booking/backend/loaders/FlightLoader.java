@@ -47,7 +47,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight1);
@@ -64,8 +64,8 @@ public class FlightLoader implements CommandLineRunner {
                             builder()
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
-                            .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .arrivalTime(LocalTime.parse("17:40:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight2);
@@ -80,7 +80,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight16);
@@ -95,7 +95,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-08-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight17);
@@ -110,7 +110,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2021-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight18);
@@ -126,7 +126,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("08:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight19);
@@ -141,7 +141,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-24"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight20);
@@ -156,7 +156,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-26"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight21);
@@ -171,7 +171,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight22);
@@ -190,7 +190,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight3);
@@ -207,7 +207,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight4);
@@ -224,7 +224,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight5);
@@ -241,7 +241,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("18:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight6);
@@ -258,7 +258,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight7);
@@ -275,7 +275,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight8);
@@ -292,7 +292,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight9);
@@ -309,7 +309,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight10);
@@ -326,7 +326,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight11);
@@ -343,7 +343,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight12);
@@ -360,7 +360,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight13);
@@ -377,7 +377,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight14);
@@ -394,7 +394,7 @@ public class FlightLoader implements CommandLineRunner {
                             .departureDate(LocalDate.parse("2020-07-25"))
                             .arrivalDate(LocalDate.parse("2020-07-29"))
                             .arrivalTime(LocalTime.parse("10:40:00"))
-                            .departureTime(LocalTime.parse("10:45:00"))
+                            .departureTime(LocalTime.parse("17:45:00"))
                             .build())
                     .build();
             flightRepository.save(flight15);
