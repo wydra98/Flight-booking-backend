@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Collection;
 
 @Component
 public class AirportLoader implements CommandLineRunner {

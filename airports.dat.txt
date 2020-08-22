@@ -1,8 +1,5 @@
 John F. Kennedy International Airport;-118.410042;33.942791;New York;USA;-4
 Chicago O'Hare International Airport;-87.904724;41.978611;Chicago;USA;-5
-Toronto Pearson Airport;-79.62481969999999;43.67771760000001;Toronto;USA;-4
-Calgary International Airport;-114.010559;51.131470;Calgary;USA;-6
-Denver International Airport;-104.673828;39.849312;Denver;USA;-6
-Kraków John Paul II International Airport;19.7842;50.0733;Cracow;Poland;2
-George Bush Intercontinental Airport;-95.33678270000001;29.9902199;Houston;USA;-5
-Los Angeles International Airport;-118.410042;33.942791;Los Angeles;USA;-7
+Warsaw Chopin Airport;20.9678911;52.1672369;Warsaw;Poland;2
+Beijing Capital International Airport;116.383331;39.916668;Pekin;China;8
+Berlin Tegel Airport;13.404954;52.520008;Berlin;Germany;2
