@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLOutput;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +109,6 @@ public class FlightService {
 
     public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate, Long dstAirport) {
 
-
         //lista wyszukanych fligtow dla jednego tripa
         List<List<Flight>> properDateFlight = new ArrayList<>();
         List<List<Flight>> finishListFlights = new ArrayList<>();
@@ -125,8 +125,10 @@ public class FlightService {
                     //petla cheba pobiera nam wszystkie zagniezdzone flight z connection jednego typu (w tym przypadku )
                     List<List<Flight>> newListProperDateFlight = new ArrayList<>();
                     for (int k = 0; k < oneConnection.size(); k++) {
+
                         if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(userDate) &&
-                                oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
+                                (oneConnection.get(k).getTimes().getDepartureDate().isEqual(LocalDate.now()) &&
+                                        oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now()))) ||
                                 (oneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
                                         oneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(180)))) {
 
@@ -151,21 +153,20 @@ public class FlightService {
                     for (List<Flight> oneTripFlight : properDateFlight) {
 
                         Flight latestFlight = oneTripFlight.get(oneTripFlight.size() - 1);
-                        for (int k = 0; k < oneConnection.size(); k++) {
-                            System.out.println("***********************************************************");
-                            System.out.println("Latest flight: " + latestFlight.getTimes().getArrivalDate());
-                            System.out.println("Actual time:" + oneConnection.get(k).getTimes().getDepartureDate());
-                            System.out.println("***********************************************************");
-                            if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
-                                    ((oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now()))) &&
-                                    
-                                    (oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime()) ||
-                                            oneConnection.get(k).getTimes().getDepartureTime().isAfter(latestFlight.getTimes().getArrivalTime())) &&
-                                    (oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime().plusHours(3)) ||
-                                            oneConnection.get(k).getTimes().getDepartureTime().isBefore(latestFlight.getTimes().getArrivalTime().plusHours(3))))
-                            {
+                        LocalDateTime arrivalLatest = LocalDateTime.of(latestFlight.getTimes().getArrivalDate(),latestFlight.getTimes().getArrivalTime());
 
-                                //System.out.println(oneConnection.get(k));
+                        for (int k = 0; k < oneConnection.size(); k++) {
+
+                            LocalDateTime departureCurrent = LocalDateTime.of(oneConnection.get(k).getTimes().getDepartureDate(),oneConnection.get(k).getTimes().getDepartureTime());
+
+                            if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
+                                    ((oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
+                                            (oneConnection.get(k).getTimes().getDepartureTime().equals(LocalTime.now()))) &&
+                                    ((oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime()) ||
+                                            (oneConnection.get(k).getTimes().getDepartureTime().isAfter(latestFlight.getTimes().getArrivalTime()))))) ||
+                                    (departureCurrent.equals(arrivalLatest.plusHours(24)) ||
+                                            departureCurrent.isBefore(arrivalLatest.plusHours(24)))) {
+
                                 List<Flight> oneTripFlightCopy = new ArrayList<>(oneTripFlight);
                                 oneTripFlightCopy.add(oneConnection.get(k));
                                 //dla kazdego znalezionego flighta tworzysz dla niego nowa tablice, czekajaca na wypelnienie
@@ -184,7 +185,7 @@ public class FlightService {
 
             }
         }
-        for (List<Flight> flights: finishListFlights) {
+        for (List<Flight> flights : finishListFlights) {
             System.out.println(flights);
         }
 
