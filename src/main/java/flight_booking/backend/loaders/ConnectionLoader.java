@@ -156,6 +156,24 @@ public class ConnectionLoader implements CommandLineRunner {
                     .build();
             connectionRepository.save(connection14);
 
+            /** Z WARSZAWY DO CHICAGO* */
+            Optional<Airport> srcAirport15 = airportRepository.findById(3L);
+            Optional<Airport> dstAirport15 = airportRepository.findById(2L);
+            Connection connection15 = Connection.builder()
+                    .srcAirport(srcAirport15.get())
+                    .dstAirport(dstAirport15.get())
+                    .build();
+            connectionRepository.save(connection15);
+
+            /** Z CHICAGO DO WARSZAWY **/
+            Optional<Airport> srcAirport16 = airportRepository.findById(2L);
+            Optional<Airport> dstAirport16 = airportRepository.findById(3L);
+            Connection connection16 = Connection.builder()
+                    .srcAirport(srcAirport16.get())
+                    .dstAirport(dstAirport16.get())
+                    .build();
+            connectionRepository.save(connection16);
+
 
 
 //            Optional<Airport> srcAirport2 = airportRepository.findById(1L);

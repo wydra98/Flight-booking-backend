@@ -8,6 +8,7 @@ import java.time.LocalTime;
 
 @Embeddable
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
