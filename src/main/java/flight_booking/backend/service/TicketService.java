@@ -46,7 +46,6 @@ public class TicketService {
         List<Trip> allTrips = new ArrayList<>();
 
         for (List<Flight> flights : allFlights) {
-            System.out.println("hej");
             double totalPrice = 0;
             boolean flag = false;
             LocalDateTime depDT = null;

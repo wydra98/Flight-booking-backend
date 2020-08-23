@@ -50,7 +50,6 @@ public class TripController {
 
         ArrayList<TripDto> tripsDtos = new ArrayList<>();
         for (Trip trip : trips) {
-            System.out.println("dupa");
             tripsDtos.add(tripMapper.map(trip));
         }
 
