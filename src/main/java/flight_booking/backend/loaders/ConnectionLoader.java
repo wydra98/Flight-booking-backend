@@ -336,8 +336,8 @@ public class ConnectionLoader implements CommandLineRunner {
                     .build();
             connectionRepository.save(connection34);
 
-            /** Z RIO DE JANEIRO DO BERLINA **/
-            Optional<Airport> srcAirport35 = airportRepository.findById(10L);
+            /** Z TOKIO DO BERLINA **/
+            Optional<Airport> srcAirport35 = airportRepository.findById(9L);
             Optional<Airport> dstAirport35 = airportRepository.findById(5L);
             Connection connection35 = Connection.builder()
                     .srcAirport(srcAirport35.get())
@@ -345,14 +345,50 @@ public class ConnectionLoader implements CommandLineRunner {
                     .build();
             connectionRepository.save(connection35);
 
-            /** Z BERLINA DO RIO DE JANEIRO **/
+            /** Z BERLINA DO TOKIO **/
             Optional<Airport> srcAirport36 = airportRepository.findById(5L);
-            Optional<Airport> dstAirport36 = airportRepository.findById(10L);
+            Optional<Airport> dstAirport36 = airportRepository.findById(9L);
             Connection connection36 = Connection.builder()
                     .srcAirport(srcAirport36.get())
                     .dstAirport(dstAirport36.get())
                     .build();
             connectionRepository.save(connection36);
+
+            /** Z TOKIO DO RIO DE JANEIRO **/
+            Optional<Airport> srcAirport37 = airportRepository.findById(9L);
+            Optional<Airport> dstAirport37 = airportRepository.findById(10L);
+            Connection connection37 = Connection.builder()
+                    .srcAirport(srcAirport37.get())
+                    .dstAirport(dstAirport37.get())
+                    .build();
+            connectionRepository.save(connection37);
+
+            /** Z RIO DE JANEIRO DO TOKIO **/
+            Optional<Airport> srcAirport38 = airportRepository.findById(10L);
+            Optional<Airport> dstAirport38 = airportRepository.findById(9L);
+            Connection connection38 = Connection.builder()
+                    .srcAirport(srcAirport38.get())
+                    .dstAirport(dstAirport38.get())
+                    .build();
+            connectionRepository.save(connection38);
+
+            /** Z RIO DE JANEIRO DO BERLINA **/
+            Optional<Airport> srcAirport39 = airportRepository.findById(10L);
+            Optional<Airport> dstAirport39 = airportRepository.findById(5L);
+            Connection connection39 = Connection.builder()
+                    .srcAirport(srcAirport39.get())
+                    .dstAirport(dstAirport39.get())
+                    .build();
+            connectionRepository.save(connection39);
+
+            /** Z BERLINA DO RIO DE JANEIRO **/
+            Optional<Airport> srcAirport40 = airportRepository.findById(5L);
+            Optional<Airport> dstAirport40 = airportRepository.findById(10L);
+            Connection connection40 = Connection.builder()
+                    .srcAirport(srcAirport40.get())
+                    .dstAirport(dstAirport40.get())
+                    .build();
+            connectionRepository.save(connection40);
 
         }
     }

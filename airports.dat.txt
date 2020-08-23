@@ -8,3 +8,13 @@ Toronto Pearson Airport;-79.347015;43.651070;Toronto;Canada;-4
 Sydney Airport;151.209900;-33.865143;Sydney;Canada;10
 Haneda Airport;139.839478;35.652832;Tokyo;Japan;9
 Rio de Janeiro International Airport;-43.196388;-22.908333;Rio de Janeiro;Brazil;-3
+Oslo Airport - Avinor;10.757933;59.911491;Norway;Oslo;2
+Buenos Aires Ezeiza Airport;-58.381592;-34.603722;Buenos Aires;Brazil;-3
+Charles de Gaulle Airport;2.349014;48.864716;Paris;France;2
+London City Airport;-0.118092;51.509865;London;Great Britain;1
+Los Angeles International Airport;-118.243683;34.052235;Los Angeles;USA;-7
+Sheremetyevo International Airport;37.618423;55.751244;Moscow;Russia;3
+Cairo International Airport;31.233334;30.033333;Cairo;Egypt;2
+Kraków John Paul II International Airport;19.944544;50.049683;Cracow;Poland;2
+Indira Gandhi International Airport;77.216721;28.644800;Delhi;India;5
+Boryspil International Airport;30.517023;50.431759;Kiev;Ukraine;3
