@@ -110,7 +110,7 @@ public class FlightService {
     public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate, Long dstAirport) {
 
         final int DAYS_AFTER = 7;
-        final int HOURS_BREAK = 6;
+        final int HOURS_BREAK = 24;
         //lista wyszukanych fligtow dla jednego tripa
         List<List<Flight>> properDateFlight = new ArrayList<>();
         List<List<Flight>> finishListFlights = new ArrayList<>();

@@ -3,3 +3,8 @@ Chicago O'Hare International Airport;-87.904724;41.978611;Chicago;USA;-5
 Warsaw Chopin Airport;20.9678911;52.1672369;Warsaw;Poland;2
 Beijing Capital International Airport;116.383331;39.916668;Pekin;China;8
 Berlin Tegel Airport;13.404954;52.520008;Berlin;Germany;2
+Shanghai Pudong Airport;121.469170;31.224361;Shanghai;China;8
+Toronto Pearson Airport;-79.347015;43.651070;Toronto;Canada;-4
+Sydney Airport;151.209900;-33.865143;Sydney;Canada;10
+Haneda Airport;139.839478;35.652832;Tokyo;Japan;9
+Rio de Janeiro International Airport;-43.196388;-22.908333;Rio de Janeiro;Brazil;-3
