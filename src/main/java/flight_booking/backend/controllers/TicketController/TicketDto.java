@@ -11,9 +11,13 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class TicketDto {
-    private Long id;
+   // private Long id;
     private FlightDto flightDto;
-    private String purchaseDate;
-    private String purchaseTime;
+    private String departureDate;
+    private String departureTime;
+    private String arrivalDate;
+    private String arrivalTime;
+   // private String purchaseDate;
+   // private String purchaseTime;
     private double totalPrice;
 }

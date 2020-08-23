@@ -9,10 +9,14 @@ public class TicketMapper {
 
     public TicketDto map(Ticket ticket) {
         return TicketDto.builder()
-                .id(ticket.getId())
+                //.id(ticket.getId())
                 .flightDto(flightMapper.map(ticket.getFlight(), ticket.getFlight().getConnection()))
-                .purchaseDate(ticket.getPurchaseDate().toString())
-                .purchaseTime(ticket.getPurchaseTime().toString())
+                .departureDate(ticket.getFlight().getTimes().getDepartureDate().toString())
+                .departureTime(ticket.getFlight().getTimes().getDepartureTime().toString())
+                .arrivalDate(ticket.getFlight().getTimes().getArrivalDate().toString())
+                .arrivalTime(ticket.getFlight().getTimes().getArrivalTime().toString())
+                //.purchaseDate(ticket.getPurchaseDate().toString())
+                //.purchaseTime(ticket.getPurchaseTime().toString())
                 .totalPrice(ticket.getPrice())
                 .build();
     }

@@ -7,9 +7,11 @@ import flight_booking.backend.models.Trips.Trip;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 @Service
@@ -44,37 +46,68 @@ public class TicketService {
         List<Trip> allTrips = new ArrayList<>();
 
         for (List<Flight> flights : allFlights) {
+            System.out.println("hej");
+            double totalPrice = 0;
+            boolean flag = false;
+            LocalDateTime depDT = null;
+            LocalDateTime arrDT = null;
             List<Ticket> allTickets = new ArrayList<>();
             Trip trip = Trip.builder()
-                    .id(1L)
+                    .id(null)
                     .tickets(null)
-                    .departureDate(LocalDate.parse("2020-07-29"))
-                    .departureTime(LocalTime.parse("10:40:00"))
-                    .arrivalDate(LocalDate.parse("2020-07-29"))
-                    .arrivalTime(LocalTime.parse("10:40:00"))
-                    .price(5.6)
+                    .departureDate(null)
+                    .departureTime(null)
+                    .arrivalDate(null)
+                    .arrivalTime(null)
+                    .price(0)
                     .build();
 
             for (Flight flight : flights) {
-                //System.out.println("dupa");
                 Ticket ticket = Ticket.builder()
+                        .id(null)
                         .passenger(null)
                         .flight(flight)
                         .trip(trip)
-                        .purchaseDate(LocalDate.parse("2020-07-29"))
-                        .purchaseTime(LocalTime.parse("10:40:00"))
-                        .seatNumber(23)
-                        .price(34)
+                        .purchaseDate(null)
+                        .purchaseTime(null)
+                        .seatNumber(generateSeatNumber(flight.getNumberSeats()))
+                        .price(flight.getPrice())
                         .build();
-                //trip.addTicket(ticket);
-                allTickets.add(ticket);
-                //System.out.println(allTickets);
 
+                LocalDateTime actualDepDT = LocalDateTime.of(flight.getTimes().getDepartureDate(), flight.getTimes().getDepartureTime());
+                LocalDateTime actualArrDT = LocalDateTime.of(flight.getTimes().getArrivalDate(), flight.getTimes().getArrivalTime());
+                if (!flag) {
+                    depDT = actualDepDT;
+                    arrDT = actualArrDT;
+                }
+                else{
+                    if(actualDepDT.isBefore(depDT)){
+                        depDT = actualDepDT;
+                    }
+                    if(actualArrDT.isAfter(arrDT)){
+                        arrDT = actualArrDT;
+                    }
+                }
+                allTickets.add(ticket);
+                totalPrice += flight.getPrice();
+                flag = true;
             }
-            //System.out.println(allTickets);
+
+            trip.setDepartureDate(depDT.toLocalDate());
+            trip.setDepartureTime(depDT.toLocalTime());
+            trip.setArrivalDate(arrDT.toLocalDate());
+            trip.setArrivalTime(arrDT.toLocalTime());
             trip.setTickets(allTickets);
+            trip.setPrice(totalPrice);
             allTrips.add(trip);
+
         }
         return allTrips;
+    }
+
+    private int generateSeatNumber(int seatNumbers){
+
+        Random random = new Random();
+        return random.nextInt(seatNumbers) + 1;
     }
 }

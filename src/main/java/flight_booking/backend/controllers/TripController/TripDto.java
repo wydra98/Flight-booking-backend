@@ -15,12 +15,12 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class TripDto {
-    private Long id;
+   // private Long id;
     private ArrayList<TicketDto> arraysTicket;
     //private PassengerDto passengerDto;
     private String departureDate;
     private String departureTime;
-    private String purchaseDate;
-    private String purchaseTime;
+    private String arrivalDate;
+    private String arrivalTime;
     private double totalPrice;
 }

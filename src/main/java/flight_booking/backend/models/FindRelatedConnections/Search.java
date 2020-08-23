@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 public class Search {
 
-    public static final int MAX_CONNECTION = 3;
+    public static final int MAX_CONNECTION = 5;
     private final Long START;
     private final Long END;
     private final List<List<Connection>> allConnection = new ArrayList();

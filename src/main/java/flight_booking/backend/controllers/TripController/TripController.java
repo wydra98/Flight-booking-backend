@@ -50,32 +50,11 @@ public class TripController {
 
         ArrayList<TripDto> tripsDtos = new ArrayList<>();
         for (Trip trip : trips) {
+            System.out.println("dupa");
             tripsDtos.add(tripMapper.map(trip));
         }
 
         return ResponseEntity.ok(tripsDtos);
     }
 
-//    @ApiOperation(value = "Find all connection")
-//    @GetMapping("/findTestConnections/{id}")
-//    ResponseEntity<List<TripDto>> findTrips(@RequestParam Long srcAirportId,
-//                                            @RequestParam Long dstAirportId) {
-//
-//        //@TODO check if srcAirportId is correct
-//        //@TODO check if dstAirportId is correct
-//        //@TODO how to check if arrivalDate is correct?? :O:O:O:O:O:O:O:O:O
-//
-//        List<Connection> trips = tripService.findAllAvailableTrips(srcAirportId, dstAirportId);
-//        System.out.println(trips.size());
-//
-//        ArrayList<TripDto> tripsDtos = new ArrayList<>();
-//        for (Trip trip : trips) {
-//            tripsDtos.add(tripMapper.map(trip));
-//        }
-//
-//
-//
-//
-//        return ResponseEntity.ok(tripsDtos);
-//    }
 }
