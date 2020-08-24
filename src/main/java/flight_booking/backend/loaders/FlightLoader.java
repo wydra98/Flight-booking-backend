@@ -512,19 +512,19 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection19 = connectionRepository.findById(19L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                    flightRepository.save(Flight.builder()
-                            .connection(connection19.get())
-                            .airline(airline19.get())
-                            .numberSeats(150)
-                            .price(400)
-                            .times(Times.
-                                    builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .departureTime(LocalTime.parse("12:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("13:00:00"))
-                                    .build())
-                            .build());
+                flightRepository.save(Flight.builder()
+                        .connection(connection19.get())
+                        .airline(airline19.get())
+                        .numberSeats(150)
+                        .price(400)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:00:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("13:00:00"))
+                                .build())
+                        .build());
             }
 
             /*********************** Z PEKINU DO SZANGHAJU ***********************/
@@ -532,19 +532,19 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection20 = connectionRepository.findById(20L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                    flightRepository.save(Flight.builder()
-                            .connection(connection20.get())
-                            .airline(airline20.get())
-                            .numberSeats(150)
-                            .price(400)
-                            .times(Times.
-                                    builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .departureTime(LocalTime.parse("17:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("18:45:00"))
-                                    .build())
-                            .build());
+                flightRepository.save(Flight.builder()
+                        .connection(connection20.get())
+                        .airline(airline20.get())
+                        .numberSeats(150)
+                        .price(400)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("17:45:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:45:00"))
+                                .build())
+                        .build());
             }
 
             /*********************** Z SZANGHAJU DO TORONTO ***********************/
@@ -552,7 +552,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection21 = connectionRepository.findById(21L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%5 == 0){
+                if (i % 5 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection21.get())
                             .airline(airline21.get())
@@ -574,7 +574,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection22 = connectionRepository.findById(22L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%2 == 0){
+                if (i % 2 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection22.get())
                             .airline(airline22.get())
@@ -596,7 +596,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection23 = connectionRepository.findById(23L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%7 == 0){
+                if (i % 7 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection23.get())
                             .airline(airline23.get())
@@ -618,7 +618,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection24 = connectionRepository.findById(24L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%2 == 0){
+                if (i % 2 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection24.get())
                             .airline(airline24.get())
@@ -640,7 +640,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection25 = connectionRepository.findById(25L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%4 == 0){
+                if (i % 4 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection25.get())
                             .airline(airline25.get())
@@ -662,7 +662,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection26 = connectionRepository.findById(26L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%4 == 0){
+                if (i % 4 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection26.get())
                             .airline(airline26.get())
@@ -673,7 +673,7 @@ public class FlightLoader implements CommandLineRunner {
                                     .departureDate((LocalDate.parse("2020-09-03")).plusDays(i))
                                     .departureTime(LocalTime.parse("15:00:00"))
                                     .arrivalDate((LocalDate.parse("2020-09-04")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("20:00:00"))
+                                    .arrivalTime(LocalTime.parse("03:00:00"))
                                     .build())
                             .build());
                 }
@@ -684,7 +684,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection27 = connectionRepository.findById(27L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%2 == 0){
+                if (i % 2 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection27.get())
                             .airline(airline27.get())
@@ -706,7 +706,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection28 = connectionRepository.findById(28L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%2 == 0){
+                if (i % 2 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection28.get())
                             .airline(airline28.get())
@@ -728,7 +728,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection29 = connectionRepository.findById(29L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%3 == 0){
+                if (i % 3 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection29.get())
                             .airline(airline29.get())
@@ -750,7 +750,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection30 = connectionRepository.findById(30L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%3 == 0){
+                if (i % 3 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection30.get())
                             .airline(airline30.get())
@@ -772,19 +772,19 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection31 = connectionRepository.findById(31L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                    flightRepository.save(Flight.builder()
-                            .connection(connection31.get())
-                            .airline(airline31.get())
-                            .numberSeats(200)
-                            .price(380)
-                            .times(Times.
-                                    builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .departureTime(LocalTime.parse("22:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("08:00:00"))
-                                    .build())
-                            .build());
+                flightRepository.save(Flight.builder()
+                        .connection(connection31.get())
+                        .airline(airline31.get())
+                        .numberSeats(200)
+                        .price(380)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("22:00:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("08:00:00"))
+                                .build())
+                        .build());
             }
 
             /*********************** Z BERLINA DO SYDNEY ***********************/
@@ -792,19 +792,19 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection32 = connectionRepository.findById(32L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                    flightRepository.save(Flight.builder()
-                            .connection(connection32.get())
-                            .airline(airline32.get())
-                            .numberSeats(200)
-                            .price(390)
-                            .times(Times.
-                                    builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .departureTime(LocalTime.parse("06:30:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("16:30:00"))
-                                    .build())
-                            .build());
+                flightRepository.save(Flight.builder()
+                        .connection(connection32.get())
+                        .airline(airline32.get())
+                        .numberSeats(200)
+                        .price(390)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("06:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("16:30:00"))
+                                .build())
+                        .build());
             }
 
             /*********************** Z SYDNEY DO TOKIO ***********************/
@@ -812,7 +812,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection33 = connectionRepository.findById(33L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%5 == 0){
+                if (i % 5 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection33.get())
                             .airline(airline33.get())
@@ -834,7 +834,7 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection34 = connectionRepository.findById(34L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%5 == 0){
+                if (i % 5 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection34.get())
                             .airline(airline34.get())
@@ -853,10 +853,10 @@ public class FlightLoader implements CommandLineRunner {
 
             /*********************** Z TOKIO DO BERLINA ***********************/
             Optional<Airline> airline35 = airlineRepository.findById(7L);
-            Optional<Connection> connection35 = connectionRepository.findById(34L);
+            Optional<Connection> connection35 = connectionRepository.findById(35L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%3 == 0){
+                if (i % 3 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection35.get())
                             .airline(airline35.get())
@@ -875,10 +875,10 @@ public class FlightLoader implements CommandLineRunner {
 
             /*********************** Z BERLINA DO TOKIO ***********************/
             Optional<Airline> airline36 = airlineRepository.findById(2L);
-            Optional<Connection> connection36 = connectionRepository.findById(34L);
+            Optional<Connection> connection36 = connectionRepository.findById(36L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%2 == 0){
+                if (i % 2 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection36.get())
                             .airline(airline36.get())
@@ -897,10 +897,10 @@ public class FlightLoader implements CommandLineRunner {
 
             /*********************** Z TOKIO DO RIO DE JANEIRO ***********************/
             Optional<Airline> airline37 = airlineRepository.findById(7L);
-            Optional<Connection> connection37 = connectionRepository.findById(34L);
+            Optional<Connection> connection37 = connectionRepository.findById(37L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%3 == 0){
+                if (i % 3 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection37.get())
                             .airline(airline37.get())
@@ -919,10 +919,10 @@ public class FlightLoader implements CommandLineRunner {
 
             /*********************** Z RIO DE JANEIRO DO TOKIO ***********************/
             Optional<Airline> airline38 = airlineRepository.findById(8L);
-            Optional<Connection> connection38 = connectionRepository.findById(34L);
+            Optional<Connection> connection38 = connectionRepository.findById(38L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                if(i%3 == 0){
+                if (i % 3 == 0) {
                     flightRepository.save(Flight.builder()
                             .connection(connection38.get())
                             .airline(airline38.get())
@@ -941,43 +941,1270 @@ public class FlightLoader implements CommandLineRunner {
 
             /*********************** Z RIO DE JANEIRO DO BERLINA ***********************/
             Optional<Airline> airline39 = airlineRepository.findById(8L);
-            Optional<Connection> connection39 = connectionRepository.findById(35L);
+            Optional<Connection> connection39 = connectionRepository.findById(39L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                    flightRepository.save(Flight.builder()
-                            .connection(connection39.get())
-                            .airline(airline39.get())
-                            .numberSeats(160)
-                            .price(450)
-                            .times(Times.
-                                    builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .departureTime(LocalTime.parse("08:15:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("20:15:00"))
-                                    .build())
-                            .build());
+                flightRepository.save(Flight.builder()
+                        .connection(connection39.get())
+                        .airline(airline39.get())
+                        .numberSeats(160)
+                        .price(450)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("08:15:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("20:15:00"))
+                                .build())
+                        .build());
             }
 
             /*********************** Z BERLINA DO RIO DE JANEIRO ***********************/
             Optional<Airline> airline40 = airlineRepository.findById(2L);
-            Optional<Connection> connection40 = connectionRepository.findById(36L);
+            Optional<Connection> connection40 = connectionRepository.findById(40L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection40.get())
+                        .airline(airline40.get())
+                        .numberSeats(160)
+                        .price(450)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("21:00:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("09:00:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z RIO DE JANEIRO DO LOS ANGELES ***********************/
+            Optional<Airline> airline41 = airlineRepository.findById(8L);
+            Optional<Connection> connection41 = connectionRepository.findById(41L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 2 == 0) {
                     flightRepository.save(Flight.builder()
-                            .connection(connection40.get())
-                            .airline(airline40.get())
+                            .connection(connection41.get())
+                            .airline(airline41.get())
+                            .numberSeats(200)
+                            .price(230)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("11:45:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("17:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+            /*********************** Z LOS ANGELES DO RIO DE JANEIRO ***********************/
+            Optional<Airline> airline42 = airlineRepository.findById(3L);
+            Optional<Connection> connection42 = connectionRepository.findById(42L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 2 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection42.get())
+                            .airline(airline42.get())
+                            .numberSeats(200)
+                            .price(260)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("20:45:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("02:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+            /*********************** Z RIO DE JANEIRO DO OSLO ***********************/
+            Optional<Airline> airline43 = airlineRepository.findById(8L);
+            Optional<Connection> connection43 = connectionRepository.findById(43L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 7 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection43.get())
+                            .airline(airline43.get())
+                            .numberSeats(200)
+                            .price(470)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("20:30:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("08:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+            /*********************** Z OSLO DO RIO DE JANEIRO ***********************/
+            Optional<Airline> airline44 = airlineRepository.findById(9L);
+            Optional<Connection> connection44 = connectionRepository.findById(44L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 7 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection44.get())
+                            .airline(airline44.get())
                             .numberSeats(160)
                             .price(450)
                             .times(Times.
                                     builder()
                                     .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .departureTime(LocalTime.parse("21:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("09:00:00"))
+                                    .departureTime(LocalTime.parse("11:30:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("23:30:00"))
                                     .build())
                             .build());
+                }
             }
+
+            /*********************** Z RIO DE JANEIRO DO BUENOS AIRES ***********************/
+            Optional<Airline> airline45 = airlineRepository.findById(8L);
+            Optional<Connection> connection45 = connectionRepository.findById(45L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection45.get())
+                        .airline(airline45.get())
+                        .numberSeats(150)
+                        .price(120)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("11:45:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("13:45:00"))
+                                .build())
+                        .build());
+            }
+
+
+            /*********************** Z BUENOS AIRES DO RIO DE JANEIRO ***********************/
+            Optional<Airline> airline46 = airlineRepository.findById(8L);
+            Optional<Connection> connection46 = connectionRepository.findById(46L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection46.get())
+                        .airline(airline46.get())
+                        .numberSeats(140)
+                        .price(120)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("17:45:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("19:45:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z OSLO DO BUENOS AIRES ***********************/
+            Optional<Airline> airline47 = airlineRepository.findById(9L);
+            Optional<Connection> connection47 = connectionRepository.findById(47L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 3 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection47.get())
+                            .airline(airline47.get())
+                            .numberSeats(80)
+                            .price(450)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("09:30:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("21:30:00"))
+                                    .build())
+                            .build());
+                }
+
+            }
+
+            /*********************** Z BUENOS AIRES DO OSLO ***********************/
+            Optional<Airline> airline48 = airlineRepository.findById(8L);
+            Optional<Connection> connection48 = connectionRepository.findById(48L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 3 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection48.get())
+                            .airline(airline48.get())
+                            .numberSeats(100)
+                            .price(450)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("01:15:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("13:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+            /*********************** Z OSLO DO PARYŻA ***********************/
+            Optional<Airline> airline49 = airlineRepository.findById(9L);
+            Optional<Connection> connection49 = connectionRepository.findById(49L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection49.get())
+                        .airline(airline49.get())
+                        .numberSeats(140)
+                        .price(200)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:15:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("13:45:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z PARYŻA DO OSLO ***********************/
+            Optional<Airline> airline50 = airlineRepository.findById(10L);
+            Optional<Connection> connection50 = connectionRepository.findById(50L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection50.get())
+                        .airline(airline50.get())
+                        .numberSeats(140)
+                        .price(200)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("15:15:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("17:45:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z OSLO DO LONDYNU ***********************/
+            Optional<Airline> airline51 = airlineRepository.findById(9L);
+            Optional<Connection> connection51 = connectionRepository.findById(51L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection51.get())
+                        .airline(airline51.get())
+                        .numberSeats(120)
+                        .price(150)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:15:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("13:45:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LONDYNU DO OSLO ***********************/
+            Optional<Airline> airline52 = airlineRepository.findById(11L);
+            Optional<Connection> connection52 = connectionRepository.findById(52L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection52.get())
+                        .airline(airline52.get())
+                        .numberSeats(120)
+                        .price(150)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("15:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("17:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z OSLO DO LOS ANGELES ***********************/
+            Optional<Airline> airline53 = airlineRepository.findById(9L);
+            Optional<Connection> connection53 = connectionRepository.findById(53L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 3 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection53.get())
+                            .airline(airline53.get())
+                            .numberSeats(180)
+                            .price(400)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("04:15:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("20:00:00"))
+                                    .build())
+                            .build());
+                }
+
+            }
+
+            /*********************** Z LOS ANGELES DO OSLO ***********************/
+            Optional<Airline> airline54 = airlineRepository.findById(3L);
+            Optional<Connection> connection54 = connectionRepository.findById(54L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 3 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection54.get())
+                            .airline(airline54.get())
+                            .numberSeats(180)
+                            .price(400)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("21:30:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("12:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+            /*********************** Z BUENOS AIRES DO PARYŻA ***********************/
+            Optional<Airline> airline55 = airlineRepository.findById(8L);
+            Optional<Connection> connection55 = connectionRepository.findById(55L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 4 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection55.get())
+                            .airline(airline55.get())
+                            .numberSeats(220)
+                            .price(390)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("06:00:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("12:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+            /*********************** Z PARYŻA DO BUENOS AIRES ***********************/
+            Optional<Airline> airline56 = airlineRepository.findById(10L);
+            Optional<Connection> connection56 = connectionRepository.findById(56L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                if (i % 4 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection56.get())
+                            .airline(airline56.get())
+                            .numberSeats(220)
+                            .price(390)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureTime(LocalTime.parse("11:45:00"))
+                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .arrivalTime(LocalTime.parse("18:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+            /*********************** Z PARYŻA DO LONDYNU ***********************/
+            Optional<Airline> airline57 = airlineRepository.findById(10L);
+            Optional<Connection> connection57 = connectionRepository.findById(57L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection57.get())
+                        .airline(airline57.get())
+                        .numberSeats(130)
+                        .price(100)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("07:00:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("08:00:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LONDYNU DO PARYŻA ***********************/
+            Optional<Airline> airline58 = airlineRepository.findById(11L);
+            Optional<Connection> connection58 = connectionRepository.findById(58L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection58.get())
+                        .airline(airline58.get())
+                        .numberSeats(130)
+                        .price(100)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("16:00:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("17:00:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LONDYNU DO TORONTO ***********************/
+            Optional<Airline> airline59 = airlineRepository.findById(11L);
+            Optional<Connection> connection59 = connectionRepository.findById(59L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection59.get())
+                        .airline(airline59.get())
+                        .numberSeats(240)
+                        .price(350)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("07:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("15:15:00"))
+                                .build())
+                        .build());
+            }
+
+
+            /*********************** Z TORONTO DO LONDYNU ***********************/
+            Optional<Airline> airline60 = airlineRepository.findById(5L);
+            Optional<Connection> connection60 = connectionRepository.findById(60L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection60.get())
+                        .airline(airline60.get())
+                        .numberSeats(240)
+                        .price(350)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("14:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("23:15:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LONDYNU DO KAIRU ***********************/
+            Optional<Airline> airline61 = airlineRepository.findById(11L);
+            Optional<Connection> connection61 = connectionRepository.findById(61L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection61.get())
+                        .airline(airline61.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("04:15:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("10:15:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KAIRU DO LONDYNU ***********************/
+            Optional<Airline> airline62 = airlineRepository.findById(13L);
+            Optional<Connection> connection62 = connectionRepository.findById(62L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LONDYNU DO MOSKWY ***********************/
+            Optional<Airline> airline63 = airlineRepository.findById(11L);
+            Optional<Connection> connection63 = connectionRepository.findById(63L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z MOSKWY DO LONDYNU ***********************/
+            Optional<Airline> airline64 = airlineRepository.findById(12L);
+            Optional<Connection> connection64 = connectionRepository.findById(64L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LONDYNU DO WARSZAWY ***********************/
+            Optional<Airline> airline65 = airlineRepository.findById(11L);
+            Optional<Connection> connection65 = connectionRepository.findById(65L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z WARSZAWY DO LONDYNU ***********************/
+            Optional<Airline> airline66 = airlineRepository.findById(1L);
+            Optional<Connection> connection66 = connectionRepository.findById(66L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LONDYNU DO LOS ANGELES ***********************/
+            Optional<Airline> airline67 = airlineRepository.findById(11L);
+            Optional<Connection> connection67 = connectionRepository.findById(67L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LOS ANGELES DO LONDYNU ***********************/
+            Optional<Airline> airline68 = airlineRepository.findById(3L);
+            Optional<Connection> connection68 = connectionRepository.findById(68L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LOS ANGELES DO BERLINA ***********************/
+            Optional<Airline> airline69 = airlineRepository.findById(13L);
+            Optional<Connection> connection69 = connectionRepository.findById(69L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z BERLINA DO LOS ANGELES ***********************/
+            Optional<Airline> airline70 = airlineRepository.findById(2L);
+            Optional<Connection> connection70 = connectionRepository.findById(70L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LOS ANGELES DO CHICAGO ***********************/
+            Optional<Airline> airline71 = airlineRepository.findById(3L);
+            Optional<Connection> connection71 = connectionRepository.findById(71L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z CHICAGO DO LOS ANGELES ***********************/
+            Optional<Airline> airline72 = airlineRepository.findById(3L);
+            Optional<Connection> connection72 = connectionRepository.findById(72L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LOS ANGELES DO WARSZAWY ***********************/
+            Optional<Airline> airline73 = airlineRepository.findById(3L);
+            Optional<Connection> connection73 = connectionRepository.findById(73L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z WARSZAWY DO LOS ANGELES ***********************/
+            Optional<Airline> airline74 = airlineRepository.findById(13L);
+            Optional<Connection> connection74 = connectionRepository.findById(74L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z LOS ANGELES DO KIJOWA ***********************/
+            Optional<Airline> airline75 = airlineRepository.findById(3L);
+            Optional<Connection> connection75 = connectionRepository.findById(75L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KIJOWA DO LOS ANGELES ***********************/
+            Optional<Airline> airline76 = airlineRepository.findById(15L);
+            Optional<Connection> connection76 = connectionRepository.findById(76L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z MOSKWY DO DELHI ***********************/
+            Optional<Airline> airline77 = airlineRepository.findById(12L);
+            Optional<Connection> connection77 = connectionRepository.findById(77L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z DELHI DO MOSKWY ***********************/
+            Optional<Airline> airline78 = airlineRepository.findById(14L);
+            Optional<Connection> connection78 = connectionRepository.findById(78L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z MOSKWY DO KRAKOWA  ***********************/
+            Optional<Airline> airline79 = airlineRepository.findById(12L);
+            Optional<Connection> connection79 = connectionRepository.findById(79L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KRAKOWA DO MOSKWY ***********************/
+            Optional<Airline> airline80 = airlineRepository.findById(1L);
+            Optional<Connection> connection80 = connectionRepository.findById(80L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z MOSKWY DO NOWEGO YORKU ***********************/
+            Optional<Airline> airline81 = airlineRepository.findById(12L);
+            Optional<Connection> connection81 = connectionRepository.findById(81L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z NOWEGO YORKU DO MOSKWY ***********************/
+            Optional<Airline> airline82 = airlineRepository.findById(3L);
+            Optional<Connection> connection82 = connectionRepository.findById(82L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z MOSKWY DO WARSZAWY ***********************/
+            Optional<Airline> airline83 = airlineRepository.findById(12L);
+            Optional<Connection> connection83 = connectionRepository.findById(83L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z WARSZAWY DO MOSKWY ***********************/
+            Optional<Airline> airline84 = airlineRepository.findById(1L);
+            Optional<Connection> connection84 = connectionRepository.findById(84L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z MOSKWY DO WARSZAWY ***********************/
+            Optional<Airline> airline85 = airlineRepository.findById(12L);
+            Optional<Connection> connection85 = connectionRepository.findById(85L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z WARSZAWY DO MOSKWY ***********************/
+            Optional<Airline> airline86 = airlineRepository.findById(1L);
+            Optional<Connection> connection86 = connectionRepository.findById(86L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KAIRU DO DELHI ***********************/
+            Optional<Airline> airline87 = airlineRepository.findById(13L);
+            Optional<Connection> connection87 = connectionRepository.findById(87L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+
+            /*********************** Z DELHI DO KAIRU ***********************/
+            Optional<Airline> airline88 = airlineRepository.findById(14L);
+            Optional<Connection> connection88 = connectionRepository.findById(88L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KAIRU DO KRAKOWA ***********************/
+            Optional<Airline> airline89 = airlineRepository.findById(13L);
+            Optional<Connection> connection89 = connectionRepository.findById(89L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KRAKOWA DO KAIRU ***********************/
+            Optional<Airline> airline90 = airlineRepository.findById(1L);
+            Optional<Connection> connection90 = connectionRepository.findById(90L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KRAKOWA DO DELHI ***********************/
+            Optional<Airline> airline91 = airlineRepository.findById(1L);
+            Optional<Connection> connection91 = connectionRepository.findById(91L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z DELHI DO KRAKOWA ***********************/
+            Optional<Airline> airline92 = airlineRepository.findById(14L);
+            Optional<Connection> connection92 = connectionRepository.findById(92L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KRAKOWA DO KIJOWA ***********************/
+            Optional<Airline> airline93 = airlineRepository.findById(1L);
+            Optional<Connection> connection93 = connectionRepository.findById(93L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KIJOWA DO KRAKOWA ***********************/
+            Optional<Airline> airline94 = airlineRepository.findById(15L);
+            Optional<Connection> connection94 = connectionRepository.findById(94L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KRAKOWA DO NOWEGO YORKU ***********************/
+            Optional<Airline> airline95 = airlineRepository.findById(1L);
+            Optional<Connection> connection95 = connectionRepository.findById(95L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z NOWEGO YORKU DO KRAKOWA  ***********************/
+            Optional<Airline> airline96 = airlineRepository.findById(3L);
+            Optional<Connection> connection96 = connectionRepository.findById(96L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z DELHI DO KIJOWA ***********************/
+            Optional<Airline> airline97 = airlineRepository.findById(14L);
+            Optional<Connection> connection97 = connectionRepository.findById(97L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KIJOWA DO DELHI ***********************/
+            Optional<Airline> airline98 = airlineRepository.findById(15L);
+            Optional<Connection> connection98 = connectionRepository.findById(98L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z KIJOWA DO NOWEGO YORKU ***********************/
+            Optional<Airline> airline99 = airlineRepository.findById(15L);
+            Optional<Connection> connection99 = connectionRepository.findById(99L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+            /*********************** Z NOWEGO YORKU DO KIJOWA ***********************/
+            Optional<Airline> airline100 = airlineRepository.findById(3L);
+            Optional<Connection> connection100 = connectionRepository.findById(100L);
+
+            for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                flightRepository.save(Flight.builder()
+                        .connection(connection62.get())
+                        .airline(airline62.get())
+                        .numberSeats(160)
+                        .price(320)
+                        .times(Times.
+                                builder()
+                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureTime(LocalTime.parse("12:30:00"))
+                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .build())
+                        .build());
+            }
+
+
         }
     }
 }
