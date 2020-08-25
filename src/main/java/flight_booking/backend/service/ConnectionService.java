@@ -67,12 +67,12 @@ public class ConnectionService {
         connectionRepository.save(connection);
     }
 
-    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId) {
+    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId, int maxChange) {
 
        List<Connection> allConnection = connectionRepository.findAll();
 
        Search search = new Search(srcAirportId,dstAirportId);
-       List<List<Connection>> connections = search.findConnections(allConnection);
+       List<List<Connection>> connections = search.findConnections(allConnection, maxChange);
 
        return connections;
     }

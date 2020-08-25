@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,14 +40,21 @@ public class TripController {
     @GetMapping("/findTrips/{id}")
     ResponseEntity<List<TripDto>> findTrips(@RequestParam Long srcAirportId,
                                             @RequestParam Long dstAirportId,
-                                            @RequestParam String departureDate) {
+                                            @RequestParam String minDepartureDate,
+                                            @RequestParam String maxDepartureDate,
+                                            @RequestParam int maxChange,
+                                            @RequestParam int maxTimeBreak) {
 
         //@TODO check if srcAirportId is correct
         //@TODO check if dstAirportId is correct
         //@TODO how to check if arrivalDate is correct?? :O:O:O:O:O:O:O:O:O
 
-        List<Trip> trips = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, departureDate);
-        System.out.println(trips.size());
+        LocalDate minDepartureDateParse = LocalDate.parse(minDepartureDate);
+        LocalDate maxDepartureDateParse = LocalDate.parse(maxDepartureDate);
+
+        List<Trip> trips = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, minDepartureDateParse,
+                maxDepartureDateParse, maxChange, maxTimeBreak);
+       // System.out.println(trips.size());
 
         ArrayList<TripDto> tripsDtos = new ArrayList<>();
         for (Trip trip : trips) {

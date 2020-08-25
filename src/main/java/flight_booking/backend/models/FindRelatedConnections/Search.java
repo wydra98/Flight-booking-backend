@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 public class Search {
 
-    public static final int MAX_CONNECTION = 5;
+    public int MAX_CONNECTION;
     private final Long START;
     private final Long END;
     private final List<List<Connection>> allConnection = new ArrayList();
@@ -21,7 +21,8 @@ public class Search {
         this.END = END;
     }
 
-    public List<List<Connection>> findConnections(List<Connection> baseConnection) {
+    public List<List<Connection>> findConnections(List<Connection> baseConnection, int maxChange) {
+        this.MAX_CONNECTION = maxChange+1;
         Graph graph = new Graph();
         this.baseConnection = baseConnection;
         for (Connection connection : baseConnection) {

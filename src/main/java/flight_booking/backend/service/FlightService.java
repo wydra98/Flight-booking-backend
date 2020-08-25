@@ -82,11 +82,13 @@ public class FlightService {
         return flightRepository.findById(id);
     }
 
-    public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate) {
+    public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate minDepartureDate,
+                                          LocalDate maxDepartureDate, int maxChange, int maxTimeBreak) {
 
-        List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport);
+        List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport, maxChange);
         List<List<List<Flight>>> flights = findAllFlights(connections);
-        List<List<Flight>> properFlights = chooseFlightsWithProperDate(flights, departureDate, dstAirport);
+        List<List<Flight>> properFlights = chooseFlightsWithProperDate(flights, dstAirport,
+                minDepartureDate, maxDepartureDate, maxTimeBreak);
 
         return properFlights;
     }
@@ -105,10 +107,11 @@ public class FlightService {
         return allFlights;
     }
 
-    public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate, Long dstAirport) {
+    public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, Long dstAirport,
+                                                          LocalDate minDepartureDate, LocalDate maxDepartureDate,
+                                                          int maxTimeBreak) {
 
-        final int DAYS_AFTER = 7;
-        final int HOURS_BREAK = 12;
+
         //lista wyszukanych fligtow dla jednego tripa
         List<List<Flight>> properDateFlight = new ArrayList<>();
         List<List<Flight>> finishListFlights = new ArrayList<>();
@@ -129,11 +132,12 @@ public class FlightService {
                     List<List<Flight>> newListProperDateFlight = new ArrayList<>();
                     for (int k = 0; k < oneConnection.size(); k++) {
 
-                        if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(userDate) &&
-                                (oneConnection.get(k).getTimes().getDepartureDate().isEqual(LocalDate.now()) &&
-                                        oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now()))) ||
-                                (oneConnection.get(k).getTimes().getDepartureDate().isAfter(userDate) &&
-                                        oneConnection.get(k).getTimes().getDepartureDate().isBefore(userDate.plusDays(DAYS_AFTER)))) {
+                        LocalDate departureDate = oneConnection.get(k).getTimes().getDepartureDate();
+                        LocalTime departureTime = oneConnection.get(k).getTimes().getDepartureTime();
+
+                        if ((departureDate.isEqual(minDepartureDate) &&
+                                (departureDate.isEqual(LocalDate.now()) && departureTime.isAfter(LocalTime.now()))) ||
+                                (departureDate.isAfter(minDepartureDate) && departureDate.isBefore(maxDepartureDate.plusDays(1)))) {
 
                             List<Flight> oneTripFlightCopy = new ArrayList<>();
                             oneTripFlightCopy.add(oneConnection.get(k));
@@ -174,10 +178,9 @@ public class FlightService {
                             if ((departureCurrentDate.isEqual(arrivalLatestDate) &&
                                     ((departureCurrentTime.isAfter(LocalTime.now())) || (departureCurrentTime.equals(LocalTime.now()))) &&
                                     (departureCurrentTime.equals(arrivalLatestTime) || (departureCurrentTime.isAfter(arrivalLatestTime))) &&
-                                    (departureCurrent.isAfter(arrivalLatest) && departureCurrent.isBefore(arrivalLatest.plusHours(HOURS_BREAK)))) ||
+                                    (departureCurrent.isAfter(arrivalLatest) && departureCurrent.isBefore(arrivalLatest.plusHours(maxTimeBreak + 1)))) ||
                                     (departureCurrentDate.isAfter(arrivalLatestDate) &&
-                                    (departureCurrent.isAfter(arrivalLatest) && departureCurrent.isBefore(arrivalLatest.plusHours(HOURS_BREAK)))))
-                             {
+                                            (departureCurrent.isAfter(arrivalLatest) && departureCurrent.isBefore(arrivalLatest.plusHours(maxTimeBreak + 1))))) {
 
                                 List<Flight> oneTripFlightCopy = new ArrayList<>(oneTripFlight);
                                 oneTripFlightCopy.add(oneConnection.get(k));
