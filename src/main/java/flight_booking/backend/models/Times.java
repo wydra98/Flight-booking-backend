@@ -15,7 +15,6 @@ import java.time.LocalTime;
 @Setter
 public class Times {
     private LocalDate departureDate;
-    private LocalDate arrivalDate;
     private LocalTime departureTime;
-    private LocalTime arrivalTime;
+    private LocalTime flightTime;
 }

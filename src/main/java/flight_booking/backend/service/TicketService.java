@@ -74,7 +74,11 @@ public class TicketService {
                         .build();
 
                 LocalDateTime actualDepDT = LocalDateTime.of(flight.getTimes().getDepartureDate(), flight.getTimes().getDepartureTime());
-                LocalDateTime actualArrDT = LocalDateTime.of(flight.getTimes().getArrivalDate(), flight.getTimes().getArrivalTime());
+                LocalDateTime actualArrDT = LocalDateTime.of(flight.getTimes().getDepartureDate(), flight.getTimes().getDepartureTime())
+                        .plusHours(flight.getTimes().getFlightTime().getHour())
+                        .plusMinutes(flight.getTimes().getFlightTime().getMinute())
+                        .plusSeconds(flight.getTimes().getFlightTime().getSecond());
+
                 if (!flag) {
                     depDT = actualDepDT;
                     arrDT = actualArrDT;

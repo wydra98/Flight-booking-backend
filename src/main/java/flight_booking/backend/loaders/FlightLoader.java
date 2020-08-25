@@ -22,6 +22,7 @@ public class FlightLoader implements CommandLineRunner {
     AirlineRepository airlineRepository;
     FlightRepository flightRepository;
     private static int MAX_DAYS_TO_LOAD = 365;
+    private static String FIRST_DAY = "2020-09-01";
 
     FlightLoader(ConnectionRepository connectionRepository,
                  AirlineRepository airlineRepository,
@@ -37,6 +38,7 @@ public class FlightLoader implements CommandLineRunner {
         if (flightRepository.amountOfRows() == 0) {
 
 
+
             /****************** Z NOWEGO YORKU DO CHICAGO **********************/
             Optional<Airline> airline1 = airlineRepository.findById(3L);
             Optional<Connection> connection1 = connectionRepository.findById(1L);
@@ -49,10 +51,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(225)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("04:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("10:30:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
 
@@ -63,10 +64,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(200)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("14:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("20:30:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
 
@@ -77,10 +77,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(175)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("21:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("03:30:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
             }
@@ -98,10 +97,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(200)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("07:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("13:00:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
 
@@ -112,10 +110,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(200)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("18:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("00:00:00"))
+                                .flightTime(LocalTime.parse("08:00:00"))
                                 .build())
                         .build());
             }
@@ -133,10 +130,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(350)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("09:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("19:00:00"))
+                                .flightTime(LocalTime.parse("09:30:00"))
                                 .build())
                         .build());
             }
@@ -154,10 +150,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(340)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("20:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("05:00:00"))
+                                .flightTime(LocalTime.parse("09:00:00"))
                                 .build())
                         .build());
             }
@@ -176,10 +171,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(550)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("15:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("03:00:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -198,10 +192,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(575)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("20:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("08:00:00"))
+                                .flightTime(LocalTime.parse("12:00:00"))
                                 .build())
                         .build());
             }
@@ -219,10 +212,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(555)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("08:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:00:00"))
+                                .flightTime(LocalTime.parse("10:00:00"))
                                 .build())
                         .build());
             }
@@ -240,10 +232,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(560)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("11:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("23:00:00"))
+                                .flightTime(LocalTime.parse("12:00:00"))
                                 .build())
                         .build());
             }
@@ -260,10 +251,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(560)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("03:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("16:30:00"))
+                                .flightTime(LocalTime.parse("13:00:00"))
                                 .build())
                         .build());
             }
@@ -280,10 +270,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(450)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("19:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("04:00:00"))
+                                .flightTime(LocalTime.parse("09:00:00"))
                                 .build())
                         .build());
             }
@@ -301,10 +290,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(375)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("10:45:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("19:45:00"))
+                                .flightTime(LocalTime.parse("09:00:00"))
                                 .build())
                         .build());
             }
@@ -322,10 +310,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(400)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("15:15:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("00:15:00"))
+                                .flightTime(LocalTime.parse("09:00:00"))
                                 .build())
                         .build());
             }
@@ -344,10 +331,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(125)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("11:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("13:00:00"))
+                                    .flightTime(LocalTime.parse("02:00:00"))
                                     .build())
                             .build());
 
@@ -358,10 +344,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(125)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("19:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("21:00:00"))
+                                    .flightTime(LocalTime.parse("02:00:00"))
                                     .build())
                             .build());
                 } else {
@@ -373,10 +358,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(155)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("15:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("17:00:00"))
+                                    .flightTime(LocalTime.parse("02:00:00"))
                                     .build())
                             .build());
                 }
@@ -396,10 +380,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(110)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("08:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("10:45:00"))
+                                    .flightTime(LocalTime.parse("02:00:00"))
                                     .build())
                             .build());
                 } else {
@@ -410,10 +393,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(110)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("14:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("16:45:00"))
+                                    .flightTime(LocalTime.parse("02:00:00"))
                                     .build())
                             .build());
                 }
@@ -433,10 +415,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(200)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("15:30:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("00:30:00"))
+                                    .flightTime(LocalTime.parse("09:00:00"))
                                     .build())
                             .build());
                 }
@@ -455,10 +436,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(120)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("11:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("20:00:00"))
+                                .flightTime(LocalTime.parse("09:00:00"))
                                 .build())
                         .build());
             }
@@ -476,10 +456,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(520)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-03")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("12:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-03")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("00:00:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -498,10 +477,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(530)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("08:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("22:45:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -519,10 +497,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(400)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("12:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("13:00:00"))
+                                .flightTime(LocalTime.parse("01:00:00"))
                                 .build())
                         .build());
             }
@@ -539,10 +516,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(400)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("17:45:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:45:00"))
+                                .flightTime(LocalTime.parse("01:00:00"))
                                 .build())
                         .build());
             }
@@ -560,10 +536,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(450)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-04")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("17:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-05")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("05:00:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -582,10 +557,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(450)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-04")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("17:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-04")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("18:45:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -604,10 +578,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(250)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("09:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("14:00:00"))
+                                    .flightTime(LocalTime.parse("05:00:00"))
                                     .build())
                             .build());
                 }
@@ -626,10 +599,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(230)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("15:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("20:00:00"))
+                                    .flightTime(LocalTime.parse("05:00:00"))
                                     .build())
                             .build());
                 }
@@ -648,10 +620,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(405)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-02")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("14:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-03")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("02:00:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -670,10 +641,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(405)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-03")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("15:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-04")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("03:00:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -692,10 +662,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(200)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-02")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("13:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("18:00:00"))
+                                    .flightTime(LocalTime.parse("05:00:00"))
                                     .build())
                             .build());
                 }
@@ -714,10 +683,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(200)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-03")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("14:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-03")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("19:45:00"))
+                                    .flightTime(LocalTime.parse("05:00:00"))
                                     .build())
                             .build());
                 }
@@ -736,10 +704,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(600)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-02")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("10:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-03")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("05:00:00"))
+                                    .flightTime(LocalTime.parse("15:00:00"))
                                     .build())
                             .build());
                 }
@@ -758,10 +725,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(550)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-15")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("05:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-15")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("20:00:00"))
+                                    .flightTime(LocalTime.parse("15:00:00"))
                                     .build())
                             .build());
                 }
@@ -779,10 +745,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(380)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("22:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("08:00:00"))
+                                .flightTime(LocalTime.parse("10:00:00"))
                                 .build())
                         .build());
             }
@@ -799,10 +764,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(390)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("06:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("16:30:00"))
+                                .flightTime(LocalTime.parse("10:00:00"))
                                 .build())
                         .build());
             }
@@ -820,10 +784,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(210)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("10:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("15:45:00"))
+                                    .flightTime(LocalTime.parse("05:00:00"))
                                     .build())
                             .build());
                 }
@@ -842,10 +805,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(210)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("18:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("23:00:00"))
+                                    .flightTime(LocalTime.parse("05:00:00"))
                                     .build())
                             .build());
                 }
@@ -864,10 +826,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(370)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("14:15:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("01:30:00"))
+                                    .flightTime(LocalTime.parse("11:15:00"))
                                     .build())
                             .build());
                 }
@@ -886,10 +847,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(380)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("04:15:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("14:30:00"))
+                                    .flightTime(LocalTime.parse("11:15:00"))
                                     .build())
                             .build());
                 }
@@ -908,10 +868,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(620)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("17:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("08:15:00"))
+                                    .flightTime(LocalTime.parse("14:30:00"))
                                     .build())
                             .build());
                 }
@@ -930,10 +889,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(620)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("08:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("23:45:00"))
+                                    .flightTime(LocalTime.parse("14:30:00"))
                                     .build())
                             .build());
                 }
@@ -951,10 +909,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(450)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("08:15:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("20:15:00"))
+                                .flightTime(LocalTime.parse("12:00:00"))
                                 .build())
                         .build());
             }
@@ -971,10 +928,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(450)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("21:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("09:00:00"))
+                                .flightTime(LocalTime.parse("12:00:00"))
                                 .build())
                         .build());
             }
@@ -992,10 +948,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(230)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("11:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("17:45:00"))
+                                    .flightTime(LocalTime.parse("06:00:00"))
                                     .build())
                             .build());
                 }
@@ -1014,10 +969,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(260)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("20:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("02:45:00"))
+                                    .flightTime(LocalTime.parse("06:00:00"))
                                     .build())
                             .build());
                 }
@@ -1036,10 +990,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(470)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("20:30:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("08:30:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -1058,10 +1011,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(450)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("11:30:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("23:30:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -1079,10 +1031,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(120)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("11:45:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("13:45:00"))
+                                .flightTime(LocalTime.parse("02:00:00"))
                                 .build())
                         .build());
             }
@@ -1100,10 +1051,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(120)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("17:45:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("19:45:00"))
+                                .flightTime(LocalTime.parse("02:00:00"))
                                 .build())
                         .build());
             }
@@ -1121,10 +1071,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(450)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("09:30:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("21:30:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -1144,10 +1093,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(450)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("01:15:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("13:15:00"))
+                                    .flightTime(LocalTime.parse("12:00:00"))
                                     .build())
                             .build());
                 }
@@ -1165,10 +1113,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(200)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("12:15:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("13:45:00"))
+                                .flightTime(LocalTime.parse("01:30:00"))
                                 .build())
                         .build());
             }
@@ -1185,10 +1132,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(200)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("15:15:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("17:45:00"))
+                                .flightTime(LocalTime.parse("01:30:00"))
                                 .build())
                         .build());
             }
@@ -1205,10 +1151,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(150)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("12:15:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("13:45:00"))
+                                .flightTime(LocalTime.parse("01:30:00"))
                                 .build())
                         .build());
             }
@@ -1225,10 +1170,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(150)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("15:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("17:30:00"))
+                                .flightTime(LocalTime.parse("02:00:00"))
                                 .build())
                         .build());
             }
@@ -1246,10 +1190,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(400)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("04:15:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("20:00:00"))
+                                    .flightTime(LocalTime.parse("15:45:00"))
                                     .build())
                             .build());
                 }
@@ -1269,10 +1212,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(400)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("21:30:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-02")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("12:15:00"))
+                                    .flightTime(LocalTime.parse("15:45:00"))
                                     .build())
                             .build());
                 }
@@ -1291,10 +1233,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(390)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("06:00:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("12:15:00"))
+                                    .flightTime(LocalTime.parse("06:15:00"))
                                     .build())
                             .build());
                 }
@@ -1313,10 +1254,9 @@ public class FlightLoader implements CommandLineRunner {
                             .price(390)
                             .times(Times.
                                     builder()
-                                    .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                     .departureTime(LocalTime.parse("11:45:00"))
-                                    .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                    .arrivalTime(LocalTime.parse("18:30:00"))
+                                    .flightTime(LocalTime.parse("06:15:00"))
                                     .build())
                             .build());
                 }
@@ -1334,10 +1274,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(100)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("07:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("08:00:00"))
+                                .flightTime(LocalTime.parse("01:00:00"))
                                 .build())
                         .build());
             }
@@ -1354,10 +1293,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(100)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("16:00:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("17:00:00"))
+                                .flightTime(LocalTime.parse("01:00:00"))
                                 .build())
                         .build());
             }
@@ -1374,10 +1312,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(350)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("07:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("15:15:00"))
+                                .flightTime(LocalTime.parse("07:15:00"))
                                 .build())
                         .build());
             }
@@ -1395,10 +1332,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(350)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("14:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("23:15:00"))
+                                .flightTime(LocalTime.parse("07:15:00"))
                                 .build())
                         .build());
             }
@@ -1415,10 +1351,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(320)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("04:15:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("10:15:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
             }
@@ -1435,10 +1370,9 @@ public class FlightLoader implements CommandLineRunner {
                         .price(320)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
                                 .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
             }
@@ -1449,16 +1383,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection63.get())
+                        .airline(airline63.get())
+                        .numberSeats(250)
+                        .price(220)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("06:45:00"))
+                                .flightTime(LocalTime.parse("03:00:00"))
                                 .build())
                         .build());
             }
@@ -1469,16 +1402,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection64.get())
+                        .airline(airline64.get())
+                        .numberSeats(250)
+                        .price(220)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("09:30:00"))
+                                .flightTime(LocalTime.parse("03:00:00"))
                                 .build())
                         .build());
             }
@@ -1489,16 +1421,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection65.get())
+                        .airline(airline65.get())
+                        .numberSeats(190)
+                        .price(150)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("12:15:00"))
+                                .flightTime(LocalTime.parse("02:00:00"))
                                 .build())
                         .build());
             }
@@ -1509,16 +1440,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection66.get())
+                        .airline(airline66.get())
+                        .numberSeats(190)
+                        .price(150)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("15:15:00"))
+                                .flightTime(LocalTime.parse("02:00:00"))
                                 .build())
                         .build());
             }
@@ -1528,19 +1458,20 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection67 = connectionRepository.findById(67L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
-                        .times(Times.
-                                builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
-                                .build())
-                        .build());
+                if (i % 2 != 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection67.get())
+                            .airline(airline67.get())
+                            .numberSeats(120)
+                            .price(360)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("10:00:00"))
+                                    .flightTime(LocalTime.parse("10:45:00"))
+                                    .build())
+                            .build());
+                }
             }
 
             /*********************** Z LOS ANGELES DO LONDYNU ***********************/
@@ -1548,19 +1479,20 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection68 = connectionRepository.findById(68L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
-                        .times(Times.
-                                builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
-                                .build())
-                        .build());
+                if (i % 2 != 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection68.get())
+                            .airline(airline68.get())
+                            .numberSeats(120)
+                            .price(360)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("20:15:00"))
+                                    .flightTime(LocalTime.parse("10:45:00"))
+                                    .build())
+                            .build());
+                }
             }
 
             /*********************** Z LOS ANGELES DO BERLINA ***********************/
@@ -1568,19 +1500,20 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection69 = connectionRepository.findById(69L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
-                        .times(Times.
-                                builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
-                                .build())
-                        .build());
+                if (i % 3 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection69.get())
+                            .airline(airline69.get())
+                            .numberSeats(105)
+                            .price(380)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("17:15:00"))
+                                    .flightTime(LocalTime.parse("12:45:00"))
+                                    .build())
+                            .build());
+                }
             }
 
             /*********************** Z BERLINA DO LOS ANGELES ***********************/
@@ -1588,19 +1521,20 @@ public class FlightLoader implements CommandLineRunner {
             Optional<Connection> connection70 = connectionRepository.findById(70L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
-                flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
-                        .times(Times.
-                                builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
-                                .build())
-                        .build());
+                if (i % 3 == 0) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection70.get())
+                            .airline(airline70.get())
+                            .numberSeats(105)
+                            .price(380)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("09:00:00"))
+                                    .flightTime(LocalTime.parse("12:45:00"))
+                                    .build())
+                            .build());
+                }
             }
 
             /*********************** Z LOS ANGELES DO CHICAGO ***********************/
@@ -1609,16 +1543,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection71.get())
+                        .airline(airline71.get())
+                        .numberSeats(210)
+                        .price(150)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("10:30:00"))
+                                .flightTime(LocalTime.parse("03:00:00"))
                                 .build())
                         .build());
             }
@@ -1629,16 +1562,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection72.get())
+                        .airline(airline72.get())
+                        .numberSeats(210)
+                        .price(150)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("16:30:00"))
+                                .flightTime(LocalTime.parse("03:00:00"))
                                 .build())
                         .build());
             }
@@ -1649,16 +1581,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection73.get())
+                        .airline(airline73.get())
+                        .numberSeats(240)
+                        .price(420)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("16:00:00"))
+                                .flightTime(LocalTime.parse("15:15:00"))
                                 .build())
                         .build());
             }
@@ -1669,16 +1600,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection74.get())
+                        .airline(airline74.get())
+                        .numberSeats(240)
+                        .price(420)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("12:00:00"))
+                                .flightTime(LocalTime.parse("15:15:00"))
                                 .build())
                         .build());
             }
@@ -1689,16 +1619,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection75.get())
+                        .airline(airline75.get())
+                        .numberSeats(250)
+                        .price(460)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("15:00:00"))
+                                .flightTime(LocalTime.parse("16:15:00"))
                                 .build())
                         .build());
             }
@@ -1709,16 +1638,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection76.get())
+                        .airline(airline76.get())
+                        .numberSeats(250)
+                        .price(460)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("11:00:00"))
+                                .flightTime(LocalTime.parse("16:15:00"))
                                 .build())
                         .build());
             }
@@ -1729,16 +1657,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection77.get())
+                        .airline(airline77.get())
+                        .numberSeats(150)
+                        .price(290)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("02:45:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
             }
@@ -1749,16 +1676,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection78.get())
+                        .airline(airline78.get())
+                        .numberSeats(180)
+                        .price(290)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("12:15:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
             }
@@ -1769,16 +1695,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection79.get())
+                        .airline(airline79.get())
+                        .numberSeats(180)
+                        .price(220)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("06:15:00"))
+                                .flightTime(LocalTime.parse("03:00:00"))
                                 .build())
                         .build());
             }
@@ -1789,16 +1714,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection80.get())
+                        .airline(airline80.get())
+                        .numberSeats(180)
+                        .price(220)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("12:15:00"))
+                                .flightTime(LocalTime.parse("03:00:00"))
                                 .build())
                         .build());
             }
@@ -1809,16 +1733,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection81.get())
+                        .airline(airline81.get())
+                        .numberSeats(140)
+                        .price(550)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("13:45:00"))
+                                .flightTime(LocalTime.parse("11:30:00"))
                                 .build())
                         .build());
             }
@@ -1829,16 +1752,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection82.get())
+                        .airline(airline82.get())
+                        .numberSeats(140)
+                        .price(550)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("11:15:00"))
+                                .flightTime(LocalTime.parse("11:30:00"))
                                 .build())
                         .build());
             }
@@ -1849,16 +1771,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
+                        .connection(connection83.get())
+                        .airline(airline83.get())
                         .numberSeats(160)
-                        .price(320)
+                        .price(200)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("08:30:00"))
+                                .flightTime(LocalTime.parse("03:00:00"))
                                 .build())
                         .build());
             }
@@ -1869,56 +1790,53 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
+                        .connection(connection84.get())
+                        .airline(airline84.get())
                         .numberSeats(160)
-                        .price(320)
+                        .price(200)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("17:45:00"))
+                                .flightTime(LocalTime.parse("03:00:00"))
                                 .build())
                         .build());
             }
 
-            /*********************** Z MOSKWY DO WARSZAWY ***********************/
+            /*********************** Z MOSKWY DO LOS ANGELES ***********************/
             Optional<Airline> airline85 = airlineRepository.findById(12L);
             Optional<Connection> connection85 = connectionRepository.findById(85L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection85.get())
+                        .airline(airline85.get())
+                        .numberSeats(200)
+                        .price(600)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("02:15:00"))
+                                .flightTime(LocalTime.parse("16:30:00"))
                                 .build())
                         .build());
             }
 
-            /*********************** Z WARSZAWY DO MOSKWY ***********************/
+            /*********************** Z LOS ANGELES DO MOSKWY ***********************/
             Optional<Airline> airline86 = airlineRepository.findById(1L);
             Optional<Connection> connection86 = connectionRepository.findById(86L);
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection86.get())
+                        .airline(airline86.get())
+                        .numberSeats(200)
+                        .price(600)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("05:15:00"))
+                                .flightTime(LocalTime.parse("16:30:00"))
                                 .build())
                         .build());
             }
@@ -1929,16 +1847,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
+                        .connection(connection87.get())
+                        .airline(airline87.get())
                         .numberSeats(160)
                         .price(320)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("23:15:00"))
+                                .flightTime(LocalTime.parse("04:00:00"))
                                 .build())
                         .build());
             }
@@ -1950,16 +1867,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
+                        .connection(connection88.get())
+                        .airline(airline88.get())
                         .numberSeats(160)
                         .price(320)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("21:45:00"))
+                                .flightTime(LocalTime.parse("04:00:00"))
                                 .build())
                         .build());
             }
@@ -1970,16 +1886,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection89.get())
+                        .airline(airline89.get())
+                        .numberSeats(90)
+                        .price(255)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("09:45:00"))
+                                .flightTime(LocalTime.parse("04:15:00"))
                                 .build())
                         .build());
             }
@@ -1990,16 +1905,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection90.get())
+                        .airline(airline90.get())
+                        .numberSeats(90)
+                        .price(255)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("10:30:00"))
+                                .flightTime(LocalTime.parse("04:15:00"))
                                 .build())
                         .build());
             }
@@ -2010,16 +1924,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection91.get())
+                        .airline(airline91.get())
+                        .numberSeats(145)
+                        .price(330)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("06:15:00"))
+                                .flightTime(LocalTime.parse("08:15:00"))
                                 .build())
                         .build());
             }
@@ -2030,16 +1943,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection92.get())
+                        .airline(airline92.get())
+                        .numberSeats(145)
+                        .price(330)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("11:00:00"))
+                                .flightTime(LocalTime.parse("08:15:00"))
                                 .build())
                         .build());
             }
@@ -2050,16 +1962,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection93.get())
+                        .airline(airline93.get())
+                        .numberSeats(170)
+                        .price(100)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("14:00:00"))
+                                .flightTime(LocalTime.parse("01:15:00"))
                                 .build())
                         .build());
             }
@@ -2070,16 +1981,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection94.get())
+                        .airline(airline94.get())
+                        .numberSeats(170)
+                        .price(100)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("18:00:00"))
+                                .flightTime(LocalTime.parse("01:15:00"))
                                 .build())
                         .build());
             }
@@ -2090,16 +2000,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection95.get())
+                        .airline(airline95.get())
+                        .numberSeats(110)
+                        .price(380)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("19:00:00"))
+                                .flightTime(LocalTime.parse("10:30:00"))
                                 .build())
                         .build());
             }
@@ -2110,16 +2019,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection96.get())
+                        .airline(airline96.get())
+                        .numberSeats(110)
+                        .price(380)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("09:30:00"))
+                                .flightTime(LocalTime.parse("10:30:00"))
                                 .build())
                         .build());
             }
@@ -2130,16 +2038,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection97.get())
+                        .airline(airline97.get())
+                        .numberSeats(165)
+                        .price(340)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("17:15:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
             }
@@ -2150,16 +2057,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection98.get())
+                        .airline(airline98.get())
+                        .numberSeats(165)
+                        .price(340)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("17:00:00"))
+                                .flightTime(LocalTime.parse("06:00:00"))
                                 .build())
                         .build());
             }
@@ -2170,16 +2076,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection99.get())
+                        .airline(airline99.get())
+                        .numberSeats(120)
+                        .price(430)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("19:45:00"))
+                                .flightTime(LocalTime.parse("11:45:00"))
                                 .build())
                         .build());
             }
@@ -2190,16 +2095,15 @@ public class FlightLoader implements CommandLineRunner {
 
             for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
                 flightRepository.save(Flight.builder()
-                        .connection(connection62.get())
-                        .airline(airline62.get())
-                        .numberSeats(160)
-                        .price(320)
+                        .connection(connection100.get())
+                        .airline(airline100.get())
+                        .numberSeats(120)
+                        .price(430)
                         .times(Times.
                                 builder()
-                                .departureDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .departureTime(LocalTime.parse("12:30:00"))
-                                .arrivalDate((LocalDate.parse("2020-09-01")).plusDays(i))
-                                .arrivalTime(LocalTime.parse("18:30:00"))
+                                .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                .departureTime(LocalTime.parse("22:15:00"))
+                                .flightTime(LocalTime.parse("11:45:00"))
                                 .build())
                         .build());
             }

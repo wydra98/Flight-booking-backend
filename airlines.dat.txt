@@ -9,4 +9,7 @@ Azul Brazilian Airlines;Brazil
 Norwegian Air Shuttle;Norway
 Air France;France
 British Airways;Great Britain
-Aeroflot; Russia
+Aeroflot;Russia
+EgyptAir;Egypt
+IndiGo;India
+Ukraine International Airlines;Ukraine

@@ -64,12 +64,11 @@ public class FlightController {
                                         @RequestParam Long dstAirportId,
                                         @RequestParam String departureDate,
                                         @RequestParam String departureTime,
-                                        @RequestParam String arrivalDate,
-                                        @RequestParam String arrivalTime) {
+                                        @RequestParam String flightTime) {
 
         Connection connection = connectionService.addNewConnection(srcAirportId, dstAirportId);
         Flight flight = flightService.addNewFlight(airlineDtoId, numberSeats, price, departureDate,
-                departureTime, arrivalDate, arrivalTime, connection);
+                departureTime, flightTime, connection);
         return ResponseEntity.created(URI.create("/" + flight.getId())).body(flight);
 
     }
@@ -86,8 +85,7 @@ public class FlightController {
                                       @RequestParam Long dstAirportId,
                                       @RequestParam String departureDate,
                                       @RequestParam String departureTime,
-                                      @RequestParam String arrivalDate,
-                                      @RequestParam String arrivalTime) {
+                                      @RequestParam String flightTime) {
 
         if (!flightService.existsById(flightId)) {
             throw new EntityNotExistsException("Flight with that id not exist!");
@@ -112,10 +110,9 @@ public class FlightController {
                 airline.get(),
                 numberSeats,
                 price,
-                arrivalDate,
                 departureDate,
-                arrivalTime,
-                departureTime
+                departureTime,
+                flightTime
         );
 
         if (flightOptional.isPresent()) {

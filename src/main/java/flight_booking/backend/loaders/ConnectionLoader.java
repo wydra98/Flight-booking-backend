@@ -786,17 +786,17 @@ public class ConnectionLoader implements CommandLineRunner {
                     .build();
             connectionRepository.save(connection84);
 
-            /** Z MOSKWY DO WARSZAWY **/
+            /** Z MOSKWY DO LOS ANGELES **/
             Optional<Airport> srcAirport85 = airportRepository.findById(16L);
-            Optional<Airport> dstAirport85 = airportRepository.findById(3L);
+            Optional<Airport> dstAirport85 = airportRepository.findById(15L);
             Connection connection85 = Connection.builder()
                     .srcAirport(srcAirport85.get())
                     .dstAirport(dstAirport85.get())
                     .build();
             connectionRepository.save(connection85);
 
-            /** Z WARSZAWY DO MOSKWY **/
-            Optional<Airport> srcAirport86 = airportRepository.findById(3L);
+            /** Z LOS ANGELES DO MOSKWY **/
+            Optional<Airport> srcAirport86 = airportRepository.findById(15L);
             Optional<Airport> dstAirport86 = airportRepository.findById(16L);
             Connection connection86 = Connection.builder()
                     .srcAirport(srcAirport86.get())

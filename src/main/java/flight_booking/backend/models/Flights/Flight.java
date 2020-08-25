@@ -32,8 +32,8 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "id_airline")
     private Airline airline;
-    int numberSeats;
-    double price;
+    private int numberSeats;
+    private double price;
 
     @Embedded
     private Times times;
@@ -41,17 +41,15 @@ public class Flight {
     public void updateForm(Airline airline,
                            int numberSeats,
                            double price,
-                           String arrivalDate,
+                           String departureTime,
                            String departureDate,
-                           String arrivalTime,
-                           String departureTime) {
+                           String flightTime) {
 
         this.airline = airline;
         this.numberSeats = numberSeats;
         this.price = price;
         this.getTimes().setDepartureDate(LocalDate.parse(departureDate));
-        this.getTimes().setArrivalDate(LocalDate.parse(arrivalDate));
-        this.getTimes().setArrivalTime(LocalTime.parse(arrivalTime));
         this.getTimes().setDepartureTime(LocalTime.parse(departureTime));
+        this.getTimes().setFlightTime(LocalTime.parse(flightTime));
     }
 }

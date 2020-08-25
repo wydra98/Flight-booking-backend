@@ -49,9 +49,8 @@ public class FlightService {
                                int numberSeats,
                                double price,
                                String departureDate,
-                               String arrivalDate,
-                               String arrivalTime,
                                String departureTime,
+                               String flightTime,
                                Connection connection) {
 
         Optional<Airline> airline = airlineService.findById(airlineDtoId);
@@ -62,9 +61,8 @@ public class FlightService {
                 .price(price)
                 .times(Times.builder()
                         .departureDate(LocalDate.parse(departureDate))
-                        .arrivalDate(LocalDate.parse(arrivalDate))
-                        .arrivalTime(LocalTime.parse(arrivalTime))
                         .departureTime(LocalTime.parse(departureTime))
+                        .flightTime(LocalTime.parse(flightTime))
                         .build())
                 .build();
         flightRepository.save(flight);
@@ -110,7 +108,7 @@ public class FlightService {
     public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, LocalDate userDate, Long dstAirport) {
 
         final int DAYS_AFTER = 7;
-        final int HOURS_BREAK = 48;
+        final int HOURS_BREAK = 12;
         //lista wyszukanych fligtow dla jednego tripa
         List<List<Flight>> properDateFlight = new ArrayList<>();
         List<List<Flight>> finishListFlights = new ArrayList<>();
@@ -122,8 +120,11 @@ public class FlightService {
             //ta petla w kazdej iteracji bedzie nam rzucac jednym connectionem
             //za pierwszym razem ma jeden ,potem skoczy na 2
             for (int j = 0; j < oneTrip.size(); j++) {
+
                 List<Flight> oneConnection = oneTrip.get(j);
+
                 if (j == 0) {
+
                     //petla cheba pobiera nam wszystkie zagniezdzone flight z connection jednego typu (w tym przypadku )
                     List<List<Flight>> newListProperDateFlight = new ArrayList<>();
                     for (int k = 0; k < oneConnection.size(); k++) {
@@ -150,23 +151,33 @@ public class FlightService {
 
                 } else {
                     List<List<Flight>> newListProperDateFlight = new ArrayList<>();
+
                     // pierwsza petla odpowiada za wyciagniecie listy na ktorej maja znalezc sie wszystkie polaczenia dajace Tripa
                     for (List<Flight> oneTripFlight : properDateFlight) {
 
                         Flight latestFlight = oneTripFlight.get(oneTripFlight.size() - 1);
-                        LocalDateTime arrivalLatest = LocalDateTime.of(latestFlight.getTimes().getArrivalDate(),latestFlight.getTimes().getArrivalTime());
+                        LocalDateTime arrivalLatest = LocalDateTime.of(latestFlight.getTimes().getDepartureDate(), latestFlight.getTimes().getDepartureTime())
+                                .plusHours(latestFlight.getTimes().getFlightTime().getHour())
+                                .plusMinutes(latestFlight.getTimes().getFlightTime().getMinute())
+                                .plusSeconds(latestFlight.getTimes().getFlightTime().getSecond());
+
+                        LocalTime arrivalLatestTime = arrivalLatest.toLocalTime();
+                        LocalDate arrivalLatestDate = arrivalLatest.toLocalDate();
+
 
                         for (int k = 0; k < oneConnection.size(); k++) {
 
-                            LocalDateTime departureCurrent = LocalDateTime.of(oneConnection.get(k).getTimes().getDepartureDate(),oneConnection.get(k).getTimes().getDepartureTime());
+                            LocalDateTime departureCurrent = LocalDateTime.of(oneConnection.get(k).getTimes().getDepartureDate(), oneConnection.get(k).getTimes().getDepartureTime());
+                            LocalDate departureCurrentDate = departureCurrent.toLocalDate();
+                            LocalTime departureCurrentTime = departureCurrent.toLocalTime();
 
-                            if ((oneConnection.get(k).getTimes().getDepartureDate().isEqual(latestFlight.getTimes().getArrivalDate()) &&
-                                    ((oneConnection.get(k).getTimes().getDepartureTime().isAfter(LocalTime.now())) ||
-                                            (oneConnection.get(k).getTimes().getDepartureTime().equals(LocalTime.now()))) &&
-                                    ((oneConnection.get(k).getTimes().getDepartureTime().equals(latestFlight.getTimes().getArrivalTime()) ||
-                                            (oneConnection.get(k).getTimes().getDepartureTime().isAfter(latestFlight.getTimes().getArrivalTime()))))) ||
-                                    (departureCurrent.isAfter(arrivalLatest) &&
-                                            departureCurrent.isBefore(arrivalLatest.plusHours(HOURS_BREAK)))) {
+                            if ((departureCurrentDate.isEqual(arrivalLatestDate) &&
+                                    ((departureCurrentTime.isAfter(LocalTime.now())) || (departureCurrentTime.equals(LocalTime.now()))) &&
+                                    (departureCurrentTime.equals(arrivalLatestTime) || (departureCurrentTime.isAfter(arrivalLatestTime))) &&
+                                    (departureCurrent.isAfter(arrivalLatest) && departureCurrent.isBefore(arrivalLatest.plusHours(HOURS_BREAK)))) ||
+                                    (departureCurrentDate.isAfter(arrivalLatestDate) &&
+                                    (departureCurrent.isAfter(arrivalLatest) && departureCurrent.isBefore(arrivalLatest.plusHours(HOURS_BREAK)))))
+                             {
 
                                 List<Flight> oneTripFlightCopy = new ArrayList<>(oneTripFlight);
                                 oneTripFlightCopy.add(oneConnection.get(k));
@@ -180,6 +191,7 @@ public class FlightService {
                             }
                         }
                     }
+
                     properDateFlight.clear();
                     properDateFlight = newListProperDateFlight;
                 }
@@ -187,8 +199,8 @@ public class FlightService {
             }
         }
         for (List<Flight> flights : finishListFlights) {
-            for (Flight flight: flights) {
-                System.out.println(flight.getConnection().getSrcAirport().getName()+" - "+flight.getConnection().getDstAirport().getName()+", ");
+            for (Flight flight : flights) {
+                System.out.println(flight.getConnection().getSrcAirport().getName() + " - " + flight.getConnection().getDstAirport().getName() + ", ");
                 System.out.println(flight.getTimes().toString());
             }
             System.out.println();

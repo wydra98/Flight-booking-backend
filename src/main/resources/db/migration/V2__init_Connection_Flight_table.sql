@@ -20,9 +20,8 @@ create table flights
     number_seats  int    not null,
     price         double not null,
     departure_date date   not null,
-    arrival_date   date   not null,
     departure_time time   not null,
-    arrival_time   time   not null,
+    flight_time   time   not null,
 
     foreign key (id_connection) references connections (connection_id),
     foreign key (id_airline) references airlines (airline_id)
