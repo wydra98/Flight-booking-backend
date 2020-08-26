@@ -6,6 +6,8 @@ public interface TripRepository {
 
  //   List<Trip> findAllTripFromUserId(Long id);
 
+    Trip findTripByCode(String code);
+
     int amountOfRows();
 
     Trip save(Trip entity);

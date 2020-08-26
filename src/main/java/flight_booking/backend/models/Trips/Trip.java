@@ -40,6 +40,8 @@ public class Trip {
     private LocalTime departureTime;
     private LocalDate arrivalDate;
     private LocalTime arrivalTime;
+    private LocalDate purchaseDate;
+    private LocalTime purchaseTime;
     private double price;
 
 }

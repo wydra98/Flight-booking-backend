@@ -38,8 +38,6 @@ public class Ticket {
     @JoinColumn(name = "id_trip")
     private Trip trip;
 
-    private LocalDate purchaseDate;
-    private LocalTime purchaseTime;
     private Integer seatNumber;
     private double price;
 

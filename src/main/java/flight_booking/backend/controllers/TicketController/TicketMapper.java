@@ -27,6 +27,7 @@ public class TicketMapper {
                 //.purchaseDate(ticket.getPurchaseDate().toString())
                 //.purchaseTime(ticket.getPurchaseTime().toString())
                 .totalPrice(ticket.getPrice())
+                .seatNumber(ticket.getSeatNumber())
                 .build();
     }
 }

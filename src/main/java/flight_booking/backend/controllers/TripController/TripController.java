@@ -43,7 +43,7 @@ public class TripController {
 //    }
 
     @ApiOperation(value = "Find proper trips")
-    @GetMapping("/findTrips/{id}")
+    @GetMapping("/findTrips")
     ResponseEntity<List<TripDto>> findTrips(@RequestParam Long srcAirportId,
                                             @RequestParam Long dstAirportId,
                                             @RequestParam String minDepartureDate,
@@ -88,5 +88,16 @@ public class TripController {
         Trip trip = tripService.addNewTrip(passenger,tripDto);
 
         return ResponseEntity.created(URI.create("/" + trip.getCode())).body(trip);
+    }
+
+    @ApiOperation(value = "Get user trip from code")
+    @GetMapping("/findOneTrip")
+    ResponseEntity<TripDto> createChosenTrip(@RequestParam String code) {
+
+        Trip trip = tripService.findTripByCode(code);
+
+        TripDto tripDto = tripMapper.map(trip);
+
+        return ResponseEntity.ok(tripDto);
     }
 }

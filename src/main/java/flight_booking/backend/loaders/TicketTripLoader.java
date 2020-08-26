@@ -44,10 +44,13 @@ public class TicketTripLoader implements CommandLineRunner {
 
             Trip trip1 = Trip.builder()
                     //.passenger(passenger1.get())
+                    .code("dupa1")
                     .arrivalDate(LocalDate.parse("2020-06-26"))
                     .arrivalTime(LocalTime.parse("10:43:22"))
                     .departureDate(LocalDate.parse("2020-08-26"))
                     .departureTime(LocalTime.parse("14:43:11"))
+                    .purchaseDate(LocalDate.parse("2020-07-29"))
+                    .purchaseTime(LocalTime.parse("10:40:00"))
                     .price(34)
                     .build();
             tripRepository.save(trip1);
@@ -55,10 +58,13 @@ public class TicketTripLoader implements CommandLineRunner {
 
             Trip trip2 = Trip.builder()
                     //.passenger(passenger1.get())
+                    .code("dupa2")
                     .arrivalDate(LocalDate.parse("2011-06-26"))
                     .arrivalTime(LocalTime.parse("11:43:22"))
                     .departureDate(LocalDate.parse("1111-08-26"))
                     .departureTime(LocalTime.parse("14:42:11"))
+                    .purchaseDate(LocalDate.parse("2020-07-29"))
+                    .purchaseTime(LocalTime.parse("10:40:00"))
                     .price(45)
                     .build();
             tripRepository.save(trip2);
@@ -66,10 +72,13 @@ public class TicketTripLoader implements CommandLineRunner {
 
             Trip trip3 = Trip.builder()
                     //.passenger(passenger2.get())
+                    .code("dupa3")
                     .arrivalDate(LocalDate.parse("2022-06-26"))
                     .arrivalTime(LocalTime.parse("11:40:20"))
                     .departureDate(LocalDate.parse("2212-03-25"))
                     .departureTime(LocalTime.parse("12:23:22"))
+                    .purchaseDate(LocalDate.parse("2020-07-29"))
+                    .purchaseTime(LocalTime.parse("10:40:00"))
                     .price(78)
                     .build();
             tripRepository.save(trip3);
@@ -80,8 +89,6 @@ public class TicketTripLoader implements CommandLineRunner {
                     .passenger(passenger1.get())
                     .flight(flights1.get())
                     .trip(tripFind1.get())
-                    .purchaseDate(LocalDate.parse("2020-07-29"))
-                    .purchaseTime(LocalTime.parse("10:40:00"))
                     .seatNumber(23)
                     .price(34)
                     .build();
@@ -93,8 +100,6 @@ public class TicketTripLoader implements CommandLineRunner {
                     .passenger(passenger1.get())
                     .flight(flights2.get())
                     .trip(tripFind2.get())
-                    .purchaseDate(LocalDate.parse("2020-07-29"))
-                    .purchaseTime(LocalTime.parse("10:40:00"))
                     .seatNumber(23)
                     .price(34)
                     .build();
@@ -106,8 +111,6 @@ public class TicketTripLoader implements CommandLineRunner {
                     .passenger(passenger1.get())
                     .flight(flights3.get())
                     .trip(tripFind3.get())
-                    .purchaseDate(LocalDate.parse("2020-07-29"))
-                    .purchaseTime(LocalTime.parse("10:40:00"))
                     .seatNumber(23)
                     .price(34)
                     .build();
@@ -120,8 +123,6 @@ public class TicketTripLoader implements CommandLineRunner {
                     .passenger(passenger1.get())
                     .flight(flights4.get())
                     .trip(tripFind4.get())
-                    .purchaseDate(LocalDate.parse("2020-07-29"))
-                    .purchaseTime(LocalTime.parse("10:40:00"))
                     .seatNumber(23)
                     .price(34)
                     .build();
@@ -133,8 +134,6 @@ public class TicketTripLoader implements CommandLineRunner {
                     .passenger(passenger1.get())
                     .flight(flights5.get())
                     .trip(tripFind5.get())
-                    .purchaseDate(LocalDate.parse("2020-07-29"))
-                    .purchaseTime(LocalTime.parse("10:40:00"))
                     .seatNumber(111)
                     .price(666)
                     .build();

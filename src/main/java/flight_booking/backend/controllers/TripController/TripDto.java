@@ -22,5 +22,7 @@ public class TripDto {
     private String departureTime;
     private String arrivalDate;
     private String arrivalTime;
+    private String purchaseDate;
+    private String purchaseTime;
     private double totalPrice;
 }

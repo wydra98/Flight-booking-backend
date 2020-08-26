@@ -60,6 +60,8 @@ public class TripService {
                 .departureTime(LocalTime.parse(tripDto.getDepartureTime()))
                 .arrivalDate(LocalDate.parse(tripDto.getArrivalDate()))
                 .arrivalTime(LocalTime.parse(tripDto.getArrivalTime()))
+                .purchaseDate(LocalDate.now())
+                .purchaseTime(LocalTime.now())
                 .price(tripDto.getTotalPrice())
                 .build());
 
@@ -71,8 +73,6 @@ public class TripService {
                     .passenger(passenger)
                     .flight(flight.get())
                     .trip(trip)
-                    .purchaseDate(LocalDate.now())
-                    .purchaseTime(LocalTime.now())
                     .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
                     .price(flight.get().getPrice())
                     .build());
@@ -89,5 +89,10 @@ public class TripService {
 
         Random random = new Random();
         return random.nextInt(seatNumbers) + 1;
+    }
+
+    public Trip findTripByCode(String code){
+        Trip trip = tripRepository.findTripByCode(code);
+        return trip;
     }
 }

@@ -6,6 +6,8 @@ import flight_booking.backend.controllers.TicketController.TicketMapper;
 import flight_booking.backend.models.Tickets.Ticket;
 import flight_booking.backend.models.Trips.Trip;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TripMapper {
@@ -16,6 +18,7 @@ public class TripMapper {
 
         ArrayList<TicketDto> ticketDtos = new ArrayList<>();
         for(Ticket ticket: trip.getTickets()){
+           // System.out.println("ticket");
             ticketDtos.add(ticketMapper.map(ticket));
         }
 
@@ -27,6 +30,8 @@ public class TripMapper {
                 .departureTime(trip.getDepartureTime().toString())
                 .arrivalDate(trip.getArrivalDate().toString())
                 .arrivalTime(trip.getArrivalTime().toString())
+                .purchaseDate(LocalDate.now().toString())
+                .purchaseTime(LocalTime.now().toString())
                 .totalPrice(trip.getPrice())
                 .build();
     }

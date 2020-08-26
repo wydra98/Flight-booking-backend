@@ -10,6 +10,8 @@ create table trips
     departure_time time   not null,
     arrival_date  date   not null,
     arrival_time  time   not null,
+    purchase_date date   not null,
+    purchase_time time   not null,
     price          double not null//,
 
     //foreign key (id_passenger) references passengers (passenger_id)
@@ -21,8 +23,6 @@ create table tickets
     id_passenger  bigint not null,
     id_flight     bigint not null,
     id_trip       bigint not null,
-    purchase_date date   not null,
-    purchase_time time   not null,
     seat_number   int    not null,
     price         double not null,
 

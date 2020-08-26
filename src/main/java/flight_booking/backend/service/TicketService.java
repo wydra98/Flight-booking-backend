@@ -64,6 +64,8 @@ public class TicketService {
                     .departureTime(null)
                     .arrivalDate(null)
                     .arrivalTime(null)
+                    .purchaseDate(null)
+                    .purchaseTime(null)
                     .price(0)
                     .build();
 
@@ -73,8 +75,6 @@ public class TicketService {
                         .passenger(null)
                         .flight(flight)
                         .trip(trip)
-                        .purchaseDate(null)
-                        .purchaseTime(null)
                         .seatNumber(null)
                         .price(flight.getPrice())
                         .build();
