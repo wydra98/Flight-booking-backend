@@ -89,6 +89,4 @@ public class TripController {
 
         return ResponseEntity.created(URI.create("/" + trip.getCode())).body(trip);
     }
-
-
 }

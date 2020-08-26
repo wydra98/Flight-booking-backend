@@ -41,8 +41,8 @@ public class FlightService {
         return flightRepository.findAll();
     }
 
-    public void save(Flight flight) {
-        flightRepository.save(flight);
+    public Flight save(Flight flight) {
+       return flightRepository.save(flight);
     }
 
     public Flight addNewFlight(Long airlineDtoId,

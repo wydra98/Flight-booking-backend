@@ -1,7 +1,12 @@
 package flight_booking.backend.service;
 
 
+import flight_booking.backend.controllers.FlightController.FlightDto;
+import flight_booking.backend.controllers.TicketController.TicketDto;
 import flight_booking.backend.models.Airports.AirportRepository;
+import flight_booking.backend.models.Flights.Flight;
+import flight_booking.backend.models.Flights.FlightRepository;
+import flight_booking.backend.models.Tickets.Ticket;
 import flight_booking.backend.models.Trips.Trip;
 import flight_booking.backend.models.Passengers.Passenger;
 import flight_booking.backend.controllers.TripController.TripDto;
@@ -12,19 +17,22 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class TripService {
     private final TripRepository tripRepository;
     private final TicketService ticketService;
-    private final AirportRepository airportRepository;
+    private final FlightService flightService;
 
     TripService(TripRepository tripRepository,
                 TicketService ticketService,
-                AirportRepository airportRepository) {
+                FlightService flightService) {
         this.tripRepository = tripRepository;
         this.ticketService = ticketService;
-        this.airportRepository = airportRepository;
+        this.flightService = flightService;
     }
 
 //    public List<Trip> findAllTripsFromUserId(Long id) {
@@ -41,9 +49,45 @@ public class TripService {
                 departureDate, arrivalDate, maxChange, maxTimeBreak);
     }
 
-    public Trip addNewTrip(Passenger passenger, TripDto tripDto){
+    public Trip addNewTrip(Passenger passenger, TripDto tripDto) {
 
-        Trip trip = null;
-        return trip;
+        String uniqueID = UUID.randomUUID().toString();
+
+        Trip trip = tripRepository.save(Trip.builder()
+                .code(uniqueID)
+                .tickets(null)
+                .departureDate(LocalDate.parse(tripDto.getDepartureDate()))
+                .departureTime(LocalTime.parse(tripDto.getDepartureTime()))
+                .arrivalDate(LocalDate.parse(tripDto.getArrivalDate()))
+                .arrivalTime(LocalTime.parse(tripDto.getArrivalTime()))
+                .price(tripDto.getTotalPrice())
+                .build());
+
+        for (TicketDto ticketDto: tripDto.getArraysTicket()) {
+            FlightDto flightDto = ticketDto.getFlightDto();
+            Optional<Flight> flight = flightService.findById(flightDto.getId());
+
+            Ticket ticket = ticketService.save(Ticket.builder()
+                    .passenger(passenger)
+                    .flight(flight.get())
+                    .trip(trip)
+                    .purchaseDate(LocalDate.now())
+                    .purchaseTime(LocalTime.now())
+                    .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
+                    .price(flight.get().getPrice())
+                    .build());
+
+
+            trip.addTicket(ticket);
+        }
+        Trip actualTrip = tripRepository.save(trip);
+
+        return actualTrip;
+    }
+
+    private int generateSeatNumber(int seatNumbers){
+
+        Random random = new Random();
+        return random.nextInt(seatNumbers) + 1;
     }
 }

@@ -41,6 +41,11 @@ public class TicketService {
         return trips;
     }
 
+    public Ticket save(Ticket ticket) {
+        return ticketRepository.save(ticket);
+    }
+
+
     public List<Trip> mapToTicket(List<List<Flight>> allFlights) {
 
         List<Trip> allTrips = new ArrayList<>();
@@ -70,7 +75,7 @@ public class TicketService {
                         .trip(trip)
                         .purchaseDate(null)
                         .purchaseTime(null)
-                        .seatNumber(generateSeatNumber(flight.getNumberSeats()))
+                        .seatNumber(null)
                         .price(flight.getPrice())
                         .build();
 
@@ -109,9 +114,4 @@ public class TicketService {
         return allTrips;
     }
 
-    private int generateSeatNumber(int seatNumbers){
-
-        Random random = new Random();
-        return random.nextInt(seatNumbers) + 1;
-    }
 }
