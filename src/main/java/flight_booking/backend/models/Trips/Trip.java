@@ -25,7 +25,7 @@ public class Trip {
     @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "trip_id")
     private Long id;
-
+    private String code;
     @OneToMany(mappedBy = "trip")
     private List<Ticket> tickets;
 

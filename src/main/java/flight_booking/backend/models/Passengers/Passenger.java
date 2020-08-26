@@ -23,6 +23,7 @@ public class Passenger {
     @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "passenger_id")
     private Long id;
+    private String pesel;
     private String firstName;
     private String surname;
     private LocalDate dateOfBirth;

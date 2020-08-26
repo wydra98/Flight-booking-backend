@@ -15,15 +15,14 @@ public interface SqlPassengerRepository extends PassengerRepository, JpaReposito
     int amountOfRows();
 
     @Override
-    @Query(value = "SELECT COUNT (p.passenger_id) FROM passengers p WHERE p.email=:email",
-            nativeQuery = true)
-    int checkIfPassengerExistsThroughEmail(@Param("email") String email);
+    @Query(value = "SELECT DISTINCT p FROM Passenger p WHERE p.pesel=:pesel")
+    Passenger findByPesel(@Param("pesel") String pesel);
 
 
     @Override
-    @Query(value = "SELECT COUNT (p.passenger_id) FROM passengers p WHERE p.phone_number=:phoneNumber",
+    @Query(value = "SELECT COUNT (p.passenger_id) FROM passengers p WHERE p.phone_number=:pesel",
             nativeQuery = true)
-    int checkIfPassengerExistsThroughPhoneNumber(@Param("phoneNumber") String phoneNumber);
+    int checkIfPassengerExistsThroughPesel(@Param("pesel") String pesel);
 
 
 }

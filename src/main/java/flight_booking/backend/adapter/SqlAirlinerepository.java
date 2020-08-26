@@ -18,5 +18,4 @@ interface SqlAirlinerepository extends AirlineRepository, JpaRepository<Airline,
     @Query(value = "SELECT COUNT (a.airport_id) FROM airports a WHERE a.name=:name AND a.country=:country",
             nativeQuery = true)
     int checkIfAirlineExists(@Param("name") String name, @Param("country") String country);
-
 }

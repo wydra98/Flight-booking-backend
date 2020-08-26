@@ -53,6 +53,7 @@ public class TicketService {
             List<Ticket> allTickets = new ArrayList<>();
             Trip trip = Trip.builder()
                     .id(null)
+                    .code(null)
                     .tickets(null)
                     .departureDate(null)
                     .departureTime(null)

@@ -7,6 +7,7 @@ public class PassengerMapper {
     public PassengerDto map(Passenger passenger) {
         return PassengerDto.builder()
                 .id(passenger.getId())
+                .pesel(passenger.getPesel())
                 .firstName(passenger.getFirstName())
                 .surname(passenger.getSurname())
                 .dateOfBirth(passenger.getDateOfBirth().toString())

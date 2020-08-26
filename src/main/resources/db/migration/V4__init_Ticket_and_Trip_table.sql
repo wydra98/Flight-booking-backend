@@ -5,6 +5,7 @@ create table trips
 (
     trip_id        bigint auto_increment primary key,
     //id_passenger   bigint not null,
+    code    varchar(50),
     departure_date date   not null,
     departure_time time   not null,
     arrival_date  date   not null,

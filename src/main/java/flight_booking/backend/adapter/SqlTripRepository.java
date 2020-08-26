@@ -16,4 +16,6 @@ public interface SqlTripRepository extends TripRepository, JpaRepository<Trip, L
     @Override
     @Query(value = "SELECT COUNT (t.trip_id) FROM trips t", nativeQuery = true)
     int amountOfRows();
+
+
 }

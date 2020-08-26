@@ -39,18 +39,18 @@ public class PassengerController {
     }
 
 
-    @ApiOperation(value = "Add new passenger")
-    @PostMapping
-    ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
-
-        if (passengerService.checkIfPassengerExists(passengerDto.getEmail(), passengerDto.getPhoneNumber())) {
-            throw new EntityAlreadyExistsException("Passenger with these data already exist in datebase!");
-        }
-
-        Passenger passenger = passengerService.addNewPassenger(passengerDto);
-        return ResponseEntity.created(URI.create("/" + passenger.getId())).body(passenger);
-
-    }
+//    @ApiOperation(value = "Add new passenger")
+//    @PostMapping
+//    ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
+//
+//        if (passengerService.checkIfPassengerExists(passengerDto.getEmail(), passengerDto.getPhoneNumber())) {
+//            throw new EntityAlreadyExistsException("Passenger with these data already exist in datebase!");
+//        }
+//
+//        Passenger passenger = passengerService.addNewPassenger(passengerDto);
+//        return ResponseEntity.created(URI.create("/" + passenger.getId())).body(passenger);
+//
+//    }
 
 
 //    //TODO Should i do do make update passenger??

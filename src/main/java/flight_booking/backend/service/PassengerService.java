@@ -35,13 +35,17 @@ public class PassengerService {
         return passenger;
     }
 
-    public boolean checkIfPassengerExists(String email, String phoneNumber) {
-        if (passengerRepository.checkIfPassengerExistsThroughEmail(email) > 0
-                || passengerRepository.checkIfPassengerExistsThroughPhoneNumber(phoneNumber) > 0)
+    public boolean checkIfPassengerExists(String pesel) {
+        if (passengerRepository.checkIfPassengerExistsThroughPesel(pesel) > 0)
             return true;
         else
             return false;
+    }
 
+    public Passenger findPassenger(String pesel){
+
+        Passenger passenger = passengerRepository.findByPesel(pesel);
+        return passenger;
     }
 
     public boolean existsById(Long id) {

@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PassengerDto {
     private Long id;
+    private String pesel;
     private String firstName;
     private String surname;
     private String dateOfBirth;

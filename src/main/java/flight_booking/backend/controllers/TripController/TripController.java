@@ -1,11 +1,15 @@
 package flight_booking.backend.controllers.TripController;
 
+import flight_booking.backend.controllers.PassengerController.PassengerDto;
+import flight_booking.backend.models.Passengers.Passenger;
 import flight_booking.backend.models.Trips.Trip;
+import flight_booking.backend.service.PassengerService;
 import flight_booking.backend.service.TripService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +20,11 @@ public class TripController {
 
     private final TripService tripService;
     private final TripMapper tripMapper;
+    private final PassengerService passengerService;
 
-    TripController(TripService tripService) {
+    TripController(TripService tripService, PassengerService passengerService) {
         this.tripService = tripService;
+        this.passengerService = passengerService;
         this.tripMapper = new TripMapper();
     }
 
@@ -63,5 +69,26 @@ public class TripController {
 
         return ResponseEntity.ok(tripsDtos);
     }
+
+
+
+    @ApiOperation(value = "Create new trip for user")
+    @GetMapping("/createTrip")
+    ResponseEntity<Trip> createChosenTrip(@RequestParam TripDto tripDto,
+                                          @RequestParam PassengerDto passengerDto) {
+
+        Passenger passenger;
+        if (passengerService.checkIfPassengerExists(passengerDto.getPesel())) {
+            passenger = passengerService.findPassenger(passengerDto.getPesel());
+        }
+        else{
+            passenger = passengerService.addNewPassenger(passengerDto);
+        }
+
+        Trip trip = tripService.addNewTrip(passenger,tripDto);
+
+        return ResponseEntity.created(URI.create("/" + trip.getCode())).body(trip);
+    }
+
 
 }

@@ -3,6 +3,9 @@ package flight_booking.backend.service;
 
 import flight_booking.backend.models.Airports.AirportRepository;
 import flight_booking.backend.models.Trips.Trip;
+import flight_booking.backend.models.Passengers.Passenger;
+import flight_booking.backend.controllers.TripController.TripDto;
+
 import flight_booking.backend.models.Trips.TripRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +39,11 @@ public class TripService {
 
         return ticketService.findAllTrips(srcAirportId, dstAirportId,
                 departureDate, arrivalDate, maxChange, maxTimeBreak);
+    }
+
+    public Trip addNewTrip(Passenger passenger, TripDto tripDto){
+
+        Trip trip = null;
+        return trip;
     }
 }

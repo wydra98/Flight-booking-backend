@@ -1,6 +1,8 @@
 package flight_booking.backend.models.Passengers;
 
 
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,9 +14,9 @@ public interface PassengerRepository {
 
     int amountOfRows();
 
-    int checkIfPassengerExistsThroughEmail(String email);
+    int checkIfPassengerExistsThroughPesel(String pesel);
 
-    int checkIfPassengerExistsThroughPhoneNumber(String phoneNumber);
+    Passenger findByPesel(@Param("pesel") String pesel);
 
     boolean existsById(Long Id);
 
