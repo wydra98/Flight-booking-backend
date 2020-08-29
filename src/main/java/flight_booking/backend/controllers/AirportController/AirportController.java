@@ -8,7 +8,7 @@ import flight_booking.backend.service.ConnectionService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import flight_booking.backend.models.Airports.Airport;
+import flight_booking.backend.models.Airport;
 
 import javax.transaction.Transactional;
 import java.net.URI;

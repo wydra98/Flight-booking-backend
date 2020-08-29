@@ -1,6 +1,6 @@
 package flight_booking.backend.controllers.TicketController;
 
-import flight_booking.backend.models.Tickets.Ticket;
+import flight_booking.backend.models.Ticket;
 import flight_booking.backend.service.TicketService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;

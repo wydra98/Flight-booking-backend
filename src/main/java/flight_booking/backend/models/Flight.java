@@ -1,14 +1,11 @@
-package flight_booking.backend.models.Flights;
+package flight_booking.backend.models;
 
-import flight_booking.backend.models.Airlines.Airline;
-import flight_booking.backend.models.Connections.Connection;
+import flight_booking.backend.models.Airline;
+import flight_booking.backend.models.Connection;
 import flight_booking.backend.models.Times;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity
 @Builder
@@ -16,6 +13,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @ToString
 @Getter
+@Setter
 @Table(name = "flights")
 public class Flight {
 
@@ -24,17 +22,15 @@ public class Flight {
     @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "flight_id")
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "id_connection")
     private Connection connection;
-
     @ManyToOne
     @JoinColumn(name = "id_airline")
     private Airline airline;
     private int numberSeats;
+    private int availableSeats;
     private double price;
-
     @Embedded
     private Times times;
 

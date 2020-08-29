@@ -1,10 +1,10 @@
 package flight_booking.backend.controllers.FlightController;
 
 import flight_booking.backend.exception.EntityNotExistsException;
-import flight_booking.backend.models.Airlines.Airline;
-import flight_booking.backend.models.Airports.Airport;
-import flight_booking.backend.models.Connections.Connection;
-import flight_booking.backend.models.Flights.Flight;
+import flight_booking.backend.models.Airline;
+import flight_booking.backend.models.Airport;
+import flight_booking.backend.models.Connection;
+import flight_booking.backend.models.Flight;
 import flight_booking.backend.service.AirlineService;
 import flight_booking.backend.service.AirportService;
 import flight_booking.backend.service.ConnectionService;

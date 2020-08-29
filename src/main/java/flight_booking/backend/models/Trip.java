@@ -1,13 +1,12 @@
-package flight_booking.backend.models.Trips;
+package flight_booking.backend.models;
 
-import flight_booking.backend.models.Tickets.Ticket;
+import flight_booking.backend.models.Ticket;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

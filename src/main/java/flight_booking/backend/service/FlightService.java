@@ -1,14 +1,12 @@
 package flight_booking.backend.service;
 
-import flight_booking.backend.models.Airlines.Airline;
-import flight_booking.backend.models.Connections.Connection;
-import flight_booking.backend.models.Flights.Flight;
-import flight_booking.backend.models.Flights.FlightRepository;
+import flight_booking.backend.models.Airline;
+import flight_booking.backend.models.Connection;
+import flight_booking.backend.models.Flight;
 import flight_booking.backend.models.Times;
 import org.springframework.stereotype.Service;
 
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

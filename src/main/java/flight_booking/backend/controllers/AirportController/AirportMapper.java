@@ -1,6 +1,6 @@
 package flight_booking.backend.controllers.AirportController;
 
-import flight_booking.backend.models.Airports.Airport;
+import flight_booking.backend.models.Airport;
 
 public class AirportMapper {
 

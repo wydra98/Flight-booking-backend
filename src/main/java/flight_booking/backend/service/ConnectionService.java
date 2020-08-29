@@ -1,11 +1,9 @@
 package flight_booking.backend.service;
 
-import flight_booking.backend.models.Airports.Airport;
-import flight_booking.backend.models.Connections.Connection;
-import flight_booking.backend.models.Connections.ConnectionRepository;
-import flight_booking.backend.models.FindRelatedConnections.Search;
+import flight_booking.backend.models.Airport;
+import flight_booking.backend.models.Connection;
+import flight_booking.backend.models.find_connections.Search;
 import org.springframework.stereotype.Service;
-import flight_booking.backend.models.Airports.AirportRepository;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,11 +1,8 @@
 package flight_booking.backend.loaders;
 
-import flight_booking.backend.models.Airlines.Airline;
-import flight_booking.backend.models.Airlines.AirlineRepository;
-import flight_booking.backend.models.Connections.Connection;
-import flight_booking.backend.models.Connections.ConnectionRepository;
-import flight_booking.backend.models.Flights.Flight;
-import flight_booking.backend.models.Flights.FlightRepository;
+import flight_booking.backend.models.Airline;
+import flight_booking.backend.models.Connection;
+import flight_booking.backend.models.Flight;
 import flight_booking.backend.models.Times;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

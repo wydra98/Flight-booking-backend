@@ -1,10 +1,10 @@
-package flight_booking.backend.models.Connections;
+package flight_booking.backend.models;
 
 import javax.persistence.*;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import flight_booking.backend.models.Airports.Airport;
+import flight_booking.backend.models.Airport;
 
 @Entity
 @Builder

@@ -4,8 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import flight_booking.backend.models.Airports.Airport;
-import flight_booking.backend.models.Airports.AirportRepository;
+import flight_booking.backend.models.Airport;
 
 @Repository
 interface SqlAirportRepository extends AirportRepository, JpaRepository<Airport, Long> {

@@ -1,4 +1,4 @@
-package flight_booking.backend.models.Airlines;
+package flight_booking.backend.models;
 
 import lombok.*;
 import flight_booking.backend.controllers.AirlineController.AirlineDto;

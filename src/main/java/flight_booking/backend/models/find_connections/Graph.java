@@ -1,7 +1,7 @@
-package flight_booking.backend.models.FindRelatedConnections;
+package flight_booking.backend.models.find_connections;
 
 
-import flight_booking.backend.models.Connections.Connection;
+import flight_booking.backend.models.Connection;
 
 import java.util.*;
 

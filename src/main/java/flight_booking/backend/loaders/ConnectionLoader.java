@@ -1,11 +1,9 @@
 package flight_booking.backend.loaders;
 
-import flight_booking.backend.models.Airports.Airport;
-import flight_booking.backend.models.Connections.Connection;
-import flight_booking.backend.models.Connections.ConnectionRepository;
+import flight_booking.backend.models.Airport;
+import flight_booking.backend.models.Connection;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import flight_booking.backend.models.Airports.AirportRepository;
 
 
 import javax.transaction.Transactional;

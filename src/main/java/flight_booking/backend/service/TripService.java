@@ -3,15 +3,12 @@ package flight_booking.backend.service;
 
 import flight_booking.backend.controllers.FlightController.FlightDto;
 import flight_booking.backend.controllers.TicketController.TicketDto;
-import flight_booking.backend.models.Airports.AirportRepository;
-import flight_booking.backend.models.Flights.Flight;
-import flight_booking.backend.models.Flights.FlightRepository;
-import flight_booking.backend.models.Tickets.Ticket;
-import flight_booking.backend.models.Trips.Trip;
-import flight_booking.backend.models.Passengers.Passenger;
+import flight_booking.backend.models.Flight;
+import flight_booking.backend.models.Ticket;
+import flight_booking.backend.models.Trip;
+import flight_booking.backend.models.Passenger;
 import flight_booking.backend.controllers.TripController.TripDto;
 
-import flight_booking.backend.models.Trips.TripRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

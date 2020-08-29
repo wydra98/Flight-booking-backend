@@ -1,7 +1,6 @@
 package flight_booking.backend.loaders;
 
-import flight_booking.backend.models.Passengers.Passenger;
-import flight_booking.backend.models.Passengers.PassengerRepository;
+import flight_booking.backend.models.Passenger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

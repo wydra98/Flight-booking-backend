@@ -1,17 +1,14 @@
 package flight_booking.backend.service;
 
-import flight_booking.backend.models.Flights.Flight;
-import flight_booking.backend.models.Tickets.Ticket;
-import flight_booking.backend.models.Tickets.TicketRepository;
-import flight_booking.backend.models.Trips.Trip;
+import flight_booking.backend.models.Flight;
+import flight_booking.backend.models.Ticket;
+import flight_booking.backend.models.Trip;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 @Service

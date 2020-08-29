@@ -1,8 +1,8 @@
 package flight_booking.backend.controllers.TripController;
 
 import flight_booking.backend.controllers.PassengerController.PassengerDto;
-import flight_booking.backend.models.Passengers.Passenger;
-import flight_booking.backend.models.Trips.Trip;
+import flight_booking.backend.models.Passenger;
+import flight_booking.backend.models.Trip;
 import flight_booking.backend.service.PassengerService;
 import flight_booking.backend.service.TripService;
 import io.swagger.annotations.ApiOperation;

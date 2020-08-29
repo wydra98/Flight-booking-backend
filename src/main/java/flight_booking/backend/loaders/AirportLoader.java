@@ -3,14 +3,12 @@ package flight_booking.backend.loaders;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import flight_booking.backend.models.Airports.Airport;
-import flight_booking.backend.models.Airports.AirportRepository;
+import flight_booking.backend.models.Airport;
 
 import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.Collection;
 
 @Component
 public class AirportLoader implements CommandLineRunner {

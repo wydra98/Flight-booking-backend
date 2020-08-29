@@ -1,4 +1,4 @@
-package flight_booking.backend.models.Airports;
+package flight_booking.backend.models;
 
 import javax.persistence.*;
 

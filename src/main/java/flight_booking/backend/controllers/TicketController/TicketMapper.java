@@ -1,7 +1,7 @@
 package flight_booking.backend.controllers.TicketController;
 
 import flight_booking.backend.controllers.FlightController.FlightMapper;
-import flight_booking.backend.models.Tickets.Ticket;
+import flight_booking.backend.models.Ticket;
 
 import java.time.LocalDateTime;
 
