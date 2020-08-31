@@ -17,21 +17,34 @@ public class TripMapper {
 
         ArrayList<TicketDto> ticketDtos = new ArrayList<>();
         for(Ticket ticket: trip.getTickets()){
-           // System.out.println("ticket");
             ticketDtos.add(ticketMapper.map(ticket));
         }
 
-        return TripDto.builder()
-                //.id(trip.getId())
-                .arraysTicket(ticketDtos)
-               // .passengerDto(passengerMapper.map(trip.getPassenger()))
-                .departureDate(trip.getDepartureDate().toString())
-                .departureTime(trip.getDepartureTime().toString())
-                .arrivalDate(trip.getArrivalDate().toString())
-                .arrivalTime(trip.getArrivalTime().toString())
-                .purchaseDate(LocalDate.now().toString())
-                .purchaseTime(LocalTime.now().toString())
-                .totalPrice(trip.getPrice())
-                .build();
+        TripDto tripDto = null;
+
+        if(trip.getPurchaseDate() == null || trip.getPurchaseTime() == null){
+            tripDto = TripDto.builder()
+                    .arraysTicket(ticketDtos)
+                    .departureDate(trip.getDepartureDate().toString())
+                    .departureTime(trip.getDepartureTime().toString())
+                    .arrivalDate(trip.getArrivalDate().toString())
+                    .arrivalTime(trip.getArrivalTime().toString())
+                    .totalPrice(trip.getPrice())
+                    .build();
+        }
+        else{
+            tripDto = TripDto.builder()
+                    .arraysTicket(ticketDtos)
+                    .departureDate(trip.getDepartureDate().toString())
+                    .departureTime(trip.getDepartureTime().toString())
+                    .arrivalDate(trip.getArrivalDate().toString())
+                    .arrivalTime(trip.getArrivalTime().toString())
+                    .purchaseDate(trip.getPurchaseDate().toString())
+                    .purchaseTime(trip.getPurchaseTime().toString())
+                    .totalPrice(trip.getPrice())
+                    .build();
+        }
+
+        return tripDto;
     }
 }

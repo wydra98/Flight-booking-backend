@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import flight_booking.backend.models.Airport;
 
 @Repository
-interface AirportRepository extends AirportRepository, JpaRepository<Airport, Long> {
+public interface AirportRepository extends JpaRepository<Airport, Long> {
 
     @Override
     @Query(value = "SELECT COUNT (a.airport_id) FROM airports a", nativeQuery = true)

@@ -10,7 +10,7 @@ import flight_booking.backend.models.Flight;
 import java.util.List;
 
 @Repository
-interface FlightRepository extends FlightRepository, JpaRepository<Flight, Long> {
+public interface FlightRepository extends JpaRepository<Flight, Long> {
 
     @Override
     @Query(value = "SELECT f.id_connection FROM flights f where f.flight_id = :id", nativeQuery = true)

@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface AirlineRepository extends AirlineRepository, JpaRepository<Airline, Long> {
+public interface AirlineRepository extends JpaRepository<Airline, Long> {
 
     @Override
     @Query(value = "SELECT COUNT (a.airline_id) FROM airlines a", nativeQuery = true)

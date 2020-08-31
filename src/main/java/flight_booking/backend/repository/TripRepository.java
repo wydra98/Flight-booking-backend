@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TripRepository extends TripRepository, JpaRepository<Trip, Long> {
+public interface TripRepository extends JpaRepository<Trip, Long> {
 
 //    @Override
 //    @Query("SELECT t FROM Trip t WHERE t.passenger.id = :id")

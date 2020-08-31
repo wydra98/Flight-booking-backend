@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-interface ConnectionRepository extends ConnectionRepository, JpaRepository<Connection, Long> {
+public interface ConnectionRepository extends JpaRepository<Connection, Long> {
 
     @Override
     @Query(value = "SELECT COUNT (c.connection_id) FROM connections c", nativeQuery = true)
