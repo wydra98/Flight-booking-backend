@@ -3,6 +3,8 @@ package flight_booking.backend.service;
 import flight_booking.backend.models.Airport;
 import flight_booking.backend.models.Connection;
 import flight_booking.backend.models.find_connections.Search;
+import flight_booking.backend.repository.AirportRepository;
+import flight_booking.backend.repository.ConnectionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,14 +67,14 @@ public class ConnectionService {
         connectionRepository.save(connection);
     }
 
-    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId, int maxChange) {
+    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId) {
 
-       List<Connection> allConnection = connectionRepository.findAll();
+        List<Connection> allConnection = connectionRepository.findAll();
 
-       Search search = new Search(srcAirportId,dstAirportId);
-       List<List<Connection>> connections = search.findConnections(allConnection, maxChange);
+        Search search = new Search(srcAirportId,dstAirportId);
+        List<List<Connection>> connections = search.findConnections(allConnection);
 
-       return connections;
+        return connections;
     }
 
 }

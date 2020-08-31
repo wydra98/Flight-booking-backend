@@ -1,5 +1,6 @@
 package flight_booking.backend.service;
 
+import flight_booking.backend.repository.AirportRepository;
 import org.springframework.stereotype.Service;
 import flight_booking.backend.controllers.airport.AirportDto;
 import flight_booking.backend.models.Airport;

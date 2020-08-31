@@ -2,6 +2,7 @@ package flight_booking.backend.service;
 
 import flight_booking.backend.controllers.passenger.PassengerDto;
 import flight_booking.backend.models.Passenger;
+import flight_booking.backend.repository.PassengerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

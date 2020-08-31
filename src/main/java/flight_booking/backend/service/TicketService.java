@@ -3,6 +3,7 @@ package flight_booking.backend.service;
 import flight_booking.backend.models.Flight;
 import flight_booking.backend.models.Ticket;
 import flight_booking.backend.models.Trip;
+import flight_booking.backend.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,7 +22,6 @@ public class TicketService {
                   FlightService flightService) {
         this.ticketRepository = ticketRepository;
         this.flightService = flightService;
-
     }
 
     public List<Ticket> findAllTicketFromUserId(Long id) {

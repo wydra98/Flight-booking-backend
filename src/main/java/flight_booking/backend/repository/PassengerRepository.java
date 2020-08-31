@@ -9,17 +9,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PassengerRepository extends JpaRepository<Passenger,Long> {
 
-    @Override
     @Query(value = "SELECT COUNT (p.passenger_id) FROM passengers p", nativeQuery = true)
     int amountOfRows();
 
-    @Override
     @Query(value = "SELECT DISTINCT p FROM Passenger p WHERE p.pesel=:pesel")
     Passenger findByPesel(@Param("pesel") String pesel);
 
 
-    @Override
-    @Query(value = "SELECT COUNT (p.passenger_id) FROM passengers p WHERE p.phone_number=:pesel",
+    @Query(value = "SELECT COUNT (p.passenger_id) FROM passengers p WHERE p.pesel=:pesel",
             nativeQuery = true)
     int checkIfPassengerExistsThroughPesel(@Param("pesel") String pesel);
 

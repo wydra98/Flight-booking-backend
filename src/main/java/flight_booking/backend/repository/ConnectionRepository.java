@@ -12,17 +12,14 @@ import javax.transaction.Transactional;
 @Repository
 public interface ConnectionRepository extends JpaRepository<Connection, Long> {
 
-    @Override
     @Query(value = "SELECT COUNT (c.connection_id) FROM connections c", nativeQuery = true)
     int amountOfRows();
 
-    @Override
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM connections c WHERE c.connection_id=:id", nativeQuery = true)
     void deleteAllConnectionWithAirlineId(@Param("id") Long id);
 
-    @Override
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM connections c WHERE c.airport_src_id =:id OR airport_dst_id=:id", nativeQuery = true)

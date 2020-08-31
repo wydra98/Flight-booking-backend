@@ -9,12 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AirlineRepository extends JpaRepository<Airline, Long> {
 
-    @Override
     @Query(value = "SELECT COUNT (a.airline_id) FROM airlines a", nativeQuery = true)
     int amountOfRows();
 
-    @Override
-    @Query(value = "SELECT COUNT (a.airport_id) FROM airports a WHERE a.name=:name AND a.country=:country",
+    @Query(value = "SELECT COUNT (a.airline_id) FROM airlines a WHERE a.name=:name AND a.country=:country",
             nativeQuery = true)
     int checkIfAirlineExists(@Param("name") String name, @Param("country") String country);
 }

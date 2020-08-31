@@ -4,6 +4,7 @@ import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Connection;
 import flight_booking.backend.models.Flight;
 import flight_booking.backend.models.Times;
+import flight_booking.backend.repository.FlightRepository;
 import org.springframework.stereotype.Service;
 
 

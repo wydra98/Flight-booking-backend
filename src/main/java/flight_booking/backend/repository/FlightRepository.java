@@ -12,17 +12,12 @@ import java.util.List;
 @Repository
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 
-    @Override
-    @Query(value = "SELECT f.id_connection FROM flights f where f.flight_id = :id", nativeQuery = true)
-    Long findIdConnectionByFlight(@Param("id") Long id);
-
-    @Override
     @Query(value = "SELECT COUNT (f.flight_id) FROM flights f", nativeQuery = true)
     int amountOfRows();
 
-
-    @Override
     @Query("SELECT DISTINCT f FROM Flight f WHERE f.connection = :connection")
     List<Flight> findFlightsByConnection(@Param("connection") Connection connection);
 
+    @Query(value = "SELECT f.id_connection FROM flights f where f.flight_id = :id", nativeQuery = true)
+    Long findIdConnectionByFlight(@Param("id") Long id);
 }

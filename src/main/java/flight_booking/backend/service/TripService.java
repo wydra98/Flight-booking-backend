@@ -9,6 +9,7 @@ import flight_booking.backend.models.Trip;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.controllers.trip.TripDto;
 
+import flight_booking.backend.repository.TripRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
