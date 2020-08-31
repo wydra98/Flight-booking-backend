@@ -17,24 +17,17 @@ import java.util.List;
 @Setter
 @Getter
 @Table(name = "trips")
-public class Trip {
 
+public class Trip {
     @Id
     @GeneratedValue(generator = "inc")
     @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "trip_id")
     private Long id;
     private String code;
-    @OneToMany(mappedBy = "trip")
+    @OneToMany
+    @JoinColumn(name = "id_trip", referencedColumnName="trip_id")
     private List<Ticket> tickets;
-
-//    @ManyToOne
-//    @JoinColumn(name = "id_passenger")
-//    private Passenger passenger;
-
-    public void addTicket(Ticket ticket){
-        tickets.add(ticket);
-    }
     private LocalDate departureDate;
     private LocalTime departureTime;
     private LocalDate arrivalDate;
@@ -43,4 +36,8 @@ public class Trip {
     private LocalTime purchaseTime;
     private double price;
 
+    public void addTicket(Ticket ticket){
+        tickets.add(ticket);
+    }
 }
+

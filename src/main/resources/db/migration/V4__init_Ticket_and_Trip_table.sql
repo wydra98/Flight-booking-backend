@@ -5,13 +5,13 @@ create table trips
 (
     trip_id        bigint auto_increment primary key,
     //id_passenger   bigint not null,
-    code    varchar(50),
+    code           varchar(50),
     departure_date date   not null,
     departure_time time   not null,
-    arrival_date  date   not null,
-    arrival_time  time   not null,
-    purchase_date date   not null,
-    purchase_time time   not null,
+    arrival_date   date   not null,
+    arrival_time   time   not null,
+    purchase_date  date   not null,
+    purchase_time  time   not null,
     price          double not null//,
 
     //foreign key (id_passenger) references passengers (passenger_id)
@@ -19,12 +19,12 @@ create table trips
 
 create table tickets
 (
-    ticket_id     bigint auto_increment primary key,
-    id_passenger  bigint not null,
-    id_flight     bigint not null,
-    id_trip       bigint not null,
-    seat_number   int    not null,
-    price         double not null,
+    ticket_id    bigint auto_increment primary key,
+    id_passenger bigint not null,
+    id_flight    bigint not null,
+    id_trip      bigint,
+    seat_number  int    not null,
+    price        double not null,
 
     foreign key (id_passenger) references passengers (passenger_id),
     foreign key (id_flight) references flights (flight_id),

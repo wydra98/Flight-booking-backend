@@ -4,12 +4,18 @@ import flight_booking.backend.models.Flight;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.models.Ticket;
 import flight_booking.backend.models.Trip;
+import flight_booking.backend.repository.FlightRepository;
+import flight_booking.backend.repository.PassengerRepository;
+import flight_booking.backend.repository.TicketRepository;
+import flight_booking.backend.repository.TripRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -32,108 +38,181 @@ public class TicketTripLoader implements CommandLineRunner {
 
     @Override
     @Transactional
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         if (ticketRepository.amountOfRows() == 0 && tripRepository.amountOfRows() == 0) {
 
+            // GET PASSENGERS
             Optional<Passenger> passenger1 = passengerRepository.findById(1L);
             Optional<Passenger> passenger2 = passengerRepository.findById(2L);
+            Optional<Passenger> passenger3 = passengerRepository.findById(2L);
 
-            Trip trip1 = Trip.builder()
-                    //.passenger(passenger1.get())
-                    .code("dupa1")
-                    .arrivalDate(LocalDate.parse("2020-06-26"))
-                    .arrivalTime(LocalTime.parse("10:43:22"))
-                    .departureDate(LocalDate.parse("2020-08-26"))
+
+            // TRIP FROM NEW YORK TO WARSAW WITH TICKETS BELONG TO PASSENGER 1
+            tripRepository.save(Trip.builder()
+                    .code("2afe9b0d-052d-43a5-af9a-124137eebf30")
+                    .arrivalDate(LocalDate.parse("2021-01-03"))
+                    .arrivalTime(LocalTime.parse("16:30:00"))
+                    .departureDate(LocalDate.parse("2021-01-02"))
                     .departureTime(LocalTime.parse("14:43:11"))
-                    .purchaseDate(LocalDate.parse("2020-07-29"))
-                    .purchaseTime(LocalTime.parse("10:40:00"))
-                    .price(34)
-                    .build();
-            tripRepository.save(trip1);
+                    .purchaseDate(LocalDate.parse("2020-08-28"))
+                    .purchaseTime(LocalTime.parse("09:03:56"))
+                    .price(1345)
+                    .build());
+
+            Optional<Trip> trip1 = tripRepository.findById(1L);
+            List<Ticket> allTickets1 = new ArrayList<>();
+
+            Optional<Flight> flight1 = flightRepository.findById(370L);
+            if (passenger1.isPresent() && flight1.isPresent() && trip1.isPresent()) {
+                Ticket ticket = ticketRepository.save(Ticket.builder()
+                        .passenger(passenger1.get())
+                        .flight(flight1.get())
+                        .seatNumber(34)
+                        .price(225)
+                        .build());
+
+                allTickets1.add(ticket);
+            }
+
+            Optional<Flight> flight2 = flightRepository.findById(3592L);
+            if (passenger1.isPresent() && flight2.isPresent() && trip1.isPresent()) {
+                Ticket ticket = ticketRepository.save(Ticket.builder()
+                        .passenger(passenger1.get())
+                        .flight(flight2.get())
+                        .seatNumber(56)
+                        .price(560)
+                        .build());
+
+                allTickets1.add(ticket);
+            }
+
+            Optional<Flight> flight3 = flightRepository.findById(3958L);
+            if (passenger1.isPresent() && flight3.isPresent() && trip1.isPresent()) {
+                Ticket ticket = ticketRepository.save(Ticket.builder()
+                        .passenger(passenger1.get())
+                        .flight(flight3.get())
+                        .seatNumber(64)
+                        .price(560)
+                        .build());
+
+                allTickets1.add(ticket);
+            }
+
+            if(trip1.isPresent()){
+                trip1.get().setTickets(allTickets1);
+                tripRepository.save(trip1.get());
+            }
 
 
-            Trip trip2 = Trip.builder()
-                    //.passenger(passenger1.get())
-                    .code("dupa2")
-                    .arrivalDate(LocalDate.parse("2011-06-26"))
-                    .arrivalTime(LocalTime.parse("11:43:22"))
-                    .departureDate(LocalDate.parse("1111-08-26"))
-                    .departureTime(LocalTime.parse("14:42:11"))
-                    .purchaseDate(LocalDate.parse("2020-07-29"))
-                    .purchaseTime(LocalTime.parse("10:40:00"))
-                    .price(45)
-                    .build();
-            tripRepository.save(trip2);
+            // TRIP FROM PEKIN TO TORONTO WITH TICKETS BELONG TO PASSENGER 1
+            tripRepository.save(Trip.builder()
+                    .code("95fe9b0d-932d-67a5-er9a-994137aabf30")
+                    .arrivalDate(LocalDate.parse("2021-04-06"))
+                    .arrivalTime(LocalTime.parse("03:00:00"))
+                    .departureDate(LocalDate.parse("2021-04-05"))
+                    .departureTime(LocalTime.parse("15:00:00"))
+                    .purchaseDate(LocalDate.parse("2020-08-28"))
+                    .purchaseTime(LocalTime.parse("09:44:06"))
+                    .price(405)
+                    .build());
+
+            Optional<Trip> trip2 = tripRepository.findById(2L);
+            List<Ticket> allTickets2 = new ArrayList<>();
+
+            Optional<Flight> flight4 = flightRepository.findById(8487L);
+            if (passenger1.isPresent() && flight4.isPresent() && trip2.isPresent()) {
+                Ticket ticket = ticketRepository.save(Ticket.builder()
+                        .passenger(passenger1.get())
+                        .flight(flight4.get())
+                        .seatNumber(79)
+                        .price(405)
+                        .build());
+
+                allTickets2.add(ticket);
+            }
+
+            if(trip2.isPresent()){
+                trip2.get().setTickets(allTickets2);
+                tripRepository.save(trip2.get());
+            }
 
 
-            Trip trip3 = Trip.builder()
-                    //.passenger(passenger2.get())
-                    .code("dupa3")
-                    .arrivalDate(LocalDate.parse("2022-06-26"))
-                    .arrivalTime(LocalTime.parse("11:40:20"))
-                    .departureDate(LocalDate.parse("2212-03-25"))
-                    .departureTime(LocalTime.parse("12:23:22"))
-                    .purchaseDate(LocalDate.parse("2020-07-29"))
-                    .purchaseTime(LocalTime.parse("10:40:00"))
+            // TRIP FROM PARIS TO MOSCOW WITH TICKETS BELONG TO PASSENGER 2
+            tripRepository.save(Trip.builder()
+                    .code("9d1b390c-9de5-4f65-a795-f61fb3c4de2d")
+                    .arrivalDate(LocalDate.parse("2021-03-17"))
+                    .arrivalTime(LocalTime.parse("09:45:00"))
+                    .departureDate(LocalDate.parse("2021-03-16"))
+                    .departureTime(LocalTime.parse("07:00:00"))
+                    .purchaseDate(LocalDate.parse("2020-08-28"))
+                    .purchaseTime(LocalTime.parse("09:53:35"))
+                    .price(320)
+                    .build());
+
+            Optional<Trip> trip3 = tripRepository.findById(3L);
+            List<Ticket> allTickets3 = new ArrayList<>();
+
+            Optional<Flight> flight5 = flightRepository.findById(14820L);
+            if (passenger2.isPresent() && flight5.isPresent() && trip3.isPresent()) {
+                Ticket ticket = ticketRepository.save(Ticket.builder()
+                        .passenger(passenger2.get())
+                        .flight(flight5.get())
+                        .seatNumber(8)
+                        .price(100)
+                        .build());
+
+                allTickets3.add(ticket);
+            }
+
+            Optional<Flight> flight6 = flightRepository.findById(17011L);
+            if (passenger2.isPresent() && flight6.isPresent() && trip3.isPresent()) {
+                Ticket ticket = ticketRepository.save(Ticket.builder()
+                        .passenger(passenger2.get())
+                        .flight(flight6.get())
+                        .seatNumber(42)
+                        .price(220)
+                        .build());
+
+                allTickets3.add(ticket);
+            }
+
+            if(trip3.isPresent()){
+                trip3.get().setTickets(allTickets3);
+                tripRepository.save(trip3.get());
+            }
+
+
+            // TRIP FROM OSLO TO LONDON WITH TICKETS BELONG TO PASSENGER 3
+            tripRepository.save(Trip.builder()
+                    .code("210347d5-1aa8-4213-9559-524993e784f8")
+                    .arrivalDate(LocalDate.parse("2020-12-02"))
+                    .arrivalTime(LocalTime.parse("13:45:00"))
+                    .departureDate(LocalDate.parse("2020-12-02"))
+                    .departureTime(LocalTime.parse("12:15:00"))
+                    .purchaseDate(LocalDate.parse("2020-08-28"))
+                    .purchaseTime(LocalTime.parse("10:14:42"))
                     .price(78)
-                    .build();
-            tripRepository.save(trip3);
+                    .build());
 
-            Optional<Flight> flights1 = flightRepository.findById(1L);
-            Optional<Trip> tripFind1 = tripRepository.findById(1L);
-            Ticket ticket1 = Ticket.builder()
-                    .passenger(passenger1.get())
-                    .flight(flights1.get())
-                    .trip(tripFind1.get())
-                    .seatNumber(23)
-                    .price(34)
-                    .build();
-            ticketRepository.save(ticket1);
+            Optional<Trip> trip4 = tripRepository.findById(4L);
+            List<Ticket> allTickets4 = new ArrayList<>();
 
-            Optional<Flight> flights2 = flightRepository.findById(1L);
-            Optional<Trip> tripFind2 = tripRepository.findById(1L);
-            Ticket ticket2 = Ticket.builder()
-                    .passenger(passenger1.get())
-                    .flight(flights2.get())
-                    .trip(tripFind2.get())
-                    .seatNumber(23)
-                    .price(34)
-                    .build();
-            ticketRepository.save(ticket2);
+            Optional<Flight> flight7 = flightRepository.findById(13558L);
+            if (passenger3.isPresent() && flight7.isPresent() && trip4.isPresent()) {
+                Ticket ticket = ticketRepository.save(Ticket.builder()
+                        .passenger(passenger3.get())
+                        .flight(flight7.get())
+                        .seatNumber(65)
+                        .price(150)
+                        .build());
 
-            Optional<Flight> flights3 = flightRepository.findById(1L);
-            Optional<Trip> tripFind3 = tripRepository.findById(1L);
-            Ticket ticket3 = Ticket.builder()
-                    .passenger(passenger1.get())
-                    .flight(flights3.get())
-                    .trip(tripFind3.get())
-                    .seatNumber(23)
-                    .price(34)
-                    .build();
-            ticketRepository.save(ticket3);
+                allTickets4.add(ticket);
+            }
 
-
-            Optional<Flight> flights4 = flightRepository.findById(1L);
-            Optional<Trip> tripFind4 = tripRepository.findById(1L);
-            Ticket ticket4 = Ticket.builder()
-                    .passenger(passenger1.get())
-                    .flight(flights4.get())
-                    .trip(tripFind4.get())
-                    .seatNumber(23)
-                    .price(34)
-                    .build();
-            ticketRepository.save(ticket4);
-
-            Optional<Flight> flights5 = flightRepository.findById(2L);
-            Optional<Trip> tripFind5 = tripRepository.findById(2L);
-            Ticket ticket5 = Ticket.builder()
-                    .passenger(passenger1.get())
-                    .flight(flights5.get())
-                    .trip(tripFind5.get())
-                    .seatNumber(111)
-                    .price(666)
-                    .build();
-            ticketRepository.save(ticket5);
+            if(trip4.isPresent()){
+                trip4.get().setTickets(allTickets4);
+                tripRepository.save(trip4.get());
+            }
         }
     }
 }

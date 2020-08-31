@@ -34,12 +34,4 @@ public class Passenger {
 
     @OneToMany(mappedBy = "passenger")
     private List<Ticket> tickets;
-
-
-    public void updateForm(String firstName, String surname, String phoneNumber, String email) {
-        this.firstName = firstName;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
 }

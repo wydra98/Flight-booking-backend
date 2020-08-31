@@ -20,21 +20,16 @@ public class Ticket {
     @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "ticket_id")
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
-
     @OneToOne
     @JoinColumn(name = "id_flight")
     private Flight flight;
-
     @ManyToOne
     @JoinColumn(name = "id_trip")
     private Trip trip;
-
     private Integer seatNumber;
     private double price;
-
 
 }

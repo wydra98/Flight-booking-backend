@@ -1,13 +1,12 @@
 package flight_booking.backend.models.find_connections;
 
 import flight_booking.backend.models.Connection;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Search {
 
-    public int MAX_CONNECTION;
+    public int MAX_CONNECTION = 3;
     private final Long START;
     private final Long END;
     private final List<List<Connection>> allConnection = new ArrayList();
@@ -19,8 +18,7 @@ public class Search {
         this.END = END;
     }
 
-    public List<List<Connection>> findConnections(List<Connection> baseConnection, int maxChange) {
-        this.MAX_CONNECTION = maxChange+1;
+    public List<List<Connection>> findConnections(List<Connection> baseConnection) {
         Graph graph = new Graph();
         this.baseConnection = baseConnection;
         for (Connection connection : baseConnection) {
