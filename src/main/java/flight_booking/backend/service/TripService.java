@@ -14,10 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
+import java.time.Period;
+import java.util.*;
 
 @Service
 public class TripService {
@@ -45,13 +43,12 @@ public class TripService {
         return ticketService.findAllTrips(srcAirportId, dstAirportId, departureDate, passengerNumber);
     }
 
-    public Trip addNewTrip(Passenger passenger, TripDto tripDto) {
-
+    public Trip addNewTrip(List<Passenger> passengers, TripDto tripDto) {
         String uniqueID = UUID.randomUUID().toString();
-
+        boolean flag = true;
         Trip trip = tripRepository.save(Trip.builder()
                 .code(uniqueID)
-                .tickets(null)
+                .tickets(new ArrayList<>())
                 .departureDate(LocalDate.parse(tripDto.getDepartureDate()))
                 .departureTime(LocalTime.parse(tripDto.getDepartureTime()))
                 .arrivalDate(LocalDate.parse(tripDto.getArrivalDate()))
@@ -61,22 +58,45 @@ public class TripService {
                 .price(tripDto.getTotalPrice())
                 .build());
 
-        for (TicketDto ticketDto: tripDto.getArraysTicket()) {
+        for (TicketDto ticketDto : tripDto.getArraysTicket()) {
             FlightDto flightDto = ticketDto.getFlightDto();
             Optional<Flight> flight = flightService.findById(flightDto.getId());
 
-            Ticket ticket = ticketService.save(Ticket.builder()
-                    .passenger(passenger)
-                    .flight(flight.get())
-                    .trip(trip)
-                    .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
-                    .price(flight.get().getPrice())
-                    .build());
+            if (flight.isPresent()) {
 
+                for (Passenger passenger: passengers) {
+                    flight.get().setAvailableSeats(flight.get().getAvailableSeats()-1);
+                    flightService.save(flight.get());
 
-            trip.addTicket(ticket);
+                    Period period = Period.between(passenger.getDateOfBirth(), LocalDate.now());
+                    double price = 0;
+                    if(period.getYears()<18){
+                        price =  flight.get().getPrice() * 0.8;
+                    }
+                    else{
+                        price =  flight.get().getPrice();
+                    }
+
+                    Ticket ticket = ticketService.save(Ticket.builder()
+                            .passenger(passenger)
+                            .flight(flight.get())
+                            .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
+                            .price(price)
+                            .build());
+
+                    trip.addTicket(ticket);
+                }
+
+            } else {
+                flag = false;
+                break;
+            }
         }
-        Trip actualTrip = tripRepository.save(trip);
+
+        Trip actualTrip = null;
+        if (flag) {
+            actualTrip = tripRepository.save(trip);
+        }
 
         return actualTrip;
     }
@@ -87,8 +107,24 @@ public class TripService {
         return random.nextInt(seatNumbers) + 1;
     }
 
-    public Trip findTripByCode(String code){
+    public Trip findTripByCode(String code) {
+
+        return tripRepository.findTripByCode(code);
+    }
+
+    public boolean existsById(Long id) {
+
+        return tripRepository.existsById(id);
+    }
+
+    public boolean existsByCode(String code) {
+
+        boolean flag = true;
         Trip trip = tripRepository.findTripByCode(code);
-        return trip;
+        if (trip == null) {
+            flag = false;
+        }
+
+        return flag;
     }
 }
