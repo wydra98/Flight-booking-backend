@@ -848,6 +848,806 @@ public class ConnectionLoader implements CommandLineRunner {
                         .dstAirport(airport20.get())
                         .build());
             }
+
+            // 101. FROM PEKIN TO CRACOW
+            if (airport4.isPresent() && airport18.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport4.get())
+                        .dstAirport(airport18.get())
+                        .build());
+            }
+
+            // 102. FROM CRACOW TO PEKIN
+            if (airport18.isPresent() && airport4.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport18.get())
+                        .dstAirport(airport4.get())
+                        .build());
+            }
+
+            // 103. FROM SZANGHAI TO DELHI
+            if (airport6.isPresent() && airport19.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport6.get())
+                        .dstAirport(airport19.get())
+                        .build());
+            }
+
+            // 104. FROM DELHI TO SZANGHAI
+            if (airport19.isPresent() && airport6.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport19.get())
+                        .dstAirport(airport6.get())
+                        .build());
+            }
+
+            // 105. FROM CHICAGO TO KIEV
+            if (airport2.isPresent() && airport20.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport2.get())
+                        .dstAirport(airport20.get())
+                        .build());
+            }
+
+            // 106. FROM KIEV TO CHICAGO
+            if (airport20.isPresent() && airport2.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport20.get())
+                        .dstAirport(airport2.get())
+                        .build());
+            }
+
+            // 107. FROM NEW YORK TO OSLO
+            if (airport1.isPresent() && airport11.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport1.get())
+                        .dstAirport(airport11.get())
+                        .build());
+            }
+
+            // 108. FROM OSLO TO NEW YORK
+            if (airport11.isPresent() && airport1.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport11.get())
+                        .dstAirport(airport1.get())
+                        .build());
+            }
+
+            // 109. FROM SZANGHAI TO BERLIN
+            if (airport6.isPresent() && airport5.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport6.get())
+                        .dstAirport(airport5.get())
+                        .build());
+            }
+
+            // 110. FROM BERLIN TO SZANGHAI
+            if (airport5.isPresent() && airport6.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport5.get())
+                        .dstAirport(airport6.get())
+                        .build());
+            }
+
+            // 111. FROM PEKIN TO TOKIO
+            if (airport4.isPresent() && airport9.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport4.get())
+                        .dstAirport(airport9.get())
+                        .build());
+            }
+
+            // 112. FROM TOKIO TO PEKIN
+            if (airport9.isPresent() && airport4.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport9.get())
+                        .dstAirport(airport4.get())
+                        .build());
+            }
+
+            // 113. FROM TOKIO TO LONDON
+            if (airport9.isPresent() && airport14.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport9.get())
+                        .dstAirport(airport14.get())
+                        .build());
+            }
+
+            // 114. FROM LONDON TO TOKIO
+            if (airport14.isPresent() && airport9.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport14.get())
+                        .dstAirport(airport9.get())
+                        .build());
+            }
+
+            // 115. FROM CAIRO TO BERLIN
+            if (airport17.isPresent() && airport5.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport17.get())
+                        .dstAirport(airport5.get())
+                        .build());
+            }
+
+            // 116. FROM BERLIN TO CAIRO
+            if (airport5.isPresent() && airport17.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport5.get())
+                        .dstAirport(airport20.get())
+                        .build());
+            }
+
+            // 117. FROM CAIRO TO SZANGHAI
+            if (airport17.isPresent() && airport6.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport17.get())
+                        .dstAirport(airport6.get())
+                        .build());
+            }
+
+            // 118. FROM SZANGHAI TO CAIRO
+            if (airport6.isPresent() && airport17.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport6.get())
+                        .dstAirport(airport17.get())
+                        .build());
+            }
+
+            // 119. FROM PARIS TO MOSCOW
+            if (airport13.isPresent() && airport16.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport16.get())
+                        .build());
+            }
+
+            // 120. FROM MOSCOW TO PARIS
+            if (airport16.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport16.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 121. FROM SYDNEY TO CHICAGO
+            if (airport8.isPresent() && airport2.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport8.get())
+                        .dstAirport(airport2.get())
+                        .build());
+            }
+
+            // 122. FROM CHICAGO TO SYDNEY
+            if (airport2.isPresent() && airport8.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport2.get())
+                        .dstAirport(airport8.get())
+                        .build());
+            }
+
+            // 123. FROM KIEV TO MOSCOW
+            if (airport20.isPresent() && airport16.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport20.get())
+                        .dstAirport(airport16.get())
+                        .build());
+            }
+
+            // 124. FROM MOSCOW TO KIEV
+            if (airport16.isPresent() && airport20.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport16.get())
+                        .dstAirport(airport20.get())
+                        .build());
+            }
+
+            // 125. FROM WARSAW TO CRACOW
+            if (airport3.isPresent() && airport18.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport3.get())
+                        .dstAirport(airport18.get())
+                        .build());
+            }
+
+            // 126. FROM CRACOW TO WARSAW
+            if (airport18.isPresent() && airport3.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport18.get())
+                        .dstAirport(airport3.get())
+                        .build());
+            }
+
+            // 127. FROM BERLIN TO OSLO
+            if (airport5.isPresent() && airport11.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport5.get())
+                        .dstAirport(airport11.get())
+                        .build());
+            }
+
+            // 128. FROM OSLO TO BERLIN
+            if (airport11.isPresent() && airport5.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport11.get())
+                        .dstAirport(airport5.get())
+                        .build());
+            }
+
+            // 129. FROM TOKIO TO PARIS
+            if (airport9.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport9.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 130. FROM PARIS TO TOKIO
+            if (airport13.isPresent() && airport9.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport9.get())
+                        .build());
+            }
+
+            // 131. FROM BERLIN TO PARIS
+            if (airport5.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport5.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 132. FROM PARIS TO BERLIN
+            if (airport13.isPresent() && airport5.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport5.get())
+                        .build());
+            }
+
+            // 133. FROM PEKIN TO LONDON
+            if (airport4.isPresent() && airport14.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport4.get())
+                        .dstAirport(airport14.get())
+                        .build());
+            }
+
+            // 134. FROM LONDON TO PEKIN
+            if (airport14.isPresent() && airport4.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport14.get())
+                        .dstAirport(airport4.get())
+                        .build());
+            }
+
+            // 135. FROM LONDON TO TOKIO
+            if (airport14.isPresent() && airport9.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport14.get())
+                        .dstAirport(airport9.get())
+                        .build());
+            }
+
+            // 136. FROM TOKIO TO LONDON
+            if (airport9.isPresent() && airport14.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport9.get())
+                        .dstAirport(airport14.get())
+                        .build());
+            }
+
+            // 137. FROM CRACOW TO PARIS
+            if (airport18.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport18.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 138. FROM PARIS TO CRACOW
+            if (airport13.isPresent() && airport18.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport18.get())
+                        .build());
+            }
+
+            // 139. FROM PEKIN TO PARIS
+            if (airport4.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport4.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 140. FROM PARIS TO PEKIN
+            if (airport13.isPresent() && airport4.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport4.get())
+                        .build());
+            }
+
+            // 141. FROM NEW YORK TO PARIS
+            if (airport1.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport1.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 142. FROM PARIS TO NEW YORK
+            if (airport13.isPresent() && airport1.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport1.get())
+                        .build());
+            }
+
+            // 143. FROM WARSAW TO PARIS
+            if (airport3.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport3.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 144. FROM PARIS TO WARSAW
+            if (airport13.isPresent() && airport3.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport3.get())
+                        .build());
+            }
+
+            // 145. FROM RIO DE JANEIRO TO PARIS
+            if (airport10.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport10.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 146. FROM PARIS TO RIO DE JANEIRO
+            if (airport13.isPresent() && airport10.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport10.get())
+                        .build());
+            }
+
+            // 147. FROM CHICAGO TO PARIS
+            if (airport2.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport2.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 148. FROM PARIS TO CHICAGO
+            if (airport13.isPresent() && airport2.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport2.get())
+                        .build());
+            }
+
+            // 149. FROM TORONTO TO PARIS
+            if (airport7.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport7.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 150. FROM PARIS TO TORONTO
+            if (airport13.isPresent() && airport7.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport7.get())
+                        .build());
+            }
+
+            // 151. FROM TOKIO TO SZANGHAI
+            if (airport9.isPresent() && airport6.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport9.get())
+                        .dstAirport(airport6.get())
+                        .build());
+            }
+
+            // 152. FROM SZANGHAI TO TOKIO
+            if (airport6.isPresent() && airport9.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport6.get())
+                        .dstAirport(airport9.get())
+                        .build());
+            }
+
+            // 153. FROM TORONTO TO NEW YORK
+            if (airport7.isPresent() && airport1.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport7.get())
+                        .dstAirport(airport1.get())
+                        .build());
+            }
+
+            // 154. FROM NEW YORK TO TORONTO
+            if (airport1.isPresent() && airport7.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport1.get())
+                        .dstAirport(airport7.get())
+                        .build());
+            }
+
+            // 155. FROM TORONTO TO DELHI
+            if (airport7.isPresent() && airport19.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport7.get())
+                        .dstAirport(airport19.get())
+                        .build());
+            }
+
+            // 156. FROM DELHI TO TORONTO
+            if (airport19.isPresent() && airport7.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport19.get())
+                        .dstAirport(airport7.get())
+                        .build());
+            }
+
+            // 157. FROM WARSAW TO KIEV
+            if (airport3.isPresent() && airport20.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport3.get())
+                        .dstAirport(airport20.get())
+                        .build());
+            }
+
+            // 158. FROM KIEV TO WARSAW
+            if (airport20.isPresent() && airport3.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport20.get())
+                        .dstAirport(airport3.get())
+                        .build());
+            }
+
+            // 159. FROM KIEV TO KAIR
+            if (airport20.isPresent() && airport17.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport20.get())
+                        .dstAirport(airport17.get())
+                        .build());
+            }
+
+            // 160. FROM KAIR TO KIEV
+            if (airport17.isPresent() && airport20.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport17.get())
+                        .dstAirport(airport20.get())
+                        .build());
+            }
+
+            // 161. FROM DELHI TO PARIS
+            if (airport19.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport19.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 162. FROM PARIS TO DELHI
+            if (airport13.isPresent() && airport19.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport19.get())
+                        .build());
+            }
+
+            // 163. FROM DELHI TO LONDON
+            if (airport19.isPresent() && airport14.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport19.get())
+                        .dstAirport(airport14.get())
+                        .build());
+            }
+
+            // 164. FROM LONDON TO DELHI
+            if (airport14.isPresent() && airport19.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport14.get())
+                        .dstAirport(airport19.get())
+                        .build());
+            }
+
+            // 165. FROM NEW YORK TO RIO DE JANEIRO
+            if (airport1.isPresent() && airport10.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport1.get())
+                        .dstAirport(airport10.get())
+                        .build());
+            }
+
+            // 166. FROM RIO DE JANEIRO TO NEW YORK
+            if (airport10.isPresent() && airport1.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport10.get())
+                        .dstAirport(airport1.get())
+                        .build());
+            }
+
+            // 167. FROM MOSCOW TO SYDNEY
+            if (airport16.isPresent() && airport8.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport16.get())
+                        .dstAirport(airport8.get())
+                        .build());
+            }
+
+            // 168. FROM SYDNEY TO MOSCOW
+            if (airport8.isPresent() && airport16.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport8.get())
+                        .dstAirport(airport16.get())
+                        .build());
+            }
+
+            // 169. FROM WARSAW TO OSLO
+            if (airport3.isPresent() && airport11.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport3.get())
+                        .dstAirport(airport11.get())
+                        .build());
+            }
+
+            // 170. FROM OSLO TO WARSAW
+            if (airport11.isPresent() && airport3.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport11.get())
+                        .dstAirport(airport3.get())
+                        .build());
+            }
+
+            // 171. FROM CRACOW TO OSLO
+            if (airport18.isPresent() && airport11.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport18.get())
+                        .dstAirport(airport11.get())
+                        .build());
+            }
+
+            // 172. FROM OSLO TO CRACOW
+            if (airport11.isPresent() && airport18.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport11.get())
+                        .dstAirport(airport18.get())
+                        .build());
+            }
+
+            // 173. FROM CHICAGO TO TOKIO
+            if (airport2.isPresent() && airport9.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport2.get())
+                        .dstAirport(airport9.get())
+                        .build());
+            }
+
+            // 174. FROM TOKIO TO CHICAGO
+            if (airport9.isPresent() && airport2.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport9.get())
+                        .dstAirport(airport2.get())
+                        .build());
+            }
+
+            // 175. FROM SYDNEY TO RIO DE JANEIRO
+            if (airport8.isPresent() && airport10.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport8.get())
+                        .dstAirport(airport10.get())
+                        .build());
+            }
+
+            // 176. FROM RIO DE JANEIRO TO SYDNEY
+            if (airport10.isPresent() && airport8.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport10.get())
+                        .dstAirport(airport8.get())
+                        .build());
+            }
+
+            // 177. FROM LONDON TO BUENOS AIRES
+            if (airport14.isPresent() && airport12.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport14.get())
+                        .dstAirport(airport12.get())
+                        .build());
+            }
+
+            // 178. FROM BUENOS AIRES TO LONDON
+            if (airport12.isPresent() && airport14.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport12.get())
+                        .dstAirport(airport14.get())
+                        .build());
+            }
+
+            // 179. FROM BERLIN TO PARIS
+            if (airport5.isPresent() && airport13.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport5.get())
+                        .dstAirport(airport13.get())
+                        .build());
+            }
+
+            // 180. FROM PARIS TO BERLIN
+            if (airport13.isPresent() && airport5.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport13.get())
+                        .dstAirport(airport5.get())
+                        .build());
+            }
+
+            // 181. FROM KIEV TO RIO DE JANEIRO
+            if (airport20.isPresent() && airport10.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport20.get())
+                        .dstAirport(airport10.get())
+                        .build());
+            }
+
+            // 182. FROM RIO DE JANEIRO TO KIEV
+            if (airport10.isPresent() && airport20.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport10.get())
+                        .dstAirport(airport20.get())
+                        .build());
+            }
+
+            // 183. FROM SZANGHAI TO LONDON
+            if (airport6.isPresent() && airport14.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport6.get())
+                        .dstAirport(airport14.get())
+                        .build());
+            }
+
+            // 184. FROM LONDON TO SZANHGAI
+            if (airport14.isPresent() && airport6.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport14.get())
+                        .dstAirport(airport6.get())
+                        .build());
+            }
+
+            // 185. FROM PEKIN TO CRACOW
+            if (airport4.isPresent() && airport18.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport4.get())
+                        .dstAirport(airport18.get())
+                        .build());
+            }
+
+            // 186. FROM CRACOW TO PEKIN
+            if (airport18.isPresent() && airport4.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport18.get())
+                        .dstAirport(airport4.get())
+                        .build());
+            }
+
+            // 187. FROM PEKIN TO MOSCOW
+            if (airport4.isPresent() && airport16.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport4.get())
+                        .dstAirport(airport16.get())
+                        .build());
+            }
+
+            // 188. FROM MOSCOW TO PEKIN
+            if (airport16.isPresent() && airport4.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport16.get())
+                        .dstAirport(airport4.get())
+                        .build());
+            }
+
+            // 189. FROM PEKIN TO BERLIN
+            if (airport4.isPresent() && airport5.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport4.get())
+                        .dstAirport(airport5.get())
+                        .build());
+            }
+
+            // 190. FROM BERLIN TO PEKIN
+            if (airport5.isPresent() && airport4.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport5.get())
+                        .dstAirport(airport4.get())
+                        .build());
+            }
+
+            // 191. FROM CRACOW TO LONDON
+            if (airport18.isPresent() && airport14.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport18.get())
+                        .dstAirport(airport14.get())
+                        .build());
+            }
+
+            // 192. FROM LONDON TO CRACOW
+            if (airport14.isPresent() && airport18.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport14.get())
+                        .dstAirport(airport18.get())
+                        .build());
+            }
+
+            // 193. FROM SYDNEY TO KAIR
+            if (airport17.isPresent() && airport8.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport17.get())
+                        .dstAirport(airport8.get())
+                        .build());
+            }
+
+            // 194. FROM KAIR TO SYDNEY
+            if (airport8.isPresent() && airport17.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport8.get())
+                        .dstAirport(airport17.get())
+                        .build());
+            }
+
+            // 195. FROM TORONTO TO BUENOS AIRES
+            if (airport7.isPresent() && airport12.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport7.get())
+                        .dstAirport(airport12.get())
+                        .build());
+            }
+
+            // 196. FROM BUENOS AIRES TO TORONTO
+            if (airport12.isPresent() && airport7.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport12.get())
+                        .dstAirport(airport7.get())
+                        .build());
+            }
+
+            // 197. FROM CHICAGO TO BUENOS AIRES
+            if (airport2.isPresent() && airport12.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport2.get())
+                        .dstAirport(airport12.get())
+                        .build());
+            }
+
+            // 198. FROM BUENOS AIRES TO CHICAGO
+            if (airport12.isPresent() && airport2.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport12.get())
+                        .dstAirport(airport2.get())
+                        .build());
+            }
+
+            // 199. FROM MOSCOW TO BERLIN
+            if (airport16.isPresent() && airport5.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport16.get())
+                        .dstAirport(airport5.get())
+                        .build());
+            }
+
+            // 200. FROM BERLIN TO MOSCOW
+            if (airport5.isPresent() && airport16.isPresent()) {
+                connectionRepository.save(Connection.builder()
+                        .srcAirport(airport5.get())
+                        .dstAirport(airport16.get())
+                        .build());
+            }
         }
     }
 }
