@@ -1,6 +1,5 @@
 package flight_booking.backend.controllers.flight;
 
-import flight_booking.backend.exception.EntityNotExistsException;
 import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Airport;
 import flight_booking.backend.models.Connection;
@@ -17,6 +16,7 @@ import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -88,11 +88,11 @@ public class FlightController {
                                       @RequestParam String flightTime) {
 
         if (!flightService.existsById(flightId)) {
-            throw new EntityNotExistsException("Flight with that id not exist!");
+            throw new NoSuchElementException("Flight with that id not exist!");
         }
 
         if (!connectionService.existsById(flightId)) {
-            throw new EntityNotExistsException("Connection with that id not exist!");
+            throw new NoSuchElementException("Connection with that id not exist!");
         }
 
         Optional<Flight> flightOptional = flightService.findById(flightId);
@@ -129,7 +129,7 @@ public class FlightController {
     public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {
 
         if (!flightService.existsById(id)) {
-            throw new EntityNotExistsException("Flight with that id not exist!");
+            throw new NoSuchElementException("Flight with that id not exist!");
         }
 
         flightService.deleteConnection(id);
@@ -137,8 +137,8 @@ public class FlightController {
     }
 
 
-    @ExceptionHandler(EntityNotExistsException.class)
-    ResponseEntity<?> handleConnectionNotExistsException(EntityNotExistsException e) {
+    @ExceptionHandler(NoSuchElementException.class)
+    ResponseEntity<?> handleConnectionNotExistsException(NoSuchElementException e) {
         return ResponseEntity.notFound().build();
     }
 }

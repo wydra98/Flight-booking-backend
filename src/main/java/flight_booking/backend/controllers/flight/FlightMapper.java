@@ -1,6 +1,5 @@
 package flight_booking.backend.controllers.flight;
 
-
 import flight_booking.backend.controllers.airline.AirlineMapper;
 import flight_booking.backend.controllers.airport.AirportMapper;
 import flight_booking.backend.models.Connection;

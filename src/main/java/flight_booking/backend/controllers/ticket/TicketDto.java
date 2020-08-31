@@ -11,12 +11,11 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class TicketDto {
-   // private Long id;
     private FlightDto flightDto;
     private String departureDate;
     private String departureTime;
     private String arrivalDate;
     private String arrivalTime;
-    private int seatNumber;
+    private Integer seatNumber;
     private double totalPrice;
 }

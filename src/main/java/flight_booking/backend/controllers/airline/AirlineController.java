@@ -1,7 +1,5 @@
 package flight_booking.backend.controllers.airline;
 
-import flight_booking.backend.exception.EntityAlreadyExistsException;
-import flight_booking.backend.exception.EntityNotExistsException;
 import flight_booking.backend.models.Airline;
 import flight_booking.backend.service.AirlineService;
 import flight_booking.backend.service.ConnectionService;
@@ -13,6 +11,7 @@ import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -50,7 +49,7 @@ public class AirlineController {
                                           @RequestParam String country) {
 
         if (airlineService.checkIfAirlineExists(airlineDto, country)) {
-            throw new EntityAlreadyExistsException("Airline with these data already exist ins datebase!");
+            throw new IllegalStateException("Airline with these data already exist ins datebase!");
         }
 
         Airline airline = airlineService.addNewAirline(airlineDto, country);
@@ -63,7 +62,7 @@ public class AirlineController {
     ResponseEntity<Long> deleteAirline(@PathVariable Long id) {
 
         if (!airlineService.existsById(id)) {
-            throw new EntityNotExistsException("Airline with that id not exist!");
+            throw new NoSuchElementException("Airline with that id not exist!");
         }
 
         connectionService.deleteConnectionWithAirlineId(id);
@@ -78,24 +77,26 @@ public class AirlineController {
                                        @RequestParam String country) {
 
         if (!airlineService.existsById(airlineDto.getId())) {
-            throw new EntityNotExistsException("Airline with that ID not exist!");
+            throw new NoSuchElementException("Airline with that ID not exist!");
         }
 
         Optional<Airline> airlineOptional = airlineService.findById(airlineDto.getId());
-        airlineOptional.get().updateForm(airlineDto, country);
-        airlineService.save(airlineOptional.get());
+        if(airlineOptional.isPresent()){
+            airlineOptional.get().updateForm(airlineDto, country);
+            airlineService.save(airlineOptional.get());
+        }
 
         return ResponseEntity.noContent().build();
     }
 
-    @ExceptionHandler(EntityAlreadyExistsException.class)
-    ResponseEntity<String> handleAirlineAlreadyExistsException(EntityAlreadyExistsException e) {
+    @ExceptionHandler(NoSuchElementException.class)
+    ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
-    @ExceptionHandler(EntityNotExistsException.class)
-    ResponseEntity<?> handleAirlineNotExistsException(EntityNotExistsException e) {
-        return ResponseEntity.notFound().build();
+    @ExceptionHandler(IllegalStateException.class)
+    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
 

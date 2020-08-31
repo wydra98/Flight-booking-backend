@@ -18,14 +18,11 @@ public class TicketMapper {
 
 
         return TicketDto.builder()
-                //.id(ticket.getId())
                 .flightDto(flightMapper.map(ticket.getFlight(), ticket.getFlight().getConnection()))
                 .departureDate(ticket.getFlight().getTimes().getDepartureDate().toString())
                 .departureTime(ticket.getFlight().getTimes().getDepartureTime().toString())
                 .arrivalDate(arrival.toLocalDate().toString())
                 .arrivalTime(arrival.toLocalTime().toString())
-                //.purchaseDate(ticket.getPurchaseDate().toString())
-                //.purchaseTime(ticket.getPurchaseTime().toString())
                 .totalPrice(ticket.getPrice())
                 .seatNumber(ticket.getSeatNumber())
                 .build();

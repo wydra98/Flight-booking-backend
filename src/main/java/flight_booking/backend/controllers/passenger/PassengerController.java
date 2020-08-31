@@ -1,7 +1,5 @@
 package flight_booking.backend.controllers.passenger;
 
-import flight_booking.backend.exception.EntityAlreadyExistsException;
-import flight_booking.backend.exception.EntityNotExistsException;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
@@ -9,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/passengers")
@@ -38,22 +38,18 @@ public class PassengerController {
     }
 
 
-//    @ApiOperation(value = "Add new passenger")
-//    @PostMapping
-//    ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
-//
-//        if (passengerService.checkIfPassengerExists(passengerDto.getEmail(), passengerDto.getPhoneNumber())) {
-//            throw new EntityAlreadyExistsException("Passenger with these data already exist in datebase!");
-//        }
-//
-//        Passenger passenger = passengerService.addNewPassenger(passengerDto);
-//        return ResponseEntity.created(URI.create("/" + passenger.getId())).body(passenger);
-//
-//    }
+    @ApiOperation(value = "Add new passenger")
+    @PostMapping
+    ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
 
+        if (passengerService.checkIfPassengerExists(passengerDto.getPesel())) {
+            throw new IllegalStateException("Passenger with these data already exist in datebase!");
+        }
 
-//    //TODO Should i do do make update passenger??
-//
+        Passenger passenger = passengerService.addNewPassenger(passengerDto);
+        return ResponseEntity.created(URI.create("/" + passenger.getId())).body(passenger);
+    }
+
 
     @ApiOperation(value = "Delete passenger")
     @Transactional
@@ -61,7 +57,7 @@ public class PassengerController {
     public ResponseEntity<Long> deletePassenger(@PathVariable Long id) {
 
         if (!passengerService.existsById(id)) {
-            throw new EntityNotExistsException("Passenger with that id not exist!");
+            throw new NoSuchElementException("Passenger with that id not exist!");
         }
 
         passengerService.deleteConnection(id);
@@ -69,8 +65,13 @@ public class PassengerController {
     }
 
 
-    @ExceptionHandler(EntityNotExistsException.class)
-    ResponseEntity<?> handleConnectionNotExistsException(EntityNotExistsException e) {
-        return ResponseEntity.notFound().build();
+    @ExceptionHandler(NoSuchElementException.class)
+    ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

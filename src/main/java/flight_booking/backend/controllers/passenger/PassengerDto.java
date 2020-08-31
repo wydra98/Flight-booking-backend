@@ -1,6 +1,5 @@
 package flight_booking.backend.controllers.passenger;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
