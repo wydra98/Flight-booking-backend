@@ -1,7 +1,7 @@
 package flight_booking.backend.models;
 
 import lombok.*;
-import flight_booking.backend.controllers.AirlineController.AirlineDto;
+import flight_booking.backend.controllers.airline.AirlineDto;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
