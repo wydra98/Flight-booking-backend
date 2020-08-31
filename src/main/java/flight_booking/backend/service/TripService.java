@@ -65,7 +65,8 @@ public class TripService {
 
         Set<Trip> trips = new HashSet<>();
         for (Ticket ticket: tickets) {
-            trips.add(tripRepository.findTripByTicket(ticket));
+            Trip trip = ticket.getTrip();
+            trips.add(trip);
         }
         return trips;
     }
@@ -132,5 +133,11 @@ public class TripService {
 
         Random random = new Random();
         return random.nextInt(seatNumbers) + 1;
+    }
+
+    public void deleteTrips(Set<Trip> trips){
+        for (Trip trip: trips) {
+            tripRepository.deleteTripById(trip.getId());
+        }
     }
 }

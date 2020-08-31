@@ -93,12 +93,12 @@ public class AirportController {
                 ticketService.deleteTickets(tickets);
             }
             if (!flights.isEmpty()) {
-                flightService.deleteFlighs(flights);
+                flightService.deleteFlights(flights);
             }
             if (!trips.isEmpty()) {
                 connectionService.deleteConnections(connections);
             }
-            airportService.deleteAirport(airport);
+            airportService.deleteAirport(airport.get());
         }
         return ResponseEntity.ok(id);
     }

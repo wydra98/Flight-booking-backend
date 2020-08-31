@@ -2,6 +2,7 @@ package flight_booking.backend.service;
 
 import flight_booking.backend.models.Airport;
 import flight_booking.backend.models.Connection;
+import flight_booking.backend.models.Ticket;
 import flight_booking.backend.models.find_connections.Search;
 import flight_booking.backend.repository.AirportRepository;
 import flight_booking.backend.repository.ConnectionRepository;
@@ -71,6 +72,9 @@ public class ConnectionService {
         connectionRepository.save(connection);
     }
 
-
-
+    public void deleteConnections(List<Connection> connections) {
+        for (Connection connection : connections) {
+            connectionRepository.deleteConnectionById(connection.getId());
+        }
+    }
 }

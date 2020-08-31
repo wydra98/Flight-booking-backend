@@ -25,8 +25,7 @@ public class Trip {
     @Column(name = "trip_id")
     private Long id;
     private String code;
-    @OneToMany
-    @JoinColumn(name = "id_trip", referencedColumnName="trip_id")
+    @OneToMany(mappedBy = "trip")
     private List<Ticket> tickets;
     private LocalDate departureDate;
     private LocalTime departureTime;

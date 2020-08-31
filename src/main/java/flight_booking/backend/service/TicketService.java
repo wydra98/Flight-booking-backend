@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -125,6 +126,12 @@ public class TicketService {
 
         }
         return allTrips;
+    }
+
+    public void deleteTickets(List<Ticket> tickets){
+        for (Ticket ticket: tickets) {
+            ticketRepository.deleteTicketById(ticket.getId());
+        }
     }
 
 }

@@ -23,6 +23,5 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     @Query(value = "SELECT DISTINCT t FROM Trip t WHERE t.code=:code")
     Trip findTripByCode(@Param("code") String code);
 
-    @Query(value = "SELECT t FROM Trip t WHERE t.")
-    Trip findTripByTicket(@Param("flight") Flight flight);
+    Trip deleteTripById(Long id);
 }

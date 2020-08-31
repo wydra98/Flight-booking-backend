@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
@@ -19,7 +16,6 @@ import java.util.Optional;
 public class AirlineController {
 
     private final AirlineService airlineService;
-    private final ConnectionService connectionService;
     private final FlightService flightService;
     private final TicketService ticketService;
     private final TripService tripService;
@@ -31,7 +27,6 @@ public class AirlineController {
                              TicketService ticketService,
                              TripService tripService) {
         this.airlineService = airlineService;
-        this.connectionService = connectionService;
         this.flightService = flightService;
         this.ticketService = ticketService;
         this.tripService = tripService;
@@ -77,13 +72,13 @@ public class AirlineController {
         if (airline.isPresent()) {
             List<Flight> flights;
             List<Ticket> tickets = new ArrayList<>();
-            List<Trip> trips = new ArrayList<>();
+            Set<Trip> trips = new HashSet<>();
 
             flights = flightService.findFlightsByAirline(airline.get());
             if (!flights.isEmpty()) {
                 tickets = ticketService.findTicketsByFlights(flights);
                 if (!tickets.isEmpty()) {
-                    trips = tripService.findTripsBytickets(tickets);
+                    trips = tripService.findTripsByTickets(tickets);
                 }
             }
 
@@ -94,9 +89,9 @@ public class AirlineController {
                 ticketService.deleteTickets(tickets);
             }
             if (!flights.isEmpty()) {
-                flightService.deleteFlighs(flights);
+                flightService.deleteFlights(flights);
             }
-            airlineService.deleteAirline(id);
+            airlineService.deleteAirline(airline.get());
         }
         return ResponseEntity.ok(id);
     }

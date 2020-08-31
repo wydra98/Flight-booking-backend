@@ -1,6 +1,6 @@
 #FileLock
-#Mon Aug 31 14:28:43 CEST 2020
-server=127.0.1.1\:43033
-hostName=pcawydra
+#Mon Aug 31 22:52:14 CEST 2020
+server=127.0.1.1\:36203
+hostName=wydra-VivoBook-ASUSLaptop-X571GT-X571GT
 method=file
-id=174447db7cc15b6cde0cb83c8e2133ca9607e173db4
+id=174464aab645327cfdbbef2de626fdd98cad54e13c7

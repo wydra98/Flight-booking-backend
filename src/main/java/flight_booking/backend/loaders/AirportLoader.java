@@ -115,8 +115,8 @@ public class AirportLoader implements CommandLineRunner {
                     .name("Oslo Airport - Avinor")
                     .longitude(10.757933)
                     .latitude(59.911491)
-                    .city("Norway")
-                    .country("Oslo")
+                    .city("Oslo")
+                    .country("Norway")
                     .timezone(2)
                     .build());
 

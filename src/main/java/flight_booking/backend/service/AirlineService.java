@@ -48,7 +48,7 @@ public class AirlineService {
         repository.save(airline);
     }
 
-    public void deleteAirline(Long id) {
-        repository.deleteById(id);
+    public void deleteAirline(Airline airline) {
+        repository.deleteById(airline.getId());
     }
 }

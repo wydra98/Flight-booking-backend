@@ -1,13 +1,10 @@
 package flight_booking.backend.repository;
 
-import flight_booking.backend.models.Airline;
-import flight_booking.backend.models.Airport;
-import flight_booking.backend.models.Connection;
+import flight_booking.backend.models.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import flight_booking.backend.models.Flight;
 
 import java.util.List;
 
@@ -26,4 +23,8 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
     @Query(value = "SELECT f FROM Flight f WHERE f.airline=:airline")
     List<Flight> findFlightsByAirline(@Param("airline") Airline airline);
 
+    @Query("SELECT DISTINCT f FROM Flight f WHERE f.connection = :connection")
+    List<Flight> findFlightsByConnection(@Param("connection") Connection connection);
+
+    Flight deleteFlightById(Long id);
 }

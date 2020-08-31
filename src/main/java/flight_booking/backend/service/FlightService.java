@@ -223,4 +223,10 @@ public class FlightService {
 
         return finishListFlights;
     }
+
+    public void deleteFlights(List<Flight> flights){
+        for (Flight flight: flights) {
+            flightRepository.deleteFlightById(flight.getId());
+        }
+    }
 }

@@ -48,16 +48,13 @@ public class AirportService {
         return repository.findById(id);
     }
 
-    public void deleteAirport(Long id) {
-        repository.deleteById(id);
+    public void deleteAirport(Airport airport) {
+        repository.deleteById(airport.getId());
     }
 
     public boolean checkIfAirportExists(AirportDto airportDto, double longitude, double latitude) {
-        if (repository.checkIfAirportExistsThroughName(airportDto.getName().toUpperCase(), airportDto.getCity().toUpperCase()) > 0 ||
-                repository.checkIfAirportExistsThroughCoordinates(longitude, latitude) > 0) {
-            return true;
-        } else
-            return false;
+        return repository.checkIfAirportExistsThroughName(airportDto.getName().toUpperCase(), airportDto.getCity().toUpperCase()) > 0 ||
+                repository.checkIfAirportExistsThroughCoordinates(longitude, latitude) > 0;
     }
 
 
