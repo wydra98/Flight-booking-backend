@@ -1,5 +1,8 @@
 package flight_booking.backend.loaders;
 
+import flight_booking.backend.repository.AirlineRepository;
+import flight_booking.backend.repository.ConnectionRepository;
+import flight_booking.backend.repository.FlightRepository;
 import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Connection;
 import flight_booking.backend.models.Flight;
@@ -1234,3 +1237,1106 @@ public class FlightLoader implements CommandLineRunner {
                             .build());
                 }
             }
+
+
+            // 51. FROM OSLO TO LONDON
+            Optional<Connection> connection51 = connectionRepository.findById(51L);
+
+            if (connection51.isPresent() && airline9.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection51.get())
+                            .airline(airline9.get())
+                            .numberSeats(120)
+                            .availableSeats(120)
+                            .price(150)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("12:15:00"))
+                                    .flightTime(LocalTime.parse("01:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 52. FROM LONDON TO OSLO
+            Optional<Connection> connection52 = connectionRepository.findById(52L);
+
+            if (connection52.isPresent() && airline11.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection52.get())
+                            .airline(airline11.get())
+                            .numberSeats(120)
+                            .availableSeats(120)
+                            .price(150)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("15:30:00"))
+                                    .flightTime(LocalTime.parse("02:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 53. FROM OSLO TO LOS ANGELES
+            Optional<Connection> connection53 = connectionRepository.findById(53L);
+
+            if (connection53.isPresent() && airline9.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection53.get())
+                            .airline(airline9.get())
+                            .numberSeats(180)
+                            .availableSeats(180)
+                            .price(400)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("04:15:00"))
+                                    .flightTime(LocalTime.parse("15:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 54. FROM LOS ANGELES TO OSLO
+            Optional<Connection> connection54 = connectionRepository.findById(54L);
+
+            if (connection54.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection54.get())
+                            .airline(airline3.get())
+                            .numberSeats(180)
+                            .availableSeats(180)
+                            .price(400)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("21:30:00"))
+                                    .flightTime(LocalTime.parse("15:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 55. FROM BUENOS AIRES TO PARIS
+            Optional<Connection> connection55 = connectionRepository.findById(55L);
+
+            if (connection55.isPresent() && airline8.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection55.get())
+                            .airline(airline8.get())
+                            .numberSeats(220)
+                            .availableSeats(220)
+                            .price(390)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("06:00:00"))
+                                    .flightTime(LocalTime.parse("06:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 56. FROM PARIS TO BUENOS AIRES
+            Optional<Connection> connection56 = connectionRepository.findById(56L);
+
+            if (connection56.isPresent() && airline10.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection56.get())
+                            .airline(airline10.get())
+                            .numberSeats(220)
+                            .availableSeats(220)
+                            .price(390)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("11:45:00"))
+                                    .flightTime(LocalTime.parse("06:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 57. FROM PARIS TO LONDON
+            Optional<Connection> connection57 = connectionRepository.findById(57L);
+
+            if (connection57.isPresent() && airline10.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection57.get())
+                            .airline(airline10.get())
+                            .numberSeats(130)
+                            .availableSeats(130)
+                            .price(100)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("07:00:00"))
+                                    .flightTime(LocalTime.parse("01:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 58. FROM LONDON TO PARIS
+            Optional<Connection> connection58 = connectionRepository.findById(58L);
+
+            if (connection58.isPresent() && airline11.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection58.get())
+                            .airline(airline11.get())
+                            .numberSeats(130)
+                            .availableSeats(130)
+                            .price(100)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("16:00:00"))
+                                    .flightTime(LocalTime.parse("01:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 59. FROM LONDON TO TORONTO
+            Optional<Connection> connection59 = connectionRepository.findById(59L);
+
+            if (connection59.isPresent() && airline11.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection59.get())
+                            .airline(airline11.get())
+                            .numberSeats(240)
+                            .availableSeats(240)
+                            .price(350)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("07:30:00"))
+                                    .flightTime(LocalTime.parse("07:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 60. FROM TORONTO TO LONDON
+            Optional<Connection> connection60 = connectionRepository.findById(60L);
+
+            if (connection60.isPresent() && airline5.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection60.get())
+                            .airline(airline5.get())
+                            .numberSeats(240)
+                            .availableSeats(240)
+                            .price(350)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("14:30:00"))
+                                    .flightTime(LocalTime.parse("07:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 61. FROM LONDON TO CAIRO
+            Optional<Connection> connection61 = connectionRepository.findById(61L);
+
+            if (connection61.isPresent() && airline11.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection61.get())
+                            .airline(airline11.get())
+                            .numberSeats(160)
+                            .availableSeats(160)
+                            .price(320)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("04:15:00"))
+                                    .flightTime(LocalTime.parse("06:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 62. FROM CAIRO TO LONDON
+            Optional<Connection> connection62 = connectionRepository.findById(62L);
+
+            if (connection62.isPresent() && airline13.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection62.get())
+                            .airline(airline13.get())
+                            .numberSeats(160)
+                            .availableSeats(160)
+                            .price(320)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("12:30:00"))
+                                    .flightTime(LocalTime.parse("06:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 63. FROM LONDON TO MOSCOW
+            Optional<Connection> connection63 = connectionRepository.findById(63L);
+
+            if (connection63.isPresent() && airline11.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection63.get())
+                            .airline(airline11.get())
+                            .numberSeats(250)
+                            .availableSeats(250)
+                            .price(220)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("06:45:00"))
+                                    .flightTime(LocalTime.parse("03:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 64. FROM MOSCOW TO LONDON
+            Optional<Connection> connection64 = connectionRepository.findById(64L);
+
+            if (connection64.isPresent() && airline12.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection64.get())
+                            .airline(airline12.get())
+                            .numberSeats(250)
+                            .availableSeats(250)
+                            .price(220)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("09:30:00"))
+                                    .flightTime(LocalTime.parse("03:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 65. FROM LONDON TO WARSAW
+            Optional<Connection> connection65 = connectionRepository.findById(65L);
+
+            if (connection65.isPresent() && airline11.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection65.get())
+                            .airline(airline11.get())
+                            .numberSeats(190)
+                            .availableSeats(190)
+                            .price(150)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("12:15:00"))
+                                    .flightTime(LocalTime.parse("02:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 66. FROM WARSAW TO LONDON
+            Optional<Connection> connection66 = connectionRepository.findById(66L);
+
+            if (connection66.isPresent() && airline1.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection66.get())
+                            .airline(airline1.get())
+                            .numberSeats(190)
+                            .availableSeats(190)
+                            .price(150)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("15:15:00"))
+                                    .flightTime(LocalTime.parse("02:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 67. FROM LONDON TO LOS ANGELES
+            Optional<Connection> connection67 = connectionRepository.findById(67L);
+
+            if (connection67.isPresent() && airline11.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection67.get())
+                            .airline(airline11.get())
+                            .numberSeats(120)
+                            .availableSeats(120)
+                            .price(360)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("10:00:00"))
+                                    .flightTime(LocalTime.parse("10:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 68. FROM LOS ANGELES TO LONDON
+            Optional<Connection> connection68 = connectionRepository.findById(68L);
+
+            if (connection68.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection68.get())
+                            .airline(airline3.get())
+                            .numberSeats(120)
+                            .availableSeats(120)
+                            .price(360)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("20:15:00"))
+                                    .flightTime(LocalTime.parse("10:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 69. FROM LOS ANGELES TO BERLIN
+            Optional<Connection> connection69 = connectionRepository.findById(69L);
+
+            if (connection69.isPresent() && airline13.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection69.get())
+                            .airline(airline13.get())
+                            .numberSeats(105)
+                            .availableSeats(105)
+                            .price(380)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("17:15:00"))
+                                    .flightTime(LocalTime.parse("12:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 70. FROM BERLIN TO LOS ANGELES
+            Optional<Connection> connection70 = connectionRepository.findById(70L);
+
+            if (connection70.isPresent() && airline2.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection70.get())
+                            .airline(airline2.get())
+                            .numberSeats(105)
+                            .availableSeats(105)
+                            .price(380)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("09:00:00"))
+                                    .flightTime(LocalTime.parse("12:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 71. FROM LOS ANGELES TO CHICAGO
+            Optional<Connection> connection71 = connectionRepository.findById(71L);
+
+            if (connection71.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection71.get())
+                            .airline(airline3.get())
+                            .numberSeats(210)
+                            .availableSeats(210)
+                            .price(150)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("10:30:00"))
+                                    .flightTime(LocalTime.parse("03:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 72. FROM CHICAGO TO LOS ANGELES
+            Optional<Connection> connection72 = connectionRepository.findById(72L);
+
+            if (connection72.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection72.get())
+                            .airline(airline3.get())
+                            .numberSeats(210)
+                            .availableSeats(120)
+                            .price(150)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("16:30:00"))
+                                    .flightTime(LocalTime.parse("03:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 73. FROM LOS ANGELES TO WARSAW
+            Optional<Connection> connection73 = connectionRepository.findById(73L);
+
+            if (connection73.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection73.get())
+                            .airline(airline3.get())
+                            .numberSeats(240)
+                            .availableSeats(240)
+                            .price(420)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("16:00:00"))
+                                    .flightTime(LocalTime.parse("15:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 74. FROM WARSAW TO LOS ANGELES
+            Optional<Connection> connection74 = connectionRepository.findById(74L);
+
+            if (connection74.isPresent() && airline13.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection74.get())
+                            .airline(airline13.get())
+                            .numberSeats(240)
+                            .availableSeats(240)
+                            .price(420)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("12:00:00"))
+                                    .flightTime(LocalTime.parse("15:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 75. FROM LOS ANGELES TO KIEV
+            Optional<Connection> connection75 = connectionRepository.findById(75L);
+
+            if (connection75.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection75.get())
+                            .airline(airline3.get())
+                            .numberSeats(250)
+                            .availableSeats(250)
+                            .price(460)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("15:00:00"))
+                                    .flightTime(LocalTime.parse("16:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 76. FROM KIEV TO LOS ANGELES
+            Optional<Connection> connection76 = connectionRepository.findById(76L);
+
+            if (connection76.isPresent() && airline15.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection76.get())
+                            .airline(airline15.get())
+                            .numberSeats(250)
+                            .availableSeats(250)
+                            .price(460)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("11:00:00"))
+                                    .flightTime(LocalTime.parse("16:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 77. FROM MOSCOW TO DELHI
+            Optional<Connection> connection77 = connectionRepository.findById(77L);
+
+            if (connection77.isPresent() && airline12.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection77.get())
+                            .airline(airline12.get())
+                            .numberSeats(150)
+                            .availableSeats(150)
+                            .price(290)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("02:45:00"))
+                                    .flightTime(LocalTime.parse("06:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 78. FROM DELHI TO MOSCOW
+            Optional<Connection> connection78 = connectionRepository.findById(78L);
+
+            if (connection78.isPresent() && airline14.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection78.get())
+                            .airline(airline14.get())
+                            .numberSeats(180)
+                            .availableSeats(180)
+                            .price(290)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("12:15:00"))
+                                    .flightTime(LocalTime.parse("06:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 79. FROM MOSCOW TO CRACOW
+            Optional<Connection> connection79 = connectionRepository.findById(79L);
+
+            if (connection79.isPresent() && airline12.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection79.get())
+                            .airline(airline12.get())
+                            .numberSeats(180)
+                            .availableSeats(180)
+                            .price(220)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("06:15:00"))
+                                    .flightTime(LocalTime.parse("03:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 80. FROM CRACOW TO MOSCOW
+            Optional<Connection> connection80 = connectionRepository.findById(80L);
+
+            if (connection80.isPresent() && airline1.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection80.get())
+                            .airline(airline1.get())
+                            .numberSeats(180)
+                            .availableSeats(180)
+                            .price(220)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("12:15:00"))
+                                    .flightTime(LocalTime.parse("03:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 81. FROM MOSCOW TO NEW YORK
+            Optional<Connection> connection81 = connectionRepository.findById(81L);
+
+            if (connection81.isPresent() && airline12.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection81.get())
+                            .airline(airline12.get())
+                            .numberSeats(140)
+                            .availableSeats(140)
+                            .price(550)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("13:45:00"))
+                                    .flightTime(LocalTime.parse("11:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 82. FROM NEW YORK TO MOSCOW
+            Optional<Connection> connection82 = connectionRepository.findById(82L);
+
+            if (connection82.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection82.get())
+                            .airline(airline3.get())
+                            .numberSeats(140)
+                            .availableSeats(140)
+                            .price(550)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("11:15:00"))
+                                    .flightTime(LocalTime.parse("11:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 83. FROM MOSCOW TO WARSAW
+            Optional<Connection> connection83 = connectionRepository.findById(83L);
+
+            if (connection83.isPresent() && airline12.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection83.get())
+                            .airline(airline12.get())
+                            .numberSeats(160)
+                            .availableSeats(160)
+                            .price(200)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("08:30:00"))
+                                    .flightTime(LocalTime.parse("03:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 84. FROM WARSAW TO MOSCOW
+            Optional<Connection> connection84 = connectionRepository.findById(84L);
+
+            if (connection84.isPresent() && airline1.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection84.get())
+                            .airline(airline1.get())
+                            .numberSeats(160)
+                            .availableSeats(160)
+                            .price(200)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("17:45:00"))
+                                    .flightTime(LocalTime.parse("03:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 85. FROM MOSCOW TO LOS ANGELES
+            Optional<Connection> connection85 = connectionRepository.findById(85L);
+
+            if (connection85.isPresent() && airline12.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection85.get())
+                            .airline(airline12.get())
+                            .numberSeats(200)
+                            .availableSeats(200)
+                            .price(600)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("02:15:00"))
+                                    .flightTime(LocalTime.parse("16:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 86. FROM LOS ANGELES TO MOSCOW
+            Optional<Connection> connection86 = connectionRepository.findById(86L);
+
+            if (connection86.isPresent() && airline1.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection86.get())
+                            .airline(airline1.get())
+                            .numberSeats(200)
+                            .availableSeats(200)
+                            .price(600)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("05:15:00"))
+                                    .flightTime(LocalTime.parse("16:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 87. FROM CAIRO TO DELHI
+            Optional<Connection> connection87 = connectionRepository.findById(87L);
+
+            if (connection87.isPresent() && airline13.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection87.get())
+                            .airline(airline13.get())
+                            .numberSeats(160)
+                            .availableSeats(160)
+                            .price(320)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("23:15:00"))
+                                    .flightTime(LocalTime.parse("04:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 88. FROM DELHI TO CAIRO
+            Optional<Connection> connection88 = connectionRepository.findById(88L);
+
+            if (connection88.isPresent() && airline14.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection88.get())
+                            .airline(airline14.get())
+                            .numberSeats(160)
+                            .availableSeats(160)
+                            .price(320)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("21:45:00"))
+                                    .flightTime(LocalTime.parse("04:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 89. FROM CAIRO TO CRACOW
+            Optional<Connection> connection89 = connectionRepository.findById(89L);
+
+            if (connection89.isPresent() && airline13.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection89.get())
+                            .airline(airline13.get())
+                            .numberSeats(90)
+                            .availableSeats(90)
+                            .price(255)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("09:45:00"))
+                                    .flightTime(LocalTime.parse("04:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 90. FROM CRACOW TO CAIRO
+            Optional<Connection> connection90 = connectionRepository.findById(90L);
+
+            if (connection90.isPresent() && airline1.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection90.get())
+                            .airline(airline1.get())
+                            .numberSeats(90)
+                            .availableSeats(90)
+                            .price(255)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("10:30:00"))
+                                    .flightTime(LocalTime.parse("04:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 91. FROM CRACOW TO DELHI
+            Optional<Connection> connection91 = connectionRepository.findById(91L);
+
+            if (connection91.isPresent() && airline1.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection91.get())
+                            .airline(airline1.get())
+                            .numberSeats(145)
+                            .availableSeats(145)
+                            .price(330)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("06:15:00"))
+                                    .flightTime(LocalTime.parse("08:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 92. FROM DELHI TO CRACOW
+            Optional<Connection> connection92 = connectionRepository.findById(92L);
+
+            if (connection92.isPresent() && airline14.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection92.get())
+                            .airline(airline14.get())
+                            .numberSeats(145)
+                            .availableSeats(145)
+                            .price(330)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("11:00:00"))
+                                    .flightTime(LocalTime.parse("08:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 93. FROM CRACOW TO KIEV
+            Optional<Connection> connection93 = connectionRepository.findById(93L);
+
+            if (connection93.isPresent() && airline1.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection93.get())
+                            .airline(airline1.get())
+                            .numberSeats(170)
+                            .availableSeats(170)
+                            .price(100)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("14:00:00"))
+                                    .flightTime(LocalTime.parse("01:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 94. FROM KIEV TO CRACOW
+            Optional<Connection> connection94 = connectionRepository.findById(94L);
+
+            if (connection94.isPresent() && airline15.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection94.get())
+                            .airline(airline15.get())
+                            .numberSeats(170)
+                            .availableSeats(170)
+                            .price(100)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("18:00:00"))
+                                    .flightTime(LocalTime.parse("01:15:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 95. FROM CRACOW TO NEW YORK
+            Optional<Connection> connection95 = connectionRepository.findById(95L);
+
+            if (connection95.isPresent() && airline1.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection95.get())
+                            .airline(airline1.get())
+                            .numberSeats(110)
+                            .availableSeats(110)
+                            .price(380)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("19:00:00"))
+                                    .flightTime(LocalTime.parse("10:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 96. FROM NEW YORK TO CRACOW
+            Optional<Connection> connection96 = connectionRepository.findById(96L);
+
+            if (connection96.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection96.get())
+                            .airline(airline3.get())
+                            .numberSeats(110)
+                            .availableSeats(110)
+                            .price(380)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("09:30:00"))
+                                    .flightTime(LocalTime.parse("10:30:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 97. FROM DELHI TO KIEV
+            Optional<Connection> connection97 = connectionRepository.findById(97L);
+
+            if (connection97.isPresent() && airline14.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection97.get())
+                            .airline(airline14.get())
+                            .numberSeats(165)
+                            .availableSeats(165)
+                            .price(340)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("17:15:00"))
+                                    .flightTime(LocalTime.parse("06:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 98. FROM KIEV TO DELHI
+            Optional<Connection> connection98 = connectionRepository.findById(98L);
+
+            if (connection98.isPresent() && airline15.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection98.get())
+                            .airline(airline15.get())
+                            .numberSeats(165)
+                            .availableSeats(165)
+                            .price(340)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("17:00:00"))
+                                    .flightTime(LocalTime.parse("06:00:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 99. FROM KIEV TO NEW YORK
+            Optional<Connection> connection99 = connectionRepository.findById(99L);
+
+            if (connection99.isPresent() && airline15.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection99.get())
+                            .airline(airline15.get())
+                            .numberSeats(120)
+                            .availableSeats(120)
+                            .price(430)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("19:45:00"))
+                                    .flightTime(LocalTime.parse("11:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+
+
+            // 100. FROM NEW YORK TO KIEV
+            Optional<Connection> connection100 = connectionRepository.findById(100L);
+
+            if (connection100.isPresent() && airline3.isPresent()) {
+                for (int i = 0; i < MAX_DAYS_TO_LOAD; i++) {
+                    flightRepository.save(Flight.builder()
+                            .connection(connection100.get())
+                            .airline(airline3.get())
+                            .numberSeats(120)
+                            .availableSeats(120)
+                            .price(430)
+                            .times(Times.
+                                    builder()
+                                    .departureDate((LocalDate.parse(FIRST_DAY)).plusDays(i))
+                                    .departureTime(LocalTime.parse("22:15:00"))
+                                    .flightTime(LocalTime.parse("11:45:00"))
+                                    .build())
+                            .build());
+                }
+            }
+        }
+    }
+}
