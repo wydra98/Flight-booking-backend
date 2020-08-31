@@ -9,4 +9,5 @@ import lombok.*;
 public class AirlineDto {
     private Long id;
     private String name;
+    private String country;
 }

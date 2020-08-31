@@ -1,8 +1,7 @@
 package flight_booking.backend.controllers.airline;
 
-import flight_booking.backend.models.Airline;
-import flight_booking.backend.service.AirlineService;
-import flight_booking.backend.service.ConnectionService;
+import flight_booking.backend.models.*;
+import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +18,23 @@ import java.util.Optional;
 @RequestMapping("/airlines")
 public class AirlineController {
 
-    private final AirlineMapper mapper = new AirlineMapper();
     private final AirlineService airlineService;
     private final ConnectionService connectionService;
+    private final FlightService flightService;
+    private final TicketService ticketService;
+    private final TripService tripService;
+    private final AirlineMapper mapper = new AirlineMapper();
 
-
-    public AirlineController(AirlineService airlineService, ConnectionService connectionService) {
+    public AirlineController(AirlineService airlineService,
+                             ConnectionService connectionService,
+                             FlightService flightService,
+                             TicketService ticketService,
+                             TripService tripService) {
         this.airlineService = airlineService;
         this.connectionService = connectionService;
+        this.flightService = flightService;
+        this.ticketService = ticketService;
+        this.tripService = tripService;
     }
 
     @ApiOperation(value = "Get all airlines")
@@ -42,7 +50,6 @@ public class AirlineController {
         return ResponseEntity.ok(airlineDtos);
     }
 
-    //@TODO what is better request bddy or parametr?
     @ApiOperation(value = "Add new airline")
     @PostMapping
     ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto,
@@ -65,12 +72,35 @@ public class AirlineController {
             throw new NoSuchElementException("Airline with that id not exist!");
         }
 
-        connectionService.deleteConnectionWithAirlineId(id);
-        airlineService.deleteAirline(id);
+        Optional<Airline> airline = airlineService.findById(id);
+
+        if (airline.isPresent()) {
+            List<Flight> flights;
+            List<Ticket> tickets = new ArrayList<>();
+            List<Trip> trips = new ArrayList<>();
+
+            flights = flightService.findFlightsByAirline(airline.get());
+            if (!flights.isEmpty()) {
+                tickets = ticketService.findTicketsByFlights(flights);
+                if (!tickets.isEmpty()) {
+                    trips = tripService.findTripsBytickets(tickets);
+                }
+            }
+
+            if (!trips.isEmpty()) {
+                tripService.deleteTrips(trips);
+            }
+            if (!tickets.isEmpty()) {
+                ticketService.deleteTickets(tickets);
+            }
+            if (!flights.isEmpty()) {
+                flightService.deleteFlighs(flights);
+            }
+            airlineService.deleteAirline(id);
+        }
         return ResponseEntity.ok(id);
     }
 
-    //@TODO what is better request bddy or parametr?
     @ApiOperation(value = "Update airline")
     @PutMapping
     ResponseEntity<Void> updateAirline(@RequestBody AirlineDto airlineDto,
@@ -81,7 +111,7 @@ public class AirlineController {
         }
 
         Optional<Airline> airlineOptional = airlineService.findById(airlineDto.getId());
-        if(airlineOptional.isPresent()){
+        if (airlineOptional.isPresent()) {
             airlineOptional.get().updateForm(airlineDto, country);
             airlineService.save(airlineOptional.get());
         }

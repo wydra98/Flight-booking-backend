@@ -21,6 +21,18 @@ public class AirlineService {
         return repository.findAll();
     }
 
+    public Optional<Airline> findById(Long id) {
+        return repository.findById(id);
+    }
+
+    public boolean existsById(Long id) {
+        return repository.existsById(id);
+    }
+
+    public boolean checkIfAirlineExists(AirlineDto airlineDto,String country) {
+        return repository.checkIfAirlineExists(airlineDto.getName(), country) > 0;
+    }
+
     public Airline addNewAirline(AirlineDto airlineDto, String country) {
 
         Airline airline = Airline.builder()
@@ -32,26 +44,11 @@ public class AirlineService {
         return airline;
     }
 
-    public boolean existsById(Long id) {
-        return repository.existsById(id);
-    }
-
-    public Optional<Airline> findById(Long id) {
-        return repository.findById(id);
+    public void save(Airline airline) {
+        repository.save(airline);
     }
 
     public void deleteAirline(Long id) {
         repository.deleteById(id);
-    }
-
-    public boolean checkIfAirlineExists(AirlineDto airlineDto,String country) {
-        if (repository.checkIfAirlineExists(airlineDto.getName(),country)>0) {
-            return true;
-        } else
-            return false;
-    }
-
-    public void save(Airline airline) {
-        repository.save(airline);
     }
 }

@@ -1,10 +1,14 @@
 package flight_booking.backend.repository;
 
+import flight_booking.backend.models.Flight;
+import flight_booking.backend.models.Ticket;
 import flight_booking.backend.models.Trip;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface TripRepository extends JpaRepository<Trip, Long> {
@@ -19,5 +23,6 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     @Query(value = "SELECT DISTINCT t FROM Trip t WHERE t.code=:code")
     Trip findTripByCode(@Param("code") String code);
 
-
+    @Query(value = "SELECT t FROM Trip t WHERE t.")
+    Trip findTripByTicket(@Param("flight") Flight flight);
 }

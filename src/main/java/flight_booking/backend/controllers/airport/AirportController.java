@@ -1,30 +1,36 @@
 package flight_booking.backend.controllers.airport;
 
-import flight_booking.backend.service.AirportService;
-import flight_booking.backend.service.ConnectionService;
+import flight_booking.backend.models.*;
+import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import flight_booking.backend.models.Airport;
 
 import javax.transaction.Transactional;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/airports")
 public class AirportController {
 
-    private final AirportMapper mapper = new AirportMapper();
     private final AirportService airportService;
     private final ConnectionService connectionService;
+    private final FlightService flightService;
+    private final TicketService ticketService;
+    private final TripService tripService;
+    private final AirportMapper mapper = new AirportMapper();
 
-    public AirportController(AirportService airportService, ConnectionService connectionService) {
+    public AirportController(AirportService airportService,
+                             ConnectionService connectionService,
+                             FlightService flightService,
+                             TicketService ticketService,
+                             TripService tripService) {
         this.airportService = airportService;
         this.connectionService = connectionService;
+        this.flightService = flightService;
+        this.ticketService = ticketService;
+        this.tripService = tripService;
     }
 
     @ApiOperation(value = "Get all airports")
@@ -39,7 +45,6 @@ public class AirportController {
         return ResponseEntity.ok(airportsDtos);
     }
 
-    //@TODO what is better request body or parametr?
     @ApiOperation(value = "Add new airport")
     @PostMapping
     ResponseEntity<Airport> addNewAirline(@RequestBody AirportDto airportDto,
@@ -63,12 +68,41 @@ public class AirportController {
             throw new NoSuchElementException("Airport with that id not exist!");
         }
 
-        connectionService.deleteConnectionWithAirportId(id);
-        airportService.deleteAirport(id);
+        Optional<Airport> airport = airportService.findById(id);
+
+        if (airport.isPresent()) {
+            List<Connection> connections;
+            List<Flight> flights = new ArrayList<>();
+            List<Ticket> tickets = new ArrayList<>();
+            Set<Trip> trips = new HashSet<>();
+
+            connections = connectionService.findConnectionsByAirport(airport.get());
+            if (!connections.isEmpty()) {
+                flights = flightService.findFlightsByConnections(connections);
+                if (!flights.isEmpty()) {
+                    tickets = ticketService.findTicketsByFlights(flights);
+                    if (!tickets.isEmpty()) {
+                        trips = tripService.findTripsByTickets(tickets);
+                    }
+                }
+            }
+            if (!trips.isEmpty()) {
+                tripService.deleteTrips(trips);
+            }
+            if (!tickets.isEmpty()) {
+                ticketService.deleteTickets(tickets);
+            }
+            if (!flights.isEmpty()) {
+                flightService.deleteFlighs(flights);
+            }
+            if (!trips.isEmpty()) {
+                connectionService.deleteConnections(connections);
+            }
+            airportService.deleteAirport(airport);
+        }
         return ResponseEntity.ok(id);
     }
 
-    //@TODO what is better request bddy or parametr?
     @ApiOperation(value = "Update airport")
     @Transactional
     @PutMapping
@@ -80,9 +114,11 @@ public class AirportController {
             throw new NoSuchElementException("Airport with that id not exist!");
         }
 
-        Optional<Airport> airportOptional = airportService.findById(airportDto.getId());
-        airportOptional.get().updateForm(airportDto, longitude, latitude);
-        airportService.save(airportOptional.get());
+        Optional<Airport> airport = airportService.findById(airportDto.getId());
+        if(airport.isPresent()){
+            airport.get().updateForm(airportDto, longitude, latitude);
+            airportService.save(airport.get());
+        }
 
         return ResponseEntity.noContent().build();
     }

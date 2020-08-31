@@ -1,5 +1,6 @@
 package flight_booking.backend.service;
 
+import flight_booking.backend.models.Connection;
 import flight_booking.backend.models.Flight;
 import flight_booking.backend.models.Ticket;
 import flight_booking.backend.models.Trip;
@@ -28,6 +29,25 @@ public class TicketService {
         List<Ticket> tickets = ticketRepository.findAllTicketFromUserId(id);
 
         return tickets;
+    }
+
+    public List<Ticket> findTicketsByFlights(List<Flight> flights) {
+
+        List<List<Ticket>> tickets = new ArrayList<>();
+        List<Ticket> parseTickets = new ArrayList<>();
+        for (Flight flight: flights) {
+            List<Ticket> findTickets = ticketRepository.findTicketsByFlights(flight);
+            if(!findTickets.isEmpty()){
+                tickets.add(findTickets);
+            }
+        }
+        for (List<Ticket> listTicket: tickets) {
+            for (Ticket ticket: listTicket) {
+                parseTickets.add(ticket);
+            }
+        }
+
+        return parseTickets;
     }
 
     public List<Trip> findAllTrips(Long srcAirport, Long dstAirport, LocalDate departureDate, int passengerNumber) {

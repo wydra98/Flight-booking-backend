@@ -1,5 +1,7 @@
 package flight_booking.backend.repository;
 
+import flight_booking.backend.models.Airline;
+import flight_booking.backend.models.Flight;
 import flight_booking.backend.models.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +19,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query(value = "SELECT COUNT (a.ticket_id) FROM tickets a", nativeQuery = true)
     int amountOfRows();
 
+    @Query(value = "SELECT t FROM Ticket t WHERE t.flight=:flight")
+    List<Ticket> findTicketsByFlights(@Param("flight") Flight flight);
 }

@@ -8,6 +8,7 @@ public class AirlineMapper {
         return AirlineDto.builder()
                 .id(airline.getId())
                 .name(airline.getName())
+                .country(airline.getCountry())
                 .build();
     }
 }

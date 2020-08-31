@@ -24,57 +24,53 @@ public class ConnectionService {
         this.airportRepository = airportRepository;
     }
 
+    public List<Connection> findConnectionsByAirport(Airport airport) {
 
-    public Connection addNewConnection(Long srcAirportId,
-                                       Long dstAirportId) {
-
-        Optional<Airport> srcAirport1 = airportRepository.findById(srcAirportId);
-        Optional<Airport> dstAirport1 = airportRepository.findById(dstAirportId);
-
-        Connection connection = Connection.builder()
-                .srcAirport(srcAirport1.get())
-                .dstAirport(dstAirport1.get())
-                .build();
-        connectionRepository.save(connection);
-        return connection;
+        return connectionRepository.findConnectionByAirport(airport);
     }
 
-    public void deleteConnectionWithAirlineId(Long id) {
-        connectionRepository.deleteAllConnectionWithAirlineId(id);
+
+    public Optional<Connection> findById(Long id) {
+        return connectionRepository.findById(id);
     }
 
-    public void deleteConnectionWithAirportId(Long id) {
-        connectionRepository.deleteAllConnectionWithAirportId(id);
-    }
 
-    public List<Connection> findAll() {
-        return connectionRepository.findAll();
+    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId) {
+
+        List<Connection> allConnection = connectionRepository.findAll();
+
+        Search search = new Search(srcAirportId, dstAirportId);
+        List<List<Connection>> connections = search.findConnections(allConnection);
+
+        return connections;
     }
 
     public boolean existsById(Long id) {
         return connectionRepository.existsById(id);
     }
 
-    public void deleteConnection(Long id) {
-        connectionRepository.deleteById(id);
-    }
+    public Connection addNewConnection(Long srcAirportId,
+                                       Long dstAirportId) {
 
-    public Optional<Connection> findById(Long id) {
-        return connectionRepository.findById(id);
+        Optional<Airport> srcAirport = airportRepository.findById(srcAirportId);
+        Optional<Airport> dstAirport = airportRepository.findById(dstAirportId);
+
+        Connection connection = null;
+        if (srcAirport.isPresent() && dstAirport.isPresent()) {
+            connection = Connection.builder()
+                    .srcAirport(srcAirport.get())
+                    .dstAirport(dstAirport.get())
+                    .build();
+            connectionRepository.save(connection);
+        }
+
+        return connection;
     }
 
     public void save(Connection connection) {
         connectionRepository.save(connection);
     }
 
-    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId) {
 
-        List<Connection> allConnection = connectionRepository.findAll();
-
-        Search search = new Search(srcAirportId,dstAirportId);
-        List<List<Connection>> connections = search.findConnections(allConnection);
-
-        return connections;
-    }
 
 }

@@ -1,9 +1,6 @@
 package flight_booking.backend.service;
 
-import flight_booking.backend.models.Airline;
-import flight_booking.backend.models.Connection;
-import flight_booking.backend.models.Flight;
-import flight_booking.backend.models.Times;
+import flight_booking.backend.models.*;
 import flight_booking.backend.repository.FlightRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +32,20 @@ public class FlightService {
 
         Long id_connection = flightRepository.findIdConnectionByFlight(flightId);
         return connectionService.findById(id_connection).get();
+    }
+
+    public List<Flight> findFlightsByAirline(Airline airline) {
+
+        return flightRepository.findFlightsByAirline(airline);
+    }
+
+    public List<Flight> findFlightsByConnections(List<Connection> connections) {
+
+        List<Flight> flights = new ArrayList<>();
+        for (Connection connection: connections) {
+            flights.add(flightRepository.findFlightByConnection(connection));
+        }
+        return flights;
     }
 
     public List<Flight> findAll() {

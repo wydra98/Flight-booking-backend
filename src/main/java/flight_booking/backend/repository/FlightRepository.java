@@ -1,5 +1,7 @@
 package flight_booking.backend.repository;
 
+import flight_booking.backend.models.Airline;
+import flight_booking.backend.models.Airport;
 import flight_booking.backend.models.Connection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,8 +18,12 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
     int amountOfRows();
 
     @Query("SELECT DISTINCT f FROM Flight f WHERE f.connection = :connection")
-    List<Flight> findFlightsByConnection(@Param("connection") Connection connection);
+    Flight findFlightByConnection(@Param("connection") Connection connection);
 
     @Query(value = "SELECT f.id_connection FROM flights f where f.flight_id = :id", nativeQuery = true)
     Long findIdConnectionByFlight(@Param("id") Long id);
+
+    @Query(value = "SELECT f FROM Flight f WHERE f.airline=:airline")
+    List<Flight> findFlightsByAirline(@Param("airline") Airline airline);
+
 }

@@ -3,10 +3,7 @@ package flight_booking.backend.service;
 
 import flight_booking.backend.controllers.flight.FlightDto;
 import flight_booking.backend.controllers.ticket.TicketDto;
-import flight_booking.backend.models.Flight;
-import flight_booking.backend.models.Ticket;
-import flight_booking.backend.models.Trip;
-import flight_booking.backend.models.Passenger;
+import flight_booking.backend.models.*;
 import flight_booking.backend.controllers.trip.TripDto;
 
 import flight_booking.backend.repository.TripRepository;
@@ -41,6 +38,36 @@ public class TripService {
                                             LocalDate departureDate, int passengerNumber) {
 
         return ticketService.findAllTrips(srcAirportId, dstAirportId, departureDate, passengerNumber);
+    }
+
+    public Trip findTripByCode(String code) {
+
+        return tripRepository.findTripByCode(code);
+    }
+
+    public boolean existsById(Long id) {
+
+        return tripRepository.existsById(id);
+    }
+
+    public boolean existsByCode(String code) {
+
+        boolean flag = true;
+        Trip trip = tripRepository.findTripByCode(code);
+        if (trip == null) {
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    public Set<Trip> findTripsByTickets(List<Ticket> tickets) {
+
+        Set<Trip> trips = new HashSet<>();
+        for (Ticket ticket: tickets) {
+            trips.add(tripRepository.findTripByTicket(ticket));
+        }
+        return trips;
     }
 
     public Trip addNewTrip(List<Passenger> passengers, TripDto tripDto) {
@@ -105,26 +132,5 @@ public class TripService {
 
         Random random = new Random();
         return random.nextInt(seatNumbers) + 1;
-    }
-
-    public Trip findTripByCode(String code) {
-
-        return tripRepository.findTripByCode(code);
-    }
-
-    public boolean existsById(Long id) {
-
-        return tripRepository.existsById(id);
-    }
-
-    public boolean existsByCode(String code) {
-
-        boolean flag = true;
-        Trip trip = tripRepository.findTripByCode(code);
-        if (trip == null) {
-            flag = false;
-        }
-
-        return flag;
     }
 }
