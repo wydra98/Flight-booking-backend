@@ -40,11 +40,9 @@ public class TripService {
 //    }
 
     public List<Trip> findAllAvailableTrips(Long srcAirportId, Long dstAirportId,
-                                            LocalDate departureDate, LocalDate arrivalDate,
-                                            int maxChange, int maxTimeBreak) {
+                                            LocalDate departureDate, int passengerNumber) {
 
-        return ticketService.findAllTrips(srcAirportId, dstAirportId,
-                departureDate, arrivalDate, maxChange, maxTimeBreak);
+        return ticketService.findAllTrips(srcAirportId, dstAirportId, departureDate, passengerNumber);
     }
 
     public Trip addNewTrip(Passenger passenger, TripDto tripDto) {

@@ -30,10 +30,9 @@ public class TicketService {
         return tickets;
     }
 
-    public List<Trip> findAllTrips(Long srcAirport, Long dstAirport, LocalDate minDepartureDate, LocalDate maxDepartureDate, int maxChange, int maxTimeBreak) {
+    public List<Trip> findAllTrips(Long srcAirport, Long dstAirport, LocalDate departureDate, int passengerNumber) {
 
-        List<List<Flight>> flights = flightService.findFlights(srcAirport, dstAirport, minDepartureDate, maxDepartureDate, maxChange, maxTimeBreak);
-
+        List<List<Flight>> flights = flightService.findFlights(srcAirport, dstAirport, departureDate, passengerNumber);
         List<Trip> trips = mapToTicket(flights);
         return trips;
     }
@@ -41,7 +40,6 @@ public class TicketService {
     public Ticket save(Ticket ticket) {
         return ticketRepository.save(ticket);
     }
-
 
     public List<Trip> mapToTicket(List<List<Flight>> allFlights) {
 
@@ -71,7 +69,6 @@ public class TicketService {
                         .id(null)
                         .passenger(null)
                         .flight(flight)
-                        .trip(trip)
                         .seatNumber(null)
                         .price(flight.getPrice())
                         .build();
@@ -85,12 +82,11 @@ public class TicketService {
                 if (!flag) {
                     depDT = actualDepDT;
                     arrDT = actualArrDT;
-                }
-                else{
-                    if(actualDepDT.isBefore(depDT)){
+                } else {
+                    if (actualDepDT.isBefore(depDT)) {
                         depDT = actualDepDT;
                     }
-                    if(actualArrDT.isAfter(arrDT)){
+                    if (actualArrDT.isAfter(arrDT)) {
                         arrDT = actualArrDT;
                     }
                 }

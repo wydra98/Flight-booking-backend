@@ -22,12 +22,12 @@ public class PassengerService {
     }
 
     public Passenger addNewPassenger(PassengerDto passengerDto) {
-
         Passenger passenger = Passenger.builder()
                 .firstName(passengerDto.getFirstName())
                 .surname(passengerDto.getSurname())
                 .dateOfBirth(LocalDate.parse(passengerDto.getDateOfBirth()))
                 .phoneNumber(passengerDto.getPhoneNumber())
+                .pesel(passengerDto.getPesel())
                 .email(passengerDto.getEmail())
                 .build();
         passengerRepository.save(passenger);
@@ -36,23 +36,15 @@ public class PassengerService {
     }
 
     public boolean checkIfPassengerExists(String pesel) {
-        if (passengerRepository.checkIfPassengerExistsThroughPesel(pesel) > 0)
-            return true;
-        else
-            return false;
+        return passengerRepository.checkIfPassengerExistsThroughPesel(pesel) > 0;
     }
 
     public Passenger findPassenger(String pesel){
-
-        Passenger passenger = passengerRepository.findByPesel(pesel);
-        return passenger;
+        return passengerRepository.findByPesel(pesel);
     }
 
     public boolean existsById(Long id) {
-        if (passengerRepository.existsById(id))
-            return true;
-        else
-            return false;
+        return passengerRepository.existsById(id);
     }
 
     public void deleteConnection(Long id) {
