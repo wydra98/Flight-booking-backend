@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -20,8 +21,10 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query("SELECT DISTINCT t FROM Ticket t WHERE t.id = :id")
     List<Ticket> findAllTicketFromUserId(@Param("id") Long id);
 
+    @Query(value = "SELECT t FROM Ticket t WHERE t.flight.id=:id")
+    Ticket findTicketsByFlightsId(@Param("id") Long id);
+
     @Query(value = "SELECT t FROM Ticket t WHERE t.flight=:flight")
     List<Ticket> findTicketsByFlights(@Param("flight") Flight flight);
 
-    Ticket deleteTicketById(Long id);
 }

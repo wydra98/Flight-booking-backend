@@ -41,9 +41,21 @@ public class FlightService {
 
     public List<Flight> findFlightsByConnections(List<Connection> connections) {
 
+        List<List<Flight>> listOfFlights = new ArrayList<>();
         List<Flight> flights = new ArrayList<>();
+
         for (Connection connection: connections) {
-            flights.add(flightRepository.findFlightByConnection(connection));
+            List<Flight> resultFlights = flightRepository.findFlightsByConnection(connection);
+
+            if(!resultFlights.isEmpty()){
+                listOfFlights.add(resultFlights);
+            }
+        }
+
+        for (List<Flight> flights1:listOfFlights) {
+            for (Flight flight: flights1) {
+                flights.add(flight);
+            }
         }
         return flights;
     }
@@ -226,7 +238,7 @@ public class FlightService {
 
     public void deleteFlights(List<Flight> flights){
         for (Flight flight: flights) {
-            flightRepository.deleteFlightById(flight.getId());
+            flightRepository.deleteById(flight.getId());
         }
     }
 }

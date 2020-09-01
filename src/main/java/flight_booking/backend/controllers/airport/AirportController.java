@@ -86,11 +86,9 @@ public class AirportController {
                     }
                 }
             }
+
             if (!trips.isEmpty()) {
                 tripService.deleteTrips(trips);
-            }
-            if (!tickets.isEmpty()) {
-                ticketService.deleteTickets(tickets);
             }
             if (!flights.isEmpty()) {
                 flightService.deleteFlights(flights);

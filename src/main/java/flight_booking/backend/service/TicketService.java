@@ -34,21 +34,14 @@ public class TicketService {
 
     public List<Ticket> findTicketsByFlights(List<Flight> flights) {
 
-        List<List<Ticket>> tickets = new ArrayList<>();
-        List<Ticket> parseTickets = new ArrayList<>();
-        for (Flight flight: flights) {
-            List<Ticket> findTickets = ticketRepository.findTicketsByFlights(flight);
-            if(!findTickets.isEmpty()){
+        List<Ticket> tickets = new ArrayList<>();
+        for (Flight flight : flights) {
+            Ticket findTickets = ticketRepository.findTicketsByFlightsId(flight.getId());
+            if (findTickets != null) {
                 tickets.add(findTickets);
             }
         }
-        for (List<Ticket> listTicket: tickets) {
-            for (Ticket ticket: listTicket) {
-                parseTickets.add(ticket);
-            }
-        }
-
-        return parseTickets;
+        return tickets;
     }
 
     public List<Trip> findAllTrips(Long srcAirport, Long dstAirport, LocalDate departureDate, int passengerNumber) {
@@ -90,6 +83,7 @@ public class TicketService {
                         .id(null)
                         .passenger(null)
                         .flight(flight)
+                        .trip(trip)
                         .seatNumber(null)
                         .price(flight.getPrice())
                         .build();
@@ -128,9 +122,9 @@ public class TicketService {
         return allTrips;
     }
 
-    public void deleteTickets(List<Ticket> tickets){
-        for (Ticket ticket: tickets) {
-            ticketRepository.deleteTicketById(ticket.getId());
+    public void deleteTickets(List<Ticket> tickets) {
+        for (Ticket ticket : tickets) {
+            ticketRepository.deleteById(ticket.getId());
         }
     }
 

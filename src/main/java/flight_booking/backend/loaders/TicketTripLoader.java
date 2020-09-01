@@ -44,7 +44,7 @@ public class TicketTripLoader implements CommandLineRunner {
             // GET PASSENGERS
             Optional<Passenger> passenger1 = passengerRepository.findById(1L);
             Optional<Passenger> passenger2 = passengerRepository.findById(2L);
-            Optional<Passenger> passenger3 = passengerRepository.findById(2L);
+            Optional<Passenger> passenger3 = passengerRepository.findById(3L);
 
 
             // TRIP FROM NEW YORK TO WARSAW WITH TICKETS BELONG TO PASSENGER 1
@@ -67,6 +67,7 @@ public class TicketTripLoader implements CommandLineRunner {
                 Ticket ticket = ticketRepository.save(Ticket.builder()
                         .passenger(passenger1.get())
                         .flight(flight1.get())
+                        .trip(trip1.get())
                         .seatNumber(34)
                         .price(225)
                         .build());
@@ -79,6 +80,7 @@ public class TicketTripLoader implements CommandLineRunner {
                 Ticket ticket = ticketRepository.save(Ticket.builder()
                         .passenger(passenger1.get())
                         .flight(flight2.get())
+                        .trip(trip1.get())
                         .seatNumber(56)
                         .price(560)
                         .build());
@@ -91,6 +93,7 @@ public class TicketTripLoader implements CommandLineRunner {
                 Ticket ticket = ticketRepository.save(Ticket.builder()
                         .passenger(passenger1.get())
                         .flight(flight3.get())
+                        .trip(trip1.get())
                         .seatNumber(64)
                         .price(560)
                         .build());
@@ -124,6 +127,7 @@ public class TicketTripLoader implements CommandLineRunner {
                 Ticket ticket = ticketRepository.save(Ticket.builder()
                         .passenger(passenger1.get())
                         .flight(flight4.get())
+                        .trip(trip2.get())
                         .seatNumber(79)
                         .price(405)
                         .build());
@@ -157,6 +161,7 @@ public class TicketTripLoader implements CommandLineRunner {
                 Ticket ticket = ticketRepository.save(Ticket.builder()
                         .passenger(passenger2.get())
                         .flight(flight5.get())
+                        .trip(trip3.get())
                         .seatNumber(8)
                         .price(100)
                         .build());
@@ -169,6 +174,7 @@ public class TicketTripLoader implements CommandLineRunner {
                 Ticket ticket = ticketRepository.save(Ticket.builder()
                         .passenger(passenger2.get())
                         .flight(flight6.get())
+                        .trip(trip3.get())
                         .seatNumber(42)
                         .price(220)
                         .build());
@@ -202,6 +208,7 @@ public class TicketTripLoader implements CommandLineRunner {
                 Ticket ticket = ticketRepository.save(Ticket.builder()
                         .passenger(passenger3.get())
                         .flight(flight7.get())
+                        .trip(trip4.get())
                         .seatNumber(65)
                         .price(150)
                         .build());

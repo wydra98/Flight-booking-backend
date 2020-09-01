@@ -61,7 +61,7 @@ public class AirlineController {
     @ApiOperation(value = "Delete airline")
     @Transactional
     @DeleteMapping("/delete/{id}")
-    ResponseEntity<Long> deleteAirline(@PathVariable Long id) {
+    ResponseEntity<Long> deleteAirline(@PathVariable Long id) throws InterruptedException {
 
         if (!airlineService.existsById(id)) {
             throw new NoSuchElementException("Airline with that id not exist!");
@@ -85,12 +85,13 @@ public class AirlineController {
             if (!trips.isEmpty()) {
                 tripService.deleteTrips(trips);
             }
-            if (!tickets.isEmpty()) {
-                ticketService.deleteTickets(tickets);
-            }
+
             if (!flights.isEmpty()) {
                 flightService.deleteFlights(flights);
             }
+
+
+
             airlineService.deleteAirline(airline.get());
         }
         return ResponseEntity.ok(id);

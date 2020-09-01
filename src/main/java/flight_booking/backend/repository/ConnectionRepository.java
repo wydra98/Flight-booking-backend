@@ -19,8 +19,6 @@ public interface ConnectionRepository extends JpaRepository<Connection, Long> {
     @Query(value = "SELECT c FROM Connection c WHERE c.srcAirport=:airport OR c.dstAirport=:airport")
     List<Connection> findConnectionByAirport(@Param("airport") Airport airport);
 
-    Connection deleteConnectionById(Long id);
-
 
 //    @Override
 //    @Query("SELECT t FROM Trip t WHERE t.passenger.id = :id")

@@ -74,7 +74,7 @@ public class ConnectionService {
 
     public void deleteConnections(List<Connection> connections) {
         for (Connection connection : connections) {
-            connectionRepository.deleteConnectionById(connection.getId());
+            connectionRepository.deleteById(connection.getId());
         }
     }
 }

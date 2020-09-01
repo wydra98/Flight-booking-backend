@@ -108,6 +108,7 @@ public class TripService {
                     Ticket ticket = ticketService.save(Ticket.builder()
                             .passenger(passenger)
                             .flight(flight.get())
+                            .trip(trip)
                             .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
                             .price(price)
                             .build());
@@ -136,8 +137,10 @@ public class TripService {
     }
 
     public void deleteTrips(Set<Trip> trips){
+
         for (Trip trip: trips) {
-            tripRepository.deleteTripById(trip.getId());
+            ticketService.deleteTickets(trip.getTickets());
+            tripRepository.deleteById(trip.getId());
         }
     }
 }

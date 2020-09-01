@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -13,9 +14,6 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
 
     @Query(value = "SELECT COUNT (f.flight_id) FROM flights f", nativeQuery = true)
     int amountOfRows();
-
-    @Query("SELECT DISTINCT f FROM Flight f WHERE f.connection = :connection")
-    Flight findFlightByConnection(@Param("connection") Connection connection);
 
     @Query(value = "SELECT f.id_connection FROM flights f where f.flight_id = :id", nativeQuery = true)
     Long findIdConnectionByFlight(@Param("id") Long id);
@@ -25,6 +23,4 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
 
     @Query("SELECT DISTINCT f FROM Flight f WHERE f.connection = :connection")
     List<Flight> findFlightsByConnection(@Param("connection") Connection connection);
-
-    Flight deleteFlightById(Long id);
 }
