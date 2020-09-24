@@ -43,20 +43,29 @@ public class FlightService {
 
         List<List<Flight>> listOfFlights = new ArrayList<>();
         List<Flight> flights = new ArrayList<>();
+        int i = 0;
+        for (Connection connection : connections) {
 
-        for (Connection connection: connections) {
             List<Flight> resultFlights = flightRepository.findFlightsByConnection(connection);
 
-            if(!resultFlights.isEmpty()){
+            for (Flight result:resultFlights) {
+                System.out.println(result);
+            }
+            System.out.println();
+            System.out.println(connection.toString());
+            if (!resultFlights.isEmpty()) {
+                System.out.println(i++);
                 listOfFlights.add(resultFlights);
             }
         }
 
-        for (List<Flight> flights1:listOfFlights) {
-            for (Flight flight: flights1) {
+        for (List<Flight> flights1 : listOfFlights) {
+            for (Flight flight : flights1) {
                 flights.add(flight);
             }
         }
+
+        System.out.println("Krzycz tutaj "+ flights.size());
         return flights;
     }
 
@@ -65,7 +74,7 @@ public class FlightService {
     }
 
     public Flight save(Flight flight) {
-       return flightRepository.save(flight);
+        return flightRepository.save(flight);
     }
 
     public Flight addNewFlight(Long airlineDtoId,
@@ -236,8 +245,8 @@ public class FlightService {
         return finishListFlights;
     }
 
-    public void deleteFlights(List<Flight> flights){
-        for (Flight flight: flights) {
+    public void deleteFlights(List<Flight> flights) {
+        for (Flight flight : flights) {
             flightRepository.deleteById(flight.getId());
         }
     }

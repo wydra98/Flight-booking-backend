@@ -93,7 +93,7 @@ public class AirportController {
             if (!flights.isEmpty()) {
                 flightService.deleteFlights(flights);
             }
-            if (!trips.isEmpty()) {
+            if (!connections.isEmpty()) {
                 connectionService.deleteConnections(connections);
             }
             airportService.deleteAirport(airport.get());

@@ -1,12 +1,16 @@
 package flight_booking.backend.service;
 
 import flight_booking.backend.controllers.passenger.PassengerDto;
+import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Passenger;
+import flight_booking.backend.models.Trip;
 import flight_booking.backend.repository.PassengerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PassengerService {
@@ -47,8 +51,11 @@ public class PassengerService {
         return passengerRepository.existsById(id);
     }
 
-    public void deleteConnection(Long id) {
-        passengerRepository.deleteById(id);
+    public void deletePassenger(Passenger passenger) {
+        passengerRepository.deleteById(passenger.getId());
     }
 
+    public Optional<Passenger> findById(Long id) {
+        return passengerRepository.findById(id);
+    }
 }

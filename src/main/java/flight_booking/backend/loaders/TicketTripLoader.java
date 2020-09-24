@@ -46,18 +46,20 @@ public class TicketTripLoader implements CommandLineRunner {
             Optional<Passenger> passenger2 = passengerRepository.findById(2L);
             Optional<Passenger> passenger3 = passengerRepository.findById(3L);
 
-
             // TRIP FROM NEW YORK TO WARSAW WITH TICKETS BELONG TO PASSENGER 1
-            tripRepository.save(Trip.builder()
-                    .code("2afe9b0d-052d-43a5-af9a-124137eebf30")
-                    .arrivalDate(LocalDate.parse("2021-01-03"))
-                    .arrivalTime(LocalTime.parse("16:30:00"))
-                    .departureDate(LocalDate.parse("2021-01-02"))
-                    .departureTime(LocalTime.parse("14:43:11"))
-                    .purchaseDate(LocalDate.parse("2020-08-28"))
-                    .purchaseTime(LocalTime.parse("09:03:56"))
-                    .price(1345)
-                    .build());
+            if (passenger1.isPresent()) {
+                tripRepository.save(Trip.builder()
+                        .code("2afe9b0d-052d-43a5-af9a-124137eebf30")
+                        .arrivalDate(LocalDate.parse("2021-01-03"))
+                        .arrivalTime(LocalTime.parse("16:30:00"))
+                        .departureDate(LocalDate.parse("2021-01-02"))
+                        .departureTime(LocalTime.parse("14:43:11"))
+                        .purchaseDate(LocalDate.parse("2020-08-28"))
+                        .purchaseTime(LocalTime.parse("09:03:56"))
+                        .passenger(passenger1.get())
+                        .price(1345)
+                        .build());
+            }
 
             Optional<Trip> trip1 = tripRepository.findById(1L);
             List<Ticket> allTickets1 = new ArrayList<>();
@@ -101,23 +103,27 @@ public class TicketTripLoader implements CommandLineRunner {
                 allTickets1.add(ticket);
             }
 
-            if(trip1.isPresent()){
+            if (trip1.isPresent()) {
                 trip1.get().setTickets(allTickets1);
                 tripRepository.save(trip1.get());
             }
 
 
             // TRIP FROM PEKIN TO TORONTO WITH TICKETS BELONG TO PASSENGER 1
-            tripRepository.save(Trip.builder()
-                    .code("95fe9b0d-932d-67a5-er9a-994137aabf30")
-                    .arrivalDate(LocalDate.parse("2021-04-06"))
-                    .arrivalTime(LocalTime.parse("03:00:00"))
-                    .departureDate(LocalDate.parse("2021-04-05"))
-                    .departureTime(LocalTime.parse("15:00:00"))
-                    .purchaseDate(LocalDate.parse("2020-08-28"))
-                    .purchaseTime(LocalTime.parse("09:44:06"))
-                    .price(405)
-                    .build());
+            if (passenger1.isPresent()) {
+                tripRepository.save(Trip.builder()
+                        .code("95fe9b0d-932d-67a5-er9a-994137aabf30")
+                        .arrivalDate(LocalDate.parse("2021-04-06"))
+                        .arrivalTime(LocalTime.parse("03:00:00"))
+                        .departureDate(LocalDate.parse("2021-04-05"))
+                        .departureTime(LocalTime.parse("15:00:00"))
+                        .purchaseDate(LocalDate.parse("2020-08-28"))
+                        .purchaseTime(LocalTime.parse("09:44:06"))
+                        .passenger(passenger1.get())
+                        .price(405)
+                        .build());
+            }
+
 
             Optional<Trip> trip2 = tripRepository.findById(2L);
             List<Ticket> allTickets2 = new ArrayList<>();
@@ -135,23 +141,27 @@ public class TicketTripLoader implements CommandLineRunner {
                 allTickets2.add(ticket);
             }
 
-            if(trip2.isPresent()){
+            if (trip2.isPresent()) {
                 trip2.get().setTickets(allTickets2);
                 tripRepository.save(trip2.get());
             }
 
 
             // TRIP FROM PARIS TO MOSCOW WITH TICKETS BELONG TO PASSENGER 2
-            tripRepository.save(Trip.builder()
-                    .code("9d1b390c-9de5-4f65-a795-f61fb3c4de2d")
-                    .arrivalDate(LocalDate.parse("2021-03-17"))
-                    .arrivalTime(LocalTime.parse("09:45:00"))
-                    .departureDate(LocalDate.parse("2021-03-16"))
-                    .departureTime(LocalTime.parse("07:00:00"))
-                    .purchaseDate(LocalDate.parse("2020-08-28"))
-                    .purchaseTime(LocalTime.parse("09:53:35"))
-                    .price(320)
-                    .build());
+            if (passenger2.isPresent()) {
+                tripRepository.save(Trip.builder()
+                        .code("9d1b390c-9de5-4f65-a795-f61fb3c4de2d")
+                        .arrivalDate(LocalDate.parse("2021-03-17"))
+                        .arrivalTime(LocalTime.parse("09:45:00"))
+                        .departureDate(LocalDate.parse("2021-03-16"))
+                        .departureTime(LocalTime.parse("07:00:00"))
+                        .purchaseDate(LocalDate.parse("2020-08-28"))
+                        .purchaseTime(LocalTime.parse("09:53:35"))
+                        .passenger(passenger2.get())
+                        .price(320)
+                        .build());
+            }
+
 
             Optional<Trip> trip3 = tripRepository.findById(3L);
             List<Ticket> allTickets3 = new ArrayList<>();
@@ -182,23 +192,27 @@ public class TicketTripLoader implements CommandLineRunner {
                 allTickets3.add(ticket);
             }
 
-            if(trip3.isPresent()){
+            if (trip3.isPresent()) {
                 trip3.get().setTickets(allTickets3);
                 tripRepository.save(trip3.get());
             }
 
 
             // TRIP FROM OSLO TO LONDON WITH TICKETS BELONG TO PASSENGER 3
-            tripRepository.save(Trip.builder()
-                    .code("210347d5-1aa8-4213-9559-524993e784f8")
-                    .arrivalDate(LocalDate.parse("2020-12-02"))
-                    .arrivalTime(LocalTime.parse("13:45:00"))
-                    .departureDate(LocalDate.parse("2020-12-02"))
-                    .departureTime(LocalTime.parse("12:15:00"))
-                    .purchaseDate(LocalDate.parse("2020-08-28"))
-                    .purchaseTime(LocalTime.parse("10:14:42"))
-                    .price(78)
-                    .build());
+            if (passenger3.isPresent()) {
+                tripRepository.save(Trip.builder()
+                        .code("210347d5-1aa8-4213-9559-524993e784f8")
+                        .arrivalDate(LocalDate.parse("2020-12-02"))
+                        .arrivalTime(LocalTime.parse("13:45:00"))
+                        .departureDate(LocalDate.parse("2020-12-02"))
+                        .departureTime(LocalTime.parse("12:15:00"))
+                        .purchaseDate(LocalDate.parse("2020-08-28"))
+                        .purchaseTime(LocalTime.parse("10:14:42"))
+                        .passenger(passenger3.get())
+                        .price(78)
+                        .build());
+            }
+
 
             Optional<Trip> trip4 = tripRepository.findById(4L);
             List<Ticket> allTickets4 = new ArrayList<>();
@@ -216,7 +230,7 @@ public class TicketTripLoader implements CommandLineRunner {
                 allTickets4.add(ticket);
             }
 
-            if(trip4.isPresent()){
+            if (trip4.isPresent()) {
                 trip4.get().setTickets(allTickets4);
                 tripRepository.save(trip4.get());
             }

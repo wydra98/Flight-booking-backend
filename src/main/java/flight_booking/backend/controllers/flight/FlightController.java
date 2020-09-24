@@ -1,23 +1,14 @@
 package flight_booking.backend.controllers.flight;
 
-import flight_booking.backend.models.Airline;
-import flight_booking.backend.models.Airport;
-import flight_booking.backend.models.Connection;
-import flight_booking.backend.models.Flight;
-import flight_booking.backend.service.AirlineService;
-import flight_booking.backend.service.AirportService;
-import flight_booking.backend.service.ConnectionService;
-import flight_booking.backend.service.FlightService;
+import flight_booking.backend.models.*;
+import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/flights")
@@ -27,16 +18,22 @@ public class FlightController {
     private final FlightService flightService;
     private final AirlineService airlineService;
     private final AirportService airportService;
+    private final TicketService ticketService;
+    private final TripService tripService;
     private final FlightMapper flightMapper;
 
     FlightController(ConnectionService connectionService,
                      FlightService flightService,
                      AirlineService airlineService,
-                     AirportService airportService) {
+                     AirportService airportService,
+                     TicketService ticketService,
+                     TripService tripService) {
         this.connectionService = connectionService;
         this.flightService = flightService;
         this.airlineService = airlineService;
         this.airportService = airportService;
+        this.ticketService = ticketService;
+        this.tripService = tripService;
         this.flightMapper = new FlightMapper();
     }
 
@@ -132,10 +129,29 @@ public class FlightController {
             throw new NoSuchElementException("Flight with that id not exist!");
         }
 
-        flightService.deleteConnection(id);
+        Optional<Flight> flight = flightService.findById(id);
+
+        if (flight.isPresent()) {
+            List<Flight> flights = new ArrayList<>();
+            List<Ticket> tickets = new ArrayList<>();
+            Set<Trip> trips = new HashSet<>();
+            flights.add(flight.get());
+
+            if (!flights.isEmpty()) {
+                tickets = ticketService.findTicketsByFlights(flights);
+                if (!tickets.isEmpty()) {
+                    trips = tripService.findTripsByTickets(tickets);
+                }
+
+                if (!trips.isEmpty()) {
+                    tripService.deleteTrips(trips);
+                }
+
+                flightService.deleteFlights(flights);
+            }
+        }
         return ResponseEntity.ok(id);
     }
-
 
     @ExceptionHandler(NoSuchElementException.class)
     ResponseEntity<?> handleConnectionNotExistsException(NoSuchElementException e) {

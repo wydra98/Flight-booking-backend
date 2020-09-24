@@ -70,7 +70,7 @@ public class AirlineController {
         Optional<Airline> airline = airlineService.findById(id);
 
         if (airline.isPresent()) {
-            List<Flight> flights;
+            List<Flight> flights = new ArrayList<>();
             List<Ticket> tickets = new ArrayList<>();
             Set<Trip> trips = new HashSet<>();
 
@@ -89,8 +89,6 @@ public class AirlineController {
             if (!flights.isEmpty()) {
                 flightService.deleteFlights(flights);
             }
-
-
 
             airlineService.deleteAirline(airline.get());
         }

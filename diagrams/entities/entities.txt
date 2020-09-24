@@ -76,6 +76,12 @@ class Trip {
   - price: Price
 }
 
+class User {
+  __ attributes __
+  - id: Long
+  - trips: Set<Trip>
+}
+
 Connection o-- Airline
 Connection o-- Airport
 Times --* Flight
@@ -83,4 +89,5 @@ Flight o-- Connection
 Ticket o-- Passenger
 Ticket o-- Flight
 Trip *-- Ticket
+Trip --o User
 @enduml

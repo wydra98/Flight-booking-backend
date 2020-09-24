@@ -27,6 +27,9 @@ public class Trip {
     private String code;
     @OneToMany(mappedBy = "trip")
     private List<Ticket> tickets;
+    @ManyToOne
+    @JoinColumn(name = "id_passenger")
+    private Passenger passenger;
     private LocalDate departureDate;
     private LocalTime departureTime;
     private LocalDate arrivalDate;

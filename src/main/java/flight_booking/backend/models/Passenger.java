@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -28,10 +29,8 @@ public class Passenger {
     private LocalDate dateOfBirth;
     private String phoneNumber;
     private String email;
-
-//    @OneToMany(mappedBy = "passenger")
-//    private List<Trip> trips;
-
+    @OneToMany(mappedBy = "passenger")
+    private Set<Trip> trips;
     @OneToMany(mappedBy = "passenger")
     private List<Ticket> tickets;
 }

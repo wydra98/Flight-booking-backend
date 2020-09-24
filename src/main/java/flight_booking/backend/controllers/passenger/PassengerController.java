@@ -11,6 +11,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/passengers")
@@ -18,10 +19,16 @@ public class PassengerController {
 
     private final PassengerService passengerService;
     private final PassengerMapper passengerMapper;
+    private final TicketService ticketService;
+    private final TripService tripService;
 
-    PassengerController(PassengerService passengerService
+    PassengerController(PassengerService passengerService,
+                        TicketService ticketService,
+                        TripService tripService
     ) {
         this.passengerService = passengerService;
+        this.ticketService = ticketService;
+        this.tripService = tripService;
         this.passengerMapper = new PassengerMapper();
     }
 
@@ -60,7 +67,14 @@ public class PassengerController {
             throw new NoSuchElementException("Passenger with that id not exist!");
         }
 
-        passengerService.deleteConnection(id);
+        Optional<Passenger> passenger = passengerService.findById(id);
+
+        if(passenger.isPresent()){
+
+            tripService.deleteTrips(passenger.get().getTrips());
+            passengerService.deletePassenger(passenger.get());
+        }
+
         return ResponseEntity.ok(id);
     }
 
