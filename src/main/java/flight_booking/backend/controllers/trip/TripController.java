@@ -7,6 +7,7 @@ import flight_booking.backend.service.AirportService;
 import flight_booking.backend.service.PassengerService;
 import flight_booking.backend.service.TripService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.hibernate.validator.internal.constraintvalidators.hv.pl.PESELValidator;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,7 @@ public class TripController {
 //        return ResponseEntity.ok(tripsDtos);
 //    }
 
-    @ApiOperation(value = "Find proper trips")
+    @ApiOperation(value = "Find proper trips", authorizations = {@Authorization(value = "authkey")})
     @GetMapping("/findTrips")
     ResponseEntity<List<List<TripDto>>> findTrips(@RequestParam Long srcAirportId,
                                                   @RequestParam Long dstAirportId,
@@ -103,7 +104,7 @@ public class TripController {
     }
 
 
-    @ApiOperation(value = "Create new trip for user")
+    @ApiOperation(value = "Create new trip for user", authorizations = {@Authorization(value = "authkey")})
     @PostMapping("/createTrip")
     ResponseEntity<Trip> createChosenTrip(@RequestBody BookedTripDto bookedTripDto) {
         List<PassengerDto> passengersDto = bookedTripDto.getPassengersDto();
@@ -112,9 +113,9 @@ public class TripController {
         List<Passenger> passengers = new ArrayList<>();
         for (PassengerDto passengerDto : passengersDto) {
 
-            if (passengerDto.getDateOfBirth().isEmpty() || passengerDto.getEmail().isBlank() ||
-                    passengerDto.getFirstName().isBlank() || passengerDto.getPesel().isBlank() ||
-                    passengerDto.getPhoneNumber().isBlank() || passengerDto.getSurname().isBlank()) {
+            if (passengerDto.getDateOfBirth().length() == 0 || passengerDto.getEmail().length() == 0 ||
+                    passengerDto.getFirstName().length() == 0 || passengerDto.getPesel().length() == 0 ||
+                    passengerDto.getPhoneNumber().length() == 0 || passengerDto.getSurname().length() == 0) {
                 throw new IllegalStateException("The empty field is not allowed.");
             }
 
@@ -165,7 +166,7 @@ public class TripController {
         return ResponseEntity.created(URI.create("/" + trip.getCode())).body(trip);
     }
 
-    @ApiOperation(value = "Get user trip from code")
+    @ApiOperation(value = "Get user trip from code", authorizations = {@Authorization(value = "authkey")})
     @GetMapping("/findOneTrip")
     ResponseEntity<TripDto> createChosenTrip(@RequestParam String code) {
 

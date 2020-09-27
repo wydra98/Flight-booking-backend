@@ -1,0 +1,40 @@
+package flight_booking.backend.security;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final String[] AUTH_WHITELIST = {
+            // -- swagger ui
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/login*",
+            "/register*"
+            // other public endpoints of your API may be appended to this array
+    };
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(AUTH_WHITELIST);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().authorizeRequests()
+                .antMatchers("/airlines*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/airports*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/flights*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/passengers*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/trips/findOneTrip").hasAuthority("ROLE_USER")
+                .and().addFilter(new JwtFilter(authenticationManager()))
+                .csrf().disable();
+    }
+}

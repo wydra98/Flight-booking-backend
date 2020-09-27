@@ -3,6 +3,7 @@ package flight_booking.backend.controllers.airport;
 import flight_booking.backend.models.*;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ public class AirportController {
         this.tripService = tripService;
     }
 
-    @ApiOperation(value = "Get all airports")
+    @ApiOperation(value = "Get all airports", authorizations = {@Authorization(value = "authkey")})
     @GetMapping
     ResponseEntity<List<AirportDto>> getAllAirports() {
         List<Airport> airports = airportService.findAll();
@@ -45,7 +46,7 @@ public class AirportController {
         return ResponseEntity.ok(airportsDtos);
     }
 
-    @ApiOperation(value = "Add new airport")
+    @ApiOperation(value = "Add new airport", authorizations = {@Authorization(value = "authkey")})
     @PostMapping
     ResponseEntity<Airport> addNewAirline(@RequestBody AirportDto airportDto,
                                           @RequestParam double longitude,
@@ -59,7 +60,7 @@ public class AirportController {
         return ResponseEntity.created(URI.create("/" + airport.getId())).body(airport);
     }
 
-    @ApiOperation(value = "Delete airport")
+    @ApiOperation(value = "Delete airport", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deleteAirport(@PathVariable Long id) {
@@ -101,7 +102,7 @@ public class AirportController {
         return ResponseEntity.ok(id);
     }
 
-    @ApiOperation(value = "Update airport")
+    @ApiOperation(value = "Update airport", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @PutMapping
     ResponseEntity<Void> updateAirport(@RequestBody AirportDto airportDto,

@@ -3,13 +3,13 @@ package flight_booking.backend.controllers.airline;
 import flight_booking.backend.models.*;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.*;
-
 
 @RestController
 @RequestMapping("/airlines")
@@ -22,7 +22,6 @@ public class AirlineController {
     private final AirlineMapper mapper = new AirlineMapper();
 
     public AirlineController(AirlineService airlineService,
-                             ConnectionService connectionService,
                              FlightService flightService,
                              TicketService ticketService,
                              TripService tripService) {
@@ -32,7 +31,7 @@ public class AirlineController {
         this.tripService = tripService;
     }
 
-    @ApiOperation(value = "Get all airlines")
+    @ApiOperation(value = "Get all airlines", authorizations = {@Authorization(value = "authkey")})
     @GetMapping
     ResponseEntity<List<AirlineDto>> getAllAirlines() {
         List<Airline> airlines = airlineService.findAll();
@@ -45,7 +44,7 @@ public class AirlineController {
         return ResponseEntity.ok(airlineDtos);
     }
 
-    @ApiOperation(value = "Add new airline")
+    @ApiOperation(value = "Add new airline", authorizations = {@Authorization(value = "authkey")})
     @PostMapping
     ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto,
                                           @RequestParam String country) {
@@ -58,7 +57,7 @@ public class AirlineController {
         return ResponseEntity.created(URI.create("/" + airline.getId())).body(airline);
     }
 
-    @ApiOperation(value = "Delete airline")
+    @ApiOperation(value = "Delete airline", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @DeleteMapping("/delete/{id}")
     ResponseEntity<Long> deleteAirline(@PathVariable Long id) throws InterruptedException {
@@ -95,7 +94,7 @@ public class AirlineController {
         return ResponseEntity.ok(id);
     }
 
-    @ApiOperation(value = "Update airline")
+    @ApiOperation(value = "Update airline", authorizations = {@Authorization(value = "authkey")})
     @PutMapping
     ResponseEntity<Void> updateAirline(@RequestBody AirlineDto airlineDto,
                                        @RequestParam String country) {

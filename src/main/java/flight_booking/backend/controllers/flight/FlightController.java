@@ -3,6 +3,7 @@ package flight_booking.backend.controllers.flight;
 import flight_booking.backend.models.*;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,7 @@ public class FlightController {
         this.flightMapper = new FlightMapper();
     }
 
-    @ApiOperation(value = "Get all flights")
+    @ApiOperation(value = "Get all flights", authorizations = {@Authorization(value = "authkey")})
     @GetMapping
     ResponseEntity<List<FlightDto>> getAllFlights() {
         List<Flight> flights = flightService.findAll();
@@ -52,7 +53,7 @@ public class FlightController {
 
     //TODO read about twice @Requestbody in arguments of one function
     //TODO add validators for examples like "if airlineId exists"
-    @ApiOperation(value = "Add new flight")
+    @ApiOperation(value = "Add new flight", authorizations = {@Authorization(value = "authkey")})
     @PostMapping
     ResponseEntity<Flight> addNewFlight(@RequestParam Long airlineDtoId,
                                         @RequestParam int numberSeats,
@@ -71,7 +72,7 @@ public class FlightController {
     }
 
     //TODO add validators for examples like "if airlineId exists"
-    @ApiOperation(value = "Update flight")
+    @ApiOperation(value = "Update flight", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @PutMapping
     ResponseEntity<Void> updateFlight(@RequestParam Long flightId,
@@ -120,7 +121,7 @@ public class FlightController {
         return ResponseEntity.noContent().build();
     }
 
-    @ApiOperation(value = "Delete flight")
+    @ApiOperation(value = "Delete flight", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {

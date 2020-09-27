@@ -3,6 +3,7 @@ package flight_booking.backend.controllers.passenger;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class PassengerController {
         this.passengerMapper = new PassengerMapper();
     }
 
-    @ApiOperation(value = "Get all passengers")
+    @ApiOperation(value = "Get all passengers", authorizations = {@Authorization(value = "authkey")})
     @GetMapping
     ResponseEntity<List<PassengerDto>> getAllPassengers() {
         List<Passenger> passengers = passengerService.findAll();
@@ -45,7 +46,7 @@ public class PassengerController {
     }
 
 
-    @ApiOperation(value = "Add new passenger")
+    @ApiOperation(value = "Add new passenger", authorizations = {@Authorization(value = "authkey")})
     @PostMapping
     ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
 
@@ -58,7 +59,7 @@ public class PassengerController {
     }
 
 
-    @ApiOperation(value = "Delete passenger")
+    @ApiOperation(value = "Delete passenger", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deletePassenger(@PathVariable Long id) {
