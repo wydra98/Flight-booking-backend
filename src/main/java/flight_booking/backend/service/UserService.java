@@ -31,6 +31,7 @@ public class UserService {
                 .surname(surname)
                 .email(email)
                 .password(passwordEncoder.encode(password))
+                .role("ROLE_USER")
                 .build();
 
         userRepository.save(user);

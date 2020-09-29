@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT COUNT (u.user_id) FROM Users u WHERE u.email=:email",
+    @Query(value = "SELECT COUNT (u.user_id) FROM users u WHERE u.email=:email",
             nativeQuery = true)
     int checkIfMailExists(@Param("email") String email);
 

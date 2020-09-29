@@ -29,11 +29,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests()
-                .antMatchers("/airlines*").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/airports*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/airlines").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/airlines/delete/*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/airports").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/airports/delete/*").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/flights*").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/passengers*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/flights/delete/*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/passengers").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/passengers/delete/*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/passengers/add").hasAuthority("ROLE_USER")
                 .antMatchers("/trips/findOneTrip").hasAuthority("ROLE_USER")
+                .antMatchers("/trips/createTrip").hasAuthority("ROLE_USER")
+                .antMatchers("/trips/findTrips").hasAuthority("ROLE_USER")
                 .and().addFilter(new JwtFilter(authenticationManager()))
                 .csrf().disable();
     }

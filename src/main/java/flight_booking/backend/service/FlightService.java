@@ -65,7 +65,6 @@ public class FlightService {
             }
         }
 
-        System.out.println("Krzycz tutaj "+ flights.size());
         return flights;
     }
 
@@ -232,15 +231,15 @@ public class FlightService {
 
             }
         }
-        for (List<Flight> flights : finishListFlights) {
-            for (Flight flight : flights) {
-                System.out.println(flight.getConnection().getSrcAirport().getName() + " - " + flight.getConnection().getDstAirport().getName() + ", ");
-                System.out.println(flight.getTimes().toString());
-            }
-            System.out.println();
-            System.out.println();
-        }
-        System.out.println(finishListFlights.size());
+//        for (List<Flight> flights : finishListFlights) {
+//            for (Flight flight : flights) {
+//                System.out.println(flight.getConnection().getSrcAirport().getName() + " - " + flight.getConnection().getDstAirport().getName() + ", ");
+//                System.out.println(flight.getTimes().toString());
+//            }
+//            System.out.println();
+//            System.out.println();
+//        }
+//        System.out.println(finishListFlights.size());
 
         return finishListFlights;
     }

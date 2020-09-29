@@ -49,7 +49,7 @@ public class AuthorizationController {
             throw new IllegalStateException("The passenger email is invalid.");
         }
 
-        if (!userService.checkIfMailExists(email)) {
+        if (userService.checkIfMailExists(email)) {
             throw new IllegalStateException("Email already taken!");
         }
 

@@ -47,7 +47,7 @@ public class PassengerController {
 
 
     @ApiOperation(value = "Add new passenger", authorizations = {@Authorization(value = "authkey")})
-    @PostMapping
+    @PostMapping("/passengers/add")
     ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
 
         if (passengerService.checkIfPassengerExists(passengerDto.getPesel())) {
