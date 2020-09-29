@@ -5,6 +5,7 @@ create table trips
 (
     trip_id        bigint auto_increment primary key,
     id_passenger   bigint not null,
+    id_user        bigint not null,
     code           varchar(50),
     departure_date date   not null,
     departure_time time   not null,
@@ -14,7 +15,8 @@ create table trips
     purchase_time  time   not null,
     price          double not null,
 
-    foreign key (id_passenger) references passengers (passenger_id)
+    foreign key (id_passenger) references passengers (passenger_id),
+    foreign key (id_user) references users (user_id)
 );
 
 create table tickets

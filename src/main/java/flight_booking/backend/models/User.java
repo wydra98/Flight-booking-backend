@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -25,11 +27,12 @@ public class User {
     private String email;
     private String name;
     private String surname;
+    @OneToMany(mappedBy = "user")
+    private Set<Trip> trips;
 
     public User() {
         this.role = "ROLE_USER";
     }
-
     public User(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;

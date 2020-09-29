@@ -31,6 +31,5 @@ public class Passenger {
     private String email;
     @OneToMany(mappedBy = "passenger")
     private Set<Trip> trips;
-    @OneToMany(mappedBy = "passenger")
-    private List<Ticket> tickets;
+
 }

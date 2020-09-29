@@ -38,19 +38,6 @@ public class TripController {
         this.tripMapper = new TripMapper();
     }
 
-//    @ApiOperation(value = "Get all user's trips")
-//    @GetMapping("/{id}")
-//    ResponseEntity<List<TripDto>> getAllUsersTrips(@PathVariable Long id) {
-//
-//        List<Trip> trips = tripService.findAllTripsFromUserId(id);
-//        System.out.println(trips.size());
-//
-//        ArrayList<TripDto> tripsDtos = new ArrayList<>();
-//        for (Trip trip : trips) {
-//            tripsDtos.add(tripMapper.map(trip));
-//        }
-//        return ResponseEntity.ok(tripsDtos);
-//    }
 
     @ApiOperation(value = "Find proper trips", authorizations = {@Authorization(value = "authkey")})
     @GetMapping("/findTrips")

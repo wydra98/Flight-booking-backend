@@ -1,22 +1,14 @@
 package flight_booking.backend.loaders;
 
-import flight_booking.backend.models.Flight;
-import flight_booking.backend.models.Passenger;
-import flight_booking.backend.models.Ticket;
-import flight_booking.backend.models.Trip;
-import flight_booking.backend.repository.FlightRepository;
-import flight_booking.backend.repository.PassengerRepository;
-import flight_booking.backend.repository.TicketRepository;
-import flight_booking.backend.repository.TripRepository;
+import flight_booking.backend.models.*;
+import flight_booking.backend.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class TicketTripLoader implements CommandLineRunner {
@@ -25,15 +17,18 @@ public class TicketTripLoader implements CommandLineRunner {
     PassengerRepository passengerRepository;
     FlightRepository flightRepository;
     TripRepository tripRepository;
+    UserRepository userRepository;
 
     TicketTripLoader(TicketRepository ticketRepository,
                      PassengerRepository passengerRepository,
                      FlightRepository flightRepository,
-                     TripRepository tripRepository) {
+                     TripRepository tripRepository,
+                     UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
         this.passengerRepository = passengerRepository;
         this.flightRepository = flightRepository;
         this.tripRepository = tripRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -45,9 +40,10 @@ public class TicketTripLoader implements CommandLineRunner {
             Optional<Passenger> passenger1 = passengerRepository.findById(1L);
             Optional<Passenger> passenger2 = passengerRepository.findById(2L);
             Optional<Passenger> passenger3 = passengerRepository.findById(3L);
+            Optional<User> user1 = userRepository.findById(2L);
 
             // TRIP FROM NEW YORK TO WARSAW WITH TICKETS BELONG TO PASSENGER 1
-            if (passenger1.isPresent()) {
+            if (passenger1.isPresent() && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
                         .code("2afe9b0d-052d-43a5-af9a-124137eebf30")
                         .arrivalDate(LocalDate.parse("2021-01-03"))
@@ -57,6 +53,7 @@ public class TicketTripLoader implements CommandLineRunner {
                         .purchaseDate(LocalDate.parse("2020-08-28"))
                         .purchaseTime(LocalTime.parse("09:03:56"))
                         .passenger(passenger1.get())
+                        .user(user1.get())
                         .price(1345)
                         .build());
             }
@@ -110,7 +107,7 @@ public class TicketTripLoader implements CommandLineRunner {
 
 
             // TRIP FROM PEKIN TO TORONTO WITH TICKETS BELONG TO PASSENGER 1
-            if (passenger1.isPresent()) {
+            if (passenger1.isPresent()  && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
                         .code("95fe9b0d-932d-67a5-er9a-994137aabf30")
                         .arrivalDate(LocalDate.parse("2021-04-06"))
@@ -120,6 +117,7 @@ public class TicketTripLoader implements CommandLineRunner {
                         .purchaseDate(LocalDate.parse("2020-08-28"))
                         .purchaseTime(LocalTime.parse("09:44:06"))
                         .passenger(passenger1.get())
+                        .user(user1.get())
                         .price(405)
                         .build());
             }
@@ -148,7 +146,7 @@ public class TicketTripLoader implements CommandLineRunner {
 
 
             // TRIP FROM PARIS TO MOSCOW WITH TICKETS BELONG TO PASSENGER 2
-            if (passenger2.isPresent()) {
+            if (passenger2.isPresent()  && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
                         .code("9d1b390c-9de5-4f65-a795-f61fb3c4de2d")
                         .arrivalDate(LocalDate.parse("2021-03-17"))
@@ -158,6 +156,7 @@ public class TicketTripLoader implements CommandLineRunner {
                         .purchaseDate(LocalDate.parse("2020-08-28"))
                         .purchaseTime(LocalTime.parse("09:53:35"))
                         .passenger(passenger2.get())
+                        .user(user1.get())
                         .price(320)
                         .build());
             }
@@ -199,7 +198,7 @@ public class TicketTripLoader implements CommandLineRunner {
 
 
             // TRIP FROM OSLO TO LONDON WITH TICKETS BELONG TO PASSENGER 3
-            if (passenger3.isPresent()) {
+            if (passenger3.isPresent() && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
                         .code("210347d5-1aa8-4213-9559-524993e784f8")
                         .arrivalDate(LocalDate.parse("2020-12-02"))
@@ -209,6 +208,7 @@ public class TicketTripLoader implements CommandLineRunner {
                         .purchaseDate(LocalDate.parse("2020-08-28"))
                         .purchaseTime(LocalTime.parse("10:14:42"))
                         .passenger(passenger3.get())
+                        .user(user1.get())
                         .price(78)
                         .build());
             }
@@ -233,6 +233,22 @@ public class TicketTripLoader implements CommandLineRunner {
             if (trip4.isPresent()) {
                 trip4.get().setTickets(allTickets4);
                 tripRepository.save(trip4.get());
+            }
+
+            Optional<User> user = userRepository.findById(2L);
+            Set<Trip> allTrips = new HashSet<>();
+
+            Optional<Trip> tripFind1 = tripRepository.findById(1L);
+            Optional<Trip> tripFind2 = tripRepository.findById(2L);
+            Optional<Trip> tripFind3 = tripRepository.findById(3L);
+
+            tripFind1.ifPresent(allTrips::add);
+            tripFind2.ifPresent(allTrips::add);
+            tripFind3.ifPresent(allTrips::add);
+
+            if(user.isPresent()){
+                user.get().setTrips(allTrips);
+                userRepository.save(user.get());
             }
         }
     }

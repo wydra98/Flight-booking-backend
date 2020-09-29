@@ -54,6 +54,11 @@ public class UserService {
         if (!passwordEncoder.matches(password, hash)) throw new IllegalStateException("Invalid password!");
         return true;
     }
+
+    public boolean existsById(Long id) {
+        return userRepository.existsById(id);
+    }
+
 }
 
 

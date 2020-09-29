@@ -37,6 +37,9 @@ public class Trip {
     private LocalDate purchaseDate;
     private LocalTime purchaseTime;
     private double price;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
     public void addTicket(Ticket ticket){
         tickets.add(ticket);
