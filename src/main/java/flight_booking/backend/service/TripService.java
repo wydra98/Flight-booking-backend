@@ -162,8 +162,6 @@ public class TripService {
             throw new IllegalStateException("The user cannot cancel the flight in the last 24 hours before departure");
         }
 
-
-
         ticketService.deleteTickets(trip.getTickets());
         tripRepository.deleteById(trip.getId());
     }

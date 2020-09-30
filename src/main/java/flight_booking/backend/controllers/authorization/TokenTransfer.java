@@ -1,5 +1,6 @@
 package flight_booking.backend.controllers.authorization;
 
+import flight_booking.backend.controllers.user.UserDto;
 import lombok.*;
 
 
@@ -12,8 +13,5 @@ import lombok.*;
 
 public class TokenTransfer {
     private String token;
-    private String name;
-    private String surname;
-    private String email;
-    private String role;
+    private UserDto userDto;
 }

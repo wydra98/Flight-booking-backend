@@ -20,7 +20,7 @@ import java.util.*;
 @RequestMapping("/users")
 public class UserController {
 
-    private final TripMapper tripMapper;
+    private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final UserService userService;
     private final TripService tripService;
@@ -31,42 +31,48 @@ public class UserController {
         this.userRepository = userRepository;
         this.userService = userService;
         this.tripService = tripService;
-        this.tripMapper = new TripMapper();
+        this.userMapper = new UserMapper();
     }
 
-//    @ApiOperation(value = "Get all users", authorizations = {@Authorization(value = "authkey")})
-//    @GetMapping
-//    ResponseEntity<List<TripDto>> getAllUsersTrips() {
-//
-//        Optional<User> user = userRepository.findById(id);
-//
-//        Set<TripDto> tripsDtos = new HashSet<>();
-//        for (Trip trip : user.get().getTrips()) {
-//            tripsDtos.add(tripMapper.map(trip));
-//        }
-//        return ResponseEntity.ok(tripsDtos);
-//    }
-//
-//    @ApiOperation(value = "Delete user", authorizations = {@Authorization(value = "authkey")})
-//    @Transactional
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<Long> deleteTrip(@PathVariable Long id) {
-//
-//        if (!userService.existsById(id)) {
-//            throw new NoSuchElementException("User with that id not exist!");
-//        }
-//
-//        Optional<User> user = userService.findById(id);
-//
-//        if (user.isPresent()) {
-//            Set<Trip> trips = user.get().getTrips();
-//
-//            if (!trips.isEmpty()) {
-//                tripService.deleteTrips(trips);
-//            }
-//
-//            userService.deleteUser(user.get());
-//        }
-//        return ResponseEntity.ok(id);
-//    }
+    @ApiOperation(value = "Get all users", authorizations = {@Authorization(value = "authkey")})
+    @GetMapping
+    ResponseEntity<List<UserDto>> getAllUser() {
+        List<User> users = userService.findAll();
+
+        ArrayList<UserDto> userDtos = new ArrayList<>();
+        for (User user : users) {
+            userDtos.add(userMapper.map(user));
+        }
+        return ResponseEntity.ok(userDtos);
+    }
+
+    @ApiOperation(value = "Delete user", authorizations = {@Authorization(value = "authkey")})
+    @Transactional
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Long> deleteUser(@PathVariable Long id) {
+
+        if (!userService.existsById(id)) {
+            System.out.println("Tutaj jestem");
+            throw new NoSuchElementException("User with that id not exist!");
+        }
+
+        Optional<User> user = userService.findById(id);
+
+        if (user.isPresent()) {
+            Set<Trip> trips = user.get().getTrips();
+
+            if (!trips.isEmpty()) {
+                tripService.deleteTrips(trips);
+            }
+
+            userService.deleteUser(user.get());
+        }
+
+        return ResponseEntity.ok(id);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 }

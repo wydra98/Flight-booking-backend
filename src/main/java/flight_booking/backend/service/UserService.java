@@ -1,6 +1,8 @@
 package flight_booking.backend.service;
 
 import flight_booking.backend.controllers.authorization.TokenTransfer;
+import flight_booking.backend.controllers.user.UserDto;
+import flight_booking.backend.controllers.user.UserMapper;
 import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.User;
 import flight_booking.backend.repository.UserRepository;
@@ -8,6 +10,7 @@ import flight_booking.backend.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,9 +51,12 @@ public class UserService {
             throw new NullPointerException("User with that email not exists.");
         }
 
+        UserMapper userMapper = new UserMapper();
+        UserDto userDto = userMapper.map(user);
+
         verifyPassword(password, user.getPassword());
         String token = jwtService.sign(user.getEmail(), user.getRole());
-        return new TokenTransfer(token, user.getName(), user.getSurname(), user.getEmail(), user.getRole());
+        return new TokenTransfer(token, userDto);
     }
 
     public Boolean verifyPassword(String password, String hash) {
@@ -66,9 +72,14 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
     public void deleteUser(User user) {
         userRepository.deleteById(user.getId());
     }
+
 }
 
 

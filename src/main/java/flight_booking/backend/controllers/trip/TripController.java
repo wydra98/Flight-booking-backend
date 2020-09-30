@@ -1,6 +1,7 @@
 package flight_booking.backend.controllers.trip;
 
 import flight_booking.backend.controllers.passenger.PassengerDto;
+import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.models.Trip;
 import flight_booking.backend.models.User;

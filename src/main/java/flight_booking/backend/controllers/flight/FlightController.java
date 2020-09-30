@@ -156,6 +156,6 @@ public class FlightController {
 
     @ExceptionHandler(NoSuchElementException.class)
     ResponseEntity<?> handleConnectionNotExistsException(NoSuchElementException e) {
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

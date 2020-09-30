@@ -129,7 +129,6 @@ public class AirportController {
 
     @ExceptionHandler(NoSuchElementException.class)
     ResponseEntity<?> handleAirportNotExistsException(NoSuchElementException e) {
-        return ResponseEntity.notFound().build();
-    }
+        return ResponseEntity.badRequest().body(e.getMessage());    }
 
 }
