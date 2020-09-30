@@ -125,6 +125,9 @@ public class TicketService {
     public void deleteTickets(List<Ticket> tickets) {
         for (Ticket ticket : tickets) {
             ticketRepository.deleteById(ticket.getId());
+            Flight flight = ticket.getFlight();
+            flight.setAvailableSeats(flight.getAvailableSeats()+1);
+            flightService.save(flight);
         }
     }
 

@@ -80,6 +80,10 @@ public class UserService {
         userRepository.deleteById(user.getId());
     }
 
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
 }
 
 

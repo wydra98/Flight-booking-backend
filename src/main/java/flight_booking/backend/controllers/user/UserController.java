@@ -52,7 +52,6 @@ public class UserController {
     public ResponseEntity<Long> deleteUser(@PathVariable Long id) {
 
         if (!userService.existsById(id)) {
-            System.out.println("Tutaj jestem");
             throw new NoSuchElementException("User with that id not exist!");
         }
 

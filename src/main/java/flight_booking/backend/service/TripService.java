@@ -17,13 +17,16 @@ public class TripService {
     private final TripRepository tripRepository;
     private final TicketService ticketService;
     private final FlightService flightService;
+    private final UserService userService;
 
     TripService(TripRepository tripRepository,
                 TicketService ticketService,
-                FlightService flightService) {
+                FlightService flightService,
+                UserService userService) {
         this.tripRepository = tripRepository;
         this.ticketService = ticketService;
         this.flightService = flightService;
+        this.userService = userService;
     }
 
 //    public List<Trip> findAllTripsFromUserId(Long id) {
@@ -73,9 +76,10 @@ public class TripService {
         return trips;
     }
 
-    public Trip addNewTrip(List<Passenger> passengers, TripDto tripDto) {
+    public Trip addNewTrip(List<Passenger> passengers, TripDto tripDto, long userId) {
         String uniqueID = UUID.randomUUID().toString();
         boolean flag = true;
+        Optional<User> user = userService.findById(userId);
         Trip trip = tripRepository.save(Trip.builder()
                 .code(uniqueID)
                 .tickets(new ArrayList<>())
@@ -126,7 +130,14 @@ public class TripService {
         Trip actualTrip = null;
         if (flag) {
             actualTrip = tripRepository.save(trip);
+
+            if(user.isPresent()){
+                user.get().addTrip(actualTrip);
+                userService.save(user.get());
+            }
+
         }
+
 
         return actualTrip;
     }

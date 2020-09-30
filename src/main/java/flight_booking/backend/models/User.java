@@ -40,4 +40,9 @@ public class User {
         this.password = password;
         this.role = "ROLE_USER";
     }
+
+    public void addTrip(Trip trip){
+        trips.add(trip);
+    }
+
 }

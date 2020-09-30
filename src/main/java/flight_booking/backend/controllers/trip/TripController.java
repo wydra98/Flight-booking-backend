@@ -117,7 +117,8 @@ public class TripController {
 
     @ApiOperation(value = "Create new trip for user", authorizations = {@Authorization(value = "authkey")})
     @PostMapping("/createTrip")
-    ResponseEntity<Trip> createChosenTrip(@RequestBody BookedTripDto bookedTripDto) {
+    ResponseEntity<Trip> createChosenTrip(@RequestBody BookedTripDto bookedTripDto,
+                                          @RequestParam Long userId) {
         List<PassengerDto> passengersDto = bookedTripDto.getPassengersDto();
         TripDto tripDto = bookedTripDto.getTripDto();
 
@@ -166,6 +167,14 @@ public class TripController {
                 throw new IllegalStateException("The passenger phone number is invalid.");
             }
 
+            if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
+                throw new IllegalStateException("The passenger age is invalid.");
+            }
+
+            if (!userService.existsById(userId)) {
+                throw new NoSuchElementException("User with that id not exist!");
+            }
+
             if (passengerService.checkIfPassengerExists(passengerDto.getPesel())) {
                 passengers.add(passengerService.findPassenger(passengerDto.getPesel()));
             } else {
@@ -173,7 +182,7 @@ public class TripController {
             }
         }
 
-        Trip trip = tripService.addNewTrip(passengers, tripDto);
+        Trip trip = tripService.addNewTrip(passengers, tripDto, userId);
         return ResponseEntity.created(URI.create("/" + trip.getCode())).body(trip);
     }
 
