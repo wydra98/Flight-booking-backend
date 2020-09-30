@@ -1,11 +1,14 @@
 package flight_booking.backend.service;
 
 import flight_booking.backend.controllers.authorization.TokenTransfer;
+import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.User;
 import flight_booking.backend.repository.UserRepository;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -59,6 +62,13 @@ public class UserService {
         return userRepository.existsById(id);
     }
 
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public void deleteUser(User user) {
+        userRepository.deleteById(user.getId());
+    }
 }
 
 

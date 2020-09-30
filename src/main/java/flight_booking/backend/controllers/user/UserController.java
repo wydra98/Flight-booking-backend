@@ -23,69 +23,49 @@ public class UserController {
     private final TripMapper tripMapper;
     private final UserRepository userRepository;
     private final UserService userService;
+    private final TripService tripService;
 
     UserController(UserRepository userRepository,
-                   UserService userService) {
+                   UserService userService,
+                   TripService tripService) {
         this.userRepository = userRepository;
         this.userService = userService;
+        this.tripService = tripService;
         this.tripMapper = new TripMapper();
     }
 
-    @ApiOperation(value = "Get all user's trips")
-    @GetMapping("/{id}")
-    ResponseEntity<Set<TripDto>> getAllUsersTrips(@PathVariable Long id) {
-
-        if (!userService.existsById(id)) {
-            throw new NoSuchElementException("User with that id not exist!");
-        }
-
-        Optional<User> user = userRepository.findById(id);
-
-        Set<TripDto> tripsDtos = new HashSet<>();
-        for (Trip trip : user.get().getTrips()) {
-            tripsDtos.add(tripMapper.map(trip));
-        }
-        return ResponseEntity.ok(tripsDtos);
-    }
-
-//    @ApiOperation(value = "Delete airport", authorizations = {@Authorization(value = "authkey")})
+//    @ApiOperation(value = "Get all users", authorizations = {@Authorization(value = "authkey")})
+//    @GetMapping
+//    ResponseEntity<List<TripDto>> getAllUsersTrips() {
+//
+//        Optional<User> user = userRepository.findById(id);
+//
+//        Set<TripDto> tripsDtos = new HashSet<>();
+//        for (Trip trip : user.get().getTrips()) {
+//            tripsDtos.add(tripMapper.map(trip));
+//        }
+//        return ResponseEntity.ok(tripsDtos);
+//    }
+//
+//    @ApiOperation(value = "Delete user", authorizations = {@Authorization(value = "authkey")})
 //    @Transactional
 //    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<Long> deleteAirport(@PathVariable Long id) {
+//    public ResponseEntity<Long> deleteTrip(@PathVariable Long id) {
 //
-//        if (!airportService.existsById(id)) {
-//            throw new NoSuchElementException("Airport with that id not exist!");
+//        if (!userService.existsById(id)) {
+//            throw new NoSuchElementException("User with that id not exist!");
 //        }
 //
-//        Optional<Airport> airport = airportService.findById(id);
+//        Optional<User> user = userService.findById(id);
 //
-//        if (airport.isPresent()) {
-//            List<Connection> connections;
-//            List<Flight> flights = new ArrayList<>();
-//            List<Ticket> tickets = new ArrayList<>();
-//            Set<Trip> trips = new HashSet<>();
-//
-//            connections = connectionService.findConnectionsByAirport(airport.get());
-//            if (!connections.isEmpty()) {
-//                flights = flightService.findFlightsByConnections(connections);
-//                if (!flights.isEmpty()) {
-//                    tickets = ticketService.findTicketsByFlights(flights);
-//                    if (!tickets.isEmpty()) {
-//                        trips = tripService.findTripsByTickets(tickets);
-//                    }
-//                }
-//            }
+//        if (user.isPresent()) {
+//            Set<Trip> trips = user.get().getTrips();
 //
 //            if (!trips.isEmpty()) {
 //                tripService.deleteTrips(trips);
 //            }
-//            if (!flights.isEmpty()) {
-//                flightService.deleteFlights(flights);
-//            }
-//            if (!connections.isEmpty()) {
-//                connectionService.deleteConnections(connections);
-//            }
-//            airportService.deleteAirport(airport.get());
+//
+//            userService.deleteUser(user.get());
 //        }
 //        return ResponseEntity.ok(id);
 //    }

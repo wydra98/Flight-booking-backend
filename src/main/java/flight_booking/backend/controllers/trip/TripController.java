@@ -3,9 +3,11 @@ package flight_booking.backend.controllers.trip;
 import flight_booking.backend.controllers.passenger.PassengerDto;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.models.Trip;
+import flight_booking.backend.models.User;
 import flight_booking.backend.service.AirportService;
 import flight_booking.backend.service.PassengerService;
 import flight_booking.backend.service.TripService;
+import flight_booking.backend.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -13,13 +15,12 @@ import org.hibernate.validator.internal.constraintvalidators.hv.pl.PESELValidato
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @RestController
@@ -30,14 +31,36 @@ public class TripController {
     private final PassengerService passengerService;
     private final AirportService airportService;
     private final TripMapper tripMapper;
+    private final UserService userService;
 
-    TripController(TripService tripService, PassengerService passengerService, AirportService airportService) {
+    TripController(TripService tripService, PassengerService passengerService,
+                   AirportService airportService, UserService userService) {
         this.tripService = tripService;
         this.passengerService = passengerService;
         this.airportService = airportService;
+        this.userService = userService;
         this.tripMapper = new TripMapper();
     }
 
+    @ApiOperation(value = "Get all user's trips", authorizations = {@Authorization(value = "authkey")})
+    @GetMapping
+    ResponseEntity<Set<TripDto>> getAllUsersTrips(@PathVariable Long id) {
+
+        if (!userService.existsById(id)) {
+            throw new NoSuchElementException("User with that id not exist!");
+        }
+
+        Optional<User> user = userService.findById(id);
+
+        Set<TripDto> tripsDtos = new HashSet<>();
+        if (user.isPresent()) {
+            for (Trip trip : user.get().getTrips()) {
+                tripsDtos.add(tripMapper.map(trip));
+            }
+        }
+
+        return ResponseEntity.ok(tripsDtos);
+    }
 
     @ApiOperation(value = "Find proper trips", authorizations = {@Authorization(value = "authkey")})
     @GetMapping("/findTrips")
@@ -153,19 +176,45 @@ public class TripController {
         return ResponseEntity.created(URI.create("/" + trip.getCode())).body(trip);
     }
 
-    @ApiOperation(value = "Get user trip from code", authorizations = {@Authorization(value = "authkey")})
-    @GetMapping("/findOneTrip")
-    ResponseEntity<TripDto> createChosenTrip(@RequestParam String code) {
 
-        if (!tripService.existsByCode(code)) {
-            throw new NoSuchElementException("Trip with that code not exist!");
+    @ApiOperation(value = "Delete trip through user", authorizations = {@Authorization(value = "authkey")})
+    @Transactional
+    @DeleteMapping("/deleteThroughUser/{id}")
+    public ResponseEntity<Long> deleteTripThroughUser(@PathVariable Long id) {
+
+        if (!tripService.existsById(id)) {
+            throw new NoSuchElementException("Trip with that id not exist!");
         }
 
-        Trip trip = tripService.findTripByCode(code);
-        TripDto tripDto = tripMapper.map(trip);
+        Optional<Trip> trip = tripService.findById(id);
 
-        return ResponseEntity.ok(tripDto);
+        if (trip.isPresent()) {
+            tripService.deleteTripsWithTimeLimit(trip.get());
+        }
+
+        return ResponseEntity.ok(id);
     }
+
+    @ApiOperation(value = "Delete trip through admin", authorizations = {@Authorization(value = "authkey")})
+    @Transactional
+    @DeleteMapping("/deleteThroughAdmin/{id}")
+    public ResponseEntity<Long> deleteTripThroughAdmin(@PathVariable Long id) {
+
+        if (!tripService.existsById(id)) {
+            throw new NoSuchElementException("Trip with that id not exist!");
+        }
+
+        Optional<Trip> trip = tripService.findById(id);
+        Set<Trip> trips = new HashSet<>();
+
+        if (trip.isPresent()) {
+            trips.add(trip.get());
+            tripService.deleteTrips(trips);
+        }
+
+        return ResponseEntity.ok(id);
+    }
+
 
     @ExceptionHandler(NoSuchElementException.class)
     ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
