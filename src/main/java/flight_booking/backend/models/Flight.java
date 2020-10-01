@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Builder
@@ -32,6 +33,8 @@ public class Flight {
     private double price;
     @Embedded
     private Times times;
+    @OneToMany(mappedBy = "flight")
+    private List<Seat> seats;
 
     public void updateForm(Airline airline,
                            int numberSeats,
@@ -46,5 +49,18 @@ public class Flight {
         this.getTimes().setDepartureDate(LocalDate.parse(departureDate));
         this.getTimes().setDepartureTime(LocalTime.parse(departureTime));
         this.getTimes().setFlightTime(LocalTime.parse(flightTime));
+    }
+
+    public void addSeat(Seat seat){
+        seats.add(seat);
+    }
+
+    public void removeSeat(int seatNumber) {
+        for (Seat seat: seats) {
+            if(seat.getSeatNumber() == seatNumber){
+                seats.remove(seat);
+                break;
+            }
+        }
     }
 }

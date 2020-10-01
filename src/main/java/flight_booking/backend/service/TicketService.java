@@ -1,9 +1,6 @@
 package flight_booking.backend.service;
 
-import flight_booking.backend.models.Connection;
-import flight_booking.backend.models.Flight;
-import flight_booking.backend.models.Ticket;
-import flight_booking.backend.models.Trip;
+import flight_booking.backend.models.*;
 import flight_booking.backend.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
@@ -127,6 +124,9 @@ public class TicketService {
             ticketRepository.deleteById(ticket.getId());
             Flight flight = ticket.getFlight();
             flight.setAvailableSeats(flight.getAvailableSeats()+1);
+            int seatNumber = ticket.getSeatNumber();
+
+            flight.removeSeat(seatNumber);
             flightService.save(flight);
         }
     }

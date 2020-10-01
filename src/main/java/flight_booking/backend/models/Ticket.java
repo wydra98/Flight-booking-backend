@@ -31,5 +31,4 @@ public class Ticket {
     private Trip trip;
     private Integer seatNumber;
     private double price;
-
 }

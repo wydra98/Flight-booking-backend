@@ -18,15 +18,18 @@ public class TripService {
     private final TicketService ticketService;
     private final FlightService flightService;
     private final UserService userService;
+    private final SeatService seatService;
 
     TripService(TripRepository tripRepository,
                 TicketService ticketService,
                 FlightService flightService,
-                UserService userService) {
+                UserService userService,
+                SeatService seatService) {
         this.tripRepository = tripRepository;
         this.ticketService = ticketService;
         this.flightService = flightService;
         this.userService = userService;
+        this.seatService = seatService;
     }
 
 //    public List<Trip> findAllTripsFromUserId(Long id) {
@@ -100,6 +103,21 @@ public class TripService {
 
                 for (Passenger passenger : passengers) {
                     flight.get().setAvailableSeats(flight.get().getAvailableSeats() - 1);
+
+                    int numberSeat = 0;
+                    List<Integer> seats = seatService.findAllBusySeat(flight.get());
+
+
+                    do {
+                        numberSeat = flight.get().getNumberSeats();
+                    }
+                    while (checkIfNumberSeatIsCorrectAndFree(seats, numberSeat, flight.get()));
+
+
+                    flight.get().addSeat(Seat.builder()
+                            .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
+                            .flight(flight.get())
+                            .build());
                     flightService.save(flight.get());
 
                     Period period = Period.between(passenger.getDateOfBirth(), LocalDate.now());
@@ -131,7 +149,7 @@ public class TripService {
         if (flag) {
             actualTrip = tripRepository.save(trip);
 
-            if(user.isPresent()){
+            if (user.isPresent()) {
                 user.get().addTrip(actualTrip);
                 userService.save(user.get());
             }
@@ -146,6 +164,26 @@ public class TripService {
 
         Random random = new Random();
         return random.nextInt(seatNumbers) + 1;
+    }
+
+    private boolean checkIfNumberSeatIsCorrectAndFree(List<Integer> seatsNumber, int numberSeat, Flight flight) {
+
+        Boolean flag = true;
+
+        if (numberSeat > flight.getNumberSeats() || numberSeat < 1) {
+            flag = false;
+        }
+
+        if (flag) {
+            for (Integer seatNumber : seatsNumber) {
+                if(seatNumber == numberSeat){
+                    flag = false;
+                    break;
+                }
+            }
+        }
+
+        return flag;
     }
 
     public void deleteTrips(Set<Trip> trips) {

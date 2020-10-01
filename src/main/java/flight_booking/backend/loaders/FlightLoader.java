@@ -2337,7 +2337,7 @@ public class FlightLoader implements CommandLineRunner {
                             .build());
                 }
             }
-            
+
             // 101. FROM PEKIN TO CRACOW
             Optional<Connection> connection101 = connectionRepository.findById(101L);
 

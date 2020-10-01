@@ -5,10 +5,7 @@ import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.models.Trip;
 import flight_booking.backend.models.User;
-import flight_booking.backend.service.AirportService;
-import flight_booking.backend.service.PassengerService;
-import flight_booking.backend.service.TripService;
-import flight_booking.backend.service.UserService;
+import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -33,13 +30,16 @@ public class TripController {
     private final AirportService airportService;
     private final TripMapper tripMapper;
     private final UserService userService;
+    private final SeatService seatService;
 
     TripController(TripService tripService, PassengerService passengerService,
-                   AirportService airportService, UserService userService) {
+                   AirportService airportService, UserService userService,
+                   SeatService seatService) {
         this.tripService = tripService;
         this.passengerService = passengerService;
         this.airportService = airportService;
         this.userService = userService;
+        this.seatService = seatService;
         this.tripMapper = new TripMapper();
     }
 
@@ -118,7 +118,8 @@ public class TripController {
     @ApiOperation(value = "Create new trip for user", authorizations = {@Authorization(value = "authkey")})
     @PostMapping("/createTrip")
     ResponseEntity<Trip> createChosenTrip(@RequestBody BookedTripDto bookedTripDto,
-                                          @RequestParam Long userId) {
+                                          @RequestParam Long userId,
+                                          @RequestParam int seatNumber) {
         List<PassengerDto> passengersDto = bookedTripDto.getPassengersDto();
         TripDto tripDto = bookedTripDto.getTripDto();
 
