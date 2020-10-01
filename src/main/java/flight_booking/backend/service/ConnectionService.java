@@ -2,7 +2,6 @@ package flight_booking.backend.service;
 
 import flight_booking.backend.models.Airport;
 import flight_booking.backend.models.Connection;
-import flight_booking.backend.models.Ticket;
 import flight_booking.backend.models.find_connections.Search;
 import flight_booking.backend.repository.AirportRepository;
 import flight_booking.backend.repository.ConnectionRepository;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class ConnectionService {
@@ -20,30 +18,24 @@ public class ConnectionService {
 
     public ConnectionService(ConnectionRepository connectionRepository,
                              AirportRepository airportRepository) {
-
         this.connectionRepository = connectionRepository;
         this.airportRepository = airportRepository;
     }
 
     public List<Connection> findConnectionsByAirport(Airport airport) {
-
         return connectionRepository.findConnectionByAirport(airport);
     }
-
 
     public Optional<Connection> findById(Long id) {
         return connectionRepository.findById(id);
     }
 
-
     public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId) {
-
         List<Connection> allConnection = connectionRepository.findAll();
 
         Search search = new Search(srcAirportId, dstAirportId);
-        List<List<Connection>> connections = search.findConnections(allConnection);
 
-        return connections;
+        return search.findConnections(allConnection);
     }
 
     public boolean existsById(Long id) {

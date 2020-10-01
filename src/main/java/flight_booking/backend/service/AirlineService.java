@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import flight_booking.backend.controllers.airline.AirlineDto;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -29,12 +30,23 @@ public class AirlineService {
         return repository.existsById(id);
     }
 
-    public boolean checkIfAirlineExists(AirlineDto airlineDto,String country) {
+    public boolean checkIfAirlineExists(AirlineDto airlineDto, String country) {
         return repository.checkIfAirlineExists(airlineDto.getName(), country) > 0;
     }
 
-    public Airline addNewAirline(AirlineDto airlineDto, String country) {
+    public void validateNewAirline(AirlineDto airlineDto, String country) {
+        if (checkIfAirlineExists(airlineDto, country)) {
+            throw new IllegalStateException("Airline with these data already exist ins datebase!");
+        }
+    }
 
+    public void validateId(Long id) {
+        if (!existsById(id)) {
+            throw new NoSuchElementException("Airline with that id not exist!");
+        }
+    }
+
+    public Airline addNewAirline(AirlineDto airlineDto, String country) {
         Airline airline = Airline.builder()
                 .name(airlineDto.getName())
                 .country(country)

@@ -7,11 +7,13 @@ import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.User;
 import flight_booking.backend.repository.UserRepository;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class UserService {
@@ -26,10 +28,21 @@ public class UserService {
         this.jwtService = jwtService;
     }
 
+    public boolean existsById(Long id) {
+        return userRepository.existsById(id);
+    }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
     public boolean checkIfMailExists(String email) {
         return userRepository.checkIfMailExists(email) > 0;
     }
-
 
     public User addNewUser(String name, String surname, String email, String password) {
         User user = User.builder()
@@ -42,6 +55,42 @@ public class UserService {
 
         userRepository.save(user);
         return user;
+    }
+
+    public void validateRegistration(String name, String surname, String email, String password){
+        if (name.length() == 0 || surname.length() == 0 ||
+                email.length() == 0 || password.length() == 0) {
+            throw new IllegalStateException("The empty field is not allowed.");
+        }
+
+        Pattern pattern1 = Pattern.compile("^[\\p{L} .'-]+$");
+        if (!pattern1.matcher(name).matches() ||
+                !pattern1.matcher(surname).matches()) {
+            throw new IllegalStateException("The passenger first name or surname is invalid.");
+        }
+
+        if (password.length() < 2 || name.length() < 2 ||
+                surname.length() < 2) {
+            throw new IllegalStateException("The field's length is invalid.");
+        }
+
+        if (!EmailValidator.getInstance().isValid(email)) {
+            throw new IllegalStateException("The passenger email is invalid.");
+        }
+
+        if (checkIfMailExists(email)) {
+            throw new IllegalStateException("Email already taken!");
+        }
+    }
+
+    public void validateLogin(String email, String password){
+        if (email.length() == 0 || password.length() == 0) {
+            throw new IllegalStateException("The empty field is not allowed.");
+        }
+
+        if (!EmailValidator.getInstance().isValid(email)) {
+            throw new IllegalStateException("The passenger email is invalid.");
+        }
     }
 
     public TokenTransfer login(String email, String password) {
@@ -64,25 +113,15 @@ public class UserService {
         return true;
     }
 
-    public boolean existsById(Long id) {
-        return userRepository.existsById(id);
-    }
-
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
-    }
-
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     public void deleteUser(User user) {
         userRepository.deleteById(user.getId());
     }
 
-    public void save(User user) {
-        userRepository.save(user);
-    }
+
 
 }
 

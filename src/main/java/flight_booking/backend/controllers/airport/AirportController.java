@@ -48,13 +48,11 @@ public class AirportController {
 
     @ApiOperation(value = "Add new airport", authorizations = {@Authorization(value = "authkey")})
     @PostMapping
-    ResponseEntity<Airport> addNewAirline(@RequestBody AirportDto airportDto,
+    ResponseEntity<Airport> addNewAirport(@RequestBody AirportDto airportDto,
                                           @RequestParam double longitude,
                                           @RequestParam double latitude) {
 
-        if (airportService.checkIfAirportExists(airportDto, longitude, latitude)) {
-            throw new IllegalStateException("Airport with these data already exist in datebase!");
-        }
+        airportService.validateNewAirport(airportDto, longitude, latitude);
 
         Airport airport = airportService.addNewAirport(airportDto, longitude, latitude);
         return ResponseEntity.created(URI.create("/" + airport.getId())).body(airport);
@@ -65,16 +63,14 @@ public class AirportController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deleteAirport(@PathVariable Long id) {
 
-        if (!airportService.existsById(id)) {
-            throw new NoSuchElementException("Airport with that id not exist!");
-        }
+        airportService.validateId(id);
 
         Optional<Airport> airport = airportService.findById(id);
 
         if (airport.isPresent()) {
             List<Connection> connections;
             List<Flight> flights = new ArrayList<>();
-            List<Ticket> tickets = new ArrayList<>();
+            List<Ticket> tickets;
             Set<Trip> trips = new HashSet<>();
 
             connections = connectionService.findConnectionsByAirport(airport.get());
@@ -109,12 +105,10 @@ public class AirportController {
                                        @RequestParam double longitude,
                                        @RequestParam double latitude) {
 
-        if (!airportService.existsById(airportDto.getId())) {
-            throw new NoSuchElementException("Airport with that id not exist!");
-        }
+        airportService.validateId(airportDto.getId());
 
         Optional<Airport> airport = airportService.findById(airportDto.getId());
-        if(airport.isPresent()){
+        if (airport.isPresent()) {
             airport.get().updateForm(airportDto, longitude, latitude);
             airportService.save(airport.get());
         }
@@ -123,12 +117,13 @@ public class AirportController {
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    ResponseEntity<String> handleAirportAlreadyExistsException(IllegalStateException e) {
+    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    ResponseEntity<?> handleAirportNotExistsException(NoSuchElementException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());    }
+    ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 
 }

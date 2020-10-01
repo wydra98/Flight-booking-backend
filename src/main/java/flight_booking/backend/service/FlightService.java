@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -72,6 +73,12 @@ public class FlightService {
         return flightRepository.findAll();
     }
 
+    public void validateId(Long id){
+        if (!existsById(id)) {
+            throw new NoSuchElementException("Flight with that id not exist!");
+        }
+    }
+
     public Flight save(Flight flight) {
         return flightRepository.save(flight);
     }
@@ -103,10 +110,6 @@ public class FlightService {
 
     public boolean existsById(Long id) {
         return flightRepository.existsById(id);
-    }
-
-    public void deleteConnection(Long id) {
-        flightRepository.deleteById(id);
     }
 
     public Optional<Flight> findById(Long id) {
@@ -231,16 +234,6 @@ public class FlightService {
 
             }
         }
-//        for (List<Flight> flights : finishListFlights) {
-//            for (Flight flight : flights) {
-//                System.out.println(flight.getConnection().getSrcAirport().getName() + " - " + flight.getConnection().getDstAirport().getName() + ", ");
-//                System.out.println(flight.getTimes().toString());
-//            }
-//            System.out.println();
-//            System.out.println();
-//        }
-//        System.out.println(finishListFlights.size());
-
         return finishListFlights;
     }
 

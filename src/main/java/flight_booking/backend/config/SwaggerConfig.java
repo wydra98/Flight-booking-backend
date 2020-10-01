@@ -30,7 +30,6 @@ public class SwaggerConfig {
         return Predicates.not(PathSelectors.regex("/error.*"));
     }
 
-
     private ApiKey apiKey() {
         return new ApiKey("authkey", "Authorization", "header");
     }

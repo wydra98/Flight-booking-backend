@@ -51,8 +51,6 @@ public class FlightController {
         return ResponseEntity.ok(flightDtos);
     }
 
-    //TODO read about twice @Requestbody in arguments of one function
-    //TODO add validators for examples like "if airlineId exists"
     @ApiOperation(value = "Add new flight", authorizations = {@Authorization(value = "authkey")})
     @PostMapping
     ResponseEntity<Flight> addNewFlight(@RequestParam Long airlineDtoId,
@@ -71,7 +69,6 @@ public class FlightController {
 
     }
 
-    //TODO add validators for examples like "if airlineId exists"
     @ApiOperation(value = "Update flight", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @PutMapping
@@ -85,6 +82,7 @@ public class FlightController {
                                       @RequestParam String departureTime,
                                       @RequestParam String flightTime) {
 
+        
         if (!flightService.existsById(flightId)) {
             throw new NoSuchElementException("Flight with that id not exist!");
         }
@@ -93,28 +91,30 @@ public class FlightController {
             throw new NoSuchElementException("Connection with that id not exist!");
         }
 
-        Optional<Flight> flightOptional = flightService.findById(flightId);
+        Optional<Flight> flight = flightService.findById(flightId);
         Connection connection = flightService.findConnection(flightId);
         Optional<Airline> airline = airlineService.findById(airlineId);
         Optional<Airport> srcAirport = airportService.findById(srcAirportId);
         Optional<Airport> dstAirport = airportService.findById(dstAirportId);
 
-        connection.updateForm(
-                srcAirport.get(),
-                dstAirport.get()
-        );
+        if(srcAirport.isPresent() && dstAirport.isPresent()){
+            connection.updateForm(
+                    srcAirport.get(),
+                    dstAirport.get()
+            );
+        }
 
-        flightOptional.get().updateForm(
+        flight.ifPresent(value -> value.updateForm(
                 airline.get(),
                 numberSeats,
                 price,
                 departureDate,
                 departureTime,
                 flightTime
-        );
+        ));
 
-        if (flightOptional.isPresent()) {
-            flightService.save(flightOptional.get());
+        if (flight.isPresent()) {
+            flightService.save(flight.get());
             connectionService.save(connection);
         }
 
@@ -126,15 +126,13 @@ public class FlightController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {
 
-        if (!flightService.existsById(id)) {
-            throw new NoSuchElementException("Flight with that id not exist!");
-        }
+        flightService.validateId(id);
 
         Optional<Flight> flight = flightService.findById(id);
 
         if (flight.isPresent()) {
             List<Flight> flights = new ArrayList<>();
-            List<Ticket> tickets = new ArrayList<>();
+            List<Ticket> tickets;
             Set<Trip> trips = new HashSet<>();
             flights.add(flight.get());
 
@@ -155,7 +153,7 @@ public class FlightController {
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    ResponseEntity<?> handleConnectionNotExistsException(NoSuchElementException e) {
+    ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

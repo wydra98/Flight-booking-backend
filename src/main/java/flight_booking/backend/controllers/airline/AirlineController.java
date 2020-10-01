@@ -49,9 +49,7 @@ public class AirlineController {
     ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto,
                                           @RequestParam String country) {
 
-        if (airlineService.checkIfAirlineExists(airlineDto, country)) {
-            throw new IllegalStateException("Airline with these data already exist ins datebase!");
-        }
+        airlineService.validateNewAirline(airlineDto, country);
 
         Airline airline = airlineService.addNewAirline(airlineDto, country);
         return ResponseEntity.created(URI.create("/" + airline.getId())).body(airline);
@@ -62,15 +60,12 @@ public class AirlineController {
     @DeleteMapping("/delete/{id}")
     ResponseEntity<Long> deleteAirline(@PathVariable Long id) throws InterruptedException {
 
-        if (!airlineService.existsById(id)) {
-            throw new NoSuchElementException("Airline with that id not exist!");
-        }
-
+        airlineService.validateId(id);
         Optional<Airline> airline = airlineService.findById(id);
 
         if (airline.isPresent()) {
-            List<Flight> flights = new ArrayList<>();
-            List<Ticket> tickets = new ArrayList<>();
+            List<Flight> flights;
+            List<Ticket> tickets;
             Set<Trip> trips = new HashSet<>();
 
             flights = flightService.findFlightsByAirline(airline.get());
@@ -99,9 +94,7 @@ public class AirlineController {
     ResponseEntity<Void> updateAirline(@RequestBody AirlineDto airlineDto,
                                        @RequestParam String country) {
 
-        if (!airlineService.existsById(airlineDto.getId())) {
-            throw new NoSuchElementException("Airline with that ID not exist!");
-        }
+        airlineService.validateId(airlineDto.getId());
 
         Optional<Airline> airlineOptional = airlineService.findById(airlineDto.getId());
         if (airlineOptional.isPresent()) {
