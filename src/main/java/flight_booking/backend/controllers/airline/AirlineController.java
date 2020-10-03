@@ -34,6 +34,7 @@ public class AirlineController {
     @ApiOperation(value = "Get all airlines", authorizations = {@Authorization(value = "authkey")})
     @GetMapping
     ResponseEntity<List<AirlineDto>> getAllAirlines() {
+
         List<Airline> airlines = airlineService.findAll();
 
         ArrayList<AirlineDto> airlineDtos = new ArrayList<>();

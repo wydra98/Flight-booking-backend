@@ -1,6 +1,7 @@
 package flight_booking.backend.models.find_connections;
 
 import flight_booking.backend.models.Connection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,6 @@ public class Search {
         for (Connection connection : baseConnection) {
             graph.addEdge(connection);
         }
-
 
         ArrayList<Long> visited = new ArrayList();
         visited.add(START);

@@ -23,12 +23,6 @@ public class TicketService {
         this.flightService = flightService;
     }
 
-    public List<Ticket> findAllTicketFromUserId(Long id) {
-        List<Ticket> tickets = ticketRepository.findAllTicketFromUserId(id);
-
-        return tickets;
-    }
-
     public List<Ticket> findTicketsByFlights(List<Flight> flights) {
 
         List<Ticket> tickets = new ArrayList<>();
@@ -123,7 +117,7 @@ public class TicketService {
         for (Ticket ticket : tickets) {
             ticketRepository.deleteById(ticket.getId());
             Flight flight = ticket.getFlight();
-            flight.setAvailableSeats(flight.getAvailableSeats()+1);
+            flight.setAvailableSeats(flight.getAvailableSeats() + 1);
             int seatNumber = ticket.getSeatNumber();
 
             flight.removeSeat(seatNumber);

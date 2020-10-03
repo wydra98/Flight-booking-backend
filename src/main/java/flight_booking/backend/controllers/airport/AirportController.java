@@ -37,6 +37,7 @@ public class AirportController {
     @ApiOperation(value = "Get all airports", authorizations = {@Authorization(value = "authkey")})
     @GetMapping
     ResponseEntity<List<AirportDto>> getAllAirports() {
+
         List<Airport> airports = airportService.findAll();
 
         ArrayList<AirportDto> airportsDtos = new ArrayList<>();
@@ -53,7 +54,6 @@ public class AirportController {
                                           @RequestParam double latitude) {
 
         airportService.validateNewAirport(airportDto, longitude, latitude);
-
         Airport airport = airportService.addNewAirport(airportDto, longitude, latitude);
         return ResponseEntity.created(URI.create("/" + airport.getId())).body(airport);
     }
@@ -64,7 +64,6 @@ public class AirportController {
     public ResponseEntity<Long> deleteAirport(@PathVariable Long id) {
 
         airportService.validateId(id);
-
         Optional<Airport> airport = airportService.findById(id);
 
         if (airport.isPresent()) {

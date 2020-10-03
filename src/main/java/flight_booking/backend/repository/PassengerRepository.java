@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PassengerRepository extends JpaRepository<Passenger,Long> {
+public interface PassengerRepository extends JpaRepository<Passenger, Long> {
 
     @Query(value = "SELECT COUNT (p.passenger_id) FROM passengers p", nativeQuery = true)
     int amountOfRows();
@@ -15,10 +15,7 @@ public interface PassengerRepository extends JpaRepository<Passenger,Long> {
     @Query(value = "SELECT DISTINCT p FROM Passenger p WHERE p.pesel=:pesel")
     Passenger findByPesel(@Param("pesel") String pesel);
 
-
     @Query(value = "SELECT COUNT (p.passenger_id) FROM passengers p WHERE p.pesel=:pesel",
             nativeQuery = true)
     int checkIfPassengerExistsThroughPesel(@Param("pesel") String pesel);
-
-
 }

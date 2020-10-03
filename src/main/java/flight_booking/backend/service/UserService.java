@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -57,7 +58,7 @@ public class UserService {
         return user;
     }
 
-    public void validateRegistration(String name, String surname, String email, String password){
+    public void validateRegistration(String name, String surname, String email, String password) {
         if (name.length() == 0 || surname.length() == 0 ||
                 email.length() == 0 || password.length() == 0) {
             throw new IllegalStateException("The empty field is not allowed.");
@@ -83,13 +84,19 @@ public class UserService {
         }
     }
 
-    public void validateLogin(String email, String password){
+    public void validateLogin(String email, String password) {
         if (email.length() == 0 || password.length() == 0) {
             throw new IllegalStateException("The empty field is not allowed.");
         }
 
         if (!EmailValidator.getInstance().isValid(email)) {
             throw new IllegalStateException("The passenger email is invalid.");
+        }
+    }
+
+    public void validateId(Long id) {
+        if (!existsById(id)) {
+            throw new NoSuchElementException("User with that id not exist!");
         }
     }
 
@@ -120,7 +127,6 @@ public class UserService {
     public void deleteUser(User user) {
         userRepository.deleteById(user.getId());
     }
-
 
 
 }

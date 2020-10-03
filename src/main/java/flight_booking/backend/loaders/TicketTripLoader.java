@@ -107,7 +107,7 @@ public class TicketTripLoader implements CommandLineRunner {
 
 
             // TRIP FROM PEKIN TO TORONTO WITH TICKETS BELONG TO PASSENGER 1
-            if (passenger1.isPresent()  && user1.isPresent()) {
+            if (passenger1.isPresent() && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
                         .code("95fe9b0d-932d-67a5-er9a-994137aabf30")
                         .arrivalDate(LocalDate.parse("2021-04-06"))
@@ -146,7 +146,7 @@ public class TicketTripLoader implements CommandLineRunner {
 
 
             // TRIP FROM PARIS TO MOSCOW WITH TICKETS BELONG TO PASSENGER 2
-            if (passenger2.isPresent()  && user1.isPresent()) {
+            if (passenger2.isPresent() && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
                         .code("9d1b390c-9de5-4f65-a795-f61fb3c4de2d")
                         .arrivalDate(LocalDate.parse("2021-03-17"))
@@ -246,7 +246,7 @@ public class TicketTripLoader implements CommandLineRunner {
             tripFind2.ifPresent(allTrips::add);
             tripFind3.ifPresent(allTrips::add);
 
-            if(user.isPresent()){
+            if (user.isPresent()) {
                 user.get().setTrips(allTrips);
                 userRepository.save(user.get());
             }

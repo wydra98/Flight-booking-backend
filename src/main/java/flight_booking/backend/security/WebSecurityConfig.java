@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_WHITELIST = {
-            // -- swagger ui
             "/v2/api-docs",
             "/swagger-resources",
             "/swagger-resources/**",
@@ -18,7 +17,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/webjars/**",
             "/login*",
             "/register*"
-            // other public endpoints of your API may be appended to this array
     };
 
     @Override

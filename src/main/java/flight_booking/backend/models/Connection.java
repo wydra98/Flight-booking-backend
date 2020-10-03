@@ -27,10 +27,7 @@ public class Connection {
     @JoinColumn(name = "id_dst_airport")
     private Airport dstAirport;
 
-    public void updateForm(
-            Airport srcAirport,
-            Airport dstAirport
-    ) {
+    public void updateForm(Airport srcAirport, Airport dstAirport) {
         this.srcAirport = srcAirport;
         this.dstAirport = dstAirport;
     }

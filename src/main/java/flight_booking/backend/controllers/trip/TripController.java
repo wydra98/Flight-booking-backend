@@ -27,19 +27,14 @@ public class TripController {
 
     private final TripService tripService;
     private final PassengerService passengerService;
-    private final AirportService airportService;
     private final TripMapper tripMapper;
     private final UserService userService;
-    private final SeatService seatService;
 
     TripController(TripService tripService, PassengerService passengerService,
-                   AirportService airportService, UserService userService,
-                   SeatService seatService) {
+                   UserService userService) {
         this.tripService = tripService;
         this.passengerService = passengerService;
-        this.airportService = airportService;
         this.userService = userService;
-        this.seatService = seatService;
         this.tripMapper = new TripMapper();
     }
 
@@ -47,10 +42,7 @@ public class TripController {
     @GetMapping
     ResponseEntity<Set<TripDto>> getAllUsersTrips(@PathVariable Long id) {
 
-        if (!userService.existsById(id)) {
-            throw new NoSuchElementException("User with that id not exist!");
-        }
-
+        tripService.validateUsersId(id);
         Optional<User> user = userService.findById(id);
 
         Set<TripDto> tripsDtos = new HashSet<>();
@@ -72,20 +64,7 @@ public class TripController {
                                                   @RequestParam int passengerNumber,
                                                   @RequestParam boolean twoTrip) {
 
-        if (!airportService.existsById(srcAirportId) || !airportService.existsById(dstAirportId)) {
-            throw new NoSuchElementException("Airport with that id not exist!");
-        }
-
-        if (srcAirportId.equals(dstAirportId)) {
-            throw new IllegalStateException("Source and destination airport must be different.");
-        }
-
-        LocalDate departureDateParse = LocalDate.parse(departureDate);
-        LocalDate arrivalDateParse = LocalDate.parse(arrivalDate);
-
-        if (arrivalDateParse.isBefore(departureDateParse)) {
-            throw new IllegalStateException("The date range is invalid.");
-        }
+        List<LocalDate> dates = tripService.validateFindTrip(srcAirportId, dstAirportId, departureDate, arrivalDate, passengerNumber);
 
         List<List<TripDto>> tripsFromTo = new ArrayList<>();
         List<Trip> tripsFrom;
@@ -93,6 +72,8 @@ public class TripController {
         List<Trip> tripsTo;
         List<TripDto> tripsToDto = new ArrayList<>();
 
+        LocalDate departureDateParse = dates.get(0);
+        LocalDate arrivalDateParse = dates.get(1);
         tripsFrom = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, departureDateParse, passengerNumber);
 
         tripsFromDto = new ArrayList<>();
@@ -114,67 +95,18 @@ public class TripController {
         return ResponseEntity.ok(tripsFromTo);
     }
 
-
     @ApiOperation(value = "Create new trip for user", authorizations = {@Authorization(value = "authkey")})
     @PostMapping("/createTrip")
     ResponseEntity<Trip> createChosenTrip(@RequestBody BookedTripDto bookedTripDto,
-                                          @RequestParam Long userId,
-                                          @RequestParam int seatNumber) {
+                                          @RequestParam Long userId) {
+
         List<PassengerDto> passengersDto = bookedTripDto.getPassengersDto();
         TripDto tripDto = bookedTripDto.getTripDto();
 
         List<Passenger> passengers = new ArrayList<>();
         for (PassengerDto passengerDto : passengersDto) {
 
-            if (passengerDto.getDateOfBirth().length() == 0 || passengerDto.getEmail().length() == 0 ||
-                    passengerDto.getFirstName().length() == 0 || passengerDto.getPesel().length() == 0 ||
-                    passengerDto.getPhoneNumber().length() == 0 || passengerDto.getSurname().length() == 0) {
-                throw new IllegalStateException("The empty field is not allowed.");
-            }
-
-            Pattern pattern1 = Pattern.compile("^[\\p{L} .'-]+$");
-            if (!pattern1.matcher(passengerDto.getFirstName()).matches() ||
-                    !pattern1.matcher(passengerDto.getSurname()).matches()) {
-                throw new IllegalStateException("The passenger first name or surname is invalid.");
-            }
-
-            if (passengerDto.getPhoneNumber().length() != 9 ||
-                    passengerDto.getFirstName().length() < 2 ||
-                    passengerDto.getSurname().length() < 2) {
-                throw new IllegalStateException("The field's length is invalid.");
-            }
-
-            if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-                throw new IllegalStateException("The passenger age is invalid.");
-            }
-
-            PESELValidator peselValidator = new PESELValidator();
-            peselValidator.initialize(null);
-
-            if (!peselValidator.isValid(passengerDto.getPesel(), null)) {
-                throw new IllegalStateException("The passenger pesel is invalid.");
-            }
-
-            if (!EmailValidator.getInstance().isValid(passengerDto.getEmail())) {
-                throw new IllegalStateException("The passenger email is invalid.");
-            }
-
-            if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-                throw new IllegalStateException("The passenger age is invalid.");
-            }
-
-            Pattern pattern2 = Pattern.compile("^[0-9]{9}$");
-            if (!pattern2.matcher(passengerDto.getPhoneNumber()).matches()) {
-                throw new IllegalStateException("The passenger phone number is invalid.");
-            }
-
-            if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-                throw new IllegalStateException("The passenger age is invalid.");
-            }
-
-            if (!userService.existsById(userId)) {
-                throw new NoSuchElementException("User with that id not exist!");
-            }
+            tripService.validateNewTrip(passengerDto, userId);
 
             if (passengerService.checkIfPassengerExists(passengerDto.getPesel())) {
                 passengers.add(passengerService.findPassenger(passengerDto.getPesel()));
@@ -187,16 +119,12 @@ public class TripController {
         return ResponseEntity.created(URI.create("/" + trip.getCode())).body(trip);
     }
 
-
     @ApiOperation(value = "Delete trip through user", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @DeleteMapping("/deleteThroughUser/{id}")
     public ResponseEntity<Long> deleteTripThroughUser(@PathVariable Long id) {
 
-        if (!tripService.existsById(id)) {
-            throw new NoSuchElementException("Trip with that id not exist!");
-        }
-
+        tripService.validateTripId(id);
         Optional<Trip> trip = tripService.findById(id);
 
         if (trip.isPresent()) {
@@ -211,10 +139,7 @@ public class TripController {
     @DeleteMapping("/deleteThroughAdmin/{id}")
     public ResponseEntity<Long> deleteTripThroughAdmin(@PathVariable Long id) {
 
-        if (!tripService.existsById(id)) {
-            throw new NoSuchElementException("Trip with that id not exist!");
-        }
-
+        tripService.validateTripId(id);
         Optional<Trip> trip = tripService.findById(id);
         Set<Trip> trips = new HashSet<>();
 
@@ -225,7 +150,6 @@ public class TripController {
 
         return ResponseEntity.ok(id);
     }
-
 
     @ExceptionHandler(NoSuchElementException.class)
     ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {

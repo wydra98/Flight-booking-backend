@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class JwtFilter extends BasicAuthenticationFilter {
+
     @Autowired
     private JwtService jwtService;
 
@@ -34,11 +35,9 @@ public class JwtFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException {
         try {
             String token = request.getHeader("authorization");
-            if (token == null){
+            if (token == null) {
                 throw new IllegalStateException();
-            }
-
-            else {
+            } else {
                 if (jwtService == null) {
                     ServletContext context = request.getSession().getServletContext();
                     SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, context);
@@ -56,7 +55,6 @@ public class JwtFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
         DecodedJWT decodedJWT = jwtService.verify(token);
-        System.out.println("DecodedJWT" + decodedJWT);
         Map<String, Claim> claims = decodedJWT.getClaims();
 
         Set<SimpleGrantedAuthority> simpleGrantedAuthorities = Collections.singleton(new SimpleGrantedAuthority(claims.get("role").asString()));

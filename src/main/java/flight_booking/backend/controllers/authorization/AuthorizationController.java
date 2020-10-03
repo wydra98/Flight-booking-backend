@@ -28,7 +28,6 @@ public class AuthorizationController {
                                   @RequestParam String password) {
 
         userService.validateRegistration(name, surname, email, password);
-
         User user = userService.addNewUser(name, surname, email, password);
 
         return ResponseEntity.created(URI.create("/" + user.getId())).body(user);

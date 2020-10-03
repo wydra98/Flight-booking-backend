@@ -8,9 +8,9 @@ import java.util.*;
 public class Graph {
     public Map<Long, TreeSet<Long>> map = new HashMap();
 
-    public void addEdge(Connection connection){
+    public void addEdge(Connection connection) {
         TreeSet<Long> adjacent = map.get(connection.getSrcAirport().getId());
-        if(adjacent==null) {
+        if (adjacent == null) {
             adjacent = new TreeSet();
             map.put(connection.getSrcAirport().getId(), adjacent);
         }
@@ -19,7 +19,7 @@ public class Graph {
 
     public ArrayList<Long> adjacentNodes(Long id) {
         TreeSet<Long> adjacent = map.get(id);
-        if(adjacent==null) {
+        if (adjacent == null) {
             return new ArrayList<>();
         }
         return new ArrayList<>(adjacent);

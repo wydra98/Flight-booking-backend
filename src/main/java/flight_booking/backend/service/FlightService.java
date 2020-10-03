@@ -3,6 +3,7 @@ package flight_booking.backend.service;
 import flight_booking.backend.models.*;
 import flight_booking.backend.repository.FlightRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.time.LocalDate;
@@ -17,16 +18,19 @@ import java.util.Optional;
 public class FlightService {
 
     private static final int MAX_TIME_BREAK = 12;
-    FlightRepository flightRepository;
-    ConnectionService connectionService;
-    AirlineService airlineService;
+    private final FlightRepository flightRepository;
+    private final ConnectionService connectionService;
+    private final AirlineService airlineService;
+    private final AirportService airportService;
 
     FlightService(FlightRepository flightRepository,
                   ConnectionService connectionService,
-                  AirlineService airlineService) {
+                  AirlineService airlineService,
+                  AirportService airportService) {
         this.flightRepository = flightRepository;
         this.connectionService = connectionService;
         this.airlineService = airlineService;
+        this.airportService = airportService;
     }
 
     public Connection findConnection(Long flightId) {
@@ -49,7 +53,7 @@ public class FlightService {
 
             List<Flight> resultFlights = flightRepository.findFlightsByConnection(connection);
 
-            for (Flight result:resultFlights) {
+            for (Flight result : resultFlights) {
                 System.out.println(result);
             }
             System.out.println();
@@ -73,7 +77,7 @@ public class FlightService {
         return flightRepository.findAll();
     }
 
-    public void validateId(Long id){
+    public void validateId(Long id) {
         if (!existsById(id)) {
             throw new NoSuchElementException("Flight with that id not exist!");
         }
@@ -137,6 +141,50 @@ public class FlightService {
             allFlights.add(allFlightsInOneTrip);
         }
         return allFlights;
+    }
+
+    public void validateFlight(Long airlineId, int numberSeats, double price,
+                               Long srcAirportId, Long dstAirportId,
+                               String departureDate, String arrivalDate,
+                               String flightTime, Optional<Long> flightOptId) {
+
+        if (flightOptId.isPresent()) {
+            if (existsById(flightOptId.get())) {
+                throw new NoSuchElementException("Flight with that id not exist!");
+            }
+
+            if (!connectionService.existsById(flightOptId.get())) {
+                throw new NoSuchElementException("Connection with that id not exist!");
+            }
+        }
+
+        if (!airlineService.existsById(airlineId)) {
+            throw new NoSuchElementException("Airline with that id not exist!");
+        }
+
+        if (!airportService.existsById(srcAirportId) || !airportService.existsById(dstAirportId)) {
+            throw new NoSuchElementException("Airport with that id not exist!");
+        }
+
+        if (numberSeats < 0 || numberSeats > 350) {
+            throw new IllegalStateException("Set number is not proper!");
+        }
+
+        if (price <= 0 || price > 2000) {
+            throw new IllegalStateException("The price is not proper!");
+        }
+
+        if (srcAirportId.equals(dstAirportId)) {
+            throw new IllegalStateException("Source and destination airport must be different.");
+        }
+
+        LocalDate departureDateParse = LocalDate.parse(departureDate);
+        LocalDate arrivalDateParse = LocalDate.parse(arrivalDate);
+        LocalTime flightTimeParse = LocalTime.parse(flightTime);
+
+        if (arrivalDateParse.isBefore(departureDateParse)) {
+            throw new IllegalStateException("The date range is invalid.");
+        }
     }
 
     public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, Long dstAirport,

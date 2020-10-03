@@ -18,13 +18,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query(value = "SELECT COUNT (a.ticket_id) FROM tickets a", nativeQuery = true)
     int amountOfRows();
 
-    @Query("SELECT DISTINCT t FROM Ticket t WHERE t.id = :id")
-    List<Ticket> findAllTicketFromUserId(@Param("id") Long id);
-
     @Query(value = "SELECT t FROM Ticket t WHERE t.flight.id=:id")
     Ticket findTicketsByFlightsId(@Param("id") Long id);
-
-    @Query(value = "SELECT t FROM Ticket t WHERE t.flight=:flight")
-    List<Ticket> findTicketsByFlights(@Param("flight") Flight flight);
-
 }

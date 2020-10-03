@@ -33,6 +33,7 @@ public class User {
     public User() {
         this.role = "ROLE_USER";
     }
+
     public User(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
@@ -41,8 +42,7 @@ public class User {
         this.role = "ROLE_USER";
     }
 
-    public void addTrip(Trip trip){
+    public void addTrip(Trip trip) {
         trips.add(trip);
     }
-
 }

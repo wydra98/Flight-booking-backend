@@ -2,6 +2,7 @@ package flight_booking.backend.models;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -51,13 +52,13 @@ public class Flight {
         this.getTimes().setFlightTime(LocalTime.parse(flightTime));
     }
 
-    public void addSeat(Seat seat){
+    public void addSeat(Seat seat) {
         seats.add(seat);
     }
 
     public void removeSeat(int seatNumber) {
-        for (Seat seat: seats) {
-            if(seat.getSeatNumber() == seatNumber){
+        for (Seat seat : seats) {
+            if (seat.getSeatNumber() == seatNumber) {
                 seats.remove(seat);
                 break;
             }

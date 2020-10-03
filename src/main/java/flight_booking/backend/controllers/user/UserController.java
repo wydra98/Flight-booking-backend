@@ -37,6 +37,7 @@ public class UserController {
     @ApiOperation(value = "Get all users", authorizations = {@Authorization(value = "authkey")})
     @GetMapping
     ResponseEntity<List<UserDto>> getAllUser() {
+
         List<User> users = userService.findAll();
 
         ArrayList<UserDto> userDtos = new ArrayList<>();
@@ -51,10 +52,7 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deleteUser(@PathVariable Long id) {
 
-        if (!userService.existsById(id)) {
-            throw new NoSuchElementException("User with that id not exist!");
-        }
-
+        userService.validateId(id);
         Optional<User> user = userService.findById(id);
 
         if (user.isPresent()) {
@@ -63,7 +61,6 @@ public class UserController {
             if (!trips.isEmpty()) {
                 tripService.deleteTrips(trips);
             }
-
             userService.deleteUser(user.get());
         }
 

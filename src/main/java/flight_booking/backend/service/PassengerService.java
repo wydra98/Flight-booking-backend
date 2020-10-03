@@ -1,16 +1,14 @@
 package flight_booking.backend.service;
 
 import flight_booking.backend.controllers.passenger.PassengerDto;
-import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Passenger;
-import flight_booking.backend.models.Trip;
 import flight_booking.backend.repository.PassengerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class PassengerService {
@@ -43,8 +41,20 @@ public class PassengerService {
         return passengerRepository.checkIfPassengerExistsThroughPesel(pesel) > 0;
     }
 
-    public Passenger findPassenger(String pesel){
+    public Passenger findPassenger(String pesel) {
         return passengerRepository.findByPesel(pesel);
+    }
+
+    public void validateIfExists(String PESEL) {
+        if (checkIfPassengerExists(PESEL)) {
+            throw new IllegalStateException("Passenger with these data already exist in datebase!");
+        }
+    }
+
+    public void validateIfNonExists(Long id) {
+        if (!existsById(id)) {
+            throw new NoSuchElementException("Passenger with that id not exist!");
+        }
     }
 
     public boolean existsById(Long id) {

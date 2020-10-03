@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.net.URI;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 @RestController
@@ -53,7 +54,7 @@ public class FlightController {
 
     @ApiOperation(value = "Add new flight", authorizations = {@Authorization(value = "authkey")})
     @PostMapping
-    ResponseEntity<Flight> addNewFlight(@RequestParam Long airlineDtoId,
+    ResponseEntity<Flight> addNewFlight(@RequestParam Long airlineId,
                                         @RequestParam int numberSeats,
                                         @RequestParam double price,
                                         @RequestParam Long srcAirportId,
@@ -62,17 +63,20 @@ public class FlightController {
                                         @RequestParam String departureTime,
                                         @RequestParam String flightTime) {
 
+
+        flightService.validateFlight(airlineId, numberSeats, price, srcAirportId, dstAirportId, departureDate,
+                departureTime, flightTime, Optional.empty());
+
         Connection connection = connectionService.addNewConnection(srcAirportId, dstAirportId);
-        Flight flight = flightService.addNewFlight(airlineDtoId, numberSeats, price, departureDate,
+        Flight flight = flightService.addNewFlight(airlineId, numberSeats, price, departureDate,
                 departureTime, flightTime, connection);
         return ResponseEntity.created(URI.create("/" + flight.getId())).body(flight);
-
     }
 
     @ApiOperation(value = "Update flight", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @PutMapping
-    ResponseEntity<Void> updateFlight(@RequestParam Long flightId,
+    ResponseEntity<Void> updateFlight(@RequestParam Long flightDtoId,
                                       @RequestParam Long airlineId,
                                       @RequestParam int numberSeats,
                                       @RequestParam double price,
@@ -82,26 +86,18 @@ public class FlightController {
                                       @RequestParam String departureTime,
                                       @RequestParam String flightTime) {
 
-        
-        if (!flightService.existsById(flightId)) {
-            throw new NoSuchElementException("Flight with that id not exist!");
-        }
+        Optional<Long> flightId = Optional.of(flightDtoId);
+        flightService.validateFlight(airlineId, numberSeats, price, srcAirportId, dstAirportId, departureDate,
+                departureTime, flightTime, flightId);
 
-        if (!connectionService.existsById(flightId)) {
-            throw new NoSuchElementException("Connection with that id not exist!");
-        }
-
-        Optional<Flight> flight = flightService.findById(flightId);
-        Connection connection = flightService.findConnection(flightId);
+        Optional<Flight> flight = flightService.findById(flightDtoId);
+        Connection connection = flightService.findConnection(flightDtoId);
         Optional<Airline> airline = airlineService.findById(airlineId);
         Optional<Airport> srcAirport = airportService.findById(srcAirportId);
         Optional<Airport> dstAirport = airportService.findById(dstAirportId);
 
-        if(srcAirport.isPresent() && dstAirport.isPresent()){
-            connection.updateForm(
-                    srcAirport.get(),
-                    dstAirport.get()
-            );
+        if (srcAirport.isPresent() && dstAirport.isPresent()) {
+            connection.updateForm(srcAirport.get(), dstAirport.get());
         }
 
         flight.ifPresent(value -> value.updateForm(
@@ -127,7 +123,6 @@ public class FlightController {
     public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {
 
         flightService.validateId(id);
-
         Optional<Flight> flight = flightService.findById(id);
 
         if (flight.isPresent()) {
@@ -154,6 +149,16 @@ public class FlightController {
 
     @ExceptionHandler(NoSuchElementException.class)
     ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(DateTimeParseException.class)
+    ResponseEntity<String> handleDateTimeParseException(DateTimeParseException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

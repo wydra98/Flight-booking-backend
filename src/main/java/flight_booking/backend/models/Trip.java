@@ -41,7 +41,7 @@ public class Trip {
     @JoinColumn(name = "id_user")
     private User user;
 
-    public void addTicket(Ticket ticket){
+    public void addTicket(Ticket ticket) {
         tickets.add(ticket);
     }
 }

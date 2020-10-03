@@ -9,13 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TripRepository extends JpaRepository<Trip, Long> {
 
-//    @Override
-//    @Query("SELECT t FROM Trip t WHERE t.passenger.id = :id")
-//    List<Trip> findAllTripFromUserId(@Param("id") Long id);
-
     @Query(value = "SELECT COUNT (t.trip_id) FROM trips t", nativeQuery = true)
     int amountOfRows();
-
-    @Query(value = "SELECT DISTINCT t FROM Trip t WHERE t.code=:code")
-    Trip findTripByCode(@Param("code") String code);
 }

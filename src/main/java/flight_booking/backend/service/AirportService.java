@@ -35,13 +35,13 @@ public class AirportService {
         return repository.findById(id);
     }
 
-    public void validateNewAirport(AirportDto airportDto, double longitude, double latitude){
+    public void validateNewAirport(AirportDto airportDto, double longitude, double latitude) {
         if (checkIfAirportExists(airportDto, longitude, latitude)) {
             throw new IllegalStateException("Airport with these data already exist in datebase!");
         }
     }
 
-    public void validateId(Long id){
+    public void validateId(Long id) {
         if (!existsById(id)) {
             throw new NoSuchElementException("Airport with that id not exist!");
         }

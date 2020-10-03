@@ -2,15 +2,20 @@ package flight_booking.backend.service;
 
 
 import flight_booking.backend.controllers.flight.FlightDto;
+import flight_booking.backend.controllers.passenger.PassengerDto;
 import flight_booking.backend.controllers.ticket.TicketDto;
 import flight_booking.backend.models.*;
 import flight_booking.backend.controllers.trip.TripDto;
 
 import flight_booking.backend.repository.TripRepository;
+import org.apache.commons.validator.routines.EmailValidator;
+import org.hibernate.validator.internal.constraintvalidators.hv.pl.PESELValidator;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @Service
 public class TripService {
@@ -19,24 +24,21 @@ public class TripService {
     private final FlightService flightService;
     private final UserService userService;
     private final SeatService seatService;
+    private final AirportService airportService;
 
     TripService(TripRepository tripRepository,
                 TicketService ticketService,
                 FlightService flightService,
                 UserService userService,
-                SeatService seatService) {
+                SeatService seatService,
+                AirportService airportService) {
         this.tripRepository = tripRepository;
         this.ticketService = ticketService;
         this.flightService = flightService;
         this.userService = userService;
         this.seatService = seatService;
+        this.airportService = airportService;
     }
-
-//    public List<Trip> findAllTripsFromUserId(Long id) {
-//        List<Trip> trips = tripRepository.findAllTripFromUserId(id);
-//
-//        return trips;
-//    }
 
     public List<Trip> findAllAvailableTrips(Long srcAirportId, Long dstAirportId,
                                             LocalDate departureDate, int passengerNumber) {
@@ -48,25 +50,9 @@ public class TripService {
         return tripRepository.findById(id);
     }
 
-    public Trip findTripByCode(String code) {
-
-        return tripRepository.findTripByCode(code);
-    }
-
     public boolean existsById(Long id) {
 
         return tripRepository.existsById(id);
-    }
-
-    public boolean existsByCode(String code) {
-
-        boolean flag = true;
-        Trip trip = tripRepository.findTripByCode(code);
-        if (trip == null) {
-            flag = false;
-        }
-
-        return flag;
     }
 
     public Set<Trip> findTripsByTickets(List<Ticket> tickets) {
@@ -77,6 +63,100 @@ public class TripService {
             trips.add(trip);
         }
         return trips;
+    }
+
+    public void validateUsersId(Long id) {
+        if (!userService.existsById(id)) {
+            throw new NoSuchElementException("User with that id not exist!");
+        }
+    }
+
+    public List<LocalDate> validateFindTrip(Long srcAirportId, Long dstAirportId,
+                                            String departureDate, String arrivalDate,
+                                            int passengerNumber) {
+
+        List<LocalDate> dates = new ArrayList<>();
+
+        if (!airportService.existsById(srcAirportId) || !airportService.existsById(dstAirportId)) {
+            throw new NoSuchElementException("Airport with that id not exist!");
+        }
+
+        if (srcAirportId.equals(dstAirportId)) {
+            throw new IllegalStateException("Source and destination airport must be different.");
+        }
+
+        if (passengerNumber < 0 || passengerNumber > 10) {
+            throw new IllegalStateException("Number of passengers is invalid.");
+        }
+
+        LocalDate departureDateParse = LocalDate.parse(departureDate);
+        LocalDate arrivalDateParse = LocalDate.parse(arrivalDate);
+
+        if (arrivalDateParse.isBefore(departureDateParse)) {
+            throw new IllegalStateException("The date range is invalid.");
+        }
+
+
+        return dates;
+    }
+
+    public void validateTripId(Long id) {
+        if (!existsById(id)) {
+            throw new NoSuchElementException("Trip with that id not exist!");
+        }
+    }
+
+    public void validateNewTrip(PassengerDto passengerDto, Long userId) {
+
+        if (passengerDto.getDateOfBirth().length() == 0 || passengerDto.getEmail().length() == 0 ||
+                passengerDto.getFirstName().length() == 0 || passengerDto.getPesel().length() == 0 ||
+                passengerDto.getPhoneNumber().length() == 0 || passengerDto.getSurname().length() == 0) {
+            throw new IllegalStateException("The empty field is not allowed.");
+        }
+
+        Pattern pattern1 = Pattern.compile("^[\\p{L} .'-]+$");
+        if (!pattern1.matcher(passengerDto.getFirstName()).matches() ||
+                !pattern1.matcher(passengerDto.getSurname()).matches()) {
+            throw new IllegalStateException("The passenger first name or surname is invalid.");
+        }
+
+        if (passengerDto.getPhoneNumber().length() != 9 ||
+                passengerDto.getFirstName().length() < 2 ||
+                passengerDto.getSurname().length() < 2) {
+            throw new IllegalStateException("The field's length is invalid.");
+        }
+
+        if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
+            throw new IllegalStateException("The passenger age is invalid.");
+        }
+
+        PESELValidator peselValidator = new PESELValidator();
+        peselValidator.initialize(null);
+
+        if (!peselValidator.isValid(passengerDto.getPesel(), null)) {
+            throw new IllegalStateException("The passenger pesel is invalid.");
+        }
+
+        if (!EmailValidator.getInstance().isValid(passengerDto.getEmail())) {
+            throw new IllegalStateException("The passenger email is invalid.");
+        }
+
+        if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
+            throw new IllegalStateException("The passenger age is invalid.");
+        }
+
+        Pattern pattern2 = Pattern.compile("^[0-9]{9}$");
+        if (!pattern2.matcher(passengerDto.getPhoneNumber()).matches()) {
+            throw new IllegalStateException("The passenger phone number is invalid.");
+        }
+
+        if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
+            throw new IllegalStateException("The passenger age is invalid.");
+        }
+
+        if (!userService.existsById(userId)) {
+            throw new NoSuchElementException("User with that id not exist!");
+        }
     }
 
     public Trip addNewTrip(List<Passenger> passengers, TripDto tripDto, long userId) {
@@ -176,7 +256,7 @@ public class TripService {
 
         if (flag) {
             for (Integer seatNumber : seatsNumber) {
-                if(seatNumber == numberSeat){
+                if (seatNumber == numberSeat) {
                     flag = false;
                     break;
                 }

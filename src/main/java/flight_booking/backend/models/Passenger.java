@@ -31,5 +31,4 @@ public class Passenger {
     private String email;
     @OneToMany(mappedBy = "passenger")
     private Set<Trip> trips;
-
 }

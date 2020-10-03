@@ -17,11 +17,11 @@ public class SeatService {
         this.seatRepository = seatRepository;
     }
 
-    public List<Integer> findAllBusySeat(Flight flight){
+    public List<Integer> findAllBusySeat(Flight flight) {
         List<Seat> seats = seatRepository.findAllBusySeat(flight);
         List<Integer> seatsNumber = new ArrayList<>();
 
-        for (Seat seat: seats) {
+        for (Seat seat : seats) {
             seatsNumber.add(seat.getSeatNumber());
         }
 
