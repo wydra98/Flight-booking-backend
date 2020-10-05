@@ -1,5 +1,6 @@
 package flight_booking.backend.controllers.trip;
 
+import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.controllers.passenger.PassengerDto;
 import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Passenger;
@@ -22,13 +23,15 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 @RestController
+@ExceptionProcessing
 @RequestMapping("/trips")
 public class TripController {
 
     private final TripService tripService;
     private final PassengerService passengerService;
-    private final TripMapper tripMapper;
     private final UserService userService;
+    private final TripMapper tripMapper;
+
 
     TripController(TripService tripService, PassengerService passengerService,
                    UserService userService) {
@@ -149,20 +152,5 @@ public class TripController {
         }
 
         return ResponseEntity.ok(id);
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-
-    @ExceptionHandler(IllegalStateException.class)
-    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-
-    @ExceptionHandler(DateTimeParseException.class)
-    ResponseEntity<String> handleDateTimeParseException(DateTimeParseException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

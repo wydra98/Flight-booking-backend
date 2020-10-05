@@ -1,5 +1,6 @@
 package flight_booking.backend.controllers.passenger;
 
+import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
@@ -15,12 +16,13 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
+@ExceptionProcessing
 @RequestMapping("/passengers")
 public class PassengerController {
 
     private final PassengerService passengerService;
-    private final PassengerMapper passengerMapper;
     private final TripService tripService;
+    private final PassengerMapper passengerMapper;
 
     PassengerController(PassengerService passengerService,
                         TripService tripService
@@ -69,15 +71,5 @@ public class PassengerController {
         }
 
         return ResponseEntity.ok(id);
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-
-    @ExceptionHandler(IllegalStateException.class)
-    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

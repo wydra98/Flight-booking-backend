@@ -1,5 +1,6 @@
 package flight_booking.backend.controllers.authorization;
 
+import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.User;
 import flight_booking.backend.service.UserService;
 import io.swagger.annotations.*;
@@ -12,6 +13,7 @@ import java.net.URI;
 import java.util.regex.Pattern;
 
 @RestController
+@ExceptionProcessing
 public class AuthorizationController {
 
     private final UserService userService;
@@ -42,15 +44,5 @@ public class AuthorizationController {
         userService.validateLogin(email, password);
 
         return userService.login(email, password);
-    }
-
-    @ExceptionHandler(IllegalStateException.class)
-    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-
-    @ExceptionHandler(NullPointerException.class)
-    ResponseEntity<String> handleNullPointerException(NullPointerException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

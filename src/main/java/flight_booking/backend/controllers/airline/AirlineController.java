@@ -1,5 +1,6 @@
 package flight_booking.backend.controllers.airline;
 
+import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.*;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +13,7 @@ import java.net.URI;
 import java.util.*;
 
 @RestController
+@ExceptionProcessing
 @RequestMapping("/airlines")
 public class AirlineController {
 
@@ -104,16 +106,6 @@ public class AirlineController {
         }
 
         return ResponseEntity.noContent().build();
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-
-    @ExceptionHandler(IllegalStateException.class)
-    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
 

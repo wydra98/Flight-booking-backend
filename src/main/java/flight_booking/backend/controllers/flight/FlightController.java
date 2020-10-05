@@ -1,5 +1,6 @@
 package flight_booking.backend.controllers.flight;
 
+import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.*;
 import flight_booking.backend.service.*;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +14,7 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 
 @RestController
+@ExceptionProcessing
 @RequestMapping("/flights")
 public class FlightController {
 
@@ -145,20 +147,5 @@ public class FlightController {
             }
         }
         return ResponseEntity.ok(id);
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-
-    @ExceptionHandler(IllegalStateException.class)
-    ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-
-    @ExceptionHandler(DateTimeParseException.class)
-    ResponseEntity<String> handleDateTimeParseException(DateTimeParseException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

@@ -1,5 +1,6 @@
 package flight_booking.backend.controllers.user;
 
+import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.controllers.trip.TripDto;
 import flight_booking.backend.controllers.trip.TripMapper;
 import flight_booking.backend.models.*;
@@ -17,18 +18,16 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 @RestController
+@ExceptionProcessing
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserMapper userMapper;
-    private final UserRepository userRepository;
     private final UserService userService;
     private final TripService tripService;
+    private final UserMapper userMapper;
 
-    UserController(UserRepository userRepository,
-                   UserService userService,
+    UserController(UserService userService,
                    TripService tripService) {
-        this.userRepository = userRepository;
         this.userService = userService;
         this.tripService = tripService;
         this.userMapper = new UserMapper();
@@ -65,10 +64,5 @@ public class UserController {
         }
 
         return ResponseEntity.ok(id);
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
