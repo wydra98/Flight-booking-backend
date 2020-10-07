@@ -56,8 +56,8 @@ public class AirlineService {
         return airline;
     }
 
-    public void save(Airline airline) {
-        repository.save(airline);
+    public Airline save(Airline airline) {
+        return repository.save(airline);
     }
 
     public void deleteAirline(Airline airline) {

@@ -120,8 +120,8 @@ public class UserService {
         return true;
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     public void deleteUser(User user) {

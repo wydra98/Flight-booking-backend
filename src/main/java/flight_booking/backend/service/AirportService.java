@@ -23,8 +23,8 @@ public class AirportService {
         return repository.findAll();
     }
 
-    public void save(Airport airport) {
-        repository.save(airport);
+    public Airport save(Airport airport) {
+        return repository.save(airport);
     }
 
     public boolean existsById(Long id) {
