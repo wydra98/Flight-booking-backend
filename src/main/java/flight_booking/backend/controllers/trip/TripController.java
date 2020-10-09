@@ -2,25 +2,19 @@ package flight_booking.backend.controllers.trip;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.controllers.passenger.PassengerDto;
-import flight_booking.backend.models.Airline;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.models.Trip;
 import flight_booking.backend.models.User;
-import flight_booking.backend.service.*;
+import flight_booking.backend.unit_tests.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
-import org.apache.commons.validator.routines.EmailValidator;
-import org.hibernate.validator.internal.constraintvalidators.hv.pl.PESELValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.net.URI;
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeParseException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 @RestController
 @ExceptionProcessing

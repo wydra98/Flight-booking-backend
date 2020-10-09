@@ -2,7 +2,7 @@ package flight_booking.backend.security;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import flight_booking.backend.service.JwtService;
+import flight_booking.backend.unit_tests.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

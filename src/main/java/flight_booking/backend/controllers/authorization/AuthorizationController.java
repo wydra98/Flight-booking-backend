@@ -2,15 +2,12 @@ package flight_booking.backend.controllers.authorization;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.User;
-import flight_booking.backend.service.UserService;
+import flight_booking.backend.unit_tests.UserService;
 import io.swagger.annotations.*;
-import org.apache.commons.validator.routines.EmailValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.regex.Pattern;
 
 @RestController
 @ExceptionProcessing

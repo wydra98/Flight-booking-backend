@@ -1,14 +1,9 @@
 package flight_booking.backend.controllers.user;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
-import flight_booking.backend.controllers.trip.TripDto;
-import flight_booking.backend.controllers.trip.TripMapper;
 import flight_booking.backend.models.*;
-import flight_booking.backend.repository.UserRepository;
-import flight_booking.backend.service.AirportService;
-import flight_booking.backend.service.PassengerService;
-import flight_booking.backend.service.TripService;
-import flight_booking.backend.service.UserService;
+import flight_booking.backend.unit_tests.TripService;
+import flight_booking.backend.unit_tests.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
