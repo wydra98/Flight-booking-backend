@@ -2,8 +2,8 @@ package flight_booking.backend.controllers.user;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.*;
-import flight_booking.backend.unit_tests.TripService;
-import flight_booking.backend.unit_tests.UserService;
+import flight_booking.backend.services.TripService;
+import flight_booking.backend.services.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +29,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Get all users", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @GetMapping
     ResponseEntity<List<UserDto>> getAllUser() {
 
@@ -42,6 +43,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Delete user", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @Transactional
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deleteUser(@PathVariable Long id) {

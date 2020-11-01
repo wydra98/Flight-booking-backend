@@ -1,4 +1,4 @@
-package flight_booking.backend.unit_tests;
+package flight_booking.backend.services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

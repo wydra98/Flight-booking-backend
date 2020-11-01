@@ -2,7 +2,7 @@ package flight_booking.backend.controllers.flight;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.*;
-import flight_booking.backend.unit_tests.*;
+import flight_booking.backend.services.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +41,7 @@ public class FlightController {
     }
 
     @ApiOperation(value = "Get all flights", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @GetMapping
     ResponseEntity<List<FlightDto>> getAllFlights() {
         List<Flight> flights = flightService.findAll();
@@ -54,6 +55,7 @@ public class FlightController {
     }
 
     @ApiOperation(value = "Add new flight", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @PostMapping
     ResponseEntity<Flight> addNewFlight(@RequestParam Long airlineId,
                                         @RequestParam int numberSeats,
@@ -75,6 +77,7 @@ public class FlightController {
     }
 
     @ApiOperation(value = "Update flight", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @Transactional
     @PutMapping
     ResponseEntity<Void> updateFlight(@RequestParam Long flightDtoId,
@@ -119,6 +122,7 @@ public class FlightController {
     }
 
     @ApiOperation(value = "Delete flight", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @Transactional
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {

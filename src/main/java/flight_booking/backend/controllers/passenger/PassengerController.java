@@ -2,7 +2,7 @@ package flight_booking.backend.controllers.passenger;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.Passenger;
-import flight_booking.backend.unit_tests.*;
+import flight_booking.backend.services.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +32,7 @@ public class PassengerController {
     }
 
     @ApiOperation(value = "Get all passengers", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @GetMapping
     ResponseEntity<List<PassengerDto>> getAllPassengers() {
 
@@ -46,6 +47,7 @@ public class PassengerController {
 
 
     @ApiOperation(value = "Add new passenger", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @PostMapping("/passengers/add")
     ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
 
@@ -57,6 +59,7 @@ public class PassengerController {
 
 
     @ApiOperation(value = "Delete passenger", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @Transactional
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Long> deletePassenger(@PathVariable Long id) {

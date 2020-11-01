@@ -2,7 +2,7 @@ package flight_booking.backend.controllers.authorization;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.User;
-import flight_booking.backend.unit_tests.UserService;
+import flight_booking.backend.services.UserService;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,7 @@ public class AuthorizationController {
     }
 
     @ApiOperation(value = "Create new user")
+    @CrossOrigin(origins = "*")
     @PostMapping(value = "/register")
     ResponseEntity<User> register(@RequestParam String name,
                                   @RequestParam String surname,
@@ -33,6 +34,7 @@ public class AuthorizationController {
     }
 
     @ApiOperation(value = "Login as user")
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public TokenTransfer login(
             @RequestParam String email,

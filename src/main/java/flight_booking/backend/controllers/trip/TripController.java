@@ -5,7 +5,7 @@ import flight_booking.backend.controllers.passenger.PassengerDto;
 import flight_booking.backend.models.Passenger;
 import flight_booking.backend.models.Trip;
 import flight_booking.backend.models.User;
-import flight_booking.backend.unit_tests.*;
+import flight_booking.backend.services.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +36,7 @@ public class TripController {
     }
 
     @ApiOperation(value = "Get all user's trips", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @GetMapping
     ResponseEntity<Set<TripDto>> getAllUsersTrips(@PathVariable Long id) {
 
@@ -53,6 +54,7 @@ public class TripController {
     }
 
     @ApiOperation(value = "Find proper trips", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @GetMapping("/findTrips")
     ResponseEntity<List<List<TripDto>>> findTrips(@RequestParam Long srcAirportId,
                                                   @RequestParam Long dstAirportId,
@@ -61,7 +63,13 @@ public class TripController {
                                                   @RequestParam int passengerNumber,
                                                   @RequestParam boolean twoTrip) {
 
-        List<LocalDate> dates = tripService.validateFindTrip(srcAirportId, dstAirportId, departureDate, arrivalDate, passengerNumber);
+        List<Object> dates = tripService.validateFindTrip(srcAirportId, dstAirportId, departureDate, arrivalDate, passengerNumber, twoTrip);
+
+        LocalDate departureDateParse = LocalDate.parse(dates.get(0).toString());
+        LocalDate arrivalDateParse = null;
+        if(dates.get(1)!=null){
+            arrivalDateParse = LocalDate.parse(dates.get(1).toString());
+        }
 
         List<List<TripDto>> tripsFromTo = new ArrayList<>();
         List<Trip> tripsFrom;
@@ -69,8 +77,6 @@ public class TripController {
         List<Trip> tripsTo;
         List<TripDto> tripsToDto = new ArrayList<>();
 
-        LocalDate departureDateParse = dates.get(0);
-        LocalDate arrivalDateParse = dates.get(1);
         tripsFrom = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, departureDateParse, passengerNumber);
 
         tripsFromDto = new ArrayList<>();
@@ -93,6 +99,7 @@ public class TripController {
     }
 
     @ApiOperation(value = "Create new trip for user", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @PostMapping("/createTrip")
     ResponseEntity<Trip> createChosenTrip(@RequestBody BookedTripDto bookedTripDto,
                                           @RequestParam Long userId) {
@@ -117,6 +124,7 @@ public class TripController {
     }
 
     @ApiOperation(value = "Delete trip through user", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @Transactional
     @DeleteMapping("/deleteThroughUser/{id}")
     public ResponseEntity<Long> deleteTripThroughUser(@PathVariable Long id) {
@@ -132,6 +140,7 @@ public class TripController {
     }
 
     @ApiOperation(value = "Delete trip through admin", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @Transactional
     @DeleteMapping("/deleteThroughAdmin/{id}")
     public ResponseEntity<Long> deleteTripThroughAdmin(@PathVariable Long id) {

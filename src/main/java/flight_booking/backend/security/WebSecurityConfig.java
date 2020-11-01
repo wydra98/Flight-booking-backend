@@ -15,8 +15,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/configuration/security",
             "/swagger-ui.html",
             "/webjars/**",
-            "/login*",
-            "/register*"
+            "/login",
+            "/register"
     };
 
     @Override
@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().authorizeRequests()
                 .antMatchers("/airlines").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/airlines/delete/*").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/airports").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/airports").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .antMatchers("/airports/delete/*").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/flights*").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/flights/delete/*").hasAuthority("ROLE_ADMIN")

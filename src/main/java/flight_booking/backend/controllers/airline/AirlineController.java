@@ -2,7 +2,7 @@ package flight_booking.backend.controllers.airline;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.models.*;
-import flight_booking.backend.unit_tests.*;
+import flight_booking.backend.services.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +34,7 @@ public class AirlineController {
     }
 
     @ApiOperation(value = "Get all airlines", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @GetMapping
     ResponseEntity<List<AirlineDto>> getAllAirlines() {
 
@@ -60,6 +61,7 @@ public class AirlineController {
 
     @ApiOperation(value = "Delete airline", authorizations = {@Authorization(value = "authkey")})
     @Transactional
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     ResponseEntity<Long> deleteAirline(@PathVariable Long id) throws InterruptedException {
 
@@ -93,6 +95,7 @@ public class AirlineController {
     }
 
     @ApiOperation(value = "Update airline", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @PutMapping
     ResponseEntity<Void> updateAirline(@RequestBody AirlineDto airlineDto,
                                        @RequestParam String country) {

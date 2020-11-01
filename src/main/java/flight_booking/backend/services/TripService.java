@@ -1,4 +1,4 @@
-package flight_booking.backend.unit_tests;
+package flight_booking.backend.services;
 
 
 import flight_booking.backend.controllers.flight.FlightDto;
@@ -70,11 +70,11 @@ public class TripService {
         }
     }
 
-    public List<LocalDate> validateFindTrip(Long srcAirportId, Long dstAirportId,
+    public List<Object> validateFindTrip(Long srcAirportId, Long dstAirportId,
                                             String departureDate, String arrivalDate,
-                                            int passengerNumber) {
+                                            int passengerNumber, boolean twoTrip) {
 
-        List<LocalDate> dates = new ArrayList<>();
+        List<Object> dates = new ArrayList<>();
 
         if (!airportService.existsById(srcAirportId) || !airportService.existsById(dstAirportId)) {
             throw new NoSuchElementException("Airport with that id not exist!");
@@ -89,12 +89,22 @@ public class TripService {
         }
 
         LocalDate departureDateParse = LocalDate.parse(departureDate);
-        LocalDate arrivalDateParse = LocalDate.parse(arrivalDate);
+        LocalDate arrivalDateParse = null;
 
-        if (arrivalDateParse.isBefore(departureDateParse)) {
-            throw new IllegalStateException("The date range is invalid.");
+        if(!arrivalDate.equals("null")){
+            arrivalDateParse = LocalDate.parse(arrivalDate);
+
+            if (arrivalDateParse.isBefore(departureDateParse)) {
+                throw new IllegalStateException("The date range is invalid.");
+            }
         }
 
+        if(!twoTrip && !arrivalDate.equals("null")){
+            throw new IllegalStateException("Arrival date cannot be selected if return trip is not scheduled.");
+        }
+
+        dates.add(departureDateParse);
+        dates.add(arrivalDateParse);
 
         return dates;
     }

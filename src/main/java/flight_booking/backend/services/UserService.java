@@ -1,4 +1,4 @@
-package flight_booking.backend.unit_tests;
+package flight_booking.backend.services;
 
 import flight_booking.backend.controllers.authorization.TokenTransfer;
 import flight_booking.backend.controllers.user.UserDto;
