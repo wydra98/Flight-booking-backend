@@ -22,13 +22,13 @@ public class AirlineLoader implements CommandLineRunner {
         if (airlineRepository.amountOfRows() == 0) {
 
             airlineRepository.save(Airline.builder()
-                    .name("LOT Polish Airlines")
-                    .country("Poland")
+                    .name("LOT")
+                    .country("Polska")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("Lufthansa")
-                    .country("Germany")
+                    .country("Niemcy")
                     .build());
 
             airlineRepository.save(Airline.builder()
@@ -38,12 +38,12 @@ public class AirlineLoader implements CommandLineRunner {
 
             airlineRepository.save(Airline.builder()
                     .name("China Airlines")
-                    .country("China")
+                    .country("Chiny")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("WestJet")
-                    .country("Canada")
+                    .country("Kanada")
                     .build());
 
             airlineRepository.save(Airline.builder()
@@ -53,47 +53,47 @@ public class AirlineLoader implements CommandLineRunner {
 
             airlineRepository.save(Airline.builder()
                     .name("Jetstar Japan")
-                    .country("Japan")
+                    .country("Japonia")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("Azul Brazilian Airlines")
-                    .country("Brazil")
+                    .country("Brazylia")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("Norwegian Air Shuttle")
-                    .country("Norway")
+                    .country("Norwegia")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("Air France")
-                    .country("France")
+                    .country("Francja")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("British Airways")
-                    .country("Great Britain")
+                    .country("Wielka Brytania")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("Aeroflot")
-                    .country("Russia")
+                    .country("Rosja")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("EgyptAir")
-                    .country("Egypt")
+                    .country("Egipt")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("IndiGo")
-                    .country("India")
+                    .country("Indie")
                     .build());
 
             airlineRepository.save(Airline.builder()
                     .name("Ukraine International Airlines")
-                    .country("Ukraine")
+                    .country("Ukraina")
                     .build());
         }
     }

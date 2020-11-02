@@ -22,16 +22,16 @@ public class AirportLoader implements CommandLineRunner {
         if (airportRepository.amountOfRows() == 0) {
 
             airportRepository.save(Airport.builder()
-                    .name("John F. Kennedy International Airport")
+                    .name("Port lotniczy Nowy Jork")
                     .longitude(-118.410042)
                     .latitude(33.942791)
-                    .city("New York")
+                    .city("Nowy Jork")
                     .country("USA")
                     .timezone(-4)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Chicago O'Hare International Airport")
+                    .name("Port lotniczy Chicago-O’Hare")
                     .longitude(-87.904724)
                     .latitude(41.978611)
                     .city("Chicago")
@@ -40,52 +40,52 @@ public class AirportLoader implements CommandLineRunner {
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Warsaw Chopin Airport")
+                    .name("Lotnisko Chopina")
                     .longitude(20.9678911)
                     .latitude(52.1672369)
-                    .city("Warsaw")
-                    .country("Poland")
+                    .city("Warszawa")
+                    .country("Polska")
                     .timezone(2)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Beijing Capital International Airport")
+                    .name("Port lotniczy Pekin")
                     .longitude(116.383331)
                     .latitude(39.916668)
                     .city("Pekin")
-                    .country("China")
+                    .country("Chiny")
                     .timezone(8)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Berlin Tegel Airport")
+                    .name("Port lotniczy Berlin-Tegel")
                     .longitude(13.404954)
                     .latitude(52.520008)
                     .city("Berlin")
-                    .country("Germany")
+                    .country("Niemcy")
                     .timezone(2)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Shanghai Pudong Airport")
+                    .name("Port lotniczy Szanghaj-Pudong")
                     .longitude(121.469170)
                     .latitude(31.224361)
-                    .city("Shanghai")
-                    .country("China")
+                    .city("Shanghaj")
+                    .country("Chiny")
                     .timezone(8)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Toronto Pearson Airport")
+                    .name("Port lotniczy Toronto-Lester")
                     .longitude(-79.347015)
                     .latitude(43.651070)
                     .city("Toronto")
-                    .country("Canada")
+                    .country("Kanada")
                     .timezone(-4)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Sydney Airport")
+                    .name("Port lotniczy Sydney")
                     .longitude(151.209900)
                     .latitude(-33.865143)
                     .city("Sydney")
@@ -94,61 +94,61 @@ public class AirportLoader implements CommandLineRunner {
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Haneda Airport")
+                    .name("Port lotniczy Tokio-Haneda")
                     .longitude(139.839478)
                     .latitude(35.652832)
-                    .city("Tokyo")
-                    .country("Japan")
+                    .city("Tokio")
+                    .country("Japonia")
                     .timezone(9)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Rio de Janeiro International Airport")
+                    .name("Port lotniczy Rio de Janeiro")
                     .longitude(-43.196388)
                     .latitude(-22.908333)
                     .city("Rio de Janeiro")
-                    .country("Brazil")
+                    .country("Brazylia")
                     .timezone(-3)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Oslo Airport - Avinor")
+                    .name("Port lotniczy Oslo-Gardermoen")
                     .longitude(10.757933)
                     .latitude(59.911491)
                     .city("Oslo")
-                    .country("Norway")
+                    .country("Norwegia")
                     .timezone(2)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Buenos Aires Ezeiza Airport")
+                    .name("Port lotniczy Jorge Newbery")
                     .longitude(-58.381592)
                     .latitude(-34.603722)
                     .city("Buenos Aires")
-                    .country("Brazil")
+                    .country("Brazylia")
                     .timezone(-3)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Charles de Gaulle Airport")
+                    .name("Port lotniczy Paryż-Orly")
                     .longitude(2.349014)
                     .latitude(48.864716)
-                    .city("Paris")
-                    .country("France")
+                    .city("Paryż")
+                    .country("Francja")
                     .timezone(2)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("London City Airport")
+                    .name("Port lotniczy Londyn-City")
                     .longitude(-0.118092)
                     .latitude(51.509865)
-                    .city("London")
-                    .country("Great Britain")
+                    .city("Londyn")
+                    .country("Wielka Brytania")
                     .timezone(1)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Los Angeles International Airport")
+                    .name("Port lotniczy Los Angeles")
                     .longitude(-118.243683)
                     .latitude(34.052235)
                     .city("Los Angeles")
@@ -157,47 +157,47 @@ public class AirportLoader implements CommandLineRunner {
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Sheremetyevo International Airport")
+                    .name("Port lotniczy Moskwa-Wnukowo")
                     .longitude(37.618423)
                     .latitude(55.751244)
-                    .city("Moscow")
-                    .country("Russia")
+                    .city("Moskwa")
+                    .country("Rosja")
                     .timezone(3)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Cairo International Airport")
+                    .name("Port lotniczy Kair")
                     .longitude(31.233334)
                     .latitude(30.033333)
-                    .city("Cairo")
-                    .country("Egypt")
+                    .city("Kair")
+                    .country("Egipt")
                     .timezone(2)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Kraków John Paul II International Airport")
+                    .name("Port lotniczy Kraków-Balice")
                     .longitude(19.944544)
                     .latitude(50.049683)
-                    .city("Cracow")
-                    .country("Poland")
+                    .city("Kraków")
+                    .country("Polska")
                     .timezone(2)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Indira Gandhi International Airport")
+                    .name("Port lotniczy Indira Gandhi")
                     .longitude(77.216721)
                     .latitude(28.644800)
                     .city("Delhi")
-                    .country("India")
+                    .country("Indie")
                     .timezone(5)
                     .build());
 
             airportRepository.save(Airport.builder()
-                    .name("Boryspil International Airport")
+                    .name("Port lotniczy Kijów-Boryspol")
                     .longitude(30.517023)
                     .latitude(50.431759)
-                    .city("Kiev")
-                    .country("Ukraine")
+                    .city("Kijów")
+                    .country("Ukraina")
                     .timezone(3)
                     .build());
         }

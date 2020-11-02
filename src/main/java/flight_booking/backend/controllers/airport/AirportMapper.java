@@ -13,6 +13,8 @@ public class AirportMapper {
                 .city(airport.getCity())
                 .country(airport.getCountry())
                 .timezone(airport.getTimezone() + DEFAULT_TIMEZONE)
+                .latitude(airport.getLatitude())
+                .longitude(airport.getLongitude())
                 .build();
     }
 }

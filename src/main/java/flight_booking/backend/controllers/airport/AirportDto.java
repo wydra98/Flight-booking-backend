@@ -13,4 +13,6 @@ public class AirportDto {
     private String city;
     private String country;
     private int timezone;
+    private double longitude;
+    private double latitude;
 }
