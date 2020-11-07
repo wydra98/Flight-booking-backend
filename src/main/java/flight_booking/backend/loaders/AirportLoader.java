@@ -70,7 +70,7 @@ public class AirportLoader implements CommandLineRunner {
                     .name("Port lotniczy Szanghaj-Pudong")
                     .longitude(121.469170)
                     .latitude(31.224361)
-                    .city("Shanghaj")
+                    .city("Szanghaj")
                     .country("Chiny")
                     .timezone(8)
                     .build());

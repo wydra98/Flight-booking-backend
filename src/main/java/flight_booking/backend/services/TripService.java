@@ -80,6 +80,8 @@ public class TripService {
             throw new NoSuchElementException("Airport with that id not exist!");
         }
 
+
+
         if (srcAirportId.equals(dstAirportId)) {
             throw new IllegalStateException("Source and destination airport must be different.");
         }

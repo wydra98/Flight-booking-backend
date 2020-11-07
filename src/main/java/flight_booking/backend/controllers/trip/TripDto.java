@@ -20,5 +20,6 @@ public class TripDto {
     private String arrivalTime;
     private String purchaseDate;
     private String purchaseTime;
+    private boolean normalOffer;
     private double totalPrice;
 }

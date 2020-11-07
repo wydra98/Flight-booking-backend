@@ -6,6 +6,7 @@ import flight_booking.backend.models.Trip;
 import flight_booking.backend.models.User;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class UserMapper {
@@ -17,7 +18,7 @@ public class UserMapper {
 
         if (!user.getTrips().isEmpty()) {
             for (Trip trip : user.getTrips()) {
-                tripDtos.add(tripMapper.map(trip));
+                tripDtos.add(tripMapper.map(trip, Optional.empty(), Optional.empty()));
             }
         }
 
