@@ -38,7 +38,6 @@ class TripServiceTest {
 
         TripService tripService = mock(TripService.class);
         Trip trip = Trip.builder()
-                .code("2afe9b0d-052d-43a5-af9a-124137eebf30")
                 .arrivalDate(LocalDate.parse("2021-01-03"))
                 .arrivalTime(LocalTime.parse("16:30:00"))
                 .departureDate(LocalDate.parse("2021-01-02"))

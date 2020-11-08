@@ -36,13 +36,13 @@ public class AirlineService {
 
     public void validateNewAirline(AirlineDto airlineDto, String country) {
         if (checkIfAirlineExists(airlineDto, country)) {
-            throw new IllegalStateException("Airline with these data already exist ins datebase!");
+            throw new IllegalStateException("Taka linia lotnicza istnieje już w bazie!");
         }
     }
 
     public void validateId(Long id) {
         if (!existsById(id)) {
-            throw new NoSuchElementException("Airline with that id not exist!");
+            throw new NoSuchElementException("Taka linia lotnicza nie istnieje w bazie!");
         }
     }
 

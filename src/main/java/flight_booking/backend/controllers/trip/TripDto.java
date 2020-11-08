@@ -1,16 +1,14 @@
 package flight_booking.backend.controllers.trip;
 
 import flight_booking.backend.controllers.ticket.TicketDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 
 @Getter
 @Setter
 @Builder
+@ToString
 @AllArgsConstructor
 public class TripDto {
     private ArrayList<TicketDto> arraysTicket;

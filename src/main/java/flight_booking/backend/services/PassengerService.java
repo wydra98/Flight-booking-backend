@@ -47,13 +47,13 @@ public class PassengerService {
 
     public void validateIfExists(String PESEL) {
         if (checkIfPassengerExists(PESEL)) {
-            throw new IllegalStateException("Passenger with these data already exist in datebase!");
+            throw new IllegalStateException("Taki pasażer istnieje już w bazie!");
         }
     }
 
     public void validateIfNonExists(Long id) {
         if (!existsById(id)) {
-            throw new NoSuchElementException("Passenger with that id not exist!");
+            throw new NoSuchElementException("Taki pasażer nie istnieje w bazie!");
         }
     }
 

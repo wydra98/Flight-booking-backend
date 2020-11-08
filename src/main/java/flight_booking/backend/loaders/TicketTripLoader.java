@@ -45,7 +45,6 @@ public class TicketTripLoader implements CommandLineRunner {
             // TRIP FROM NEW YORK TO WARSAW WITH TICKETS BELONG TO PASSENGER 1
             if (passenger1.isPresent() && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
-                        .code("2afe9b0d-052d-43a5-af9a-124137eebf30")
                         .arrivalDate(LocalDate.parse("2021-01-03"))
                         .arrivalTime(LocalTime.parse("16:30:00"))
                         .departureDate(LocalDate.parse("2021-01-02"))
@@ -109,7 +108,6 @@ public class TicketTripLoader implements CommandLineRunner {
             // TRIP FROM PEKIN TO TORONTO WITH TICKETS BELONG TO PASSENGER 1
             if (passenger1.isPresent() && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
-                        .code("95fe9b0d-932d-67a5-er9a-994137aabf30")
                         .arrivalDate(LocalDate.parse("2021-04-06"))
                         .arrivalTime(LocalTime.parse("03:00:00"))
                         .departureDate(LocalDate.parse("2021-04-05"))
@@ -148,7 +146,6 @@ public class TicketTripLoader implements CommandLineRunner {
             // TRIP FROM PARIS TO MOSCOW WITH TICKETS BELONG TO PASSENGER 2
             if (passenger2.isPresent() && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
-                        .code("9d1b390c-9de5-4f65-a795-f61fb3c4de2d")
                         .arrivalDate(LocalDate.parse("2021-03-17"))
                         .arrivalTime(LocalTime.parse("09:45:00"))
                         .departureDate(LocalDate.parse("2021-03-16"))
@@ -200,7 +197,6 @@ public class TicketTripLoader implements CommandLineRunner {
             // TRIP FROM OSLO TO LONDON WITH TICKETS BELONG TO PASSENGER 3
             if (passenger3.isPresent() && user1.isPresent()) {
                 tripRepository.save(Trip.builder()
-                        .code("210347d5-1aa8-4213-9559-524993e784f8")
                         .arrivalDate(LocalDate.parse("2020-12-02"))
                         .arrivalTime(LocalTime.parse("13:45:00"))
                         .departureDate(LocalDate.parse("2020-12-02"))

@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class BookedTripDto {
+    private Long userId;
     private TripDto tripDto;
     private List<PassengerDto> passengersDto;
 }

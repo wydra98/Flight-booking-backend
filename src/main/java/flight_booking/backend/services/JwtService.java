@@ -40,7 +40,7 @@ public class JwtService {
 
 
         } catch (JWTCreationException ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error with creating token!");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Błąd podczas tworzenia tokenu!");
         } catch (JWTVerificationException e) {
             throw new IllegalStateException();
         }

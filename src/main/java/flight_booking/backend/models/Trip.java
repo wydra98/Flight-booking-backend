@@ -1,5 +1,6 @@
 package flight_booking.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import flight_booking.backend.models.Ticket;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,7 +25,6 @@ public class Trip {
     @GenericGenerator(name = "inc", strategy = "increment")
     @Column(name = "trip_id")
     private Long id;
-    private String code;
     @OneToMany(mappedBy = "trip")
     private List<Ticket> tickets;
     @ManyToOne
@@ -37,6 +37,7 @@ public class Trip {
     private LocalDate purchaseDate;
     private LocalTime purchaseTime;
     private double price;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;

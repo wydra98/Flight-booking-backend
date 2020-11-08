@@ -89,7 +89,7 @@ public class AirportLoader implements CommandLineRunner {
                     .longitude(151.209900)
                     .latitude(-33.865143)
                     .city("Sydney")
-                    .country("Canada")
+                    .country("Australia")
                     .timezone(10)
                     .build());
 

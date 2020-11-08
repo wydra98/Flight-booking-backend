@@ -60,13 +60,13 @@ public class UserService {
     public void validateRegistration(String name, String surname, String email, String password) {
         if (name.length() == 0 || surname.length() == 0 ||
                 email.length() == 0 || password.length() == 0) {
-            throw new IllegalStateException("The empty field is not allowed.");
+            throw new IllegalStateException("Puste pola są niedozwolone.");
         }
 
         Pattern pattern1 = Pattern.compile("^[\\p{L} .'-]+$");
         if (!pattern1.matcher(name).matches() ||
                 !pattern1.matcher(surname).matches()) {
-            throw new IllegalStateException("The passenger first name or surname is invalid.");
+            throw new IllegalStateException("Imię lub nazwisko użytkownika jest nieprawidłowe.");
         }
 
         if (password.length() < 2 || name.length() < 2 ||
@@ -75,27 +75,27 @@ public class UserService {
         }
 
         if (!EmailValidator.getInstance().isValid(email)) {
-            throw new IllegalStateException("The passenger email is invalid.");
+            throw new IllegalStateException("Adres email jest niepoprawny.");
         }
 
         if (checkIfMailExists(email)) {
-            throw new IllegalStateException("Email already taken!");
+            throw new IllegalStateException("Ten adres email jest zajęty!");
         }
     }
 
     public void validateLogin(String email, String password) {
         if (email.length() == 0 || password.length() == 0) {
-            throw new IllegalStateException("The empty field is not allowed.");
+            throw new IllegalStateException("Puste pole są niedozwolone.");
         }
 
         if (!EmailValidator.getInstance().isValid(email)) {
-            throw new IllegalStateException("The passenger email is invalid.");
+            throw new IllegalStateException("Adres email jest niepoprawny.");
         }
     }
 
     public void validateId(Long id) {
         if (!existsById(id)) {
-            throw new NoSuchElementException("User with that id not exist!");
+            throw new NoSuchElementException("Taki użytkownik nie istnieje w bazie.");
         }
     }
 
@@ -103,7 +103,7 @@ public class UserService {
         User user = userRepository.getUserByEmail(email);
 
         if (user == null) {
-            throw new NullPointerException("User with that email not exists.");
+            throw new NullPointerException("Taki użytkownik nie istnieje w bazie.");
         }
 
         UserMapper userMapper = new UserMapper();
@@ -115,7 +115,7 @@ public class UserService {
     }
 
     public Boolean verifyPassword(String password, String hash) {
-        if (!passwordEncoder.matches(password, hash)) throw new IllegalStateException("Invalid password!");
+        if (!passwordEncoder.matches(password, hash)) throw new IllegalStateException("Niepoprawne hasło!");
         return true;
     }
 
@@ -126,8 +126,6 @@ public class UserService {
     public void deleteUser(User user) {
         userRepository.deleteById(user.getId());
     }
-
-
 }
 
 

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.net.URI;
 import java.util.*;
 
 @RestController
@@ -26,6 +27,17 @@ public class UserController {
         this.userService = userService;
         this.tripService = tripService;
         this.userMapper = new UserMapper();
+    }
+
+    @ApiOperation(value = "Get one", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
+    @GetMapping("/{id}")
+    ResponseEntity<UserDto> getOne(@PathVariable Long id) {
+
+        userService.validateId(id);
+        Optional<User> user = userService.findById(id);
+        UserDto userDto = userMapper.map(user.get());
+        return ResponseEntity.created(URI.create("/" + userDto.getId())).body(userDto);
     }
 
     @ApiOperation(value = "Get all users", authorizations = {@Authorization(value = "authkey")})

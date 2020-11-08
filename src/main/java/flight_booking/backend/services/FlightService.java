@@ -78,7 +78,7 @@ public class FlightService {
 
     public void validateId(Long id) {
         if (!existsById(id)) {
-            throw new NoSuchElementException("Flight with that id not exist!");
+            throw new NoSuchElementException("Taki lot nie istnieje w bazie!");
         }
     }
 
@@ -149,32 +149,32 @@ public class FlightService {
 
         if (flightOptId.isPresent()) {
             if (existsById(flightOptId.get())) {
-                throw new NoSuchElementException("Flight with that id not exist!");
+                throw new NoSuchElementException("Taki lot nie istnieje w bazie!");
             }
 
             if (!connectionService.existsById(flightOptId.get())) {
-                throw new NoSuchElementException("Connection with that id not exist!");
+                throw new NoSuchElementException("Takie połączenie nie istnieje w bazie!");
             }
         }
 
         if (!airlineService.existsById(airlineId)) {
-            throw new NoSuchElementException("Airline with that id not exist!");
+            throw new NoSuchElementException("Taka linia lotnicza nie istnieje w bazie!");
         }
 
         if (!airportService.existsById(srcAirportId) || !airportService.existsById(dstAirportId)) {
-            throw new NoSuchElementException("Airport with that id not exist!");
+            throw new NoSuchElementException("Takie lotnisko nie istnieje w bazie!");
         }
 
         if (numberSeats < 0 || numberSeats > 350) {
-            throw new IllegalStateException("Set number is not proper!");
+            throw new IllegalStateException("Liczba miejsc nie jest poprawna!");
         }
 
         if (price <= 0 || price > 2000) {
-            throw new IllegalStateException("The price is not proper!");
+            throw new IllegalStateException("Cena nie jest odpowiednia!");
         }
 
         if (srcAirportId.equals(dstAirportId)) {
-            throw new IllegalStateException("Source and destination airport must be different.");
+            throw new IllegalStateException("Lotniska muszą się różnić.");
         }
 
         LocalDate departureDateParse = LocalDate.parse(departureDate);
@@ -182,7 +182,7 @@ public class FlightService {
         LocalTime flightTimeParse = LocalTime.parse(flightTime);
 
         if (arrivalDateParse.isBefore(departureDateParse)) {
-            throw new IllegalStateException("The date range is invalid.");
+            throw new IllegalStateException("Zakres dat jest niepoprawny.");
         }
     }
 

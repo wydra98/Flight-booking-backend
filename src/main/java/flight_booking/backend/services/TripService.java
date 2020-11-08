@@ -66,43 +66,42 @@ public class TripService {
 
     public void validateUsersId(Long id) {
         if (!userService.existsById(id)) {
-            throw new NoSuchElementException("User with that id not exist!");
+            throw new NoSuchElementException("Taki użytkownik nie istnieje w bazie!");
         }
     }
 
     public List<Object> validateFindTrip(Long srcAirportId, Long dstAirportId,
-                                            String departureDate, String arrivalDate,
-                                            int passengerNumber, boolean twoTrip) {
+                                         String departureDate, String arrivalDate,
+                                         int passengerNumber, boolean twoTrip) {
 
         List<Object> dates = new ArrayList<>();
 
         if (!airportService.existsById(srcAirportId) || !airportService.existsById(dstAirportId)) {
-            throw new NoSuchElementException("Airport with that id not exist!");
+            throw new NoSuchElementException("Takie lotnisko nie istnieje w bazie.");
         }
-
 
 
         if (srcAirportId.equals(dstAirportId)) {
-            throw new IllegalStateException("Source and destination airport must be different.");
+            throw new IllegalStateException("Lotniska muszą się różnić.");
         }
 
         if (passengerNumber < 0 || passengerNumber > 10) {
-            throw new IllegalStateException("Number of passengers is invalid.");
+            throw new IllegalStateException("Nieprawidłowa liczba pasażerów.");
         }
 
         LocalDate departureDateParse = LocalDate.parse(departureDate);
         LocalDate arrivalDateParse = null;
 
-        if(!arrivalDate.equals("null")){
+        if (!arrivalDate.equals("null")) {
             arrivalDateParse = LocalDate.parse(arrivalDate);
 
             if (arrivalDateParse.isBefore(departureDateParse)) {
-                throw new IllegalStateException("The date range is invalid.");
+                throw new IllegalStateException("Nieprawidłowy zakres dat.");
             }
         }
 
-        if(!twoTrip && !arrivalDate.equals("null")){
-            throw new IllegalStateException("Arrival date cannot be selected if return trip is not scheduled.");
+        if (!twoTrip && !arrivalDate.equals("null")) {
+            throw new IllegalStateException("Nie można wybrać powrotnej daty i podróży w jedną stronę jednocześnie.");
         }
 
         dates.add(departureDateParse);
@@ -113,7 +112,7 @@ public class TripService {
 
     public void validateTripId(Long id) {
         if (!existsById(id)) {
-            throw new NoSuchElementException("Trip with that id not exist!");
+            throw new NoSuchElementException("Taka podróż nie istnieje w bazie!");
         }
     }
 
@@ -122,69 +121,71 @@ public class TripService {
         if (passengerDto.getDateOfBirth().length() == 0 || passengerDto.getEmail().length() == 0 ||
                 passengerDto.getFirstName().length() == 0 || passengerDto.getPesel().length() == 0 ||
                 passengerDto.getPhoneNumber().length() == 0 || passengerDto.getSurname().length() == 0) {
-            throw new IllegalStateException("The empty field is not allowed.");
+            throw new IllegalStateException("Puste pola są niedozwolone.");
         }
 
         Pattern pattern1 = Pattern.compile("^[\\p{L} .'-]+$");
         if (!pattern1.matcher(passengerDto.getFirstName()).matches() ||
                 !pattern1.matcher(passengerDto.getSurname()).matches()) {
-            throw new IllegalStateException("The passenger first name or surname is invalid.");
+            throw new IllegalStateException("Imię lub nazwisko pasażera nieprawidłowe.");
         }
 
         if (passengerDto.getPhoneNumber().length() != 9 ||
                 passengerDto.getFirstName().length() < 2 ||
                 passengerDto.getSurname().length() < 2) {
-            throw new IllegalStateException("The field's length is invalid.");
+            throw new IllegalStateException("Długość pola nieprawidłowa.");
         }
 
         if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-            throw new IllegalStateException("The passenger age is invalid.");
+            throw new IllegalStateException("Nieprawidłowy wiek pasażera.");
         }
 
         PESELValidator peselValidator = new PESELValidator();
         peselValidator.initialize(null);
 
         if (!peselValidator.isValid(passengerDto.getPesel(), null)) {
-            throw new IllegalStateException("The passenger pesel is invalid.");
+            throw new IllegalStateException("Nieprawidłowy pesel pasażera.");
         }
 
         if (!EmailValidator.getInstance().isValid(passengerDto.getEmail())) {
-            throw new IllegalStateException("The passenger email is invalid.");
+            throw new IllegalStateException("Nieprawidłowy email pasażera.");
         }
 
         if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-            throw new IllegalStateException("The passenger age is invalid.");
+            throw new IllegalStateException("Nieprawidłowy wiek pasażera.");
         }
 
         Pattern pattern2 = Pattern.compile("^[0-9]{9}$");
         if (!pattern2.matcher(passengerDto.getPhoneNumber()).matches()) {
-            throw new IllegalStateException("The passenger phone number is invalid.");
+            throw new IllegalStateException("Nieprawidłowy numer telefonu pasażera.");
         }
 
         if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-            throw new IllegalStateException("The passenger age is invalid.");
+            throw new IllegalStateException("Rezerwować loty można tylko dla pasażerów powyżej 2 roku życia.");
         }
 
         if (!userService.existsById(userId)) {
-            throw new NoSuchElementException("User with that id not exist!");
+            throw new NoSuchElementException("Taki użytkownik nie istnieje w bazie!");
         }
     }
 
-    public Trip addNewTrip(List<Passenger> passengers, TripDto tripDto, long userId) {
-        String uniqueID = UUID.randomUUID().toString();
+    public Trip addNewTrip(List<Passenger> passengers, TripDto tripDto, Long userId) {
         boolean flag = true;
         Optional<User> user = userService.findById(userId);
-        Trip trip = tripRepository.save(Trip.builder()
-                .code(uniqueID)
-                .tickets(new ArrayList<>())
-                .departureDate(LocalDate.parse(tripDto.getDepartureDate()))
-                .departureTime(LocalTime.parse(tripDto.getDepartureTime()))
-                .arrivalDate(LocalDate.parse(tripDto.getArrivalDate()))
-                .arrivalTime(LocalTime.parse(tripDto.getArrivalTime()))
-                .purchaseDate(LocalDate.now())
-                .purchaseTime(LocalTime.now())
-                .price(tripDto.getTotalPrice())
-                .build());
+        Trip trip = null;
+        if (user.isPresent()) {
+            trip = tripRepository.save(Trip.builder()
+                    .user(user.get())
+                    .tickets(new ArrayList<>())
+                    .departureDate(LocalDate.parse(tripDto.getDepartureDate()))
+                    .departureTime(LocalTime.parse(tripDto.getDepartureTime()))
+                    .arrivalDate(LocalDate.parse(tripDto.getArrivalDate()))
+                    .arrivalTime(LocalTime.parse(tripDto.getArrivalTime()))
+                    .purchaseDate(LocalDate.now())
+                    .purchaseTime(LocalTime.now())
+                    .price(tripDto.getTotalPrice())
+                    .build());
+        }
 
         for (TicketDto ticketDto : tripDto.getArraysTicket()) {
             FlightDto flightDto = ticketDto.getFlightDto();
@@ -198,15 +199,14 @@ public class TripService {
                     int numberSeat = 0;
                     List<Integer> seats = seatService.findAllBusySeat(flight.get());
 
-
                     do {
-                        numberSeat = flight.get().getNumberSeats();
+                        numberSeat = generateSeatNumber(flight.get().getNumberSeats());
                     }
                     while (checkIfNumberSeatIsCorrectAndFree(seats, numberSeat, flight.get()));
 
 
                     flight.get().addSeat(Seat.builder()
-                            .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
+                            .seatNumber(numberSeat)
                             .flight(flight.get())
                             .build());
                     flightService.save(flight.get());
@@ -227,7 +227,10 @@ public class TripService {
                             .price(price)
                             .build());
 
-                    trip.addTicket(ticket);
+                    if (trip != null) {
+                        trip.addTicket(ticket);
+                        trip.setPassenger(passenger);
+                    }
                 }
 
             } else {
@@ -238,16 +241,15 @@ public class TripService {
 
         Trip actualTrip = null;
         if (flag) {
-            actualTrip = tripRepository.save(trip);
+            if (trip != null) {
+                actualTrip = tripRepository.save(trip);
+            }
 
-            if (user.isPresent()) {
+            if(user.isPresent()){
                 user.get().addTrip(actualTrip);
                 userService.save(user.get());
             }
-
         }
-
-
         return actualTrip;
     }
 
@@ -259,9 +261,9 @@ public class TripService {
 
     private boolean checkIfNumberSeatIsCorrectAndFree(List<Integer> seatsNumber, int numberSeat, Flight flight) {
 
-        Boolean flag = true;
+        boolean flag = true;
 
-        if (numberSeat > flight.getNumberSeats() || numberSeat < 1) {
+        if (numberSeat > flight.getNumberSeats() || numberSeat < 1|| seatsNumber.size() == 0) {
             flag = false;
         }
 
@@ -289,17 +291,16 @@ public class TripService {
         LocalDateTime departureTime = LocalDateTime.of(trip.getDepartureDate(), trip.getDepartureTime());
         LocalDateTime currentTime = LocalDateTime.now();
         long hours = Duration.between(currentTime, departureTime).toHours();
-        System.out.println(hours);
         if (currentTime.isAfter(departureTime) || currentTime.isEqual(departureTime) || hours < 24) {
-            throw new IllegalStateException("The user cannot cancel the flight in the last 24 hours before departure");
+            throw new IllegalStateException("Użytkownik nie może anulować rezerwacji 24h przed odlotem.");
         }
 
         if (currentTime.isAfter(departureTime) || currentTime.isEqual(departureTime)) {
-            throw new IllegalStateException("Trip is archived.");
+            throw new IllegalStateException("Podróż jest zarchiwizowana.");
         }
 
         if (hours < 24) {
-            throw new IllegalStateException("The user cannot cancel the flight in the last 24 hours before departure");
+            throw new IllegalStateException("Użytkownik nie może anulować rezerwacji 24h przed odlotem.");
         }
 
         ticketService.deleteTickets(trip.getTickets());
