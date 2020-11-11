@@ -155,11 +155,12 @@ public class TripController {
     @ApiOperation(value = "Create new trip for user", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @PostMapping("/createTrip")
-    ResponseEntity<Long> createChosenTrip(@RequestBody BookedTripDto bookedTripDto) {
+    ResponseEntity<List<Long>> createChosenTrip(@RequestBody BookedTripDto bookedTripDto) {
 
         List<PassengerDto> passengersDto = bookedTripDto.getPassengersDto();
-        TripDto tripDto = bookedTripDto.getTripDto();
+        List<TripDto> tripsDto = bookedTripDto.getTripsDto();
         Long userId = bookedTripDto.getUserId();
+        int passengerNumber = passengersDto.size();
 
         List<Passenger> passengers = new ArrayList<>();
         for (PassengerDto passengerDto : passengersDto) {
@@ -173,8 +174,8 @@ public class TripController {
             }
         }
 
-        Trip trip = tripService.addNewTrip(passengers, tripDto, userId);
-        return ResponseEntity.ok(trip.getId());
+        List<Long> tripIds = tripService.addNewTrips(passengers, tripsDto, userId,passengerNumber);
+        return ResponseEntity.ok(tripIds);
     }
 
     @ApiOperation(value = "Delete trip through user", authorizations = {@Authorization(value = "authkey")})

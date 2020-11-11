@@ -180,88 +180,88 @@ public class TripService {
         }
     }
 
-    public Trip addNewTrip(List<Passenger> passengers, TripDto tripDto, Long userId) {
-        boolean flag = true;
-        Optional<User> user = userService.findById(userId);
-        Trip trip = null;
-        if (user.isPresent()) {
-            trip = tripRepository.save(Trip.builder()
-                    .user(user.get())
-                    .tickets(new ArrayList<>())
-                    .departureDate(LocalDate.parse(tripDto.getDepartureDate()))
-                    .departureTime(LocalTime.parse(tripDto.getDepartureTime()))
-                    .arrivalDate(LocalDate.parse(tripDto.getArrivalDate()))
-                    .arrivalTime(LocalTime.parse(tripDto.getArrivalTime()))
-                    .purchaseDate(LocalDate.now())
-                    .purchaseTime(LocalTime.now())
-                    .price(tripDto.getTotalPrice())
-                    .build());
-        }
+    public List<Long> addNewTrips(List<Passenger> passengers, List<TripDto> tripsDto, Long userId, int passengerNumber) {
 
-        for (TicketDto ticketDto : tripDto.getArraysTicket()) {
-            FlightDto flightDto = ticketDto.getFlightDto();
-            Optional<Flight> flight = flightService.findById(flightDto.getId());
+        List<Long> ids = new ArrayList<>();
+        for (TripDto tripDto : tripsDto) {
+            if (tripDto != null) {
 
-            if (flight.isPresent()) {
-
-                for (Passenger passenger : passengers) {
-                    flight.get().setAvailableSeats(flight.get().getAvailableSeats() - 1);
-
-                    int numberSeat = 0;
-                    List<Integer> seats = seatService.findAllBusySeat(flight.get());
-
-                    do {
-                        numberSeat = generateSeatNumber(flight.get().getNumberSeats());
-                    }
-                    while (checkIfNumberSeatIsCorrectAndFree(seats, numberSeat, flight.get()));
-
-
-                    flight.get().addSeat(Seat.builder()
-                            .seatNumber(numberSeat)
-                            .flight(flight.get())
+                boolean flag = true;
+                Optional<User> user = userService.findById(userId);
+                Trip trip = null;
+                if (user.isPresent()) {
+                    trip = tripRepository.save(Trip.builder()
+                            .user(user.get())
+                            .tickets(new ArrayList<>())
+                            .departureDate(LocalDate.parse(tripDto.getDepartureDate()))
+                            .departureTime(LocalTime.parse(tripDto.getDepartureTime()))
+                            .arrivalDate(LocalDate.parse(tripDto.getArrivalDate()))
+                            .arrivalTime(LocalTime.parse(tripDto.getArrivalTime()))
+                            .purchaseDate(LocalDate.now())
+                            .purchaseTime(LocalTime.now())
+                            .price(tripDto.getTotalPrice()*passengerNumber)
                             .build());
-                    flightService.save(flight.get());
+                }
 
-                    Period period = Period.between(passenger.getDateOfBirth(), LocalDate.now());
-                    double price = 0;
-                    if (period.getYears() < 18) {
-                        price = flight.get().getPrice() * 0.8;
+                for (TicketDto ticketDto : tripDto.getArraysTicket()) {
+                    FlightDto flightDto = ticketDto.getFlightDto();
+                    Optional<Flight> flight = flightService.findById(flightDto.getId());
+
+                    if (flight.isPresent()) {
+
+                        for (Passenger passenger : passengers) {
+                            flight.get().setAvailableSeats(flight.get().getAvailableSeats() - 1);
+
+                            int numberSeat = 0;
+                            List<Integer> seats = seatService.findAllBusySeat(flight.get());
+
+                            do {
+                                numberSeat = generateSeatNumber(flight.get().getNumberSeats());
+                            }
+                            while (checkIfNumberSeatIsCorrectAndFree(seats, numberSeat, flight.get()));
+
+
+                            flight.get().addSeat(Seat.builder()
+                                    .seatNumber(numberSeat)
+                                    .flight(flight.get())
+                                    .build());
+                            flightService.save(flight.get());
+
+                            Ticket ticket = ticketService.save(Ticket.builder()
+                                    .passenger(passenger)
+                                    .flight(flight.get())
+                                    .trip(trip)
+                                    .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
+                                    .price(flight.get().getPrice())
+                                    .build());
+
+                            if (trip != null) {
+                                trip.addTicket(ticket);
+                                trip.setPassenger(passenger);
+                            }
+                        }
+
                     } else {
-                        price = flight.get().getPrice();
-                    }
-
-                    Ticket ticket = ticketService.save(Ticket.builder()
-                            .passenger(passenger)
-                            .flight(flight.get())
-                            .trip(trip)
-                            .seatNumber(generateSeatNumber(flight.get().getNumberSeats()))
-                            .price(price)
-                            .build());
-
-                    if (trip != null) {
-                        trip.addTicket(ticket);
-                        trip.setPassenger(passenger);
+                        flag = false;
+                        break;
                     }
                 }
 
-            } else {
-                flag = false;
-                break;
+                Trip actualTrip = null;
+                if (flag) {
+                    if (trip != null) {
+                        actualTrip = tripRepository.save(trip);
+                    }
+
+                    if (user.isPresent()) {
+                        user.get().addTrip(actualTrip);
+                        userService.save(user.get());
+                    }
+                }
+                ids.add(actualTrip.getId());
             }
         }
-
-        Trip actualTrip = null;
-        if (flag) {
-            if (trip != null) {
-                actualTrip = tripRepository.save(trip);
-            }
-
-            if(user.isPresent()){
-                user.get().addTrip(actualTrip);
-                userService.save(user.get());
-            }
-        }
-        return actualTrip;
+        return ids;
     }
 
     private int generateSeatNumber(int seatNumbers) {
@@ -274,7 +274,7 @@ public class TripService {
 
         boolean flag = true;
 
-        if (numberSeat > flight.getNumberSeats() || numberSeat < 1|| seatsNumber.size() == 0) {
+        if (numberSeat > flight.getNumberSeats() || numberSeat < 1 || seatsNumber.size() == 0) {
             flag = false;
         }
 

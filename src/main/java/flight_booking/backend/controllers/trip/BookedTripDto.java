@@ -15,6 +15,6 @@ import java.util.List;
 
 public class BookedTripDto {
     private Long userId;
-    private TripDto tripDto;
+    private List<TripDto> tripsDto;
     private List<PassengerDto> passengersDto;
 }
