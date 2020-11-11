@@ -53,7 +53,7 @@ public class TripController {
         Set<TripDto> tripsDtos = new HashSet<>();
         if (user.isPresent()) {
             for (Trip trip : user.get().getTrips()) {
-                tripsDtos.add(tripMapper.map(trip, Optional.empty() , Optional.empty()));
+                tripsDtos.add(tripMapper.map(trip, Optional.empty() , Optional.empty(), Optional.empty() , Optional.empty()));
             }
         }
 
@@ -67,12 +67,17 @@ public class TripController {
                                                   @RequestParam Long dstAirportId,
                                                   @RequestParam String firstChangeId,
                                                   @RequestParam String secondChangeId,
+                                                  @RequestParam String thirdChangeId,
+                                                  @RequestParam String fourthChangeId,
                                                   @RequestParam String departureDate,
                                                   @RequestParam String arrivalDate,
                                                   @RequestParam int passengerNumber,
+                                                  @RequestParam int maxChanges,
+                                                  @RequestParam int maxTimeBetweenChanges,
                                                   @RequestParam boolean twoTrip) {
 
-        List<Object> dates = tripService.validateFindTrip(srcAirportId, dstAirportId, departureDate, arrivalDate, passengerNumber, twoTrip);
+        List<Object> dates = tripService.validateFindTrip(srcAirportId, dstAirportId, departureDate,
+                arrivalDate, passengerNumber, twoTrip, maxChanges, maxTimeBetweenChanges);
 
         LocalDate departureDateParse = LocalDate.parse(dates.get(0).toString());
         LocalDate arrivalDateParse = null;
@@ -82,6 +87,8 @@ public class TripController {
 
         Optional<AirportDto> firstChangeAirportDto = Optional.empty();
         Optional<AirportDto> secondChangeAirportDto = Optional.empty();
+        Optional<AirportDto> thirdChangeAirportDto = Optional.empty();
+        Optional<AirportDto> fourthChangeAirportDto = Optional.empty();
 
         if(!firstChangeId.equals("null")){
             Optional<Airport> firstAirport = airportService.findById(Long.parseLong(firstChangeId));
@@ -97,26 +104,42 @@ public class TripController {
             }
         }
 
+        if(!thirdChangeId.equals("null")){
+            Optional<Airport> thirdAirport = airportService.findById(Long.parseLong(thirdChangeId));
+            if(thirdAirport.isPresent()){
+                thirdChangeAirportDto = Optional.of(airportMapper.map(thirdAirport.get()));
+            }
+        }
+
+        if(!fourthChangeId.equals("null")){
+            Optional<Airport> fourthAirport = airportService.findById(Long.parseLong(fourthChangeId));
+            if(fourthAirport.isPresent()){
+                fourthChangeAirportDto = Optional.of(airportMapper.map(fourthAirport.get()));
+            }
+        }
+
         List<List<TripDto>> tripsFromTo = new ArrayList<>();
         List<Trip> tripsFrom;
         List<TripDto> tripsFromDto;
         List<Trip> tripsTo;
         List<TripDto> tripsToDto = new ArrayList<>();
 
-        tripsFrom = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, departureDateParse, passengerNumber);
+        tripsFrom = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, departureDateParse,
+                passengerNumber, maxChanges, maxTimeBetweenChanges);
 
         tripsFromDto = new ArrayList<>();
         for (Trip trip : tripsFrom) {
-            tripsFromDto.add(tripMapper.map(trip, firstChangeAirportDto, secondChangeAirportDto));
+            tripsFromDto.add(tripMapper.map(trip, firstChangeAirportDto, secondChangeAirportDto, thirdChangeAirportDto, fourthChangeAirportDto));
         }
         tripsFromTo.add(tripsFromDto);
 
         if (twoTrip) {
-            tripsTo = tripService.findAllAvailableTrips(dstAirportId, srcAirportId, arrivalDateParse, passengerNumber);
+            tripsTo = tripService.findAllAvailableTrips(dstAirportId, srcAirportId, arrivalDateParse, passengerNumber,
+                     maxChanges, maxTimeBetweenChanges);
 
             tripsToDto = new ArrayList<>();
             for (Trip trip : tripsTo) {
-                tripsToDto.add(tripMapper.map(trip, firstChangeAirportDto, secondChangeAirportDto));
+                tripsToDto.add(tripMapper.map(trip, firstChangeAirportDto, secondChangeAirportDto, thirdChangeAirportDto, fourthChangeAirportDto));
             }
         }
         tripsFromTo.add(tripsToDto);
@@ -125,7 +148,6 @@ public class TripController {
         tripsFromTo.get(1).sort(Comparator.comparing(TripDto::getTotalPrice));
         tripsFromTo.get(0).sort(Comparator.comparing(TripDto::isNormalOffer));
         tripsFromTo.get(1).sort(Comparator.comparing(TripDto::isNormalOffer));
-
 
         return ResponseEntity.ok(tripsFromTo);
     }

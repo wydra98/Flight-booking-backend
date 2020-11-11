@@ -18,7 +18,7 @@ public class UserMapper {
 
         if (!user.getTrips().isEmpty()) {
             for (Trip trip : user.getTrips()) {
-                tripDtos.add(tripMapper.map(trip, Optional.empty(), Optional.empty()));
+                tripDtos.add(tripMapper.map(trip, Optional.empty(), Optional.empty(), Optional.empty() , Optional.empty()));
             }
         }
 

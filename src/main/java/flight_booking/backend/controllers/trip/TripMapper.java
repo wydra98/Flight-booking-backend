@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class TripMapper {
 
-    public TripDto map(Trip trip, Optional<AirportDto> firstAirport, Optional<AirportDto> secondAirport) {
+    public TripDto map(Trip trip, Optional<AirportDto> firstAirport, Optional<AirportDto> secondAirport, Optional<AirportDto> thirdAirport, Optional<AirportDto> fourthAirport) {
 
         TicketMapper ticketMapper = new TicketMapper();
         boolean bestOffer = true;
@@ -25,7 +25,7 @@ public class TripMapper {
             ticketDtos.add(ticketMapper.map(ticket));
         }
 
-        bestOffer = checkIfBestOffer(ticketDtos, firstAirport, secondAirport);
+        bestOffer = checkIfBestOffer(ticketDtos, firstAirport, secondAirport, thirdAirport, fourthAirport);
 
         TripDto tripDto = null;
 
@@ -56,7 +56,8 @@ public class TripMapper {
         return tripDto;
     }
 
-    private boolean checkIfBestOffer(ArrayList<TicketDto> ticketsDto, Optional<AirportDto> firstAirport, Optional<AirportDto> secondAirport) {
+    private boolean checkIfBestOffer(ArrayList<TicketDto> ticketsDto, Optional<AirportDto> firstAirport, Optional<AirportDto> secondAirport,
+                                     Optional<AirportDto> thirdAirport, Optional<AirportDto> fourthAirport) {
 
         if (ticketsDto.size() == 1) {
             return true;
@@ -77,6 +78,26 @@ public class TripMapper {
                 }
 
                 if (ticketsDto.get(ticketsDto.size() - 1).getFlightDto().getSrcAirport().equals(secondAirport.get())) {
+                    return false;
+                }
+            }
+
+            if (thirdAirport.isPresent()) {
+                if (ticketsDto.get(0).getFlightDto().getDstAirport().equals(thirdAirport.get())) {
+                    return false;
+                }
+
+                if (ticketsDto.get(ticketsDto.size() - 1).getFlightDto().getSrcAirport().equals(thirdAirport.get())) {
+                    return false;
+                }
+            }
+
+            if (fourthAirport.isPresent()) {
+                if (ticketsDto.get(0).getFlightDto().getDstAirport().equals(fourthAirport.get())) {
+                    return false;
+                }
+
+                if (ticketsDto.get(ticketsDto.size() - 1).getFlightDto().getSrcAirport().equals(fourthAirport.get())) {
                     return false;
                 }
             }

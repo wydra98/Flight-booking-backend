@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class FlightService {
 
-    private static final int MAX_TIME_BREAK = 12;
+    private int MAX_TIME_BREAK;
     private final FlightRepository flightRepository;
     private final ConnectionService connectionService;
     private final AirlineService airlineService;
@@ -119,9 +119,11 @@ public class FlightService {
         return flightRepository.findById(id);
     }
 
-    public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate, int passengerNumber) {
+    public List<List<Flight>> findFlights(Long srcAirport, Long dstAirport, LocalDate departureDate, int passengerNumber,
+                                          int maxChanges, int maxTimeBetweenChanges) {
 
-        List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport);
+        this.MAX_TIME_BREAK = maxTimeBetweenChanges;
+        List<List<Connection>> connections = connectionService.findConnections(srcAirport, dstAirport, maxChanges);
         List<List<List<Flight>>> flights = findAllFlights(connections);
         List<List<Flight>> properFlights = chooseFlightsWithProperDate(flights, dstAirport, departureDate, passengerNumber);
 

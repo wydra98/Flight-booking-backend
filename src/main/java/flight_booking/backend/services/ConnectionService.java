@@ -30,10 +30,10 @@ public class ConnectionService {
         return connectionRepository.findById(id);
     }
 
-    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId) {
+    public List<List<Connection>> findConnections(Long srcAirportId, Long dstAirportId, int maxChanges) {
         List<Connection> allConnection = connectionRepository.findAll();
 
-        Search search = new Search(srcAirportId, dstAirportId);
+        Search search = new Search(srcAirportId, dstAirportId, maxChanges);
 
         return search.findConnections(allConnection);
     }

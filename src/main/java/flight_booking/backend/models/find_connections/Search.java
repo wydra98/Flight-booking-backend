@@ -7,16 +7,17 @@ import java.util.List;
 
 public class Search {
 
-    public int MAX_CONNECTION = 3;
+    public int MAX_CONNECTION;
     private final Long START;
     private final Long END;
     private final List<List<Connection>> allConnection = new ArrayList();
     List<Connection> baseConnection;
     private int depth = 1;
 
-    public Search(Long START, Long END) {
+    public Search(Long START, Long END, int maxChanges) {
         this.START = START;
         this.END = END;
+        this.MAX_CONNECTION = maxChanges+1;
     }
 
     public List<List<Connection>> findConnections(List<Connection> baseConnection) {
