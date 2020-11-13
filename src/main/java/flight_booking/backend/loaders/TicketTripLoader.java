@@ -47,11 +47,12 @@ public class TicketTripLoader implements CommandLineRunner {
                 tripRepository.save(Trip.builder()
                         .arrivalDate(LocalDate.parse("2021-01-03"))
                         .arrivalTime(LocalTime.parse("16:30:00"))
-                        .departureDate(LocalDate.parse("2021-01-02"))
+                        .departureDate(LocalDate.parse("2018-01-02"))
                         .departureTime(LocalTime.parse("14:43:11"))
-                        .purchaseDate(LocalDate.parse("2020-08-28"))
+                        .purchaseDate(LocalDate.parse("2018-08-28"))
                         .purchaseTime(LocalTime.parse("09:03:56"))
                         .passenger(passenger1.get())
+                        .passengerNumber(2)
                         .user(user1.get())
                         .price(1345)
                         .build());
@@ -110,12 +111,13 @@ public class TicketTripLoader implements CommandLineRunner {
                 tripRepository.save(Trip.builder()
                         .arrivalDate(LocalDate.parse("2021-04-06"))
                         .arrivalTime(LocalTime.parse("03:00:00"))
-                        .departureDate(LocalDate.parse("2021-04-05"))
+                        .departureDate(LocalDate.parse("2018-04-05"))
                         .departureTime(LocalTime.parse("15:00:00"))
-                        .purchaseDate(LocalDate.parse("2020-08-28"))
+                        .purchaseDate(LocalDate.parse("2018-08-28"))
                         .purchaseTime(LocalTime.parse("09:44:06"))
                         .passenger(passenger1.get())
                         .user(user1.get())
+                        .passengerNumber(3)
                         .price(405)
                         .build());
             }
@@ -148,11 +150,12 @@ public class TicketTripLoader implements CommandLineRunner {
                 tripRepository.save(Trip.builder()
                         .arrivalDate(LocalDate.parse("2021-03-17"))
                         .arrivalTime(LocalTime.parse("09:45:00"))
-                        .departureDate(LocalDate.parse("2021-03-16"))
+                        .departureDate(LocalDate.parse("2018-03-16"))
                         .departureTime(LocalTime.parse("07:00:00"))
                         .purchaseDate(LocalDate.parse("2020-08-28"))
                         .purchaseTime(LocalTime.parse("09:53:35"))
                         .passenger(passenger2.get())
+                        .passengerNumber(4)
                         .user(user1.get())
                         .price(320)
                         .build());
@@ -199,16 +202,16 @@ public class TicketTripLoader implements CommandLineRunner {
                 tripRepository.save(Trip.builder()
                         .arrivalDate(LocalDate.parse("2020-12-02"))
                         .arrivalTime(LocalTime.parse("13:45:00"))
-                        .departureDate(LocalDate.parse("2020-12-02"))
+                        .departureDate(LocalDate.parse("2016-12-02"))
                         .departureTime(LocalTime.parse("12:15:00"))
                         .purchaseDate(LocalDate.parse("2020-08-28"))
                         .purchaseTime(LocalTime.parse("10:14:42"))
                         .passenger(passenger3.get())
+                        .passengerNumber(4)
                         .user(user1.get())
                         .price(78)
                         .build());
             }
-
 
             Optional<Trip> trip4 = tripRepository.findById(4L);
             List<Ticket> allTickets4 = new ArrayList<>();
@@ -249,6 +252,7 @@ public class TicketTripLoader implements CommandLineRunner {
         }
     }
 }
+
 
 
 

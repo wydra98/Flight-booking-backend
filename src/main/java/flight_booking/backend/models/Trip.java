@@ -37,6 +37,7 @@ public class Trip {
     private LocalDate purchaseDate;
     private LocalTime purchaseTime;
     private double price;
+    private int passengerNumber;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_user")

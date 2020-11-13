@@ -66,6 +66,19 @@ public class TripService {
         return trips;
     }
 
+    public List<Passenger> findPassengersByTrip(Long id) {
+        Optional<Trip> trip = tripRepository.findById(id);
+        Set<Passenger> passengersUnique = new HashSet<>();
+
+        if (trip.isPresent()) {
+            for (Ticket ticket : trip.get().getTickets()) {
+                passengersUnique.add(ticket.getPassenger());
+            }
+        }
+
+        return new ArrayList<>(passengersUnique);
+    }
+
     public void validateUsersId(Long id) {
         if (!userService.existsById(id)) {
             throw new NoSuchElementException("Taki użytkownik nie istnieje w bazie!");
@@ -193,13 +206,14 @@ public class TripService {
                     trip = tripRepository.save(Trip.builder()
                             .user(user.get())
                             .tickets(new ArrayList<>())
+                            .passengerNumber(passengerNumber)
                             .departureDate(LocalDate.parse(tripDto.getDepartureDate()))
                             .departureTime(LocalTime.parse(tripDto.getDepartureTime()))
                             .arrivalDate(LocalDate.parse(tripDto.getArrivalDate()))
                             .arrivalTime(LocalTime.parse(tripDto.getArrivalTime()))
                             .purchaseDate(LocalDate.now())
                             .purchaseTime(LocalTime.now())
-                            .price(tripDto.getTotalPrice()*passengerNumber)
+                            .price(tripDto.getTotalPrice() * passengerNumber)
                             .build());
                 }
 
@@ -296,25 +310,5 @@ public class TripService {
             ticketService.deleteTickets(trip.getTickets());
             tripRepository.deleteById(trip.getId());
         }
-    }
-
-    public void deleteTripsWithTimeLimit(Trip trip) {
-        LocalDateTime departureTime = LocalDateTime.of(trip.getDepartureDate(), trip.getDepartureTime());
-        LocalDateTime currentTime = LocalDateTime.now();
-        long hours = Duration.between(currentTime, departureTime).toHours();
-        if (currentTime.isAfter(departureTime) || currentTime.isEqual(departureTime) || hours < 24) {
-            throw new IllegalStateException("Użytkownik nie może anulować rezerwacji 24h przed odlotem.");
-        }
-
-        if (currentTime.isAfter(departureTime) || currentTime.isEqual(departureTime)) {
-            throw new IllegalStateException("Podróż jest zarchiwizowana.");
-        }
-
-        if (hours < 24) {
-            throw new IllegalStateException("Użytkownik nie może anulować rezerwacji 24h przed odlotem.");
-        }
-
-        ticketService.deleteTickets(trip.getTickets());
-        tripRepository.deleteById(trip.getId());
     }
 }

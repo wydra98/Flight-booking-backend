@@ -31,6 +31,7 @@ public class TripMapper {
 
         if (trip.getPurchaseDate() == null || trip.getPurchaseTime() == null) {
             tripDto = TripDto.builder()
+                    .id(trip.getId())
                     .arraysTicket(ticketDtos)
                     .departureDate(trip.getDepartureDate().toString())
                     .departureTime(trip.getDepartureTime().toString())
@@ -41,6 +42,7 @@ public class TripMapper {
                     .build();
         } else {
             tripDto = TripDto.builder()
+                    .id(trip.getId())
                     .arraysTicket(ticketDtos)
                     .departureDate(trip.getDepartureDate().toString())
                     .departureTime(trip.getDepartureTime().toString())
@@ -49,6 +51,7 @@ public class TripMapper {
                     .purchaseDate(trip.getPurchaseDate().toString())
                     .purchaseTime(trip.getPurchaseTime().toString())
                     .totalPrice(trip.getPrice())
+                    .passengerNumber(trip.getPassengerNumber())
                     .normalOffer(bestOffer)
                     .build();
         }

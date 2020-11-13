@@ -11,6 +11,7 @@ import java.util.ArrayList;
 @ToString
 @AllArgsConstructor
 public class TripDto {
+    private Long id;
     private ArrayList<TicketDto> arraysTicket;
     private String departureDate;
     private String departureTime;
@@ -18,6 +19,7 @@ public class TripDto {
     private String arrivalTime;
     private String purchaseDate;
     private String purchaseTime;
+    private int passengerNumber;
     private boolean normalOffer;
     private double totalPrice;
 }

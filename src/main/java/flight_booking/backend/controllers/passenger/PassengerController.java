@@ -45,6 +45,21 @@ public class PassengerController {
         return ResponseEntity.ok(passengerDtos);
     }
 
+    @ApiOperation(value = "Get all passengers from one trip", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
+    @GetMapping("/trip")
+    ResponseEntity<List<PassengerDto>> getPassengersAssignedToTrip(@RequestParam Long id) {
+
+        tripService.validateTripId(id);
+        List<Passenger> passengers = tripService.findPassengersByTrip(id);
+        ArrayList<PassengerDto> passengerDtos = new ArrayList<>();
+        for (Passenger passenger : passengers) {
+            passengerDtos.add(passengerMapper.map(passenger));
+        }
+
+        return ResponseEntity.ok(passengerDtos);
+    }
+
 
     @ApiOperation(value = "Add new passenger", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")

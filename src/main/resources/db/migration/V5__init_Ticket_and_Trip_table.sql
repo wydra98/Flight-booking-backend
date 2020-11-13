@@ -3,16 +3,17 @@ drop table if exists trips cascade;
 
 create table trips
 (
-    trip_id        bigint auto_increment primary key,
-    id_passenger   bigint null,
-    id_user        bigint not null,
-    departure_date date   not null,
-    departure_time time   not null,
-    arrival_date   date   not null,
-    arrival_time   time   not null,
-    purchase_date  date   not null,
-    purchase_time  time   not null,
-    price          double not null,
+    trip_id             bigint auto_increment primary key,
+    id_passenger        bigint null,
+    id_user             bigint not null,
+    passenger_number    int,
+    departure_date      date   not null,
+    departure_time      time   not null,
+    arrival_date        date   not null,
+    arrival_time        time   not null,
+    purchase_date       date   not null,
+    purchase_time       time   not null,
+    price               double not null,
 
     foreign key (id_passenger) references passengers (passenger_id),
     foreign key (id_user) references users (user_id)

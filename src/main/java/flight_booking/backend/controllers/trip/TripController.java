@@ -45,10 +45,11 @@ public class TripController {
     @ApiOperation(value = "Get all user's trips", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @GetMapping
-    ResponseEntity<Set<TripDto>> getAllUsersTrips(@PathVariable Long id) {
+    ResponseEntity<List<TripDto>> getAllUsersTrips(@RequestParam Long id) {
 
         tripService.validateUsersId(id);
         Optional<User> user = userService.findById(id);
+
 
         Set<TripDto> tripsDtos = new HashSet<>();
         if (user.isPresent()) {
@@ -57,7 +58,11 @@ public class TripController {
             }
         }
 
-        return ResponseEntity.ok(tripsDtos);
+        List<TripDto> trips = new ArrayList<>(tripsDtos);
+        trips.sort(Comparator.comparing(TripDto::getDepartureDate));
+        Collections.reverse(trips);
+
+        return ResponseEntity.ok(trips);
     }
 
     @ApiOperation(value = "Find proper trips", authorizations = {@Authorization(value = "authkey")})
@@ -162,6 +167,8 @@ public class TripController {
         Long userId = bookedTripDto.getUserId();
         int passengerNumber = passengersDto.size();
 
+        System.out.println("ilość pasażerów " + passengerNumber);
+
         List<Passenger> passengers = new ArrayList<>();
         for (PassengerDto passengerDto : passengersDto) {
 
@@ -178,27 +185,12 @@ public class TripController {
         return ResponseEntity.ok(tripIds);
     }
 
-    @ApiOperation(value = "Delete trip through user", authorizations = {@Authorization(value = "authkey")})
+
+    @ApiOperation(value = "Delete trip", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @Transactional
-    @DeleteMapping("/deleteThroughUser/{id}")
-    public ResponseEntity<Long> deleteTripThroughUser(@PathVariable Long id) {
-
-        tripService.validateTripId(id);
-        Optional<Trip> trip = tripService.findById(id);
-
-        if (trip.isPresent()) {
-            tripService.deleteTripsWithTimeLimit(trip.get());
-        }
-
-        return ResponseEntity.ok(id);
-    }
-
-    @ApiOperation(value = "Delete trip through admin", authorizations = {@Authorization(value = "authkey")})
-    @CrossOrigin(origins = "*")
-    @Transactional
-    @DeleteMapping("/deleteThroughAdmin/{id}")
-    public ResponseEntity<Long> deleteTripThroughAdmin(@PathVariable Long id) {
+    @DeleteMapping
+    public ResponseEntity<Long> deleteTripThroughAdmin(@RequestParam Long id) {
 
         tripService.validateTripId(id);
         Optional<Trip> trip = tripService.findById(id);
