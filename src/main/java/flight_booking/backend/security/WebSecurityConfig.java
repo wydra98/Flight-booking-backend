@@ -41,7 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/trips/findTrips").hasAuthority("ROLE_USER")
                 .antMatchers("/trips").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .antMatchers("/users").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/users/delete/*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/users/modifyUser").hasAuthority("ROLE_USER")
+                .antMatchers("/users/delete").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .and().addFilter(new JwtFilter(authenticationManager()))
                 .csrf().disable();
     }

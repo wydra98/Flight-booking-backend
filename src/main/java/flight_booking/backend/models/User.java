@@ -42,6 +42,13 @@ public class User {
         this.role = "ROLE_USER";
     }
 
+    public void updateForm(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+    }
+
     public void addTrip(Trip trip) {
         trips.add(trip);
     }

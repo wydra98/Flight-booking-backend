@@ -71,7 +71,7 @@ public class UserService {
 
         if (password.length() < 2 || name.length() < 2 ||
                 surname.length() < 2) {
-            throw new IllegalStateException("The field's length is invalid.");
+            throw new IllegalStateException("Długość pola jest niepoprawna.");
         }
 
         if (!EmailValidator.getInstance().isValid(email)) {
@@ -103,7 +103,7 @@ public class UserService {
         User user = userRepository.getUserByEmail(email);
 
         if (user == null) {
-            throw new NullPointerException("Taki użytkownik nie istnieje w bazie.");
+            throw new IllegalStateException("Taki użytkownik nie istnieje w bazie.");
         }
 
         UserMapper userMapper = new UserMapper();
