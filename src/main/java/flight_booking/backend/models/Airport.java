@@ -27,12 +27,12 @@ public class Airport {
     private double latitude;
     private int timezone;
 
-    public void updateForm(AirportDto airportDto, double longitude, double latitude) {
+    public void updateForm(AirportDto airportDto) {
         this.name = airportDto.getName();
         this.city = airportDto.getCity();
         this.country = airportDto.getCountry();
         this.timezone = airportDto.getTimezone();
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.longitude = airportDto.getLongitude();
+        this.latitude = airportDto.getLatitude();
     }
 }

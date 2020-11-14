@@ -23,8 +23,8 @@ public class Airline {
     private String name;
     private String country;
 
-    public void updateForm(AirlineDto airlineDto, String country) {
+    public void updateForm(AirlineDto airlineDto) {
         this.name = airlineDto.getName();
-        this.country = country;
+        this.country = airlineDto.getCountry();
     }
 }

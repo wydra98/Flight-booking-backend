@@ -64,13 +64,13 @@ class AirlineServiceTest {
     public void addNewAirline() {
         //given
         AirlineService airlineService = mock(AirlineService.class);
-        given(airlineService.addNewAirline(Mockito.any(AirlineDto.class), anyString())).willReturn(Airline.builder()
+        given(airlineService.addNewAirline(Mockito.any(AirlineDto.class))).willReturn(Airline.builder()
                 .name("Lot")
                 .country("Poland")
                 .build());
 
         //when
-        Airline airline = airlineService.addNewAirline(new AirlineDto(), "");
+        Airline airline = airlineService.addNewAirline(new AirlineDto());
         //then
         assertEquals(airline.getCountry(), "Poland");
     }

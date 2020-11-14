@@ -30,12 +30,12 @@ public class AirlineService {
         return repository.existsById(id);
     }
 
-    public boolean checkIfAirlineExists(AirlineDto airlineDto, String country) {
-        return repository.checkIfAirlineExists(airlineDto.getName(), country) > 0;
+    public boolean checkIfAirlineExists(AirlineDto airlineDto) {
+        return repository.checkIfAirlineExists(airlineDto.getName(), airlineDto.getCountry()) > 0;
     }
 
-    public void validateNewAirline(AirlineDto airlineDto, String country) {
-        if (checkIfAirlineExists(airlineDto, country)) {
+    public void validateNewAirline(AirlineDto airlineDto) {
+        if (checkIfAirlineExists(airlineDto)) {
             throw new IllegalStateException("Taka linia lotnicza istnieje już w bazie!");
         }
     }
@@ -46,10 +46,10 @@ public class AirlineService {
         }
     }
 
-    public Airline addNewAirline(AirlineDto airlineDto, String country) {
+    public Airline addNewAirline(AirlineDto airlineDto) {
         Airline airline = Airline.builder()
                 .name(airlineDto.getName())
-                .country(country)
+                .country(airlineDto.getCountry())
                 .build();
 
         repository.save(airline);

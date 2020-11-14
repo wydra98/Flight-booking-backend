@@ -74,9 +74,10 @@ class AirportServiceTest {
 
     @Test
     public void addNewAirport() {
+        //jak cos to tutaj moze byc problem z longitude i latitude bo sa teraz w srodku Airporta a nie na zewnatrz
         //given
         AirportService airportService = mock(AirportService.class);
-        given(airportService.addNewAirport(Mockito.any(AirportDto.class), anyDouble(), anyDouble())).willReturn(Airport.builder()
+        given(airportService.addNewAirport(Mockito.any(AirportDto.class))).willReturn(Airport.builder()
                 .name("John F. Kennedy International Airport")
                 .longitude(-118.410042)
                 .latitude(33.942791)
@@ -85,7 +86,7 @@ class AirportServiceTest {
                 .timezone(-4)
                 .build());
         //when
-        Airport airport = airportService.addNewAirport(new AirportDto(), 1.0, 1.0);
+        Airport airport = airportService.addNewAirport(new AirportDto());
         //then
         assertEquals(airport.getName(), "John F. Kennedy International Airport");
     }

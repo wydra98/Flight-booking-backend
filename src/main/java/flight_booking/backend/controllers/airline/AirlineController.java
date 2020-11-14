@@ -1,6 +1,7 @@
 package flight_booking.backend.controllers.airline;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
+import flight_booking.backend.controllers.airport.AirportDto;
 import flight_booking.backend.models.*;
 import flight_booking.backend.services.*;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +36,7 @@ public class AirlineController {
 
     @ApiOperation(value = "Get all airlines", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
-    @GetMapping
+    @GetMapping("/get")
     ResponseEntity<List<AirlineDto>> getAllAirlines() {
 
         List<Airline> airlines = airlineService.findAll();
@@ -50,19 +51,18 @@ public class AirlineController {
 
     @ApiOperation(value = "Add new airline", authorizations = {@Authorization(value = "authkey")})
     @PostMapping
-    ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto,
-                                          @RequestParam String country) {
+    ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto) {
 
-        airlineService.validateNewAirline(airlineDto, country);
+        airlineService.validateNewAirline(airlineDto);
 
-        Airline airline = airlineService.addNewAirline(airlineDto, country);
+        Airline airline = airlineService.addNewAirline(airlineDto);
         return ResponseEntity.created(URI.create("/" + airline.getId())).body(airline);
     }
 
     @ApiOperation(value = "Delete airline", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @CrossOrigin(origins = "*")
-    @DeleteMapping
+    @DeleteMapping("/delete")
     ResponseEntity<Long> deleteAirline(@RequestParam Long id) throws InterruptedException {
 
         airlineService.validateId(id);
@@ -96,19 +96,21 @@ public class AirlineController {
 
     @ApiOperation(value = "Update airline", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
+    @Transactional
     @PutMapping
-    ResponseEntity<Void> updateAirline(@RequestBody AirlineDto airlineDto,
-                                       @RequestParam String country) {
+    ResponseEntity<AirlineDto> updateAirline(@RequestBody AirlineDto airlineDto) {
 
         airlineService.validateId(airlineDto.getId());
 
         Optional<Airline> airlineOptional = airlineService.findById(airlineDto.getId());
+        Airline saveAirline = null;
         if (airlineOptional.isPresent()) {
-            airlineOptional.get().updateForm(airlineDto, country);
-            airlineService.save(airlineOptional.get());
+            airlineOptional.get().updateForm(airlineDto);
+            saveAirline = airlineService.save(airlineOptional.get());
         }
+        AirlineDto airlineToReturn = mapper.map(saveAirline);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(airlineToReturn);
     }
 }
 

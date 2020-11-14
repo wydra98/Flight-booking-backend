@@ -34,8 +34,8 @@ public class AirportService {
         return repository.findById(id);
     }
 
-    public void validateNewAirport(AirportDto airportDto, double longitude, double latitude) {
-        if (checkIfAirportExists(airportDto, longitude, latitude)) {
+    public void validateNewAirport(AirportDto airportDto) {
+        if (checkIfAirportExists(airportDto)) {
             throw new IllegalStateException("Takie lotnisko istnieje już w bazie!");
         }
     }
@@ -46,19 +46,19 @@ public class AirportService {
         }
     }
 
-    public boolean checkIfAirportExists(AirportDto airportDto, double longitude, double latitude) {
+    public boolean checkIfAirportExists(AirportDto airportDto) {
         return repository.checkIfAirportExistsThroughName(airportDto.getName().toUpperCase(), airportDto.getCity().toUpperCase()) > 0 ||
-                repository.checkIfAirportExistsThroughCoordinates(longitude, latitude) > 0;
+                repository.checkIfAirportExistsThroughCoordinates(airportDto.getLongitude(), airportDto.getLatitude()) > 0;
     }
 
-    public Airport addNewAirport(AirportDto airportDto, double longitude, double latitude) {
+    public Airport addNewAirport(AirportDto airportDto) {
 
         Airport airport = Airport.builder()
                 .name(airportDto.getName())
                 .city(airportDto.getCity())
                 .country(airportDto.getCountry())
-                .longitude(longitude)
-                .latitude(latitude)
+                .longitude(airportDto.getLongitude())
+                .latitude(airportDto.getLatitude())
                 .timezone(airportDto.getTimezone())
                 .build();
 

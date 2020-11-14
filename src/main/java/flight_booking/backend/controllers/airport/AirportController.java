@@ -1,6 +1,7 @@
 package flight_booking.backend.controllers.airport;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
+import flight_booking.backend.controllers.user.UserDto;
 import flight_booking.backend.models.*;
 import flight_booking.backend.services.*;
 import io.swagger.annotations.ApiOperation;
@@ -53,12 +54,10 @@ public class AirportController {
     @ApiOperation(value = "Add new airport", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @PostMapping
-    ResponseEntity<Airport> addNewAirport(@RequestBody AirportDto airportDto,
-                                          @RequestParam double longitude,
-                                          @RequestParam double latitude) {
+    ResponseEntity<Airport> addNewAirport(@RequestBody AirportDto airportDto) {
 
-        airportService.validateNewAirport(airportDto, longitude, latitude);
-        Airport airport = airportService.addNewAirport(airportDto, longitude, latitude);
+        airportService.validateNewAirport(airportDto);
+        Airport airport = airportService.addNewAirport(airportDto);
         return ResponseEntity.created(URI.create("/" + airport.getId())).body(airport);
     }
 
@@ -107,18 +106,18 @@ public class AirportController {
     @CrossOrigin(origins = "*")
     @Transactional
     @PutMapping
-    ResponseEntity<Void> updateAirport(@RequestBody AirportDto airportDto,
-                                       @RequestParam double longitude,
-                                       @RequestParam double latitude) {
+    ResponseEntity<AirportDto> updateAirport(@RequestBody AirportDto airportDto) {
 
         airportService.validateId(airportDto.getId());
 
         Optional<Airport> airport = airportService.findById(airportDto.getId());
+        Airport saveAirport = null;
         if (airport.isPresent()) {
-            airport.get().updateForm(airportDto, longitude, latitude);
-            airportService.save(airport.get());
+            airport.get().updateForm(airportDto);
+            saveAirport = airportService.save(airport.get());
         }
+        AirportDto airportToReturn = mapper.map(saveAirport);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(airportToReturn);
     }
 }
