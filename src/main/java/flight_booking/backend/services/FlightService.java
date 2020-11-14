@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FlightService {
@@ -52,13 +49,13 @@ public class FlightService {
 
             List<Flight> resultFlights = flightRepository.findFlightsByConnection(connection);
 
-            for (Flight result : resultFlights) {
-                System.out.println(result);
-            }
-            System.out.println();
-            System.out.println(connection.toString());
+//            for (Flight result : resultFlights) {
+//                System.out.println(result);
+//            }
+//            System.out.println();
+//            System.out.println(connection.toString());
             if (!resultFlights.isEmpty()) {
-                System.out.println(i++);
+  //              System.out.println(i++);
                 listOfFlights.add(resultFlights);
             }
         }

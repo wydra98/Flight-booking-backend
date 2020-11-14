@@ -38,7 +38,7 @@ public class AirportController {
 
     @ApiOperation(value = "Get all airports", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
-    @GetMapping
+    @GetMapping("/get")
     ResponseEntity<List<AirportDto>> getAllAirports() {
 
         List<Airport> airports = airportService.findAll();
@@ -65,8 +65,8 @@ public class AirportController {
     @ApiOperation(value = "Delete airport", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @Transactional
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Long> deleteAirport(@PathVariable Long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<Long> deleteAirport(@RequestParam Long id) {
 
         airportService.validateId(id);
         Optional<Airport> airport = airportService.findById(id);
@@ -98,6 +98,7 @@ public class AirportController {
                 connectionService.deleteConnections(connections);
             }
             airportService.deleteAirport(airport.get());
+
         }
         return ResponseEntity.ok(id);
     }

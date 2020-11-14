@@ -62,8 +62,8 @@ public class AirlineController {
     @ApiOperation(value = "Delete airline", authorizations = {@Authorization(value = "authkey")})
     @Transactional
     @CrossOrigin(origins = "*")
-    @DeleteMapping("/{id}")
-    ResponseEntity<Long> deleteAirline(@PathVariable Long id) throws InterruptedException {
+    @DeleteMapping
+    ResponseEntity<Long> deleteAirline(@RequestParam Long id) throws InterruptedException {
 
         airlineService.validateId(id);
         Optional<Airline> airline = airlineService.findById(id);
