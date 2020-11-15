@@ -3,27 +3,31 @@ package flight_booking.backend.services;
 import flight_booking.backend.controllers.authorization.TokenTransfer;
 import flight_booking.backend.controllers.user.UserDto;
 import flight_booking.backend.controllers.user.UserMapper;
+import flight_booking.backend.models.Passenger;
+import flight_booking.backend.models.Ticket;
+import flight_booking.backend.models.Trip;
 import flight_booking.backend.models.User;
+import flight_booking.backend.repository.TripRepository;
 import flight_booking.backend.repository.UserRepository;
 
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    private final TripRepository tripRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, TripRepository tripRepository, JwtService jwtService) {
         this.userRepository = userRepository;
+        this.tripRepository = tripRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
     }
@@ -38,6 +42,12 @@ public class UserService {
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    public User findUserByTrip(Long id) {
+        Optional<Trip> trip = tripRepository.findById(id);
+
+        return trip.get().getUser();
     }
 
     public boolean checkIfMailExists(String email) {

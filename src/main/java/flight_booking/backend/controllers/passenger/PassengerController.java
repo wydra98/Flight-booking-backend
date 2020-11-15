@@ -33,11 +33,12 @@ public class PassengerController {
 
     @ApiOperation(value = "Get all passengers", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
-    @GetMapping
+    @GetMapping("/get")
     ResponseEntity<List<PassengerDto>> getAllPassengers() {
 
         List<Passenger> passengers = passengerService.findAll();
         ArrayList<PassengerDto> passengerDtos = new ArrayList<>();
+
         for (Passenger passenger : passengers) {
             passengerDtos.add(passengerMapper.map(passenger));
         }
@@ -52,6 +53,7 @@ public class PassengerController {
 
         tripService.validateTripId(id);
         List<Passenger> passengers = tripService.findPassengersByTrip(id);
+
         ArrayList<PassengerDto> passengerDtos = new ArrayList<>();
         for (Passenger passenger : passengers) {
             passengerDtos.add(passengerMapper.map(passenger));
@@ -60,24 +62,11 @@ public class PassengerController {
         return ResponseEntity.ok(passengerDtos);
     }
 
-
-    @ApiOperation(value = "Add new passenger", authorizations = {@Authorization(value = "authkey")})
-    @CrossOrigin(origins = "*")
-    @PostMapping("/passengers/add")
-    ResponseEntity<Passenger> addNewPassenger(@RequestBody PassengerDto passengerDto) {
-
-        passengerService.validateIfExists(passengerDto.getPesel());
-        Passenger passenger = passengerService.addNewPassenger(passengerDto);
-
-        return ResponseEntity.created(URI.create("/" + passenger.getId())).body(passenger);
-    }
-
-
     @ApiOperation(value = "Delete passenger", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @Transactional
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Long> deletePassenger(@PathVariable Long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<Long> deletePassenger(@RequestParam Long id) {
 
         passengerService.validateIfNonExists(id);
         Optional<Passenger> passenger = passengerService.findById(id);

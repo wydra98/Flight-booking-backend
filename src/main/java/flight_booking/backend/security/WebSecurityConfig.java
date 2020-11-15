@@ -39,18 +39,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/flights/delete").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/flights/get").hasAuthority("ROLE_ADMIN")
 
-                .antMatchers("/passengers").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/passengers/trip").hasAuthority("ROLE_USER")
-                .antMatchers("/passengers/delete/*").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/passengers/add").hasAuthority("ROLE_USER")
+                .antMatchers("/passengers/get").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/passengers/delete").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/passengers/trip").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
 
+                .antMatchers("/trips/user").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .antMatchers("/trips/all").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/trips/delete").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .antMatchers("/trips/createTrip").hasAuthority("ROLE_USER")
                 .antMatchers("/trips/findTrips").hasAuthority("ROLE_USER")
-                .antMatchers("/trips").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
 
-                .antMatchers("/users").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/users/modifyUser").hasAuthority("ROLE_USER")
+                .antMatchers("/users/get").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/users/trip").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/users/delete").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .antMatchers("/users/modifyUser").hasAuthority("ROLE_USER")
                 .and().addFilter(new JwtFilter(authenticationManager()))
                 .csrf().disable();
     }

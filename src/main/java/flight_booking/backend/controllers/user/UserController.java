@@ -1,6 +1,7 @@
 package flight_booking.backend.controllers.user;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
+import flight_booking.backend.controllers.passenger.PassengerDto;
 import flight_booking.backend.models.*;
 import flight_booking.backend.services.TripService;
 import flight_booking.backend.services.UserService;
@@ -34,20 +35,10 @@ public class UserController {
         this.userMapper = new UserMapper();
     }
 
-    @ApiOperation(value = "Get one", authorizations = {@Authorization(value = "authkey")})
-    @CrossOrigin(origins = "*")
-    @GetMapping("/{id}")
-    ResponseEntity<UserDto> getOne(@PathVariable Long id) {
-
-        userService.validateId(id);
-        Optional<User> user = userService.findById(id);
-        UserDto userDto = userMapper.map(user.get());
-        return ResponseEntity.created(URI.create("/" + userDto.getId())).body(userDto);
-    }
 
     @ApiOperation(value = "Get all users", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
-    @GetMapping
+    @GetMapping("/get")
     ResponseEntity<List<UserDto>> getAllUser() {
 
         List<User> users = userService.findAll();
@@ -57,6 +48,19 @@ public class UserController {
             userDtos.add(userMapper.map(user));
         }
         return ResponseEntity.ok(userDtos);
+    }
+
+    @ApiOperation(value = "Get user from trip", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
+    @GetMapping("/trip")
+    ResponseEntity<UserDto> getPassengersAssignedToTrip(@RequestParam Long id) {
+
+        tripService.validateTripId(id);
+        User user = userService.findUserByTrip(id);
+
+        UserDto userDto = userMapper.map(user);
+
+        return ResponseEntity.ok(userDto);
     }
 
     @ApiOperation(value = "Delete user", authorizations = {@Authorization(value = "authkey")})

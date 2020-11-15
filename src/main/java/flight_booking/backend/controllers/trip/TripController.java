@@ -4,10 +4,7 @@ import flight_booking.backend.controllers.ExceptionProcessing;
 import flight_booking.backend.controllers.airport.AirportDto;
 import flight_booking.backend.controllers.airport.AirportMapper;
 import flight_booking.backend.controllers.passenger.PassengerDto;
-import flight_booking.backend.models.Airport;
-import flight_booking.backend.models.Passenger;
-import flight_booking.backend.models.Trip;
-import flight_booking.backend.models.User;
+import flight_booking.backend.models.*;
 import flight_booking.backend.services.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -44,7 +41,7 @@ public class TripController {
 
     @ApiOperation(value = "Get all user's trips", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
-    @GetMapping
+    @GetMapping("/user")
     ResponseEntity<List<TripDto>> getAllUsersTrips(@RequestParam Long id) {
 
         tripService.validateUsersId(id);
@@ -54,8 +51,28 @@ public class TripController {
         Set<TripDto> tripsDtos = new HashSet<>();
         if (user.isPresent()) {
             for (Trip trip : user.get().getTrips()) {
-                tripsDtos.add(tripMapper.map(trip, Optional.empty() , Optional.empty(), Optional.empty() , Optional.empty()));
+                tripsDtos.add(tripMapper.map(trip, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()));
             }
+        }
+
+        List<TripDto> trips = new ArrayList<>(tripsDtos);
+        trips.sort(Comparator.comparing(TripDto::getDepartureDate));
+        Collections.reverse(trips);
+
+
+        return ResponseEntity.ok(trips);
+    }
+
+    @ApiOperation(value = "Get all trips", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
+    @GetMapping("/all")
+    ResponseEntity<List<TripDto>> getAllUsersTrips() {
+
+        List<Trip> foundTrips = tripService.findAll();
+
+        Set<TripDto> tripsDtos = new HashSet<>();
+        for (Trip trip : foundTrips) {
+            tripsDtos.add(tripMapper.map(trip, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()));
         }
 
         List<TripDto> trips = new ArrayList<>(tripsDtos);
@@ -86,7 +103,7 @@ public class TripController {
 
         LocalDate departureDateParse = LocalDate.parse(dates.get(0).toString());
         LocalDate arrivalDateParse = null;
-        if(dates.get(1)!=null){
+        if (dates.get(1) != null) {
             arrivalDateParse = LocalDate.parse(dates.get(1).toString());
         }
 
@@ -95,30 +112,30 @@ public class TripController {
         Optional<AirportDto> thirdChangeAirportDto = Optional.empty();
         Optional<AirportDto> fourthChangeAirportDto = Optional.empty();
 
-        if(!firstChangeId.equals("null")){
+        if (!firstChangeId.equals("null")) {
             Optional<Airport> firstAirport = airportService.findById(Long.parseLong(firstChangeId));
-            if(firstAirport.isPresent()){
+            if (firstAirport.isPresent()) {
                 firstChangeAirportDto = Optional.of(airportMapper.map(firstAirport.get()));
             }
         }
 
-        if(!secondChangeId.equals("null")){
+        if (!secondChangeId.equals("null")) {
             Optional<Airport> secondAirport = airportService.findById(Long.parseLong(secondChangeId));
-            if(secondAirport.isPresent()){
+            if (secondAirport.isPresent()) {
                 secondChangeAirportDto = Optional.of(airportMapper.map(secondAirport.get()));
             }
         }
 
-        if(!thirdChangeId.equals("null")){
+        if (!thirdChangeId.equals("null")) {
             Optional<Airport> thirdAirport = airportService.findById(Long.parseLong(thirdChangeId));
-            if(thirdAirport.isPresent()){
+            if (thirdAirport.isPresent()) {
                 thirdChangeAirportDto = Optional.of(airportMapper.map(thirdAirport.get()));
             }
         }
 
-        if(!fourthChangeId.equals("null")){
+        if (!fourthChangeId.equals("null")) {
             Optional<Airport> fourthAirport = airportService.findById(Long.parseLong(fourthChangeId));
-            if(fourthAirport.isPresent()){
+            if (fourthAirport.isPresent()) {
                 fourthChangeAirportDto = Optional.of(airportMapper.map(fourthAirport.get()));
             }
         }
@@ -140,7 +157,7 @@ public class TripController {
 
         if (twoTrip) {
             tripsTo = tripService.findAllAvailableTrips(dstAirportId, srcAirportId, arrivalDateParse, passengerNumber,
-                     maxChanges, maxTimeBetweenChanges);
+                    maxChanges, maxTimeBetweenChanges);
 
             tripsToDto = new ArrayList<>();
             for (Trip trip : tripsTo) {
@@ -167,8 +184,6 @@ public class TripController {
         Long userId = bookedTripDto.getUserId();
         int passengerNumber = passengersDto.size();
 
-        System.out.println("ilość pasażerów " + passengerNumber);
-
         List<Passenger> passengers = new ArrayList<>();
         for (PassengerDto passengerDto : passengersDto) {
 
@@ -181,7 +196,7 @@ public class TripController {
             }
         }
 
-        List<Long> tripIds = tripService.addNewTrips(passengers, tripsDto, userId,passengerNumber);
+        List<Long> tripIds = tripService.addNewTrips(passengers, tripsDto, userId, passengerNumber);
         return ResponseEntity.ok(tripIds);
     }
 
@@ -189,7 +204,7 @@ public class TripController {
     @ApiOperation(value = "Delete trip", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @Transactional
-    @DeleteMapping
+    @DeleteMapping("/delete")
     public ResponseEntity<Long> deleteTripThroughAdmin(@RequestParam Long id) {
 
         tripService.validateTripId(id);

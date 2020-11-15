@@ -40,6 +40,10 @@ public class TripService {
         this.airportService = airportService;
     }
 
+    public List<Trip> findAll() {
+        return tripRepository.findAll();
+    }
+
     public List<Trip> findAllAvailableTrips(Long srcAirportId, Long dstAirportId,
                                             LocalDate departureDate, int passengerNumber,
                                             int maxChanges, int maxTimeBetweenChanges) {

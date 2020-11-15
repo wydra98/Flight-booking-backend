@@ -40,16 +40,35 @@ public class Flight {
     public void updateForm(Airline airline,
                            int numberSeats,
                            double price,
-                           String departureTime,
                            String departureDate,
+                           String departureTime,
                            String flightTime) {
+
+        String parsedTime = null;
+        if (flightTime.length() == 1) {
+            parsedTime = "0" + flightTime + ":00";
+        } else {
+            parsedTime = flightTime + ":00";
+        }
+        System.out.println(departureTime);
+        String parsedDepartureTime = null;
+        String[] arrayString = departureTime.split(":");
+        if (arrayString[0].length() == 1) {
+            arrayString[0] = '0' + arrayString[0];
+        }
+        if (arrayString[1].length() == 1) {
+            arrayString[1] = '0' + arrayString[1];
+        }
+        parsedDepartureTime = arrayString[0] + ":" + arrayString[1];
+
 
         this.airline = airline;
         this.numberSeats = numberSeats;
         this.price = price;
         this.getTimes().setDepartureDate(LocalDate.parse(departureDate));
-        this.getTimes().setDepartureTime(LocalTime.parse(departureTime));
-        this.getTimes().setFlightTime(LocalTime.parse(flightTime));
+        this.getTimes().setDepartureTime(LocalTime.parse(parsedDepartureTime));
+        this.getTimes().setFlightTime(LocalTime.parse(parsedTime));
+
     }
 
     public void addSeat(Seat seat) {

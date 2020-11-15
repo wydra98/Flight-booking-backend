@@ -55,7 +55,7 @@ public class FlightService {
 //            System.out.println();
 //            System.out.println(connection.toString());
             if (!resultFlights.isEmpty()) {
-  //              System.out.println(i++);
+                //              System.out.println(i++);
                 listOfFlights.add(resultFlights);
             }
         }
@@ -91,16 +91,36 @@ public class FlightService {
                                String flightTime,
                                Connection connection) {
 
+        String parsedTime = null;
+        if (flightTime.length() == 1) {
+            parsedTime = "0" + flightTime + ":00";
+        } else {
+            parsedTime = flightTime + ":00";
+        }
+
+        String parsedDepartureTime = null;
+        String[] arrayString = departureTime.split(":");
+        if (arrayString[0].length() == 1) {
+            arrayString[0] = '0' + arrayString[0];
+        }
+        if (arrayString[1].length() == 1) {
+            arrayString[1] = '0' + arrayString[1];
+        }
+        parsedDepartureTime = arrayString[0] + ":" + arrayString[1];
+
+        System.out.println(departureTime);
+        System.out.println(parsedTime);
         Optional<Airline> airline = airlineService.findById(airlineDtoId);
         Flight flight = Flight.builder()
                 .connection(connection)
                 .airline(airline.get())
                 .numberSeats(numberSeats)
+                .availableSeats(numberSeats)
                 .price(price)
                 .times(Times.builder()
                         .departureDate(LocalDate.parse(departureDate))
-                        .departureTime(LocalTime.parse(departureTime))
-                        .flightTime(LocalTime.parse(flightTime))
+                        .departureTime(LocalTime.parse(parsedDepartureTime))
+                        .flightTime(LocalTime.parse(parsedTime))
                         .build())
                 .build();
         flightRepository.save(flight);
@@ -143,11 +163,11 @@ public class FlightService {
 
     public void validateFlight(Long airlineId, int numberSeats, double price,
                                Long srcAirportId, Long dstAirportId,
-                               String departureDate, String arrivalDate,
+                               String departureDate, String departureTime,
                                String flightTime, Optional<Long> flightOptId) {
 
         if (flightOptId.isPresent()) {
-            if (existsById(flightOptId.get())) {
+            if (!existsById(flightOptId.get())) {
                 throw new NoSuchElementException("Taki lot nie istnieje w bazie!");
             }
 
@@ -168,6 +188,10 @@ public class FlightService {
             throw new IllegalStateException("Liczba miejsc nie jest poprawna!");
         }
 
+        if (Integer.parseInt(flightTime) < 1 || Integer.parseInt(flightTime) > 24) {
+            throw new IllegalStateException("Liczba miejsc nie jest poprawna!");
+        }
+
         if (price < 1 || price > 2000) {
             throw new IllegalStateException("Cena nie jest odpowiednia!");
         }
@@ -176,13 +200,17 @@ public class FlightService {
             throw new IllegalStateException("Lotniska muszą się różnić.");
         }
 
-        LocalDate departureDateParse = LocalDate.parse(departureDate);
-        LocalDate arrivalDateParse = LocalDate.parse(arrivalDate);
-        LocalTime flightTimeParse = LocalTime.parse(flightTime);
+        LocalDate.parse(departureDate);
 
-        if (arrivalDateParse.isBefore(departureDateParse)) {
-            throw new IllegalStateException("Zakres dat jest niepoprawny.");
+        String[] arrayString = departureTime.split(":");
+        if (arrayString[0].length() == 1) {
+            arrayString[0] = '0' + arrayString[0];
         }
+        if (arrayString[1].length() == 1) {
+            arrayString[1] = '0' + arrayString[1];
+        }
+        String parsedDepartureTime = arrayString[0] + ":" + arrayString[1];
+        LocalTime.parse(parsedDepartureTime);
     }
 
     public List<List<Flight>> chooseFlightsWithProperDate(List<List<List<Flight>>> allFlights, Long dstAirport,
