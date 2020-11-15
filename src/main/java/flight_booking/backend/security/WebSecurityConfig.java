@@ -27,23 +27,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests()
-                .antMatchers("/airports").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/airlines/get").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                .antMatchers("/airlines/delete").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .antMatchers("/airlines").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/airports/get").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                .antMatchers("/airports/delete").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .antMatchers("/airlines/delete").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/airlines/get").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+
                 .antMatchers("/airports").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/airports/delete/*").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/flights*").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/flights/delete/*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/airports/delete").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/airports/get").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+
+                .antMatchers("/flights").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/flights/delete").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/flights/get").hasAuthority("ROLE_ADMIN")
+
                 .antMatchers("/passengers").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/passengers/trip").hasAuthority("ROLE_USER")
                 .antMatchers("/passengers/delete/*").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/passengers/add").hasAuthority("ROLE_USER")
+
                 .antMatchers("/trips/createTrip").hasAuthority("ROLE_USER")
                 .antMatchers("/trips/findTrips").hasAuthority("ROLE_USER")
                 .antMatchers("/trips").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+
                 .antMatchers("/users").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/users/modifyUser").hasAuthority("ROLE_USER")
                 .antMatchers("/users/delete").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")

@@ -1,6 +1,10 @@
 package flight_booking.backend.controllers.flight;
 
 import flight_booking.backend.controllers.ExceptionProcessing;
+import flight_booking.backend.controllers.airline.AirlineDto;
+import flight_booking.backend.controllers.airline.AirlineMapper;
+import flight_booking.backend.controllers.airport.AirportDto;
+import flight_booking.backend.controllers.airport.AirportMapper;
 import flight_booking.backend.models.*;
 import flight_booking.backend.services.*;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +27,8 @@ public class FlightController {
     private final AirportService airportService;
     private final TicketService ticketService;
     private final TripService tripService;
-    private final FlightMapper flightMapper;
+    private final AirlineMapper airlineMapper;
+    private final AirportMapper airportMapper;
 
     FlightController(ConnectionService connectionService,
                      FlightService flightService,
@@ -37,42 +42,41 @@ public class FlightController {
         this.airportService = airportService;
         this.ticketService = ticketService;
         this.tripService = tripService;
-        this.flightMapper = new FlightMapper();
+        this.airlineMapper = new AirlineMapper();
+        this.airportMapper = new AirportMapper();
     }
 
     @ApiOperation(value = "Get all flights", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
-    @GetMapping
-    ResponseEntity<List<FlightDto>> getAllFlights() {
+    @GetMapping("/get")
+    ResponseEntity<List<FlightResponse>> getAllFlights() {
         List<Flight> flights = flightService.findAll();
 
-        ArrayList<FlightDto> flightDtos = new ArrayList<>();
+        ArrayList<FlightResponse> flightResponse = new ArrayList<>();
+
         for (Flight flight : flights) {
-            Connection connection = flightService.findConnection(flight.getId());
-            flightDtos.add(flightMapper.map(flight, connection));
+            AirlineDto airlineDto = airlineMapper.map(flight.getAirline());
+            AirportDto airportSrcDto = airportMapper.map(flight.getConnection().getSrcAirport());
+            AirportDto airportDstDto = airportMapper.map(flight.getConnection().getDstAirport());
+            flightResponse.add(new FlightResponse(flight.getId(), airlineDto.getName(), flight.getNumberSeats(), flight.getPrice(),
+                    airportSrcDto.getName(), airportDstDto.getName(), flight.getTimes().getDepartureDate().toString(),
+                    flight.getTimes().getDepartureTime().toString(), flight.getTimes().getFlightTime().toString()));
         }
-        return ResponseEntity.ok(flightDtos);
+        return ResponseEntity.ok(flightResponse);
     }
 
     @ApiOperation(value = "Add new flight", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @PostMapping
-    ResponseEntity<Flight> addNewFlight(@RequestParam Long airlineId,
-                                        @RequestParam int numberSeats,
-                                        @RequestParam double price,
-                                        @RequestParam Long srcAirportId,
-                                        @RequestParam Long dstAirportId,
-                                        @RequestParam String departureDate,
-                                        @RequestParam String departureTime,
-                                        @RequestParam String flightTime) {
+    ResponseEntity<Flight> addNewFlight(@RequestBody FlightRequest flightRequest) {
 
+        flightService.validateFlight(flightRequest.getAirlineId(), flightRequest.getNumberSeats(), flightRequest.getPrice(),
+                flightRequest.getSrcAirportId(), flightRequest.getDstAirportId(), flightRequest.getDepartureDate(),
+                flightRequest.getDepartureTime(), flightRequest.getFlightTime(), Optional.empty());
 
-        flightService.validateFlight(airlineId, numberSeats, price, srcAirportId, dstAirportId, departureDate,
-                departureTime, flightTime, Optional.empty());
-
-        Connection connection = connectionService.addNewConnection(srcAirportId, dstAirportId);
-        Flight flight = flightService.addNewFlight(airlineId, numberSeats, price, departureDate,
-                departureTime, flightTime, connection);
+        Connection connection = connectionService.addNewConnection(flightRequest.getSrcAirportId(), flightRequest.getDstAirportId());
+        Flight flight = flightService.addNewFlight(flightRequest.getAirlineId(), flightRequest.getNumberSeats(), flightRequest.getPrice(), flightRequest.getDepartureDate(),
+                flightRequest.getDepartureTime(), flightRequest.getFlightTime(), connection);
         return ResponseEntity.created(URI.create("/" + flight.getId())).body(flight);
     }
 
@@ -80,25 +84,18 @@ public class FlightController {
     @CrossOrigin(origins = "*")
     @Transactional
     @PutMapping
-    ResponseEntity<Void> updateFlight(@RequestParam Long flightDtoId,
-                                      @RequestParam Long airlineId,
-                                      @RequestParam int numberSeats,
-                                      @RequestParam double price,
-                                      @RequestParam Long srcAirportId,
-                                      @RequestParam Long dstAirportId,
-                                      @RequestParam String departureDate,
-                                      @RequestParam String departureTime,
-                                      @RequestParam String flightTime) {
+    ResponseEntity<FlightRequest> updateFlight(@RequestBody FlightRequest flightRequest) {
 
-        Optional<Long> flightId = Optional.of(flightDtoId);
-        flightService.validateFlight(airlineId, numberSeats, price, srcAirportId, dstAirportId, departureDate,
-                departureTime, flightTime, flightId);
+        Optional<Long> flightId = Optional.of(flightRequest.getId());
+        flightService.validateFlight(flightRequest.getAirlineId(), flightRequest.getNumberSeats(), flightRequest.getPrice(),
+                flightRequest.getSrcAirportId(), flightRequest.getDstAirportId(), flightRequest.getDepartureDate(),
+                flightRequest.getDepartureTime(), flightRequest.getFlightTime(), flightId);
 
-        Optional<Flight> flight = flightService.findById(flightDtoId);
-        Connection connection = flightService.findConnection(flightDtoId);
-        Optional<Airline> airline = airlineService.findById(airlineId);
-        Optional<Airport> srcAirport = airportService.findById(srcAirportId);
-        Optional<Airport> dstAirport = airportService.findById(dstAirportId);
+        Optional<Flight> flight = flightService.findById(flightRequest.getId());
+        Connection connection = flightService.findConnection(flightRequest.getId());
+        Optional<Airline> airline = airlineService.findById(flightRequest.getAirlineId());
+        Optional<Airport> srcAirport = airportService.findById(flightRequest.getSrcAirportId());
+        Optional<Airport> dstAirport = airportService.findById(flightRequest.getDstAirportId());
 
         if (srcAirport.isPresent() && dstAirport.isPresent()) {
             connection.updateForm(srcAirport.get(), dstAirport.get());
@@ -106,11 +103,11 @@ public class FlightController {
 
         flight.ifPresent(value -> value.updateForm(
                 airline.get(),
-                numberSeats,
-                price,
-                departureDate,
-                departureTime,
-                flightTime
+                flightRequest.getNumberSeats(),
+                flightRequest.getPrice(),
+                flightRequest.getDepartureDate(),
+                flightRequest.getDepartureTime(),
+                flightRequest.getFlightTime()
         ));
 
         if (flight.isPresent()) {
@@ -118,14 +115,14 @@ public class FlightController {
             connectionService.save(connection);
         }
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(flightRequest);
     }
 
     @ApiOperation(value = "Delete flight", authorizations = {@Authorization(value = "authkey")})
     @CrossOrigin(origins = "*")
     @Transactional
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Long> deleteFlight(@PathVariable Long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<Long> deleteFlight(@RequestParam Long id) {
 
         flightService.validateId(id);
         Optional<Flight> flight = flightService.findById(id);

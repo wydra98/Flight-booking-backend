@@ -50,6 +50,7 @@ public class AirlineController {
     }
 
     @ApiOperation(value = "Add new airline", authorizations = {@Authorization(value = "authkey")})
+    @CrossOrigin(origins = "*")
     @PostMapping
     ResponseEntity<Airline> addNewAirline(@RequestBody AirlineDto airlineDto) {
 

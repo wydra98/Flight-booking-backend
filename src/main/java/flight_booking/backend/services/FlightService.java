@@ -164,11 +164,11 @@ public class FlightService {
             throw new NoSuchElementException("Takie lotnisko nie istnieje w bazie!");
         }
 
-        if (numberSeats < 0 || numberSeats > 350) {
+        if (numberSeats < 1 || numberSeats > 350) {
             throw new IllegalStateException("Liczba miejsc nie jest poprawna!");
         }
 
-        if (price <= 0 || price > 2000) {
+        if (price < 1 || price > 2000) {
             throw new IllegalStateException("Cena nie jest odpowiednia!");
         }
 
