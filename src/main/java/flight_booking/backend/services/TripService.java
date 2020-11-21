@@ -45,10 +45,11 @@ public class TripService {
     }
 
     public List<Trip> findAllAvailableTrips(Long srcAirportId, Long dstAirportId,
-                                            LocalDate departureDate, int passengerNumber,
-                                            int maxChanges, int maxTimeBetweenChanges) {
+                                            LocalDate from, LocalDate to,
+                                            int passengerNumber, int maxChanges,
+                                            int maxTimeBetweenChanges) {
 
-        return ticketService.findAllTrips(srcAirportId, dstAirportId, departureDate, passengerNumber, maxChanges, maxTimeBetweenChanges);
+        return ticketService.findAllTrips(srcAirportId, dstAirportId, from, to ,passengerNumber, maxChanges, maxTimeBetweenChanges);
     }
 
     public Optional<Trip> findById(Long id) {
@@ -90,9 +91,10 @@ public class TripService {
     }
 
     public List<Object> validateFindTrip(Long srcAirportId, Long dstAirportId,
-                                         String departureDate, String arrivalDate,
-                                         int passengerNumber, boolean twoTrip, int maxChanges,
-                                         int maxTimeBetweenChanges) {
+                                         String fromDeparture, String toDeparture,
+                                         String fromArrival, String toArrival,
+                                         int passengerNumber, boolean twoTrip, String maxChanges,
+                                         String maxTimeBetweenChanges) {
 
         List<Object> dates = new ArrayList<>();
 
@@ -109,31 +111,36 @@ public class TripService {
             throw new IllegalStateException("Nieprawidłowa liczba pasażerów.");
         }
 
-        if (maxChanges < 0 || maxChanges > 4) {
-            throw new IllegalStateException("Nieprawidłowa maksymalna liczba przesiadek.");
+        if (!maxChanges.equals("null")) {
+            if (Integer.parseInt(maxChanges) < 0 || Integer.parseInt(maxChanges) > 4) {
+                throw new IllegalStateException("Nieprawidłowa maksymalna liczba przesiadek.");
+            }
         }
 
-        if (maxTimeBetweenChanges < 0 || maxTimeBetweenChanges > 12) {
-            throw new IllegalStateException("Nieprawidłowa maksymalna godzina.");
+        if (!maxTimeBetweenChanges.equals("null")) {
+            if (Integer.parseInt(maxTimeBetweenChanges) < 0 || Integer.parseInt(maxTimeBetweenChanges) > 12) {
+                throw new IllegalStateException("Nieprawidłowa maksymalna godzina.");
+            }
         }
 
-        LocalDate departureDateParse = LocalDate.parse(departureDate);
-        LocalDate arrivalDateParse = null;
+        LocalDate fromDepartureParse = LocalDate.parse(fromDeparture);
+        LocalDate toDepartureParse = null;
 
-        if (!arrivalDate.equals("null")) {
-            arrivalDateParse = LocalDate.parse(arrivalDate);
+        if (!fromDeparture.equals("null")) {
+            toDepartureParse = LocalDate.parse(toDeparture);
 
-            if (arrivalDateParse.isBefore(departureDateParse)) {
+            if (toDepartureParse.isBefore(fromDepartureParse)) {
                 throw new IllegalStateException("Nieprawidłowy zakres dat.");
             }
         }
 
-        if (!twoTrip && !arrivalDate.equals("null")) {
+
+        if (!twoTrip && (!fromArrival.equals("null") || !toArrival.equals("null"))) {
             throw new IllegalStateException("Nie można wybrać powrotnej daty i podróży w jedną stronę jednocześnie.");
         }
 
-        dates.add(departureDateParse);
-        dates.add(arrivalDateParse);
+        dates.add(fromDepartureParse);
+        dates.add(toDepartureParse);
 
         return dates;
     }

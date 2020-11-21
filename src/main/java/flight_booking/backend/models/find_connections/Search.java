@@ -4,6 +4,7 @@ import flight_booking.backend.models.Connection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Search {
 
