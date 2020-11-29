@@ -19,6 +19,7 @@ public class AirlineLoader implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
+        System.out.println("Airline" + airlineRepository.amountOfRows());
         if (airlineRepository.amountOfRows() == 0) {
 
             airlineRepository.save(Airline.builder()

@@ -24,6 +24,7 @@ public class RUserLoader implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
+        System.out.println("Connection" + userRepository.amountOfRows());
         if (userRepository.amountOfRows() == 0) {
 
             userRepository.save(User.builder()

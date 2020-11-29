@@ -25,6 +25,7 @@ public class ConnectionLoader implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
+        System.out.println("Connection" + connectionRepository.amountOfRows());
         if (connectionRepository.amountOfRows() == 0) {
 
             // ALL AIRPORTS

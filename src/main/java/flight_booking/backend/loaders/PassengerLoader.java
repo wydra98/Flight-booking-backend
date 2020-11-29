@@ -20,6 +20,7 @@ public class PassengerLoader implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
+        System.out.println("Connection" + passengerRepository.amountOfRows());
         if (passengerRepository.amountOfRows() == 0) {
 
             Passenger passenger1 = Passenger.builder()

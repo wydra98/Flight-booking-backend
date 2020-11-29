@@ -35,8 +35,10 @@ public class FlightLoader implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
+        System.out.println("Flight" + flightRepository.amountOfRows());
         if (flightRepository.amountOfRows() == 0) {
 
+            System.out.println("1");
             // ALL AIRLINE
             Optional<Airline> airline1 = airlineRepository.findById(1L);
             Optional<Airline> airline2 = airlineRepository.findById(2L);
@@ -104,6 +106,7 @@ public class FlightLoader implements CommandLineRunner {
                 }
             }
 
+            System.out.println("2");
 
             // 2. FROM CHICAGO TO NEW YORK
             Optional<Connection> connection2 = connectionRepository.findById(2L);
@@ -205,6 +208,7 @@ public class FlightLoader implements CommandLineRunner {
                             .build());
                 }
             }
+            System.out.println("3");
 
 
             // 6. FROM PEKIN TO NEW YORK
@@ -316,6 +320,7 @@ public class FlightLoader implements CommandLineRunner {
                 }
             }
 
+            System.out.println("4");
 
             // 11. FROM CHICAGO TO BERLIN
             Optional<Connection> connection11 = connectionRepository.findById(11L);
@@ -1898,6 +1903,7 @@ public class FlightLoader implements CommandLineRunner {
                 }
             }
 
+            System.out.println("5");
 
             // 81. FROM MOSCOW TO NEW YORK
             Optional<Connection> connection81 = connectionRepository.findById(81L);
@@ -2644,6 +2650,8 @@ public class FlightLoader implements CommandLineRunner {
                 }
             }
 
+            System.out.println("6");
+
             // 115. FROM CAIRO TO BERLIN
             Optional<Connection> connection115 = connectionRepository.findById(115L);
 
@@ -3235,6 +3243,7 @@ public class FlightLoader implements CommandLineRunner {
                 }
             }
 
+            System.out.println("7");
 
             // 142. FROM PARIS TO NEW YORK
             Optional<Connection> connection142 = connectionRepository.findById(142L);
@@ -3982,6 +3991,7 @@ public class FlightLoader implements CommandLineRunner {
                             .build());
                 }
             }
+            System.out.println("8");
 
 
             // 176. FROM RIO DE JANEIRO TO SYDNEY
@@ -4422,6 +4432,7 @@ public class FlightLoader implements CommandLineRunner {
                             .build());
                 }
             }
+            System.out.println("8");
 
 
             // 196. FROM BUENOS AIRES TO TORONTO
@@ -4533,5 +4544,6 @@ public class FlightLoader implements CommandLineRunner {
                 }
             }
         }
+        System.out.println("koniec");
     }
 }

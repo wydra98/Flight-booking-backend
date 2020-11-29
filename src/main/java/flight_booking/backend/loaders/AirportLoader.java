@@ -19,6 +19,7 @@ public class AirportLoader implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
+        System.out.println("Airport" + airportRepository.amountOfRows());
         if (airportRepository.amountOfRows() == 0) {
 
             airportRepository.save(Airport.builder()
