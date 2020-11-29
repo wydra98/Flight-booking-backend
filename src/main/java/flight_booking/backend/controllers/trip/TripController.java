@@ -172,10 +172,10 @@ public class TripController {
         if (twoTrip) {
 
             if (!maxChanges.equals("null") && !maxTimeBetweenChanges.equals("null")) {
-                tripsTo = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, fromArrivalParse, fromArrivalParse,
+                tripsTo = tripService.findAllAvailableTrips(dstAirportId, srcAirportId, fromArrivalParse, fromArrivalParse,
                         passengerNumber, Integer.parseInt(maxChanges), Integer.parseInt(maxTimeBetweenChanges));
             } else {
-                tripsTo = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, fromArrivalParse, fromArrivalParse,
+                tripsTo = tripService.findAllAvailableTrips(dstAirportId, srcAirportId, fromArrivalParse, fromArrivalParse,
                         passengerNumber, 0, 6);
             }
 
