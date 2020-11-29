@@ -14,9 +14,6 @@
 	<name>backend</name>
 	<description>Project for SIWZ </description>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
