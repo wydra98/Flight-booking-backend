@@ -27,7 +27,7 @@ public class PassengerService {
         Passenger passenger = Passenger.builder()
                 .firstName(passengerDto.getFirstName())
                 .surname(passengerDto.getSurname())
-                .dateOfBirth(LocalDate.parse(passengerDto.getDateOfBirth()))
+                .documentId(passengerDto.getDocumentId())
                 .phoneNumber(passengerDto.getPhoneNumber())
                 .pesel(passengerDto.getPesel())
                 .email(passengerDto.getEmail())

@@ -154,11 +154,10 @@ public class TripController {
         List<Trip> tripsTo;
         List<TripDto> tripsToDto = new ArrayList<>();
 
-        if (twoTrip) {
+        if (!maxChanges.equals("null") && !maxTimeBetweenChanges.equals("null")) {
             tripsFrom = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, fromDepartureParse, toDepartureParse,
                     passengerNumber, Integer.parseInt(maxChanges), Integer.parseInt(maxTimeBetweenChanges));
-        }
-        else{
+        } else {
             tripsFrom = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, fromDepartureParse, toDepartureParse,
                     passengerNumber, 0, 6);
         }
@@ -172,8 +171,13 @@ public class TripController {
 
         if (twoTrip) {
 
-            tripsTo = tripService.findAllAvailableTrips(dstAirportId, srcAirportId, toArrivalParse, fromArrivalParse,
-                    passengerNumber, Integer.parseInt(maxChanges), Integer.parseInt(maxTimeBetweenChanges));
+            if (!maxChanges.equals("null") && !maxTimeBetweenChanges.equals("null")) {
+                tripsTo = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, fromArrivalParse, fromArrivalParse,
+                        passengerNumber, Integer.parseInt(maxChanges), Integer.parseInt(maxTimeBetweenChanges));
+            } else {
+                tripsTo = tripService.findAllAvailableTrips(srcAirportId, dstAirportId, fromArrivalParse, fromArrivalParse,
+                        passengerNumber, 0, 6);
+            }
 
             tripsToDto = new ArrayList<>();
             for (Trip trip : tripsTo) {

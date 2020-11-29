@@ -49,7 +49,7 @@ public class TripService {
                                             int passengerNumber, int maxChanges,
                                             int maxTimeBetweenChanges) {
 
-        return ticketService.findAllTrips(srcAirportId, dstAirportId, from, to ,passengerNumber, maxChanges, maxTimeBetweenChanges);
+        return ticketService.findAllTrips(srcAirportId, dstAirportId, from, to, passengerNumber, maxChanges, maxTimeBetweenChanges);
     }
 
     public Optional<Trip> findById(Long id) {
@@ -153,7 +153,7 @@ public class TripService {
 
     public void validateNewTrip(PassengerDto passengerDto, Long userId) {
 
-        if (passengerDto.getDateOfBirth().length() == 0 || passengerDto.getEmail().length() == 0 ||
+        if (passengerDto.getDocumentId().length() == 0 || passengerDto.getEmail().length() == 0 ||
                 passengerDto.getFirstName().length() == 0 || passengerDto.getPesel().length() == 0 ||
                 passengerDto.getPhoneNumber().length() == 0 || passengerDto.getSurname().length() == 0) {
             throw new IllegalStateException("Puste pola są niedozwolone.");
@@ -171,9 +171,6 @@ public class TripService {
             throw new IllegalStateException("Długość pola nieprawidłowa.");
         }
 
-        if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-            throw new IllegalStateException("Nieprawidłowy wiek pasażera.");
-        }
 
         PESELValidator peselValidator = new PESELValidator();
         peselValidator.initialize(null);
@@ -186,17 +183,9 @@ public class TripService {
             throw new IllegalStateException("Nieprawidłowy email pasażera.");
         }
 
-        if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-            throw new IllegalStateException("Nieprawidłowy wiek pasażera.");
-        }
-
         Pattern pattern2 = Pattern.compile("^[0-9]{9}$");
         if (!pattern2.matcher(passengerDto.getPhoneNumber()).matches()) {
             throw new IllegalStateException("Nieprawidłowy numer telefonu pasażera.");
-        }
-
-        if (Period.between(LocalDate.parse(passengerDto.getDateOfBirth()), LocalDate.now()).getYears() < 2) {
-            throw new IllegalStateException("Rezerwować loty można tylko dla pasażerów powyżej 2 roku życia.");
         }
 
         if (!userService.existsById(userId)) {

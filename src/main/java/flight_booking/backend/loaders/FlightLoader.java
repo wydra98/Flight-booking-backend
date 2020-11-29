@@ -19,7 +19,7 @@ import java.util.Optional;
 public class FlightLoader implements CommandLineRunner {
 
     private static final int MAX_DAYS_TO_LOAD = 183;
-    private static final String FIRST_DAY = "2020-09-01";
+    private static final String FIRST_DAY = "2020-12-01";
     ConnectionRepository connectionRepository;
     AirlineRepository airlineRepository;
     FlightRepository flightRepository;

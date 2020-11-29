@@ -26,7 +26,7 @@ public class Passenger {
     private String pesel;
     private String firstName;
     private String surname;
-    private LocalDate dateOfBirth;
+    private String documentId;
     private String phoneNumber;
     private String email;
     @OneToMany(mappedBy = "passenger")

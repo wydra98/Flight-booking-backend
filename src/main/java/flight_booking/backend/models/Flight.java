@@ -50,7 +50,6 @@ public class Flight {
         } else {
             parsedTime = flightTime + ":00";
         }
-        System.out.println(departureTime);
         String parsedDepartureTime = null;
         String[] arrayString = departureTime.split(":");
         if (arrayString[0].length() == 1) {

@@ -16,6 +16,10 @@ public class TicketDto {
     private String departureTime;
     private String arrivalDate;
     private String arrivalTime;
+    private String departureDateGMT;
+    private String departureTimeGMT;
+    private String arrivalDateGMT;
+    private String arrivalTimeGMT;
     private Integer seatNumber;
     private double totalPrice;
 }

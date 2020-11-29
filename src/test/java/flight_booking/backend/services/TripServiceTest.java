@@ -23,7 +23,7 @@ class TripServiceTest {
                 .firstName("Kacper")
                 .surname("Kuczyński")
                 .pesel("02220766333")
-                .dateOfBirth(LocalDate.parse("1992-08-27"))
+                .documentId("1q2w3e")
                 .phoneNumber("512461514")
                 .email("kuczyński.kacper92@gmail.com")
                 .build();

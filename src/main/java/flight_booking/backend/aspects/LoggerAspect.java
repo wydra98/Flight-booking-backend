@@ -26,6 +26,6 @@ public class LoggerAspect {
     @AfterReturning(
             pointcut = "flight_booking.backend.aspects.AspectUtil.allMethodsFromAllControllers()")
     public void logSuccess(JoinPoint joinPoint) {
-            System.out.printf("Method %s successfully executed \n", joinPoint.getSignature());
+        System.out.printf("Method %s successfully executed \n", joinPoint.getSignature());
     }
 }

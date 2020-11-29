@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/passengers/get").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/passengers/delete").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/passengers/trip").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
+                .antMatchers("/passengers/trip").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
                 .antMatchers("/trips/user").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .antMatchers("/trips/all").hasAnyAuthority("ROLE_ADMIN")

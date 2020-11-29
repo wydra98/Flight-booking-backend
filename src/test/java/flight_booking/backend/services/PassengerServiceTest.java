@@ -27,7 +27,7 @@ class PassengerServiceTest {
                 .firstName("Kacper")
                 .surname("Kuczyński")
                 .pesel("02220766333")
-                .dateOfBirth(LocalDate.parse("1992-08-27"))
+                .documentId("1q2w3e")
                 .phoneNumber("512461514")
                 .email("kuczyński.kacper92@gmail.com")
                 .build();
@@ -55,7 +55,7 @@ class PassengerServiceTest {
                 .firstName("Kacper")
                 .surname("Kuczyński")
                 .pesel("02220766333")
-                .dateOfBirth(LocalDate.parse("1992-08-27"))
+                .documentId("1q2w3e")
                 .phoneNumber("512461514")
                 .email("kuczyński.kacper92@gmail.com")
                 .build());
@@ -63,7 +63,7 @@ class PassengerServiceTest {
                 .firstName("Jan")
                 .surname("Kowalski")
                 .pesel("75112655569")
-                .dateOfBirth(LocalDate.parse("1956-02-27"))
+                .documentId("1q2w3e")
                 .phoneNumber("482471045")
                 .email("kowalski.jan56@gmail.com")
                 .build());
@@ -79,7 +79,7 @@ class PassengerServiceTest {
                 .firstName("Jan")
                 .surname("Kowalski")
                 .pesel("75112655569")
-                .dateOfBirth(LocalDate.parse("1956-02-27"))
+                .documentId("1q2w3e")
                 .phoneNumber("482471045")
                 .email("kowalski.jan56@gmail.com")
                 .build());
@@ -90,7 +90,7 @@ class PassengerServiceTest {
         assertEquals(passenger.getFirstName(), "Jan");
         assertEquals(passenger.getSurname(), "Kowalski");
         assertEquals(passenger.getPesel(), "75112655569");
-        assertEquals(passenger.getDateOfBirth(), LocalDate.parse("1956-02-27"));
+        assertEquals(passenger.getDocumentId(), "1q2w3e");
         assertEquals(passenger.getPhoneNumber(), "482471045");
         assertEquals(passenger.getEmail(), "kowalski.jan56@gmail.com");
     }

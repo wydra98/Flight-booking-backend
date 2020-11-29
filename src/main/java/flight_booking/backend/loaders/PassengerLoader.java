@@ -26,7 +26,7 @@ public class PassengerLoader implements CommandLineRunner {
                     .firstName("Kacper")
                     .surname("Kuczyński")
                     .pesel("02220766333")
-                    .dateOfBirth(LocalDate.parse("1992-08-27"))
+                    .documentId("1q2w3e")
                     .phoneNumber("512461514")
                     .email("kuczyński.kacper92@gmail.com")
                     .build();
@@ -36,7 +36,7 @@ public class PassengerLoader implements CommandLineRunner {
                     .firstName("Jan")
                     .surname("Kowalski")
                     .pesel("75112655569")
-                    .dateOfBirth(LocalDate.parse("1956-02-27"))
+                    .documentId("1q2w3e")
                     .phoneNumber("482471045")
                     .email("kowalski.jan56@gmail.com")
                     .build();
@@ -46,7 +46,7 @@ public class PassengerLoader implements CommandLineRunner {
                     .firstName("Zofia")
                     .surname("Janicka")
                     .pesel("78112332469")
-                    .dateOfBirth(LocalDate.parse("1983-12-07"))
+                    .documentId("1q2w3e")
                     .phoneNumber("787400178")
                     .email("zofia.janicka78@gmail.com")
                     .build();

@@ -19,6 +19,10 @@ public class TripDto {
     private String arrivalTime;
     private String purchaseDate;
     private String purchaseTime;
+    private String departureDateGMT;
+    private String departureTimeGMT;
+    private String arrivalDateGMT;
+    private String arrivalTimeGMT;
     private int passengerNumber;
     private boolean normalOffer;
     private double totalPrice;

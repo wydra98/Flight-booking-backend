@@ -31,12 +31,12 @@ public class JwtService {
     public String sign(String email, String role) {
         try {
 
-            String dupa = JWT.create()
+            String test = JWT.create()
                     .withClaim("email", email)
                     .withClaim("role", role)
                     .withExpiresAt(Date.from(ZonedDateTime.now().plusDays(7).toInstant()))
                     .sign(algorithm);
-            return dupa;
+            return test;
 
 
         } catch (JWTCreationException ex) {

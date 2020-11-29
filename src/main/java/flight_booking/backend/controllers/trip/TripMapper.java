@@ -9,6 +9,7 @@ import flight_booking.backend.models.Ticket;
 import flight_booking.backend.models.Trip;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -19,13 +20,22 @@ public class TripMapper {
 
         TicketMapper ticketMapper = new TicketMapper();
         boolean bestOffer = true;
+        LocalTime allTime = LocalTime.of(0, 0);
 
         ArrayList<TicketDto> ticketDtos = new ArrayList<>();
         for (Ticket ticket : trip.getTickets()) {
             ticketDtos.add(ticketMapper.map(ticket));
+            allTime = allTime.plusHours(ticket.getFlight().getTimes().getFlightTime().getHour())
+                    .plusMinutes(ticket.getFlight().getTimes().getFlightTime().getMinute());
         }
 
         bestOffer = checkIfBestOffer(ticketDtos, firstAirport, secondAirport, thirdAirport, fourthAirport);
+
+        LocalDateTime timeDepartureGmt = LocalDateTime.of(trip.getDepartureDate(), trip.getDepartureTime());
+        LocalDateTime timeArrivalGmt = LocalDateTime.of(trip.getArrivalDate(), trip.getArrivalTime());
+
+        timeDepartureGmt = timeDepartureGmt.plusHours(trip.getTickets().get(0).getFlight().getConnection().getSrcAirport().getTimezone());
+        timeArrivalGmt = timeArrivalGmt.plusHours(trip.getTickets().get(trip.getTickets().size() - 1).getFlight().getConnection().getDstAirport().getTimezone());
 
         TripDto tripDto = null;
 
@@ -37,6 +47,10 @@ public class TripMapper {
                     .departureTime(trip.getDepartureTime().toString())
                     .arrivalDate(trip.getArrivalDate().toString())
                     .arrivalTime(trip.getArrivalTime().toString())
+                    .departureDateGMT(timeDepartureGmt.toLocalDate().toString())
+                    .departureTimeGMT(timeDepartureGmt.toLocalTime().toString())
+                    .arrivalDateGMT(timeArrivalGmt.toLocalDate().toString())
+                    .arrivalTimeGMT(timeArrivalGmt.toLocalTime().toString())
                     .totalPrice(trip.getPrice())
                     .normalOffer(bestOffer)
                     .build();
@@ -50,6 +64,10 @@ public class TripMapper {
                     .arrivalTime(trip.getArrivalTime().toString())
                     .purchaseDate(trip.getPurchaseDate().toString())
                     .purchaseTime(trip.getPurchaseTime().toString())
+                    .departureDateGMT(timeDepartureGmt.toLocalDate().toString())
+                    .departureTimeGMT(timeDepartureGmt.toLocalTime().toString())
+                    .arrivalDateGMT(timeArrivalGmt.toLocalDate().toString())
+                    .arrivalTimeGMT(timeArrivalGmt.toLocalTime().toString())
                     .totalPrice(trip.getPrice())
                     .passengerNumber(trip.getPassengerNumber())
                     .normalOffer(bestOffer)

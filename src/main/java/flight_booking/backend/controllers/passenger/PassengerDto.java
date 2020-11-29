@@ -12,7 +12,7 @@ public class PassengerDto {
     private String pesel;
     private String firstName;
     private String surname;
-    private String dateOfBirth;
+    private String documentId;
     private String phoneNumber;
     private String email;
 }

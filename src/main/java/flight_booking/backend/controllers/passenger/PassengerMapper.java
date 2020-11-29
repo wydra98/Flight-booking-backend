@@ -10,7 +10,7 @@ public class PassengerMapper {
                 .pesel(passenger.getPesel())
                 .firstName(passenger.getFirstName())
                 .surname(passenger.getSurname())
-                .dateOfBirth(passenger.getDateOfBirth().toString())
+                .documentId(passenger.getDocumentId())
                 .phoneNumber(passenger.getPhoneNumber())
                 .email(passenger.getEmail())
                 .build();
