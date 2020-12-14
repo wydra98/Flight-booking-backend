@@ -59,14 +59,6 @@ Algorytm potrafi wyszukiwać loty pośrednie. W takim przypadku można modyfikow
 2. maksymalny czas oczekiwania pomiędzy przesiadkami 
 
 Domyślnie pierwszy parametr jest ustawiony na 2 przesiadki, natomiast drugi na 12 godzin.
-### Migracje bazy danych
-W projekcie dodane zostały migracje bazy danych za pomocą flyway czyli systemu kontroli wersji dla baz danych. 
-Domyślnie stworzone są 4 migracje w katalogu db.migration. Baza danych jest tworzona na podstawie migracji,
-a jej poprawność sprawdzana na podstawie encji.
-
-### DTO 
-W przypadku komunikacji backendu z frontedem wykorzystujemy DTO (Data Transfer Object), są to obiekty specjalnie 
-zmodyfikowane, zawierające tylko te elementy, który są konieczne do wykorzystania we frontendzie.
 ## Schematy
 ### DTO
 ![UML](./diagrams/dtos/dtos.svg)
