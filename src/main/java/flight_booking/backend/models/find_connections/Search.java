@@ -45,11 +45,6 @@ public class Search {
                 visited.add(node);
                 allConnection.add(buildFlight(visited));
                 visited.remove(visited.size() - 1);
-                break;
-            }
-        }
-        for (Long node : nodes) {
-            if (visited.contains(node) || node.equals(END)) {
                 continue;
             }
             depth++;
