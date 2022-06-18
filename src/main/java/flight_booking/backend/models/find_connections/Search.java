@@ -35,6 +35,7 @@ public class Search {
     }
 
     private void depthFirst(Graph graph, ArrayList<Long> visited) {
+        // lista bezposrednich lotnisk do poczatkowego
         List<Long> nodes = graph.adjacentNodes(visited.get(visited.size() - 1));
 
         for (Long node : nodes) {
@@ -57,6 +58,7 @@ public class Search {
         }
     }
 
+    //zwraca liste connection
     private List<Connection> buildFlight(ArrayList<Long> visited) {
         List<Connection> arraysOfConnections = new ArrayList();
         List<Long> pairOfAirports = new ArrayList<>();
